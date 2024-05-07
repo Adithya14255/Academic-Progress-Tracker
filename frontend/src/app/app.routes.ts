@@ -4,6 +4,8 @@ import { CourseMentorPortralComponent } from './course-mentor-portral/course-men
 import { CourseCoordinatorPortralComponent } from './course-coordinator-portral/course-coordinator-portral.component';
 import { DomainMentorPortraltComponent } from './domain-mentor-portralt/domain-mentor-portralt.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -11,4 +13,6 @@ export const routes: Routes = [
     { path: 'course-coordinator', component: CourseCoordinatorPortralComponent},
     { path: 'domain-mentor', component: DomainMentorPortraltComponent},
     { path: 'hod-dashboard', component: HodDashboardComponent},
+    { path: 'header', component: HeaderComponent},
+    { path: 'footer', component: FooterComponent}
 ];
