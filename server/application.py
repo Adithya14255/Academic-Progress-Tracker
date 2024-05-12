@@ -1,32 +1,42 @@
 from flask import Flask, jsonify
-import mysql.connector
+import sqlalchemy
+import os
 
 app = Flask(__name__)
 
-# Configure MySQL connection
-mysql_connection = mysql.connector.connect(
-    host='db',  # Docker Compose service name
-    user='user',
-    password='password',
-    database='kgaps'
-)
 
-# Check if MySQL connection is successful
-if mysql_connection.is_connected():
-    print('Connected to MySQL database')
-else:
-    print('Failed to connect to MySQL database')
+engine = sqlalchemy.create_engine(os.environ['DATABASE_URL'])
+conn = engine.connect()
+
 
 # Define a route to fetch data from MySQL
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    cursor = mysql_connection.cursor()
-    cursor.execute(f'SHOW tables;')
-    if cursor.fetchall():
-        pass
-    else:
-        data= "hi bro"
-    cursor.close()
-    return "hello"
+    #q = sqlalchemy.text("SELECT * FROM course_coordinator")
+    #r = conn.execute(q).fetchall()
+    #data=[dict(i._mapping) for i in r]
+    data="hi"
+    return data
+
+@app.route('/mentor_login', methods=['POST', 'GET'])
+def mentor_login():
+    data="mentor logged in"
+    return data
+
+@app.route('/coordinator_login', methods=['POST', 'GET'])
+def coordinator_login():
+    data="coordinator logged in"
+    return data
+
+@app.route('/dm_login', methods=['POST', 'GET'])
+def dm_login():
+    data="domain mentor logged in"
+    return data
+
+@app.route('/admin_login', methods=['POST', 'GET'])
+def admin_login():
+    data="admin logged in"
+    return data
+
 
 
