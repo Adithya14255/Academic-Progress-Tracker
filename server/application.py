@@ -1,12 +1,14 @@
 from flask import Flask, jsonify
 import sqlalchemy
 import os
+import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-
-engine = sqlalchemy.create_engine(os.environ['DATABASE_URL'])
-conn = engine.connect()
+'''engine = sqlalchemy.create_engine(os.environ['DATABASE_URL'])
+conn = engine.connect()'''
 
 
 # Define a route to fetch data from MySQL
@@ -20,8 +22,8 @@ def index():
 
 @app.route('/mentor_login', methods=['POST', 'GET'])
 def mentor_login():
-    data="mentor logged in"
-    return data
+    data={"data":"mentor logged in"}
+    return json.dumps(data)
 
 @app.route('/coordinator_login', methods=['POST', 'GET'])
 def coordinator_login():
