@@ -1,10 +1,7 @@
 <div>
   <button (click)="fetchData()">Fetch Data</button>
-  <div *ngIf="data$ | async as data; else loading">
+  <div *ngIf="data$ | async as data;">
     <pre>{{ data.data }}</pre>
   </div>
   <p>hi</p>
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
 </div>
