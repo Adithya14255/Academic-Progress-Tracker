@@ -1,5 +1,5 @@
 services:
-  angular-nginx:
+  angular:
     build: 
       context: frontend
     ports:

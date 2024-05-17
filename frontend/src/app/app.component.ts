@@ -24,7 +24,7 @@ export class AppComponent {
   constructor(private apiService: ApiService) {}
 
   fetchData() {
-    this.data$ = this.apiService.getData();
+    this.data$ = this.apiService.getData(); // Log response for debugging
   }
 }
 
