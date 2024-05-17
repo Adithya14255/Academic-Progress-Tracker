@@ -5,12 +5,13 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Observable,of } from 'rxjs';
 import { tap } from 'rxjs';
+import { DomainMentorPortalComponent } from './domain-mentor-portal/domain-mentor-portal.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HttpClientModule,CommonModule],
+  imports: [RouterOutlet,HttpClientModule,CommonModule,DomainMentorPortalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ApiService]
@@ -23,8 +24,7 @@ export class AppComponent {
   constructor(private apiService: ApiService) {}
 
   fetchData() {
-    this.data$ = this.apiService.getData().pipe(tap(response => console.log('API Response:', response)) // Log response for debugging
-    );
+    this.data$ = this.apiService.getData();
   }
 }
 
