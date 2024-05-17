@@ -23,8 +23,7 @@ export class AppComponent {
   constructor(private apiService: ApiService) {}
 
   fetchData() {
-    this.data$ = this.apiService.getData().pipe(tap(response => console.log('API Response:', response)) // Log response for debugging
-    );
+    this.data$ = this.apiService.getData(); // Log response for debugging
   }
 }
 
