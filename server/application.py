@@ -7,18 +7,17 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-'''engine = sqlalchemy.create_engine(os.environ['DATABASE_URL'])
-conn = engine.connect()'''
+engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.44.236/kgaps")
+conn = engine.connect()
 
 
 # Define a route to fetch data from MySQL
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    #q = sqlalchemy.text("SELECT * FROM course_coordinator")
-    #r = conn.execute(q).fetchall()
-    #data=[dict(i._mapping) for i in r]
-    data="hi"
-    return data
+    q = sqlalchemy.text("SELECT * FROM users;")
+    r = conn.execute(q).fetchall()
+    data=[dict(i._mapping) for i in r]
+    return json.dumps(data)
 
 @app.route('/mentor_login', methods=['POST', 'GET'])
 def mentor_login():

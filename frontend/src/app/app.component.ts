@@ -3,11 +3,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Observable,of } from 'rxjs';
-import { tap } from 'rxjs';
 import { DomainMentorPortalComponent } from './domain-mentor-portal/domain-mentor-portal.component';
 
 
+interface UserData {
+  id: number;
+  name: string;
+  role: number;
+  department_id: number | null; // Assuming department_id can be null
+  hours_over: number;
+  total_hours: number;
+}
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,13 +24,15 @@ import { DomainMentorPortalComponent } from './domain-mentor-portal/domain-mento
 })
 export class AppComponent {
   title = 'dashboard';
-  data$: Observable<any> = of(null);
+  data: UserData[] = [];
 
  
   constructor(private apiService: ApiService) {}
 
   fetchData() {
-    this.data$ = this.apiService.getData(); // Log response for debugging
+    this.apiService.getData().subscribe(data => {
+      this.data = data; // Assign the received data to jsonData
+    }); // Log response for debugging
   }
 }
 
