@@ -21,113 +21,97 @@ export class DomainMentorPortalComponent {
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 2",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 3",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 4",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 5",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 7",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
     {
-      Course: "Unit 6",
+      Course: "Unit 1",
       Topic: "Python Basics",
       Outcome: "C003",
       Material: "view",
+      Approve: "Approve",
       Hours: 5,
     },
-    {
-      Course: "Unit 6",
-      Topic: "Python Basics",
-      Outcome: "C003",
-      Material: "view",
-      Hours: 5,
-    },
-    {
-      Course: "Unit 6",
-      Topic: "Python Basics",
-      Outcome: "C003",
-      Material: "view",
-      Hours: 5,
-    },
-    {
-      Course: "Unit 6",
-      Topic: "Python Basics",
-      Outcome: "C003",
-      Material: "view",
-      Hours: 5,
-    },
-    {
-      Course: "Unit 6",
-      Topic: "Python Basics",
-      Outcome: "C003",
-      Material: "view",
-      Hours: 5,
-    }
   ];
 
   totalCourses: number = this.array.length;
@@ -136,13 +120,15 @@ export class DomainMentorPortalComponent {
   tabKey: any = [];
   tabValue: any = [];
   materialIndex: number = -1;
-  hourIndex: number = -1 // Initialize to -1
+  HourIndex: number = -1
+  ApproveIndex: number = -1 // Initialize to -1
   getData() {
     this.array.forEach((element: any) => {
       this.tabKey = Object.keys(element);
       this.tabValue.push(Object.values(element));
       this.materialIndex = this.tabKey.findIndex((key: string) => key === 'Material'); // Calculate material index
-      this.hourIndex = this.tabKey.findIndex((key: string) => key === 'Hours');
+      this.ApproveIndex = this.tabKey.findIndex((key: string) => key === 'Approve');
+      this.HourIndex = this.tabKey.findIndex((key: string) => key === 'Hours');
     });
   }
 }
