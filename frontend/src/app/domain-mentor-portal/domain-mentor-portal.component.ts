@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-domain-mentor-portal',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, NgxPaginationModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './domain-mentor-portal.component.html',
+  host: {ngSkipHydration: 'true'},
   styleUrls: ['./domain-mentor-portal.component.css']
+  
 })
 export class DomainMentorPortalComponent {
   constructor() {
