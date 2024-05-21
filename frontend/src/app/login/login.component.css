@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
+    overflow: hidden;
+}
+.bg-img img{
+    width:900px;
+    height:670px;
+    z-index: 8;
+}
+.text{
+    z-index: 10;
+    position: absolute;
+    top:200px;
+    left:200px;
+}
+
+h1{
+    letter-spacing: 3px;
+    font-size:5em;
+}
+.login-form{
+    width:500px;
+    height:600px;
+    /* border:2px solid red; */
+    margin:40px 60px;
+    border-radius:4px;
+    box-shadow: 7px 7px 15px rgba(156, 156, 156, 0.5),
+                -7px -7px 15px rgba(156,156,156,0.5);
+    position:relative;
+}
+.container{
+    display:flex;
+    width:100vw;
+    height: 100vh;
+    
+}
+
+.drop-down{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px;
+}
+
+#loginOption{
+    width:200px;
+    height:50px;
+    border-radius:5px;
+    text-align: center;
+    outline: none;
+}
+.info{
+    width:80%;
+    position:absolute;
+    top:150px;
+    right:50px;
+    height:300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.info .username-input ,.password-input, .email-input{
+    width:380px;
+    height:80px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.info .username-input input, .info .email-input input, .info .password-input input{
+    outline:none;
+    border:none;
+    border-bottom:1px solid black;
+}
+.user, .mail ,.pass{
+    color:rgba(105, 105, 105, 0.9)
+}
+button{
+    position:absolute;
+    bottom:100px;
+    right:80px;
+    height:40px;
+    width:100px;
+    border-radius:5px;
+    border:none;
+    outline:none;
+    background-color:#F58426 ;
+    color:white;
+}

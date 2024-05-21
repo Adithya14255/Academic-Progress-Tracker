@@ -1,1 +1,62 @@
-<p>login works!</p>
+<app-header></app-header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrap">
+            <div class="bg-img">
+                <img src=".\assets\logo\Illu.png" alt="">
+            </div>
+            <div class="text">
+                <h1 class="course">Course</h1>
+                <h1 class="tracking">Tracking</h1>
+                <h1 class="dashboard">Dashboard</h1>
+            </div>
+        </div>
+        <div class="login-form">
+            <div class="drop-down">
+                <select name="loginOption" id="loginOption">
+                    <option value="departmentHead">Head of the Department</option>
+                    <option value="domainmentor">Domain Mentor</option>
+                    <option value="coordinator">Course Coordinator</option>
+                    <option value="courseMentor">Course Mentor</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div class="info">
+                <div class="username-input">
+                    <p class="user">Username</p>
+                    <input type="text">
+                </div>
+                <div class="email-input">
+                    <p class="mail">Email</p>
+                    <input type="email">
+                </div>
+                <div class="password-input">
+                    <p class="pass">Password</p>
+                    <input type="password">
+                </div>
+            </div>
+            <button type="submit">Log in</button>
+        </div>
+    </div>
+    <script>
+        let dropDown = document.querySelector(".drop-down");
+        let down = dropDown.querySelector(".dropdown-button");
+        down.addEventListener("click", () => {
+            let items = dropDown.quer
+        })
+    </script>
+</body>
+
+</html>
