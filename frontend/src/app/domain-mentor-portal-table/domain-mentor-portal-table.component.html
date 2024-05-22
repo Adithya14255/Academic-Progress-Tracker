@@ -27,7 +27,12 @@
                             <ng-container *ngIf="i === ApproveIndex">
                                 <!-- Render cell with anchor tag -->
                                 <td class="body-tr">
-                                    <button class="approve">Approve</button>
+                                    <button class="approve">
+                                        <select id="selec">
+                                            <option value="approve">Approve</option>
+                                            <option value="disapprove">Disapprove</option>
+                                        </select>
+                                    </button>
                                 </td>
                             </ng-container>
                         </ng-container>

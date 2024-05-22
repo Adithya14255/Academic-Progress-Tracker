@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-domain-mentor-portal-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './domain-mentor-portal-table.component.html',
   styleUrl: './domain-mentor-portal-table.component.css'
 })
@@ -16,7 +17,7 @@ export class DomainMentorPortalTableComponent {
   array: any[] = [
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -24,7 +25,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -32,7 +33,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -40,7 +41,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -48,7 +49,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -56,7 +57,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -64,7 +65,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -72,7 +73,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -80,7 +81,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -88,7 +89,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -96,15 +97,7 @@ export class DomainMentorPortalTableComponent {
     },
     {
       Course: "Unit 1",
-      Topic: "Python Basics",
-      Outcome: "C003",
-      Material: "view",
-      Approve: "Approve",
-      Hours: 5,
-    },
-    {
-      Course: "Unit 1",
-      Topic: "Python Basics",
+      Title: "Python Basics",
       Outcome: "C003",
       Material: "view",
       Approve: "Approve",
@@ -126,5 +119,4 @@ export class DomainMentorPortalTableComponent {
       this.HourIndex = this.tabKey.findIndex((key: string) => key === 'Hours');
     });
   }
-
 }
