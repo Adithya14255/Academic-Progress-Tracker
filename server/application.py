@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 import sqlalchemy
 import os
 import json
@@ -7,24 +7,36 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.44.236/kgaps")
+engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.44.150/kgaps")
 conn = engine.connect()
 
 
 # Define a route to fetch data from MySQL
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    q = sqlalchemy.text("SELECT * FROM users;")
-    r = conn.execute(q).fetchall()
-    data=[dict(i._mapping) for i in r]
+    data={'error':'none'}
+    if request.method=='POST':
+        data=request.json['role']
+    # q = sqlalchemy.text("SELECT * FROM users;")
+    # r = conn.execute(q).fetchall()
+    # data=[dict(i._mapping) for i in r]
     return json.dumps(data)
 
-@app.route('/mentor_login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def mentor_login():
-    data={"data":"mentor logged in"}
-    return json.dumps(data)
+    role=request.json['role']
+    name=request.json['name']
+    password=request.json['password']
+    q = sqlalchemy.text(f"SELECT * FROM users WHERE name='{name}' and password='{password}' and role={role};")
+    r = conn.execute(q).fetchall()
+    if r:
+        data=[dict(i._mapping) for i in r]
+        print(data)
+        return json.dumps(data[0])
+    else:
+        return json.dumps({'Error':'Incorrect details entered'})
 
-@app.route('/coordinator_login', methods=['POST', 'GET'])
+@app.route('/register', methods=['POST', 'GET'])
 def coordinator_login():
     data="coordinator logged in"
     return data

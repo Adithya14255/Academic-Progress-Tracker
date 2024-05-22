@@ -1,4 +1,4 @@
-<!-- <div>
+ <!-- <div>
   <button (click)="fetchData()">Fetch Data</button>
   <div *ngFor="let item of data">
     <p>ID: {{ item.id }}</p>
@@ -9,6 +9,33 @@
     <p>Total Hours: {{ item.total_hours }}</p>
     <hr>
 </div> -->
-<app-header></app-header>
+<form [formGroup]="checkoutForm" (ngSubmit)="fetchData()">
+  <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="pwd">
+      password
+    </label>
+    <input id="pwd" type="text" formControlName="password">
+  </div>
+  <button class="button" type="submit">submit</button>
+</form>
+<div *ngIf="data">
+  <p>ID: {{ data.id }}</p>
+  <p>Name: {{ data.name }}</p>
+  <p>Role: {{ data.role }}</p>
+  <p>Department ID: {{ data.department_id }}</p>
+  <hr>
+</div> 
+<!-- <button (click)="fetchData()">Fetch Data</button> -->
+<!-- <div *ngIf="data">
+  <p> {{ data }}</p>
+</div> -->
+<!-- <app-header></app-header>
 <app-domain-mentor-portal-base></app-domain-mentor-portal-base>
-<app-domain-mentor-portal-table></app-domain-mentor-portal-table>
+<app-domain-mentor-portal-table></app-domain-mentor-portal-table> -->

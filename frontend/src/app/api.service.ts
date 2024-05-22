@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-interface UserData {
+interface User {
   id: number;
   name: string;
   role: number;
+  password: string;
   department_id: number | null; // Assuming department_id can be null
-  hours_over: number;
-  total_hours: number;
 }
 
 @Injectable({
@@ -19,13 +18,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<UserData[]> {
-    return this.http.get<any>(`${this.apiUrl}/`);
+  getData(data: any): Observable<User[]> {
+    return this.http.post<any>(`${this.apiUrl}/`,data);
     
   }
 
-  postData(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data`, data);
+  postLoginCourseMentorData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
   updateData(id: number, data: any): Observable<any> {
