@@ -12,7 +12,7 @@ header{
     height: 50px;
     display:flex;
     justify-content:space-between;
-    box-shadow: 10px 10px 15px rgba(105,105,105,0.4);
+    box-shadow: 1px 3px 3px rgba(105,105,105,0.4);
     border-radius:0 0 15px 15px;
 }
 .logo{
@@ -28,4 +28,5 @@ header{
 }
 .image{
     margin:5px 10px;
+    margin-top: 10px;
 }

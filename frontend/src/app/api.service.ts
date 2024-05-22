@@ -2,6 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+interface UserData {
+  id: number;
+  name: string;
+  role: number;
+  department_id: number | null; // Assuming department_id can be null
+  hours_over: number;
+  total_hours: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +19,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/mentor_login`);
+  getData(): Observable<UserData[]> {
+    return this.http.get<any>(`${this.apiUrl}/`);
+    
   }
 
   postData(data: any): Observable<any> {

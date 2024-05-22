@@ -1,11 +1,13 @@
 <!-- <div>
   <button (click)="fetchData()">Fetch Data</button>
-  <div *ngIf="data$ | async as data; else loading">
-    <pre>{{ data.data }}</pre>
-  </div>
-  <p>hi</p>
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
+  <div *ngFor="let item of data">
+    <p>ID: {{ item.id }}</p>
+    <p>Name: {{ item.name }}</p>
+    <p>Role: {{ item.role }}</p>
+    <p>Department ID: {{ item.department_id }}</p>
+    <p>Hours Over: {{ item.hours_over }}</p>
+    <p>Total Hours: {{ item.total_hours }}</p>
+    <hr>
 </div> -->
+<!-- <app-login /> -->
 <router-outlet/>

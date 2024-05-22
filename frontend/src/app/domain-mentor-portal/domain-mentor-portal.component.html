@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MDBootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <app-header class="header"></app-header>
+    <section class="sec-one">
+        <img src="assets/logo/staff.png">
+        <div class="second-head">
+            <button class="logout-btn"><a href="#" style="text-decoration: none;color: white;">Logout</a></button>
+            <p>Professor</p>
+            <h1>Staffname</h1>
+        </div>
+        <div id="hour-div1" class="card text-white bg-primary mb-3"
+            style="width: 150px; max-height: 90px;text-align: center;align-items: center;">
+            <div class="card-header"><label>Total Hours</label></div>
+            <div class="card-body" style="padding-top: 3px;">
+                <h5 class="card-title">{{ totalHours }}</h5>
+            </div>
+        </div>
+        <div id="hour-div2" class="card text-white bg-primary mb-3"
+            style="width: 150px; max-height: 90px;text-align: center;align-items: center;">
+            <div class="card-header"><label>Total Courses</label></div>
+            <div class="card-body" style="padding-top: 3px;">
+                <h5 class="card-title">{{ totalCourses }}</h5>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <ng-container *ngFor="let key of tabKey; let i = index">
+                            <th *ngIf="i !== HourIndex" style="font-weight: bold;">
+                                {{key}}
+                            </th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <ng-container *ngFor="let arr of tabValue">
+                        <tr>
+                            <ng-container *ngFor="let val of arr; let i = index">
+                                <ng-container *ngIf="i !== materialIndex && i !== ApproveIndex  && i != HourIndex">
+                                    <!-- Render normal cell -->
+                                    <td class="body-tr">{{ val }}</td>
+                                </ng-container>
+                                <ng-container *ngIf="i === materialIndex">
+                                    <!-- Render cell with anchor tag -->
+                                    <td class="body-tr">
+                                        <a href="#" style="text-decoration: none;">{{ val }}</a>
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="i === ApproveIndex">
+                                    <!-- Render cell with anchor tag -->
+                                    <td class="body-tr">
+                                        <button class="approve">Approve</button>
+                                    </td>
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li><button class="save-btn">Save</button></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- MDBootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+
+</html>
