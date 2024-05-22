@@ -9,7 +9,7 @@
     <p>Total Hours: {{ item.total_hours }}</p>
     <hr>
 </div> -->
-<form [formGroup]="checkoutForm" (ngSubmit)="fetchData()">
+<!-- <form [formGroup]="checkoutForm" (ngSubmit)="fetchData()">
   <div>
     <label for="name">
       Name
@@ -31,7 +31,7 @@
   <p>Role: {{ data.role }}</p>
   <p>Department ID: {{ data.department_id }}</p>
   <hr>
-</div> 
+</div>  -->
 <!-- <button (click)="fetchData()">Fetch Data</button> -->
 <!-- <div *ngIf="data">
   <p> {{ data }}</p>
@@ -39,3 +39,9 @@
 <!-- <app-header></app-header>
 <app-domain-mentor-portal-base></app-domain-mentor-portal-base>
 <app-domain-mentor-portal-table></app-domain-mentor-portal-table> -->
+<app-header></app-header>
+<div class="container">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

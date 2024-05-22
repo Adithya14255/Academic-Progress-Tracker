@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.44.150/kgaps")
+engine = sqlalchemy.create_engine("postgresql://admin:admin@192.168.0.247/kgaps")
 conn = engine.connect()
 
 

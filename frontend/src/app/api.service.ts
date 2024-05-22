@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from './interfaces/user';
 
-interface User {
-  id: number;
-  name: string;
-  role: number;
-  password: string;
-  department_id: number | null; // Assuming department_id can be null
-}
+
 
 @Injectable({
   providedIn: 'root'
