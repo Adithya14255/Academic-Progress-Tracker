@@ -11,28 +11,23 @@
                 </tr>
             </thead>
             <tbody id="table-body">
-                <ng-container *ngFor="let arr of tabValue">
+                <ng-container *ngFor="let arr of tabValue; let rowIndex = index">
                     <tr>
                         <ng-container *ngFor="let val of arr; let i = index">
-                            <ng-container *ngIf="i !== materialIndex && i !== ApproveIndex  && i != HourIndex">
-                                <!-- Render normal cell -->
+                            <ng-container *ngIf="i !== materialIndex && i !== ApproveIndex && i !== HourIndex">
                                 <td class="body-tr">{{ val }}</td>
                             </ng-container>
                             <ng-container *ngIf="i === materialIndex">
-                                <!-- Render cell with anchor tag -->
                                 <td class="body-tr">
                                     <a href="#" style="text-decoration: none;">{{ val }}</a>
                                 </td>
                             </ng-container>
                             <ng-container *ngIf="i === ApproveIndex">
-                                <!-- Render cell with anchor tag -->
                                 <td class="body-tr">
-                                    <button class="approve">
-                                        <select id="selec">
-                                            <option value="approve">Approve</option>
-                                            <option value="disapprove">Disapprove</option>
-                                        </select>
-                                    </button>
+                                    <select id="selec" (change)="onSelectChange($event, rowIndex)">
+                                        <option value="approve">Approve</option>
+                                        <option value="disapprove">Disapprove</option>
+                                    </select>
                                 </td>
                             </ng-container>
                         </ng-container>
@@ -57,6 +52,7 @@
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
+            </li>
         </ul>
     </nav>
 </div>
