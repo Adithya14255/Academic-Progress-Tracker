@@ -71,3 +71,8 @@ tbody tr td a {
 .pagination {
     margin-left: 680px;
 }
+#selec{
+    background: none;
+    border: none;
+    outline: none;
+}
