@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DomainMentorPortalComponent } from './domain-mentor-portal.component';
+import { DomainMentorPortalBaseComponent } from './domain-mentor-portal-base.component';
 
 describe('DomainMentorPortalComponent', () => {
-  let component: DomainMentorPortalComponent;
-  let fixture: ComponentFixture<DomainMentorPortalComponent>;
+  let component: DomainMentorPortalBaseComponent;
+  let fixture: ComponentFixture<DomainMentorPortalBaseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DomainMentorPortalComponent]
+      imports: [DomainMentorPortalBaseComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DomainMentorPortalComponent);
+    fixture = TestBed.createComponent(DomainMentorPortalBaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
