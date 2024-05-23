@@ -7,7 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
-import { CourseMentorPortalTableComponent } from './course-mentor-portal-table/course-mentor-portal-table.component';
+import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 
 
 @Component({

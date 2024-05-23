@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CourseMentorPortalComponent } from './course-mentor-portal-table.component';
+import { CourseMentorPortalTableComponent } from './course-mentor-portal-table.component';
 
 describe('CourseMentorPortalComponent', () => {
-  let component: CourseMentorPortalComponent;
-  let fixture: ComponentFixture<CourseMentorPortalComponent>;
+  let component: CourseMentorPortalTableComponent;
+  let fixture: ComponentFixture<CourseMentorPortalTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CourseMentorPortalComponent]
+      imports: [CourseMentorPortalTableComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CourseMentorPortalComponent);
+    fixture = TestBed.createComponent(CourseMentorPortalTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
