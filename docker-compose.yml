@@ -8,7 +8,7 @@ services:
     build: 
       context: server
     env_file:
-      - ./server/db.env
+      - ./server/sqls/db.env
     ports:
       - '5001:5001'
     depends_on:
@@ -21,9 +21,10 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - ./server/db.env
+      - ./server/sqls/db.env
     volumes:
       - local_pgdata:/var/lib/postgresql/data
+      - ./server/sqls/schema.sql:/docker-entrypoint-initdb.d/schema.sql
    
   pgadmin:
     image: dpage/pgadmin4
