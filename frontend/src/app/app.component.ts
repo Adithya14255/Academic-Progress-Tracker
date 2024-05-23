@@ -6,33 +6,45 @@ import { CommonModule } from '@angular/common';
 import { DomainMentorPortalBaseComponent } from './domain-mentor-portal-base/domain-mentor-portal-base.component';
 import { DomainMentorPortalTableComponent } from './domain-mentor-portal-table/domain-mentor-portal-table.component';
 import { HeaderComponent } from './header/header.component';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { User } from './interfaces/user';
+import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor-portal-table/course-mentor-portal-table.component';
 
-interface UserData {
-  id: number;
-  name: string;
-  role: number;
-  department_id: number | null; // Assuming department_id can be null
-  hours_over: number;
-  total_hours: number;
-}
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HttpClientModule,CommonModule,DomainMentorPortalBaseComponent, DomainMentorPortalTableComponent, HeaderComponent, CourseMentorPortalTableComponent],
+  imports: [RouterOutlet,
+    HttpClientModule,
+    CommonModule,
+    DomainMentorPortalBaseComponent,
+    DomainMentorPortalTableComponent,
+    HeaderComponent,
+    ReactiveFormsModule,
+    LoginComponent,
+    CourseMentorPortalTableComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ApiService]
 })
+
+
 export class AppComponent {
   title = 'dashboard';
-  data: UserData[] = [];
+  data: User = { id: 0, name: '', role: 0, password: '', department_id: 0 };
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
+  checkoutForm = this.formBuilder.group({
+    name: '',
+    role: 2,
+    password: ''
+  });
 
- 
-  constructor(private apiService: ApiService) {}
 
-  fetchData() {
-    this.apiService.getData().subscribe(data => {
+
+  fetchCourseMentorData() {
+    this.apiService.postLoginCourseMentorData(this.checkoutForm.value).subscribe(data => {
       this.data = data; // Assign the received data to jsonData
     }); // Log response for debugging
   }
