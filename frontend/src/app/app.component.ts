@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { DomainMentorPortalBaseComponent } from './domain-mentor-portal-base/domain-mentor-portal-base.component';
 import { DomainMentorPortalTableComponent } from './domain-mentor-portal-table/domain-mentor-portal-table.component';
 import { HeaderComponent } from './header/header.component';
-
+import { CourseMentorPortalTableComponent } from './course-mentor-portal-table/course-mentor-portal-table.component';
 
 interface UserData {
   id: number;
@@ -19,7 +19,7 @@ interface UserData {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HttpClientModule,CommonModule,DomainMentorPortalBaseComponent, DomainMentorPortalTableComponent, HeaderComponent],
+  imports: [RouterOutlet,HttpClientModule,CommonModule,DomainMentorPortalBaseComponent, DomainMentorPortalTableComponent, HeaderComponent, CourseMentorPortalTableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ApiService]

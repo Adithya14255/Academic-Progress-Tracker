@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CourseMentorPortalComponent } from './course-mentor-portal.component';
+import { CourseMentorPortalComponent } from './course-mentor-portal-table.component';
 
 describe('CourseMentorPortalComponent', () => {
   let component: CourseMentorPortalComponent;

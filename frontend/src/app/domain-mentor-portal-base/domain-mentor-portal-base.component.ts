@@ -7,7 +7,7 @@ import { elementAt } from 'rxjs';
 @Component({
   selector: 'app-domain-mentor-portal-base',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, NgxPaginationModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './domain-mentor-portal-base.component.html',
   styleUrls: ['./domain-mentor-portal-base.component.css']
 })
