@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
+import { CourseMentorPortalTableComponent } from './course-mentor-portal-table/course-mentor-portal-table.component';
+
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,8 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     HeaderComponent,
     ReactiveFormsModule,
-    LoginComponent
+    LoginComponent,
+    CourseMentorPortalTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
