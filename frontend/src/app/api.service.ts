@@ -18,10 +18,19 @@ export class ApiService {
     
   }
 
-  postLoginCourseMentorData(data: any): Observable<any> {
+  postLoginFacultyData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
+  postLoginCourseMentorData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, data);
+  }
+  postLoginDomainMentorData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, data);
+  }
+  postLoginAdminData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, data);
+  }
   updateData(id: number, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/data/${id}`, data);
   }

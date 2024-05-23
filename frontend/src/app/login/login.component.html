@@ -1,20 +1,25 @@
 
-<app-header></app-header>
-<body>
-   <div class="wrap">
-                    <div class="bg-img">
-                        <img src=".\assets\logo\Illu.png" alt="">
-                    </div>
-                    <div class="text">
-                        <h1 class="font">Course</h1>
-                        <h1 class="font">Tracking</h1>
-                        <h1 class="font">Dashboard</h1>
-                    </div>
+<div class="container">
+    <div class="bg-img">
+        <img class="img" src=".\assets\logo\Illu.png" alt="">
     </div>
-    <div class="login-form">
-        <app-faculity-login></app-faculity-login>
+    <div class="nav">
+        <ul>
+          <li>
+            <a [routerLink]="['']">Faculty</a>
+          </li>
+          <li>
+            <a [routerLink]="['course-mentor']">Course Mentor</a>
+          </li>
+          <li>
+            <a [routerLink]="['domain-mentor']">Domain Mentor</a>
+          </li>
+          <li>
+            <a [routerLink]="['admin']">admin</a>
+          </li>
+        </ul>
+    </div>
+    <router-outlet/>
+</div>   
 
-    </div>
-    
-</body>
 

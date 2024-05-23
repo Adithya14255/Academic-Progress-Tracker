@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.username, .password{
+    width:80%;
+    height:80px;
+}
+.input-field{
+    border:2px solid red; 
+    margin-top:100px;
+}
+
+.username input , .password input{
+    border:none;
+    border-bottom:2px solid black;
+    outline:none;   
+}
+button{
+    width:50%;
+    height:20%;
+    padding:5%;
+    border-radius:10px;
+    outline:none;
+    border:none;
+    color:white;
+    background-color: #F58426;
+    margin:10%;
+}
+
+.font{
+    font-weight:700;
+    font-size:5em;
+    letter-spacing: 3px;
+    margin:8px 0;
+}
+
+.login-form{
+    align-items: center;
+    height:30%;
+    width:100%;
+    padding:25%;
+    margin-top:100%;
+    margin-left:200%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px rgba(105,105,105,0.5),
+                -5px -5px 7px rgba(105,105,105,0.5);
+}

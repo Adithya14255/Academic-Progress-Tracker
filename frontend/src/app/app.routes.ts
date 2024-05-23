@@ -3,26 +3,26 @@ import { LoginComponent } from './login/login.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DomainMentorPortalBaseComponent } from './domain-mentor-portal-base/domain-mentor-portal-base.component';
-import { FacultyInchargeComponent } from './faculty-incharge/faculty-incharge.component';
-import { CourseMentorPortalComponent } from './course-mentor-portal/course-mentor-portal.component';
-import { AppComponent } from './app.component';
-import { FaculityLoginComponent } from './faculity-login/faculity-login.component';
-import { DomainMentorLoginComponent } from './domain-mentor-login/domain-mentor-login.component';
-import { CourseMentorLoginComponent } from './course-mentor-login/course-mentor-login.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
+import { CourseMentorPortalComponent } from './course-mentor/course-mentor-portal/course-mentor-portal.component';
+import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
+import { DomainMentorLoginComponent } from './login/domain-mentor-login/domain-mentor-login.component';
+import { CourseMentorLoginComponent } from './login/course-mentor-login/course-mentor-login.component';
+import { AdminLoginComponent } from './login/admin-login/admin-login.component';
+import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 
 export const routes: Routes = [
-    { path: '', component: AppComponent},
-    { path: 'login', component: LoginComponent },
-    { path: 'faculty-incharge', component: FacultyInchargeComponent},
+    { path: '', component:LoginComponent,
+    children: [
+        { path: '', component: FaculityLoginComponent },
+        { path: 'course-mentor', component: CourseMentorLoginComponent },
+        { path: 'domain-mentor', component: DomainMentorLoginComponent },
+        { path: 'admin', component: AdminLoginComponent}    
+      ]},
+    { path: 'faculty-incharge', component:FacultyTableComponent },
     { path: 'course-mentor-portal', component: CourseMentorPortalComponent},
     { path: 'hod-dashboard', component: HodDashboardComponent},
     { path: 'header', component: HeaderComponent},
     { path: 'footer', component: FooterComponent},
     { path: 'domain-mentor-portal',component: DomainMentorPortalBaseComponent},
-    { path: 'faculty-login',component: FaculityLoginComponent},
-    { path: 'domain-mentor-login',component: DomainMentorLoginComponent},
-    { path: 'course-mentor-login', component: CourseMentorLoginComponent},
-    { path: 'admin-login', component: AdminLoginComponent}
 ];
