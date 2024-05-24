@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-
+import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-portal-table/domain-mentor-portal-table.component';
 import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 
@@ -19,7 +19,8 @@ import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-
     HeaderComponent,
     ReactiveFormsModule,
     LoginComponent,
-    CourseMentorPortalTableComponent
+    CourseMentorPortalTableComponent,
+    DomainMentorPortalTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
