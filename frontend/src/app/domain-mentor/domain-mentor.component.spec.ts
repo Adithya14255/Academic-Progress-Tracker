@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacultyInchargeComponent } from './faculty-incharge.component';
+import { DomainMentorComponent } from './domain-mentor.component';
 
-describe('FacultyInchargeComponent', () => {
-  let component: FacultyInchargeComponent;
-  let fixture: ComponentFixture<FacultyInchargeComponent>;
+describe('DomainMentorComponent', () => {
+  let component: DomainMentorComponent;
+  let fixture: ComponentFixture<DomainMentorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FacultyInchargeComponent]
+      imports: [DomainMentorComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FacultyInchargeComponent);
+    fixture = TestBed.createComponent(DomainMentorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
