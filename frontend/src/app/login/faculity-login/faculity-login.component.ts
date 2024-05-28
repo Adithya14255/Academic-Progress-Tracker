@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-faculity-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './faculity-login.component.html',
   styleUrl: './faculity-login.component.css'
 })

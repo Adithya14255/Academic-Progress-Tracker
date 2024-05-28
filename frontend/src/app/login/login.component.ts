@@ -4,7 +4,7 @@ import { FaculityLoginComponent } from './faculity-login/faculity-login.componen
 import { DomainMentorLoginComponent } from './domain-mentor-login/domain-mentor-login.component';
 import { CourseMentorLoginComponent } from './course-mentor-login/course-mentor-login.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,5 +14,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  constructor(private router: Router) {
+    this.router.navigateByUrl('faculty');
+  }
+        
   
 }
