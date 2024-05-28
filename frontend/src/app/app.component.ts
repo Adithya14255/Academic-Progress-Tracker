@@ -8,7 +8,9 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-portal-table/domain-mentor-portal-table.component';
 import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
-
+import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
+import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
+import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,10 @@ import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-
     ReactiveFormsModule,
     LoginComponent,
     CourseMentorPortalTableComponent,
-    DomainMentorPortalTableComponent
+    DomainMentorPortalTableComponent,
+    FaculityLoginComponent,
+    DomainMentorPortalBaseComponent,
+    FacultyTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

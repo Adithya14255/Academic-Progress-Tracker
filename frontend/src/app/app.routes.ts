@@ -10,6 +10,7 @@ import { DomainMentorLoginComponent } from './login/domain-mentor-login/domain-m
 import { CourseMentorLoginComponent } from './login/course-mentor-login/course-mentor-login.component';
 import { AdminLoginComponent } from './login/admin-login/admin-login.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
+import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 
 export const routes: Routes = [
     { path: '', component:LoginComponent,
@@ -21,8 +22,10 @@ export const routes: Routes = [
       ]},
     { path: 'faculty-incharge', component:FacultyTableComponent },
     { path: 'course-mentor-portal', component: CourseMentorPortalComponent},
+    { path: 'course-mentor-portal-table', component: CourseMentorPortalTableComponent },
     { path: 'hod-dashboard', component: HodDashboardComponent},
     { path: 'header', component: HeaderComponent},
     { path: 'footer', component: FooterComponent},
     { path: 'domain-mentor-portal',component: DomainMentorPortalBaseComponent},
+    
 ];
