@@ -24,17 +24,18 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def mentor_login():
-    role=request.json['role']
-    name=request.json['name']
-    password=request.json['password']
-    q = sqlalchemy.text(f"SELECT * FROM users WHERE name='{name}' and password='{password}' and role={role};")
-    r = conn.execute(q).fetchall()
-    if r:
-        data=[dict(i._mapping) for i in r]
-        print(data)
-        return json.dumps(data[0])
-    else:
-        return json.dumps({'Error':'Incorrect details entered'})
+    if request.method=='POST':
+        role=request.json['role']
+        name=request.json['name']
+        password=request.json['password']
+        q = sqlalchemy.text(f"SELECT * FROM users WHERE name='{name}' and password='{password}' and role={role};")
+        r = conn.execute(q).fetchall()
+        if r:
+            data=[dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data[0])
+        else:
+            return json.dumps({'Error':'Incorrect details entered'})
 
 @app.route('/register', methods=['POST', 'GET'])
 def coordinator_login():

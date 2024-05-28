@@ -15,7 +15,7 @@ import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-
 export const routes: Routes = [
     { path: '', component:LoginComponent,
     children: [
-        { path: '', component: FaculityLoginComponent },
+        { path: 'faculty', component: FaculityLoginComponent },
         { path: 'course-mentor', component: CourseMentorLoginComponent },
         { path: 'domain-mentor', component: DomainMentorLoginComponent },
         { path: 'admin', component: AdminLoginComponent}    

@@ -1,5 +1,21 @@
 <div class="login-form">
-    <form [formGroup]="checkoutForm" (ngSubmit)="fetchFacultyData()">
+  <div class="nav">
+    <ul id="navlogin">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="navloginitem" [routerLink]="['../faculty']">Faculty</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="navloginitem" [routerLink]="['../course-mentor']">Course Mentor</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="navloginitem" [routerLink]="['../domain-mentor']">Domain Mentor</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="navloginitem" [routerLink]="['../admin']">Admin</a>
+      </li>
+    </ul>
+  </div>
+    <form id="loginform" [formGroup]="checkoutForm" (ngSubmit)="fetchFacultyData()">
         <div class="username">
             <label for="name">Name</label>
             <p><input id="name" type="text" formControlName="name"></p>
