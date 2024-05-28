@@ -22,9 +22,11 @@ export class AdminLoginComponent {
   fetchAdminData() {
     this.apiService.postLoginAdminData(this.checkoutForm.value).subscribe(data => {
       this.data = data; // Assign the received data to jsonData
-    }); // Log response for debugging
-    if(this.data.role==4){
-      this.router.navigate(['/hod-dashboard']);
-  }
+      this.data = data; 
+      if(this.data.role==4){
+        this.router.navigateByUrl('/hod-dashboard', { state: this.data  });
+    }}
+  );
+  
 }
 }
