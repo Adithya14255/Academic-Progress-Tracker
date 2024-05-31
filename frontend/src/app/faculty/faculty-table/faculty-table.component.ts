@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-faculty-table',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule],
   templateUrl: './faculty-table.component.html',
   styleUrls: ['./faculty-table.component.css']
 })
@@ -155,29 +154,4 @@ export class FacultyTableComponent {
     return this.getColor(value) === 'lightgreen';
   }
 
-  addNewRow() {
-    const newRow = {
-      Course: this.newRow.Course,
-      Title: this.newRow.Title,
-      Outcome: this.newRow.Outcome,
-      Material: this.newRow.Material,
-      Approve: "Approve",
-      Hours: this.newRow.Hours,
-      DocumentLink: this.newRow.DocumentLink
-    };
-
-    this.array.push(newRow);
-    this.tabValue.push(Object.values(newRow));
-
-    // Reset the form
-    this.newRow = {
-      Course: "",
-      Title: "",
-      Outcome: "",
-      Material: "",
-      Hours: 0,
-      DocumentLink: ""
-    };
-    this.showForm = false;
-  }
 }

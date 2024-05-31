@@ -1,1 +1,21 @@
-<p>faculty works!</p>
+<p>faculty main page</p>
+<ul id="navlogin">
+    <li>
+      <a class="navloginitem" [routerLink]="['/faculty-table']">Faculty Table</a>
+    </li>
+</ul>
+<p>put faculty dashboard stuff here</p>
+<div class="profile-container">
+    <div class="profile-header">
+        <img src="profile.jpg" alt="Profile Picture">
+        <h2>a</h2>
+        <p>Role: 1</p>
+    </div>
+    <div class="profile-body">
+        <div class="profile-info">
+            <p><strong>ID:</strong>{{data.id}}</p>
+            <p><strong>Name:</strong> {{data.name}}</p>
+            <p><strong>Department ID:</strong>{{data.department_id}}</p>
+        </div>
+    </div>
+</div>

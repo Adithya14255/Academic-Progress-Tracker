@@ -15,7 +15,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 })
 export class LoginComponent {
   constructor(private router: Router) {
-    this.router.navigateByUrl('faculty');
+    this.router.navigateByUrl('/faculty-login');
   }
         
   
