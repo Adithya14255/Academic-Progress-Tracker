@@ -3,6 +3,7 @@
 header{
     /* border:2px solid red; */
     width:100vw;
+    font-family:'poppins',sans-serif;
     height: 50px;
     display:flex;
     justify-content:space-between;
