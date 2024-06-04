@@ -9,7 +9,6 @@ import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-
 import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
-import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 
 @Component({
@@ -24,7 +23,6 @@ import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.com
     CourseMentorPortalTableComponent,
     DomainMentorPortalTableComponent,
     FaculityLoginComponent,
-    DomainMentorPortalBaseComponent,
     FacultyTableComponent
   ],
   templateUrl: './app.component.html',

@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 app.secret_key="helloworld"
-engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.44.167/kgaps")
+engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.45.117/kgaps")
 conn = engine.connect()
 
 
@@ -15,11 +15,6 @@ conn = engine.connect()
 @app.route('/', methods=['POST', 'GET'])
 def index():
     data={'error':'none'}
-    if request.method=='POST':
-        data=request.json['role']
-    # q = sqlalchemy.text("SELECT * FROM users;")
-    # r = conn.execute(q).fetchall()
-    # data=[dict(i._mapping) for i in r]
     return json.dumps(data)
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -28,7 +23,7 @@ def mentor_login():
         role=request.json['role']
         name=request.json['name']
         password=request.json['password']
-        q = sqlalchemy.text(f"SELECT * FROM users WHERE name='{name}' and password='{password}' and role={role};")
+        q = sqlalchemy.text(f"SELECT id,name,role,department_id FROM users WHERE name='{name}' and password='{password}' and role={role};")
         r = conn.execute(q).fetchall()
         if r:
             data=[dict(i._mapping) for i in r]
@@ -45,11 +40,12 @@ def coordinator_login():
         role=request.json['role']
         name=request.json['name']
         password=request.json['password']
-        q = sqlalchemy.text(f"INSERT INTO users VALUES('{name}','{password}','{role});")
-        r = conn.execute(q).fetchall()
+        dept_id=request.json['department_id']
+        id=request.json['id']
+        q = sqlalchemy.text(f"INSERT INTO users VALUES({id},'{name}',{role},'{password}',{dept_id});")
+        conn.execute(q)
         conn.commit()
-        if r:
-            return json.dumps({'Success':f'{r}'})
+        return json.dumps({'data':'Success'})
 
 @app.route('/dm_login', methods=['POST', 'GET'])
 def dm_login():
@@ -63,3 +59,5 @@ def admin_login():
 
 
 
+if __name__ == '__main__':
+    app.run(debug=True, port=5001,host="0.0.0.0")
