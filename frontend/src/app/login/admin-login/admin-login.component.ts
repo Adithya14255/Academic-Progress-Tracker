@@ -12,7 +12,7 @@ import { ApiService } from '../../api.service';
   styleUrl: './admin-login.component.css'
 })
 export class AdminLoginComponent {
-  data: User = {id:0,name:'',role:0,department_id:0};
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -22,7 +22,7 @@ export class AdminLoginComponent {
   fetchAdminData() {
     this.apiService.postLoginAdminData(this.checkoutForm.value).subscribe(data => {
       this.data = data; // Assign the received data to jsonData 
-      if(this.data.role==4){
+      if(this.data.role_id==4){
         this.router.navigateByUrl('/admin', { state: this.data  });
     }}
   );

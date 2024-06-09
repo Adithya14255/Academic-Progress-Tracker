@@ -1,13 +1,13 @@
-from flask import Flask,request,session
+from flask import Flask,request,session,jsonify
 import sqlalchemy
 import os
 import json
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 
 app = Flask(__name__)
 CORS(app)
 app.secret_key="helloworld"
-engine = sqlalchemy.create_engine("postgresql://admin:admin@192.168.0.247/kgaps")
+engine = sqlalchemy.create_engine("postgresql://admin:admin@192.168.0.248/kgaps")
 conn = engine.connect()
 
 
@@ -23,14 +23,13 @@ def login():
         role=request.json['role']
         name=request.json['name']
         password=request.json['password']
-        q = sqlalchemy.text(f"SELECT id,name,role,department_id FROM user_details_check WHERE name='{name}' and password='{password}' and role_id={role};")
+        q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE name='{name}' and password='{password}' and role_id={role};")
         r = conn.execute(q).fetchall()
         if r:
             data=[dict(i._mapping) for i in r]
             print(data)
-            session['id']=data[0]['id']
-            session['name']=data[0]['name']
-            return json.dumps(data[0])
+            response=jsonify(data[0])
+            return response
         else:
             return json.dumps({'Error':'Incorrect details entered'})
 
@@ -49,15 +48,14 @@ def register():
         conn.commit()
         return json.dumps({'data':'Success'})
 
-@app.route('/faculty', methods=['POST', 'GET'])
-def faculty():
-    if request.method=='POST':
-        q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid={session[id]};")
-        r = conn.execute(q).fetchall()
-        if r:
-            data=[dict(i._mapping) for i in r]
-            print(data)
-            return json.dumps(data[0])
+@app.route('/faculty/<int:uid>', methods=['POST', 'GET'])
+def faculty(uid):
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid='{uid}';")
+    r = conn.execute(q).fetchall()
+    if r:
+        data=[dict(i._mapping) for i in r]
+        print(data)
+        return json.dumps(data)
         
 @app.route('/mentor', methods=['POST', 'GET'])
 def mentor():

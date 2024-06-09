@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  data: User = {id:0,name:'',role:0,department_id:0};
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
   constructor(private location:Location){}
   ngOnInit(): void {
     const state = this.location.getState();

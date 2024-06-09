@@ -13,7 +13,7 @@ import { ApiService } from '../../api.service';
   styleUrl: './course-mentor-login.component.css'
 })
 export class CourseMentorLoginComponent {
-  data: User = {id:0,name:'',role:0,department_id:0};
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -23,7 +23,7 @@ export class CourseMentorLoginComponent {
   fetchCourseMentorData() {
     this.apiService.postLoginCourseMentorData(this.checkoutForm.value).subscribe(data => {
       this.data = data; 
-      if(this.data.role==2){
+      if(this.data.role_id==2){
         this.router.navigateByUrl('/course-mentor', { state: this.data  });
     }}
   );

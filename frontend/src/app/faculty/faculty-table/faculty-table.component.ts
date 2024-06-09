@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
+import { ApiService } from '../../api.service';
+import { Faculty_table } from '../../interfaces/faculty';
+import { User } from '../../interfaces/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-faculty-table',
@@ -9,106 +14,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./faculty-table.component.css']
 })
 export class FacultyTableComponent {
-  array: any[] = [
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "0",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "#"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "1",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "2",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "3",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
-    },
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Material: "4",
-      Approve: "Approve",
-      Hours: 5,
-      DocumentLink: "Hm"
+  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:0,hours_completed:0,topic:'',outcome:''}];
+  userdata: User = {uid:0,name:'',role_id:0,department_id:0};
+  constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    const state = this.location.getState();
+    if (typeof state === 'object' && state !== null) {
+    this.userdata = state as User;
+  }console.log(this.userdata)
+    this.apiService.getFacultyData(this.userdata.uid).subscribe(
+      response => {
+        this.data = response;
+      });
     }
-  ];
-
-  tabKey: any = [];
-  tabValue: any = [];
-  materialIndex: number = -1;
-  HourIndex: number = -1;
-  ApproveIndex: number = -1;
-  urlIndex: number = 7; // Assuming the urlIndex is 7
-
   newRow: any = {
     Course: "",
     Title: "",
@@ -117,23 +35,6 @@ export class FacultyTableComponent {
     Hours: 0,
     DocumentLink: ""
   };
-
-  showForm = false;
-
-  constructor() {
-    this.getData();
-  }
-
-  getData() {
-    this.array.forEach((element: any) => {
-      this.tabKey = Object.keys(element);
-      this.tabValue.push(Object.values(element));
-      this.materialIndex = this.tabKey.findIndex((key: string) => key === 'Material');
-      this.ApproveIndex = this.tabKey.findIndex((key: string) => key === 'Approve');
-      this.HourIndex = this.tabKey.findIndex((key: string) => key === 'Hours');
-      this.urlIndex = this.tabKey.findIndex((key: string) => key === 'DocumentLink');
-    });
-  }
 
   getColor(value: string): string {
     switch (value) {

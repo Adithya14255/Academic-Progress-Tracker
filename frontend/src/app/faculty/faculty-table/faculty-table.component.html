@@ -5,41 +5,28 @@
     <div class="table-wrapper">
         <table>
             <thead>
-                <tr>
-                    <ng-container *ngFor="let key of tabKey; let i = index">
-                        <th *ngIf="i !== HourIndex && i !== ApproveIndex" style="font-weight: bold;">
-                            {{ key === 'DocumentLink' ? 'Status' : key }}
-                        </th>
-                    </ng-container>
-                </tr>
+              <tr>
+                <th>UID</th>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Topic</th>
+                <th>Outcome</th>
+                <th>Status Code</th>
+                <th>Hours Completed</th>
+              </tr>
             </thead>
-            <tbody id="table-body">
-                <ng-container *ngFor="let arr of tabValue; let rowIndex = index">
-                    <tr>
-                        <ng-container *ngFor="let val of arr; let i = index">
-                            <ng-container *ngIf="i !== materialIndex && i !== ApproveIndex && i !== HourIndex && i !== urlIndex">
-                                <td class="body-tr">{{ val }}</td>
-                            </ng-container>
-                            <ng-container *ngIf="i === materialIndex">
-                                <td class="body-tr">
-                                    <div [ngStyle]="{ 'background-color': getColor(val) }" class="box"></div>
-                                </td>
-                            </ng-container>
-                            <ng-container *ngIf="i === urlIndex">
-                                <td class="body-tr">
-                                  <ng-container *ngIf="isGreenBox(arr[materialIndex]); else notApproved">
-                                    <span class="approved">Approved</span>
-                                  </ng-container>
-                                  <ng-template #notApproved>
-                                    <span class="not-approved">Not Approved</span>
-                                  </ng-template>
-                                </td>
-                              </ng-container>
-                        </ng-container>
-                    </tr>
-                </ng-container>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <td>{{ item.uid }}</td>
+                <td>{{ item.course_code }}</td>
+                <td>{{ item.course_name }}</td>
+                <td>{{ item.topic }}</td>
+                <td>{{ item.outcome }}</td>
+                <td>{{ item.status_code }}</td>
+                <td>{{ item.hours_completed }}</td>
+              </tr>
             </tbody>
-        </table>
+          </table>
     </div>
 </div>
 <div>
