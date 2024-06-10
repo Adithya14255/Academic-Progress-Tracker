@@ -12,7 +12,7 @@ import { User } from '../../interfaces/user';
   styleUrl: './faculity-login.component.css'
 })
 export class FaculityLoginComponent {
-  data: User = {id:0,name:'',role:0,password:'',department_id:0};
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -22,8 +22,9 @@ export class FaculityLoginComponent {
   fetchFacultyData() {
     this.apiService.postLoginFacultyData(this.checkoutForm.value).subscribe(data => {
       this.data = data; 
-      if(this.data.role==1){
-        this.router.navigateByUrl('/hod-dashboard', { state: this.data  });
+      console.log(data)
+      if(this.data.role_id==1){
+        this.router.navigateByUrl('/faculty-incharge', { state: this.data  });
     }}
   );
   

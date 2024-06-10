@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-hod-dashboard',
+  selector: 'app-admin',
   standalone: true,
   imports: [],
-  templateUrl: './hod-dashboard.component.html',
-  styleUrl: './hod-dashboard.component.css'
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.css'
 })
-export class HodDashboardComponent {
-  data: User = {id:0,name:'',role:0,password:'',department_id:0};
-  constructor(private router:Router,private location:Location){}
+export class AdminComponent {
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
+  constructor(private location:Location){}
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {

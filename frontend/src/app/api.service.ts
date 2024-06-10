@@ -13,8 +13,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(data: any): Observable<User[]> {
-    return this.http.post<any>(`${this.apiUrl}/`,data);
+  getFacultyData(id:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
     
   }
 

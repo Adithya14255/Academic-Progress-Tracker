@@ -12,7 +12,7 @@ import { ApiService } from '../../api.service';
   styleUrls: ['./domain-mentor-login.component.css'] // Note the plural 'styleUrls'
 })
 export class DomainMentorLoginComponent {
-  data: User = {id:0,name:'',role:0,password:'',department_id:0};
+  data: User = {uid:0,name:'',role_id:0,department_id:0};
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -23,8 +23,8 @@ export class DomainMentorLoginComponent {
     if (this.checkoutForm.valid) {
       this.apiService.postLoginDomainMentorData(this.checkoutForm.value).subscribe(data => {
         this.data = data;
-        if(this.data.role==3){
-          this.router.navigateByUrl('/hod-dashboard', { state: this.data  });
+        if(this.data.role_id==3){
+          this.router.navigateByUrl('/domain-mentor', { state: this.data  });
       }}
     );
     }

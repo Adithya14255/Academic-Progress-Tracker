@@ -1,7 +1,6 @@
 export interface User {
-    id: number;
+    uid: number;
     name: string;
-    role: number;
-    password: string;
+    role_id: number;
     department_id: number | null; // Assuming department_id can be null
   }

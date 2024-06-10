@@ -13,7 +13,9 @@
 .username input , .password input{
     border:none;
     border-bottom:2px solid black;
-    outline:none;   
+    outline:none;
+    width:130%;   
+    margin:10px 0;
 }
 button{
     width:100%;
@@ -23,6 +25,7 @@ button{
     outline:none;
     border:none;
     color:white;
+    margin:20px 0;
     background-color: #F58426;
     align-self: center;
 }
@@ -36,9 +39,10 @@ button{
 
 .login-form{
     align-items: center;
-    height:30%;
-    width:100%;
-    margin-top: 25%;
+    height:50%;
+    font-family:'poppins',sans-serif;
+    width:70%;
+    margin-top: 20%;
     padding:20%;
     border-radius: 10px;
     box-shadow: 5px 5px 7px rgba(105,105,105,0.5),
@@ -50,8 +54,7 @@ button{
 }
 #navlogin{
     display: flex;
-    gap:5%;
-    overflow: hidden;
+    gap:40px;
     list-style-type: none;
 }
 
@@ -60,5 +63,8 @@ button{
 }
 
 .active {
-    background-color: #f60000; /* Change this to the color you want */
-  }
+    border-bottom:2px solid red;
+    transition:0.8s all ease-in-out;
+    /*background-color: #f60000; /* Change this to the color you want */
+}
+  

@@ -10,4 +10,4 @@ COPY . /server
 
 RUN python3 -m pip install -r requirements.txt
 
-CMD [ "python", "run.py"]
+CMD [ "python", "app.py"]

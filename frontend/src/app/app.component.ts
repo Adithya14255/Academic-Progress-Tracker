@@ -9,7 +9,6 @@ import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-
 import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
-import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashboard/admin-base-dashboard.component';
@@ -25,10 +24,7 @@ import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashbo
     CourseMentorPortalTableComponent,
     DomainMentorPortalTableComponent,
     FaculityLoginComponent,
-    DomainMentorPortalBaseComponent,
-    FacultyTableComponent,
-    AdminDashboardComponent,
-    AdminBaseDashboardComponent
+    FacultyTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
