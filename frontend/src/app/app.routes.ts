@@ -31,5 +31,4 @@ export const routes: Routes = [
     { path: 'domain-mentor',component: DomainMentorComponent},
     { path: 'domain-mentor-table',component: DomainMentorPortalTableComponent}, 
     { path: 'admin',component: AdminComponent},    
-
 ];

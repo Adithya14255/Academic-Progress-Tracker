@@ -6,7 +6,6 @@
         <table>
             <thead>
               <tr>
-                <th>UID</th>
                 <th>Course Code</th>
                 <th>Course Name</th>
                 <th>Topic</th>
@@ -17,12 +16,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of data">
-                <td>{{ item.uid }}</td>
                 <td>{{ item.course_code }}</td>
                 <td>{{ item.course_name }}</td>
                 <td>{{ item.topic }}</td>
                 <td>{{ item.outcome }}</td>
-                <td>{{ item.status_code }}</td>
+                <td >
+                    <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+                </td>
                 <td>{{ item.hours_completed }}</td>
               </tr>
             </tbody>

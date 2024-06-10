@@ -14,8 +14,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./faculty-table.component.css']
 })
 export class FacultyTableComponent {
-  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:0,hours_completed:0,topic:'',outcome:''}];
+  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''}];
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
+  boxcolor: string = 'white';
   constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}
   ngOnInit(): void {
     const state = this.location.getState();
@@ -27,32 +28,20 @@ export class FacultyTableComponent {
         this.data = response;
       });
     }
-  newRow: any = {
-    Course: "",
-    Title: "",
-    Outcome: "",
-    Material: "",
-    Hours: 0,
-    DocumentLink: ""
-  };
 
-  getColor(value: string): string {
+  getBoxColor(value: number): string {
     switch (value) {
-      case '0':
+      case 0:
         return 'white';
-      case '1':
+      case 1:
         return 'orange';
-      case '2':
+      case 2:
         return 'red';
-      case '3':
-        return 'lightgreen';
+      case 3:
+        return 'green';
       default:
         return 'white'; // Default color
     }
-  }
-
-  isGreenBox(value: string): boolean {
-    return this.getColor(value) === 'lightgreen';
   }
 
 }

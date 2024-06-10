@@ -50,7 +50,7 @@ def register():
 
 @app.route('/faculty/<int:uid>', methods=['POST', 'GET'])
 def faculty(uid):
-    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid='{uid}';")
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid='{uid}' and status_code!=4;")
     r = conn.execute(q).fetchall()
     if r:
         data=[dict(i._mapping) for i in r]

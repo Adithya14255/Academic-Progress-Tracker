@@ -95,6 +95,15 @@ CREATE TABLE t_complete_status (
   FOREIGN KEY (handler_id) REFERENCES t_users(uid)
 );
 
+-- Create the l_mentor_courses table
+CREATE TABLE l_mentor_courses (    
+  mentor_id INT,
+  course_code VARCHAR(24) NOT NULL,
+  FOREIGN KEY (course_code) REFERENCES t_course_details(course_code),g
+  FOREIGN KEY (mentor_id) REFERENCES t_users(uid)
+);
+
+
 
 --view to check user details
 
@@ -106,7 +115,7 @@ create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.
 
 --view for course mentor and domain mentor table
 
-create view mentor_table as select u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url  from t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.topic_id=c.topic_id;
+create view mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url  from t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.topic_id=c.topic_id and z.mentor_id=u.uid;
 
 -- initialize the roles
 INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Mentor'), (3, 'Domain Mentor'),(4,'Admin');
