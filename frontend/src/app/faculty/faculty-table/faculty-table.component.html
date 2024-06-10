@@ -1,76 +1,28 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <div class="container">
     <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
                     <ng-container *ngFor="let key of tabKey; let i = index">
-                        <th *ngIf="i !== HourIndex && i !== ApproveIndex" style="font-weight: bold;">
-                            {{ key === 'DocumentLink' ? 'Status' : key }}
+                        <th style="font-weight: bold;">
+                            {{ key }}
                         </th>
                     </ng-container>
                 </tr>
             </thead>
             <tbody id="table-body">
-                <ng-container *ngFor="let arr of tabValue; let rowIndex = index">
+                <ng-container *ngFor="let arr of tabValue;  let rowIndex = index">
                     <tr>
                         <ng-container *ngFor="let val of arr; let i = index">
-                            <ng-container *ngIf="i !== materialIndex && i !== ApproveIndex && i !== HourIndex && i !== urlIndex">
-                                <td class="body-tr">{{ val }}</td>
-                            </ng-container>
-                            <ng-container *ngIf="i === materialIndex">
-                                <td class="body-tr">
-                                    <div [ngStyle]="{ 'background-color': getColor(val) }" class="box"></div>
-                                </td>
-                            </ng-container>
-                            <ng-container *ngIf="i === urlIndex">
-                                <td class="body-tr">
-                                  <ng-container *ngIf="isGreenBox(arr[materialIndex]); else notApproved">
-                                    <span class="approved">Approved</span>
-                                  </ng-container>
-                                  <ng-template #notApproved>
-                                    <span class="not-approved">Not Approved</span>
-                                  </ng-template>
-                                </td>
-                              </ng-container>
+                                <td class="body-tr">{{ val }}</td>                         
                         </ng-container>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
-        <button class="add-row-btn" (click)="showForm = !showForm">Add New Row</button>
-        
-        <div *ngIf="showForm" class="form-wrapper">
-            <form (ngSubmit)="addNewRow()" class="add-row-form">
-                <div class="form-group">
-                    <label for="course">Course:</label>
-                    <input type="text" id="course" [(ngModel)]="newRow.Course" name="course" required />
-                </div>
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" [(ngModel)]="newRow.Title" name="title" required />
-                </div>
-                <div class="form-group">
-                    <label for="outcome">Outcome:</label>
-                    <input type="text" id="outcome" [(ngModel)]="newRow.Outcome" name="outcome" required />
-                </div>
-                <div class="form-group">
-                    <label for="material">Material:</label>
-                    <input type="text" id="material" [(ngModel)]="newRow.Material" name="material" placeholder="0-White 1-Orange 2-Red 3-Green" required />
-                </div>
-                <div class="form-group">
-                    <label for="hours">Hours:</label>
-                    <input type="number" id="hours" [(ngModel)]="newRow.Hours" name="hours" required />
-                </div>
-                <div class="form-group">
-                    <label for="documentLink">Document Link:</label>
-                    <input type="text" id="documentLink" [(ngModel)]="newRow.DocumentLink" name="documentLink" />
-                </div>
-                <button type="submit" class="submit-btn">Submit</button>
-            </form>
-        </div>
     </div>
 </div>
 <div>

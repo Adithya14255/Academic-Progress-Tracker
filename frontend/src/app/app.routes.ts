@@ -11,6 +11,8 @@ import { CourseMentorLoginComponent } from './login/course-mentor-login/course-m
 import { AdminLoginComponent } from './login/admin-login/admin-login.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashboard/admin-base-dashboard.component';
 
 export const routes: Routes = [
     { path: '', component:LoginComponent,
@@ -18,7 +20,7 @@ export const routes: Routes = [
         { path: 'faculty', component: FaculityLoginComponent },
         { path: 'course-mentor', component: CourseMentorLoginComponent },
         { path: 'domain-mentor', component: DomainMentorLoginComponent },
-        { path: 'admin', component: AdminLoginComponent}    
+        { path: 'admin', component: AdminLoginComponent} 
       ]},
     { path: 'faculty-incharge', component:FacultyTableComponent },
     { path: 'course-mentor-portal', component: CourseMentorPortalComponent},
@@ -27,5 +29,6 @@ export const routes: Routes = [
     { path: 'header', component: HeaderComponent},
     { path: 'footer', component: FooterComponent},
     { path: 'domain-mentor-portal',component: DomainMentorPortalBaseComponent},
-    
+    { path: 'admin-dashboard', component: AdminDashboardComponent},
+    { path: 'admin-base-dashboard', component: AdminBaseDashboardComponent}
 ];
