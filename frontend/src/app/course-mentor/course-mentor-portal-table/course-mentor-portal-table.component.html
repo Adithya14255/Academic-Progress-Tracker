@@ -4,7 +4,28 @@
 <div class="container">
     <div class="table-wrapper">
         <table>
-           
+            <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Name</th>
+                  <th>Topic</th>
+                  <th>Outcome</th>
+                  <th>Status Code</th>
+                  <th>link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data">
+                  <td>{{ item.course_code }}</td>
+                  <td>{{ item.course_name }}</td>
+                  <td>{{ item.topic }}</td>
+                  <td>{{ item.outcome }}</td>
+                  <td >
+                      <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+                  </td>
+                  <td><a href="{{item.url}}">view</a></td>
+                </tr>
+              </tbody>
         </table>
      <!--   <button class="add-row-btn" (click)="showForm = !showForm">Add New Row</button>
         

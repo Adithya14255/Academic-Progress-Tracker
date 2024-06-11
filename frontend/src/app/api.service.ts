@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
     
   }
+  getMentorData(id:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/mentor/${id}`);
+    
+  }
 
   postLoginFacultyData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
