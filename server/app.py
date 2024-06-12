@@ -57,9 +57,18 @@ def faculty(uid):
         print(data)
         return json.dumps(data)
         
-@app.route('/mentor/<int:id>', methods=['POST', 'GET'])
-def mentor(id):
-        q = sqlalchemy.text(f"SELECT * FROM mentor_table WHERE mentor_id={id};")
+@app.route('/course_mentor/<int:id>', methods=['POST', 'GET'])
+def course_mentor(id):
+        q = sqlalchemy.text(f"SELECT * FROM course_mentor_table WHERE mentor_id={id};")
+        r = conn.execute(q).fetchall()
+        if r:
+            data=[dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+        
+@app.route('/domain_mentor/<int:id>', methods=['POST', 'GET'])
+def domain_mentor(id):
+        q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table;")
         r = conn.execute(q).fetchall()
         if r:
             data=[dict(i._mapping) for i in r]
@@ -106,6 +115,8 @@ def assign_course():
        if request.method=='POST':
             course_code = request.json['course_code']
             uid=request.json['uid']
+            if (conn.execute(sqlalchemy.text(f"Select * from course_mentor_table where course_code='{course_code}' and uid={uid}")).all()):
+                 return jsonify({'error':'mentor is already assigned to that course'})
             q = sqlalchemy.text(f"INSERT INTO t_complete_status (hours_completed, topic_id, handler_id, course_code, status_code) \
                                 SELECT 0, topic_id, {uid}, '{course_code}', 0 \
                                 FROM t_course_topics \

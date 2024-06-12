@@ -17,8 +17,12 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
     
   }
-  getMentorData(id:any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/mentor/${id}`);
+  getCourseMentorData(id:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
+    
+  }
+  getDomainMentorData(id:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/domain_mentor/${id}`);
     
   }
 

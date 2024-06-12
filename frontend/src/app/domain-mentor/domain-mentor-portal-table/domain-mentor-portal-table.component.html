@@ -6,20 +6,21 @@
         <table>
             <thead>
                 <tr>
-                    <th>Course</th>
-                    <th>Title</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Topic</th>
                     <th>Outcome</th>
-                    <th>Material</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="table-body" *ngFor="let item of array; let rowIndex = index">
-                <tr>
-                    <td>{{ item.Course }}</td>
-                    <td>{{ item.Title }}</td>
-                    <td>{{ item.Outcome }}</td>
+                    <th>link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data; let rowIndex = index">
+                    <td>{{ item.course_code }}</td>
+                    <td>{{ item.course_name }}</td>
+                    <td>{{ item.topic }}</td>
+                    <td>{{ item.outcome }}</td>
                     <td>
-                        <a href="#" style="text-decoration: none;">View</a>
+                        <a href="{{item.url}}" style="text-decoration: none;">View</a>
 
                     </td>
                     <td>
