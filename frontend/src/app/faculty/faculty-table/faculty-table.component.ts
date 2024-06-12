@@ -15,16 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FacultyTableComponent {
-<<<<<<< HEAD
-  array: any[] = [
-    {
-      Course: "Unit 1",
-      Title: "Python Basics",
-      Outcome: "C003",
-      Status: 3,
-      Hourstaken:0,
-=======
-  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''}];
+  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''}];
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
   boxcolor: string = 'white';
   constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}
@@ -37,26 +28,8 @@ export class FacultyTableComponent {
       response => {
         this.data = response;
       });
->>>>>>> 148d1fb9c5480fe0faaead6586c71077027e66a6
     }
 
-<<<<<<< HEAD
-  tabKey: any = [];
-  tabValue: any = [];
-  statusIndex: any = [];
-  checkval: number = 0;
-  constructor() {
-    this.Data();
-  }
-
-  Data() {
-    this.array.forEach((element: any) => {
-      this.tabKey = Object.keys(element);
-      this.tabValue.push(Object.values(element));
-    });
-  }
-}
-=======
   getBoxColor(value: number): string {
     switch (value) {
       case 0:
@@ -73,4 +46,3 @@ export class FacultyTableComponent {
   }
 
 }
->>>>>>> 148d1fb9c5480fe0faaead6586c71077027e66a6
