@@ -2,8 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    padding-top: 200px;
+    padding: 4%;
+    padding-top: 10%;
+    width:100vw;
+    height:80vh;
 }
 
 .table-wrapper {
@@ -14,7 +16,8 @@
     overflow-x: auto;
     padding-top: 0;
     overflow-y: scroll;
-    height: 400px;
+    height: 105%;
+    border:2px solid red;
     scrollbar-width: none;
 }
 
@@ -170,4 +173,8 @@ form input {
 
 .submit-btn:hover {
     background-color: orangered;
+}
+.nav{
+    align-items: center;
+    margin-left: 10%;
 }

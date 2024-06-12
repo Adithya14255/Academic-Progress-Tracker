@@ -13,8 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './faculty-table.component.html',
   styleUrls: ['./faculty-table.component.css']
 })
+
 export class FacultyTableComponent {
-  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''}];
+  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',outcome:''}];
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
   boxcolor: string = 'white';
   constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}

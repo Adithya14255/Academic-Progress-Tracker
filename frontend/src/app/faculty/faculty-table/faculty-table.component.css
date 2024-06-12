@@ -177,7 +177,7 @@ form input {
     font-weight: bold;
   }
   
-  .not-approved {
+.not-approved {
     color: red;
     font-weight: bold;
   }
@@ -187,4 +187,8 @@ form input {
     height: 20px;
     border: 1px solid black;
     display: inline-block;
+}
+.nav{
+    align-items: center;
+    margin-left: 10%;
 }

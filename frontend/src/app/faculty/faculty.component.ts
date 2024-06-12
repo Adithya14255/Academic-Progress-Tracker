@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrl: './faculty.component.css'
 })
 export class FacultyComponent {
-  data: User = {uid:0,name:'',role_id:0,department_id:0};
+  data: User = {uid:1,name:'',role_id:0,department_id:0 };
   constructor(private router: Router,private location:Location){}
   ngOnInit(): void {
     const state = this.location.getState();
