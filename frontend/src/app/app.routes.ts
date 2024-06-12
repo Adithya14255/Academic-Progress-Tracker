@@ -14,6 +14,7 @@ import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-
 import { DomainMentorComponent } from './domain-mentor/domain-mentor.component';
 import { AdminComponent } from './admin/admin.component';
 
+
 export const routes: Routes = [
     { path: '', component:LoginComponent,
     children: [

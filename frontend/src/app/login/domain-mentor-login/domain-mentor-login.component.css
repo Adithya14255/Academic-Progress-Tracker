@@ -3,19 +3,22 @@
 
 .username, .password{
     width:80%;
-    height:80px;
+    height:20%;
+    margin:2% 0;
 }
-.input-field{
+/* .input-field{
     border:2px solid red; 
-    margin-top:100px;
+    margin-top:150%;
+} */
+.username{
+    margin: 7% 0;
 }
-
 .username input , .password input{
     border:none;
     border-bottom:2px solid black;
     outline:none;
     width:130%;   
-    margin:10px 0;
+    margin:7% 0;
 }
 button{
     width:100%;
@@ -25,7 +28,7 @@ button{
     outline:none;
     border:none;
     color:white;
-    margin:20px 0;
+    margin:5%  0;
     background-color: #F58426;
     align-self: center;
 }
@@ -39,9 +42,9 @@ button{
 
 .login-form{
     align-items: center;
-    height:50%;
+    height:60%;
     font-family:'poppins',sans-serif;
-    width:70%;
+    width:107%;
     margin-top: 20%;
     padding:20%;
     border-radius: 10px;
@@ -54,7 +57,7 @@ button{
 }
 #navlogin{
     display: flex;
-    gap:40px;
+    gap:10%;
     list-style-type: none;
 }
 
