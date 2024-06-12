@@ -7,7 +7,7 @@ from flask_cors import CORS,cross_origin
 app = Flask(__name__)
 CORS(app)
 app.secret_key="helloworld"
-engine = sqlalchemy.create_engine("postgresql://admin:admin@192.168.0.248/kgaps")
+engine = sqlalchemy.create_engine("postgresql://admin:admin@172.16.45.24/kgaps")
 conn = engine.connect()
 
 
@@ -103,8 +103,6 @@ def add_topic():
 
 @app.route('/assign_course', methods=['POST', 'GET'])
 def assign_course():
-       #have to add records to hold link for every topic as well for each handler
-       #also assign status code to 0 for all the topics for each handler
        if request.method=='POST':
             course_code = request.json['course_code']
             uid=request.json['uid']
