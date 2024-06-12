@@ -176,7 +176,7 @@ form input {
     font-weight: bold;
   }
   
-  .not-approved {
+.not-approved {
     color: red;
     font-weight: bold;
   }

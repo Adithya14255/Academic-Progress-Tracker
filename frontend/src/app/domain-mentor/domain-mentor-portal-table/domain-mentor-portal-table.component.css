@@ -85,3 +85,7 @@ tbody tr td a {
     background-color: white;
     color: black;
 }
+.nav{
+    align-items: center;
+    margin-left: 10%;
+}

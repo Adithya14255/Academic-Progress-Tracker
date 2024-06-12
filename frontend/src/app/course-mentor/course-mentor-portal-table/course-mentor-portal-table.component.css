@@ -174,3 +174,7 @@ form input {
 .submit-btn:hover {
     background-color: orangered;
 }
+.nav{
+    align-items: center;
+    margin-left: 10%;
+}
