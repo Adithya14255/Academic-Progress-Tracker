@@ -4,7 +4,7 @@
     height: 100%;
     gap:25px;
 }
-.img{
-    height:650px;
-    width:900px;
+.bg-img{
+    margin-right: 15%;
+    border: 2px solid black;
 }

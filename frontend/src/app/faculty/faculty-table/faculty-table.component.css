@@ -187,3 +187,7 @@ form input {
     border: 1px solid black;
     display: inline-block;
 }
+.nav{
+    align-items: center;
+    margin-left: 10%;
+}
