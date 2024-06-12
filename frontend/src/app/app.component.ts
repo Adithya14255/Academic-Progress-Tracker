@@ -12,6 +12,7 @@ import { FaculityLoginComponent } from './login/faculity-login/faculity-login.co
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashboard/admin-base-dashboard.component';
+import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -24,7 +25,8 @@ import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashbo
     CourseMentorPortalTableComponent,
     DomainMentorPortalTableComponent,
     FaculityLoginComponent,
-    FacultyTableComponent
+    FacultyTableComponent,
+    DomainMentorPortalBaseComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
