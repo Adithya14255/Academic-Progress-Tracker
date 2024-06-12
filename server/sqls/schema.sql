@@ -11,8 +11,8 @@ CREATE TABLE t_departments(
 
 -- Create the t_course_details table
 CREATE TABLE t_course_details (
-  course_code VARCHAR(24) PRIMARY KEY,
-  course_name VARCHAR(24) NOT NULL
+  course_code VARCHAR(48) PRIMARY KEY,
+  course_name VARCHAR(48) NOT NULL
 );
 
 -- Create the t_status table 
@@ -24,18 +24,19 @@ CREATE TABLE t_status (
 -- Create the t_users table
 CREATE TABLE t_users (
   uid INT PRIMARY KEY,
-  name VARCHAR(24) NOT NULL,
-  password VARCHAR(24) NOT NULL,
+  name VARCHAR(48) NOT NULL,
+  password VARCHAR(48) NOT NULL,
   department_id INT NOT NULL, 
   FOREIGN KEY (department_id) REFERENCES t_departments(department_id)
 );
 
 -- Create the t_course_topics table 
 CREATE TABLE t_course_topics (
-  course_code VARCHAR(24) NOT NULL,
+  course_code VARCHAR(48) NOT NULL,
   outcome VARCHAR(4),
-  topic VARCHAR(24) NOT NULL,
+  topic VARCHAR(48) NOT NULL,
   topic_id INT PRIMARY KEY,
+  total_hours INT,
   FOREIGN KEY (course_code) REFERENCES t_course_details(course_code)
 );
 
@@ -56,19 +57,11 @@ CREATE TABLE l_course_departments (
 );
 
 
--- Create the t_hours table
-CREATE TABLE t_hours (
-  topic_id INT,
-  total_hours INT,
- FOREIGN KEY (topic_id) REFERENCES t_course_topics(topic_id)
- );
-
-
 -- Create the t_topic_links table 
 CREATE TABLE t_topic_links (
   topic_id INT NOT NULL,
   handler_id INT NOT NULL,
-  url VARCHAR(24),
+  url VARCHAR(255),
   FOREIGN KEY (topic_id) REFERENCES t_course_topics(topic_id),
   FOREIGN KEY (handler_id) REFERENCES t_users(uid)
 );
@@ -99,7 +92,7 @@ CREATE TABLE t_complete_status (
 CREATE TABLE l_mentor_courses (    
   mentor_id INT,
   course_code VARCHAR(24) NOT NULL,
-  FOREIGN KEY (course_code) REFERENCES t_course_details(course_code),g
+  FOREIGN KEY (course_code) REFERENCES t_course_details(course_code),
   FOREIGN KEY (mentor_id) REFERENCES t_users(uid)
 );
 

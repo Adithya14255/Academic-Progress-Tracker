@@ -23,7 +23,7 @@ export class CourseMentorPortalTableComponent {
     if (typeof state === 'object' && state !== null) {
     this.userdata = state as User;
   }console.log(this.userdata)
-    this.apiService.getFacultyData(this.userdata.uid).subscribe(
+    this.apiService.getMentorData(this.userdata.uid).subscribe(
       response => {
         this.data = response;
       });
