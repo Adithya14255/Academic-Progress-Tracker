@@ -111,6 +111,7 @@ tbody tr td a {
     align-items: center;
     margin: auto;
     border-radius: 5px;
+    cursor:not-allowed;
 }
 
 .add-row-btn {
