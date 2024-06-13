@@ -45,7 +45,8 @@ button{
     height:60%;
     font-family:'poppins',sans-serif;
     width:107%;
-    margin-top: 20%;
+    margin-top: 20vh;
+    
     padding:20%;
     border-radius: 10px;
     box-shadow: 5px 5px 7px rgba(105,105,105,0.5),
