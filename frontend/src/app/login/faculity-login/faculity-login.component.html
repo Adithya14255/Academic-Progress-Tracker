@@ -17,14 +17,14 @@
   </div>
     <form id="loginform" [formGroup]="checkoutForm" (ngSubmit)="fetchFacultyData()">
         <div class="username">
-            <label for="name">Name</label>
+            <label for="name">Username</label>
             <p><input id="name" type="text" formControlName="name"></p>
         </div>
         <div class="password">
-            <label for="pwd">password</label>
-            <p><input id="pwd" type="text" formControlName="password"></p>
+            <label for="pwd">Password</label>
+            <p><input id="pwd" type="password" formControlName="password"></p>
         </div>
-        <button class="button" type="submit">submit</button>
+        <button class="button" type="submit">LOGIN</button>
     </form>
 </div>
 
