@@ -22,4 +22,7 @@ export class FacultyComponent {
 navigateWithData(): void {
   this.router.navigateByUrl('/faculty-table', { state: this.data });
 }
+navigateToOut():void{
+  this.router.navigateByUrl('/faculty-login',{state: this.data });
+}
 }

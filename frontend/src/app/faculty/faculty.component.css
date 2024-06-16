@@ -1,11 +1,15 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    font-family: 'poppins',sans-serif;
+    list-style:none;
+}
+.container{
+    width:100vw;
+    height:90vh;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    justify-content:center;
 }
 
 .profile-container {
@@ -13,13 +17,14 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    width: 300px;
+    width: 20vw;
+    height:55vh;
     text-align: center;
 }
 
 .profile-header {
     background-color: #ffecd1;
-    padding: 20px;
+    padding: 10px;
 }
 
 .profile-header img {
@@ -61,4 +66,32 @@ body {
 
 .profile-info strong {
     color: #e67e22;
+}
+.content{
+    margin:0 10%;
+    max-width:40vw;
+}
+.content .welcome-msg{
+    font-size:3.3em;
+    font-weight:600;
+    font-family:'poppins',sans-serif;
+}
+#navlogin{
+    margin:10% 0;
+    width:35vw;
+    display:flex;
+    gap:20%;
+    align-items:center;
+}
+.logout-btn , .table-btn{
+    padding:3%;
+    width:120%;
+    height:100%;
+    border:none;
+    background-color: #e67e22;
+    color:#ffffff;
+    border-radius:5px;
+}
+.logout-btn:hover, .table-btn:hover{
+    background-color: #d77621;
 }
