@@ -12,7 +12,10 @@ import { FaculityLoginComponent } from './login/faculity-login/faculity-login.co
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashboard/admin-base-dashboard.component';
+import { AdminTableDashboardComponent } from './admin-dashboard/admin-table-dashboard/admin-table-dashboard.component';
 import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
+import { ChartsComponent } from './charts/charts.component';
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -26,7 +29,11 @@ import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-p
     DomainMentorPortalTableComponent,
     FaculityLoginComponent,
     FacultyTableComponent,
-    DomainMentorPortalBaseComponent
+    DomainMentorPortalBaseComponent,
+    AdminDashboardComponent,
+    AdminBaseDashboardComponent,
+    AdminTableDashboardComponent,
+    ChartsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
