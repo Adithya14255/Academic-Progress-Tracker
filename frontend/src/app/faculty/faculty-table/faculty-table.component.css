@@ -111,6 +111,7 @@ tbody tr td a {
     align-items: center;
     margin: auto;
     border-radius: 5px;
+    cursor:not-allowed;
 }
 
 .add-row-btn {
@@ -186,4 +187,8 @@ form input {
     height: 20px;
     border: 1px solid black;
     display: inline-block;
+}
+.nav{
+    align-items: center;
+    margin-left: 10%;
 }

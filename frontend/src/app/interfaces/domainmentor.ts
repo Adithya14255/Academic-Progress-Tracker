@@ -1,4 +1,4 @@
-export interface Mentor {
+export interface DomainMentor {
     mentor_id: number;
     uid: number;
     course_code: string;
@@ -6,5 +6,6 @@ export interface Mentor {
     topic: string;
     outcome: string;
     status_code: number;
-    url: string; 
+    url: string;
+    comment: string; 
 }
