@@ -45,4 +45,7 @@ export class FacultyTableComponent {
     }
   }
 
+  hoursupdate(value:number){
+
+  }
 }

@@ -11,6 +11,7 @@
                 <th>Topic</th>
                 <th>Outcome</th>
                 <th>Status Code</th>
+                <th>Completed</th>
               </tr>
             </thead>
             <tbody>
@@ -22,7 +23,9 @@
                 <td >
                     <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
                 </td>
-              </tr>
+                <td *ngIf="item.status_code == 3"><button (click)="hoursupdate()" class="statusactivated">Completed</button></td>
+                <td *ngIf="item.status_code != 3"><p class="statusdeactivated">Completed</p></td>
+            </tr>
             </tbody>
           </table>
     </div>
