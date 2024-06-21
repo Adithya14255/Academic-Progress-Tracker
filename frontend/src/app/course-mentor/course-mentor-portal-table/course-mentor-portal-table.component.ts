@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-mentor-portal-table.component.css']
 })
 export class CourseMentorPortalTableComponent {
-  data: CourseMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',outcome:''}];
+  data: CourseMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',topic_id:0,outcome:''}];
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
   boxcolor: string = 'white';
   constructor(private location:Location,private apiService: ApiService,private route: ActivatedRoute) {}

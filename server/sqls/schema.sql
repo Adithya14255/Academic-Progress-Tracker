@@ -104,16 +104,20 @@ create view user_details_check as select u.uid,u.name,u.password,u.department_id
 
 --view for faculty table
 
-create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,c.hours_completed  from t_users u,t_complete_status c,t_course_details d,t_course_topics t where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id;
+create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,c.hours_completed,c.topic_id  from t_users u,t_complete_status c,t_course_details d,t_course_topics t where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id;
 
 --view for course mentor table
 
-create view course_mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url  from t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code;
+create view course_mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,c.topic_id  from t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code;
 
 --view for domain mentor table
 
-create view domain_mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment  from t_topic_comments y,t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id;
+create view domain_mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,c.topic_id  from t_topic_comments y,t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id;
 
 
 -- initialize the roles
 INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Mentor'), (3, 'Domain Mentor'),(4,'Admin');
+
+
+-- initialize the statuses
+INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'), (3, 'Approved'),(4,'Completed');

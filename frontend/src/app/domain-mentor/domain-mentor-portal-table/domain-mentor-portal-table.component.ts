@@ -15,7 +15,7 @@ import { DomainMentor } from '../../interfaces/domainmentor';
   styleUrls: ['./domain-mentor-portal-table.component.css']
 })
 export class DomainMentorPortalTableComponent {
-  data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',outcome:'',comment:''}];
+  data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',topic_id:0,outcome:'',comment:''}];
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
   boxcolor: string = 'white';
   constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}
@@ -29,21 +29,6 @@ export class DomainMentorPortalTableComponent {
         this.data = response;
       });
     }
-  // tabKey: any = [];
-  // tabValue: any = [];
-  // materialIndex: number = -1;
-  // HourIndex: number = -1;
-  // ApproveIndex: number = -1;
-
-  // getData() {
-  //   this.array.forEach((element: any) => {
-  //     this.tabKey = Object.keys(element);
-  //     this.tabValue.push(Object.values(element));
-  //     this.materialIndex = this.tabKey.findIndex((key: string) => key === 'Material');
-  //     this.ApproveIndex = this.tabKey.findIndex((key: string) => key === 'Approve');
-  //     this.HourIndex = this.tabKey.findIndex((key: string) => key === 'Hours');
-  //   });
-  // }
 
   onSelectChange(event: Event, rowIndex: Number) {
     const selectElement = event.target as HTMLSelectElement;
