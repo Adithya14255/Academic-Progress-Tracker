@@ -13,13 +13,17 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  updateCommentDetails(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/editcomment`,data);
+  updateCommentDetails(id:any,data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/editcomment/${id}`,data);
     
   }
 
   updateHoursCompletedDetails(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/edithourscompleted`,data);
+    
+  }
+  updateLinkDetails(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/editlink`,data);
     
   }
 

@@ -11,7 +11,6 @@ engine = sqlalchemy.create_engine("postgresql://admin:admin@192.168.0.247/kgaps"
 conn = engine.connect()
 
 
-# Define a route to fetch data from MySQL
 @app.route('/', methods=['POST', 'GET'])
 def index():
     data={'error':'none'}
@@ -59,7 +58,7 @@ def faculty(uid):
         
 @app.route('/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
-        q = sqlalchemy.text(f"SELECT * FROM course_mentor_table WHERE mentor_id={id};")
+        q = sqlalchemy.text(f"SELECT * FROM course_mentor_table WHERE mentor_id={id} and status_code!=4;")
         r = conn.execute(q).fetchall()
         if r:
             data=[dict(i._mapping) for i in r]
@@ -147,16 +146,39 @@ def edithourscompleted():
         conn.commit()
         return json.dumps({'data':'Success'})
 
-@app.route('/editcomment', methods=['POST', 'GET'])
-def editcomment():
+@app.route('/editcomment/<int:approval>', methods=['POST', 'GET'])
+def editcomment(approval):
+        #approval can be true or false 
+        if approval==0:
+            handler_id = request.json['handler_id']
+            topic_id = request.json['topic_id']
+            comment = request.json['comment']
+            q = sqlalchemy.text(f"update t_topic_comments set comment = '{comment}' where handler_id={handler_id} and topic_id={topic_id};")
+            conn.execute(q)
+            q = sqlalchemy.text(f"update t_complete_status set status_code=2 where handler_id={handler_id} and topic_id={topic_id};")
+            conn.execute(q)
+            conn.commit()
+        if approval==1:
+            handler_id = request.json['handler_id']
+            topic_id = request.json['topic_id']
+            q = sqlalchemy.text(f"update t_topic_comments set comment = '' where handler_id={handler_id} and topic_id={topic_id};")
+            conn.execute(q)
+            q = sqlalchemy.text(f"update t_complete_status set status_code=3 where handler_id={handler_id} and topic_id={topic_id};")
+            conn.execute(q)
+            conn.commit()
+        return json.dumps({'data':'Success'})
+
+@app.route('/editlink', methods=['POST', 'GET'])
+def editlink():
         handler_id = request.json['handler_id']
         topic_id = request.json['topic_id']
-        comment = request.json['comment']
-        q = sqlalchemy.text(f"update t_topic_comments set comment = '{comment}' where handler_id={handler_id} and topic_id={topic_id};")
+        link = request.json['link']
+        q = sqlalchemy.text(f"update t_complete_status set status_code=1 where handler_id={handler_id} and topic_id={topic_id};")
+        conn.execute(q)
+        q = sqlalchemy.text(f"update t_topic_links set url='{link}' where handler_id={handler_id} and topic_id={topic_id};")
         conn.execute(q)
         conn.commit()
         return json.dumps({'data':'Success'})
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001,host="0.0.0.0")

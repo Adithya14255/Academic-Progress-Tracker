@@ -17,7 +17,6 @@
     padding-top: 0;
     overflow-y: scroll;
     height: 105%;
-    border:2px solid red;
     scrollbar-width: none;
 }
 
@@ -79,10 +78,6 @@ tbody tr:hover {
 .header {
     position: fixed;
     background-color: white;
-}
-
-tbody tr td a {
-    color: orange;
 }
 
 .pagination {
@@ -161,20 +156,29 @@ form input {
     border-radius: 4px;
 }
 
-.submit-btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background-color: orangered;
-}
 .nav{
     align-items: center;
     margin-left: 10%;
+}
+
+.statusactivated{
+    width:5rem;
+    border:none;
+    background-color: transparent;
+    color:orange;
+    text-decoration-line: underline;
+    transition: .2s;
+}
+
+.statusactivated:hover{
+    color:red;
+    background-color: #f1f1f1;
+}
+
+.statusactivatedinput{
+    width:1.5rem;
+    text-align: center;
+    border:1px solid orange;
+    border-radius:.3rem ;
+    font-weight: 500;
 }

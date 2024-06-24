@@ -120,4 +120,4 @@ INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Me
 
 
 -- initialize the statuses
-INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'), (3, 'Approved'),(4,'Completed');
+INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Completed');

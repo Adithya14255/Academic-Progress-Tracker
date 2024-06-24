@@ -53,6 +53,10 @@ export class FacultyTableComponent {
   }
 
   hoursupdate(hourschange:number,topic_id:number,uid:number){
+    this.editedIndex=null;
+    if (topic_id==0){
+      return;
+    }
     this.checkoutForm.patchValue({
       handler_id:uid,
       topic_id: topic_id,
