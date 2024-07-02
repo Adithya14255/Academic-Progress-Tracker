@@ -1,21 +1,25 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
 <div class="container">
-    
-    <div class="profile-container">
-        <div class="profile-header">
-            <img src=".\assets\logo\staff.png" alt="Profile Picture">
-            <h2>a</h2>
-            <p>Role: 1</p>
-        </div>
-        <div class="profile-body">
-            <div class="profile-info">
-                <p><strong>ID:</strong>{{data.uid}}</p>
-                <p><strong>Name:</strong> {{data.name}}</p>
-                <p><strong>Department ID:</strong>{{data.department_id}}</p>
+
+    <div class="line">
+        <div class="profile-container">
+            <div class="profile-header">
+                <img src=".\assets\logo\staff.png" alt="Profile Picture">
+                <h2>a</h2>
+                <p>Role: 1</p>
+            </div>
+            <div class="profile-body">
+                <div class="profile-info">
+                    <p><strong>ID:</strong>{{data.uid}}</p>
+                    <p><strong>Name:</strong> {{data.name}}</p>
+                    <p><strong>Department ID:</strong>{{data.department_id}}</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="content">
-        <p class="welcome-msg">Welcome{{data.name}}..!</p>
+        <p class="welcome-msg">Welcome {{data.name}}..!</p>
         <ul id="navlogin">
             <li>
                 <button class="table-btn" (click)="navigateWithData()">Go to Faculty table</button>
@@ -24,6 +28,18 @@
                 <button class="logout-btn" (click)="navigateToOut()">Log out</button>
             </li>
         </ul>
-        
+
+    </div>
+    <div class="hours">
+        <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="0"
+            [outerStrokeColor]="'#170F76'" [animation]="true" [animationDuration]="300" [title]="percent.toString()"
+            [subtitle]="'Total Hour'" [showUnits]="true" [units]="'%'" [showSubtitle]="true" [showTitle]="true"
+            [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
+        </circle-progress>
+        <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="0"
+            [outerStrokeColor]="'#170F76'" [animation]="true" [animationDuration]="300" [title]="percent.toString()"
+            [subtitle]="'Totalhour'" [showUnits]="true" [units]="'%'" [showSubtitle]="true" [showTitle]="true"
+            [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
+        </circle-progress>
     </div>
 </div>
