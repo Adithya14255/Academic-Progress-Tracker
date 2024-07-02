@@ -15,7 +15,7 @@ import { DomainMentor } from '../../interfaces/domainmentor';
 })
 
 export class AdminTableDashboardComponent {
-    data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',outcome:'',comment:''}];
+    data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:3,url:'',topic:'',topic_id:0,outcome:'',comment:''}];
     userdata: User = {uid:0,name:'',role_id:0,department_id:0};
     boxcolor: string = 'white';
     constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private route: ActivatedRoute) {}

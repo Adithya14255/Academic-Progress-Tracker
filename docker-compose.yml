@@ -16,7 +16,7 @@ services:
 
   db:
     image: postgres
-    container_name: local_pgdb
+    container_name: local_pgdb_kgaps
     restart: always
     ports:
       - "5432:5432"
@@ -28,7 +28,7 @@ services:
    
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4_container
+    container_name: pgadmin4_container_kgaps
     restart: always
     ports:
       - "8888:80"

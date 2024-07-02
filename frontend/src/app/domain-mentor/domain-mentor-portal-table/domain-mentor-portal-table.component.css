@@ -89,3 +89,37 @@ tbody tr td a {
     align-items: center;
     margin-left: 10%;
 }
+
+
+.statusactivated{
+    width:5rem;
+    border:none;
+    background-color: transparent;
+    color:orange;
+    text-decoration-line: underline;
+    transition: .2s;
+}
+
+.statusactivated:hover{
+    color:red;
+    background-color: #f1f1f1;
+}
+
+.statusactivatedinput{
+    width:1.5rem;
+    text-align: center;
+    border:1px solid orange;
+    border-radius:.3rem ;
+}
+
+.box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 5px;
+    cursor:not-allowed;
+}

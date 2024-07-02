@@ -11,18 +11,27 @@
                 <th>Topic</th>
                 <th>Outcome</th>
                 <th>Status Code</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of data">
+              <tr *ngFor="let item of data;let i = index">
                 <td>{{ item.course_code }}</td>
                 <td>{{ item.course_name }}</td>
                 <td>{{ item.topic }}</td>
                 <td>{{ item.outcome }}</td>
-                <td >
-                    <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
-                </td>
-              </tr>
+                <td> <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div></td>
+                <td>
+                    <ng-container *ngIf="item.status_code == 3">
+                      <p  *ngIf="editedIndex===i">Enter hours taken</p>
+                      <input *ngIf="editedIndex === i" type="text" [(ngModel)]="hourschange" title="Enter hours taken" class="statusactivatedinput" />
+                      <button *ngIf="editedIndex === i" (click)="hoursupdate(hourschange,item.topic_id,item.uid)" class="statusactivated">Submit</button>
+                      <button *ngIf="editedIndex === i" (click)="hoursupdate(hourschange,0,item.uid)" class="statusactivated">Cancel</button>
+                      <button *ngIf="editedIndex !== i" (click)="editItem(i)" class="statusactivated">Completed</button>
+                    </ng-container>
+                    <p *ngIf="item.status_code != 3" class="statusdeactivated">Not Completed Yet</p>
+                  </td>
+            </tr>
             </tbody>
           </table>
     </div>
