@@ -36,7 +36,7 @@ def login():
 def register():
        if request.method=='POST':
         role=request.json['role']
-        name=request.json['name']
+        name=request.json['name']    
         password=request.json['password']
         dept_id=request.json['department_id']
         id=request.json['id']
