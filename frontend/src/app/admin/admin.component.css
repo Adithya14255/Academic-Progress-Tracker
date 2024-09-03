@@ -1,4 +1,10 @@
 .container{
     padding:2vw;
     font-size:3rem;
+    display: flex;
+    gap:2rem;
+}
+
+.boxforforms{
+    border: 2px solid orange;
 }
