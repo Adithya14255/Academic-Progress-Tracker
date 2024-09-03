@@ -86,7 +86,7 @@ def courses():
 @app.route('/topics', methods=['POST', 'GET'])
 def topics():
         course_code = request.json['course_code']
-        q = sqlalchemy.text(f"Select c.topic_id,c.topic_name,c.outcome from t_course_topics c where c.course_code='{course_code}';")
+        q = sqlalchemy.text(f"Select c.topic_id,c.topic,c.outcome from t_course_topics c where c.course_code='{course_code}';")
         r = conn.execute(q).fetchall()
         data=[dict(i._mapping) for i in r]
         print(data)

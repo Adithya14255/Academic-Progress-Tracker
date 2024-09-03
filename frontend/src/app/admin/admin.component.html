@@ -1,5 +1,6 @@
 <div class="container">   
     <div class="boxforforms">
+        <p>GET COURSES -</p>
         <form [formGroup]="checkoutForm" (ngSubmit)="fetchCourses()">
             <div class="username">
                 <label for="name">department_id</label>
@@ -14,6 +15,7 @@
         </tr>
     </div>
     <div class="boxforforms">
+        <p>ADD COURSES -</p>
         <form [formGroup]="addCourseForm" (ngSubmit)="addCourse()">
             <div class="username">
                 <label for="name">department_id</label>
@@ -32,6 +34,7 @@
         <p *ngIf="courseResponse!='failed'">Success!</p>
     </div>
     <div class="boxforforms">
+        <p>GET TOPICS -</p>
         <form [formGroup]="getTopicForm" (ngSubmit)="getTopic()">
             <div class="username">
                 <label for="name">course_code</label>
@@ -39,9 +42,16 @@
             </div>
             <button class="button" type="submit">Get Topics</button>
         </form>
-        <p *ngIf="topicResponse!='failed'">Success!</p>
+        <tr class="topiclist" *ngFor="let item of topics;">
+            <td>{{ item.topic_id }}</td>
+            <td> - </td> 
+            <td>{{ item.topic }}</td>
+            <td> - </td> 
+            <td>{{ item.outcome }}</td>
+        </tr>
     </div>
     <div class="boxforforms">
+        <p>ADD TOPICS -</p>
         <form [formGroup]="addTopicForm" (ngSubmit)="addTopic()">
             <div class="username">
                 <label for="name">course_code</label>
@@ -65,12 +75,6 @@
             </div>
             <button class="button" type="submit">Add course</button>
         </form>
-        <tr *ngFor="let item of topics;">
-            <td>{{ item.topic_id }}</td>
-            <td> - </td> 
-            <td>{{ item.topic_name }}</td>
-            <td> - </td> 
-            <td>{{ item.outcome }}</td>
-        </tr>
+        <p *ngIf="topicResponse!='failed'">Success!</p>
     </div>
 </div>
