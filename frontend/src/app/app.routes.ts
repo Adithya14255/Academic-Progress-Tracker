@@ -14,8 +14,6 @@ import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-
 import { DomainMentorComponent } from './domain-mentor/domain-mentor.component';
 import { AdminComponent } from './admin/admin.component';
 import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
-import { AdminBaseDashboardComponent } from './admin-dashboard/admin-base-dashboard/admin-base-dashboard.component';
-import { AdminTableDashboardComponent } from './admin-dashboard/admin-table-dashboard/admin-table-dashboard.component';
 import { ChartsComponent } from './charts/charts.component';
 
 export const routes: Routes = [
@@ -35,8 +33,6 @@ export const routes: Routes = [
     { path: 'domain-mentor',component: DomainMentorComponent},
     { path: 'domain-mentor-table',component: DomainMentorPortalTableComponent}, 
     { path: 'admin',component: AdminComponent},
-    { path: 'domain-mentor-base', component: DomainMentorPortalBaseComponent},    
-    { path: 'admin-base', component: AdminBaseDashboardComponent },
-    { path: 'admin-table', component: AdminTableDashboardComponent},
+    { path: 'domain-mentor-base', component: DomainMentorPortalBaseComponent},
     { path: 'charts', component: ChartsComponent}
 ];
