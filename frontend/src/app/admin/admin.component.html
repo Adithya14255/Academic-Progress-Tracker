@@ -1,14 +1,80 @@
 <div class="container">   
-    <p>Welcome {{data.name}}!</p>
-    <form [formGroup]="checkoutForm" (ngSubmit)="fetchCourses()">
-        <div class="username">
-            <label for="name">department_id</label>
-            <p><input id="name" type="text" formControlName="department_id"></p>
-        </div>
-        <button class="button" type="submit">Get courses</button>
-    </form>
-    <tr *ngFor="let item of courses;">
-        <td>{{ item.course_code }}</td>
-        <td> - </td> 
-        <td>{{ item.course_name }}</td>
-    </tr></div>
+    <div class="boxforforms">
+        <p>GET COURSES -</p>
+        <form [formGroup]="checkoutForm" (ngSubmit)="fetchCourses()">
+            <div class="username">
+                <label for="name">department_id</label>
+                <p><input id="name" type="text" formControlName="department_id"></p>
+            </div>
+            <button class="button" type="submit">Get courses</button>
+        </form>
+        <tr *ngFor="let item of courses;">
+            <td>{{ item.course_code }}</td>
+            <td> - </td> 
+            <td>{{ item.course_name }}</td>
+        </tr>
+    </div>
+    <div class="boxforforms">
+        <p>ADD COURSES -</p>
+        <form [formGroup]="addCourseForm" (ngSubmit)="addCourse()">
+            <div class="username">
+                <label for="name">department_id</label>
+                <p><input id="name" type="text" formControlName="department_id"></p>
+            </div>
+            <div class="username">
+                <label for="name">course_code</label>
+                <p><input id="name" type="text" formControlName="course_code"></p>
+            </div>
+            <div class="username">
+                <label for="name">course_name</label>
+                <p><input id="name" type="text" formControlName="course_name"></p>
+            </div>
+            <button class="button" type="submit">Add course</button>
+        </form>
+        <p *ngIf="courseResponse!='failed'">Success!</p>
+    </div>
+    <div class="boxforforms">
+        <p>GET TOPICS -</p>
+        <form [formGroup]="getTopicForm" (ngSubmit)="getTopic()">
+            <div class="username">
+                <label for="name">course_code</label>
+                <p><input id="name" type="text" formControlName="course_code"></p>
+            </div>
+            <button class="button" type="submit">Get Topics</button>
+        </form>
+        <tr class="topiclist" *ngFor="let item of topics;">
+            <td>{{ item.topic_id }}</td>
+            <td> - </td> 
+            <td>{{ item.topic }}</td>
+            <td> - </td> 
+            <td>{{ item.outcome }}</td>
+        </tr>
+    </div>
+    <div class="boxforforms">
+        <p>ADD TOPICS -</p>
+        <form [formGroup]="addTopicForm" (ngSubmit)="addTopic()">
+            <div class="username">
+                <label for="name">course_code</label>
+                <p><input id="name" type="text" formControlName="course_code"></p>
+            </div>
+            <div class="username">
+                <label for="name">Topic id</label>
+                <p><input id="name" type="number" formControlName="topic_id"></p>
+            </div>
+            <div class="username">
+                <label for="name">Topic name</label>
+                <p><input id="name" type="text" formControlName="topic"></p>
+            </div>
+            <div class="username">
+                <label for="name">outcome</label>
+                <p><input id="name" type="text" formControlName="outcome"></p>
+            </div>
+            <div class="username">
+                <label for="name">total hours</label>
+                <p><input id="name" type="number" formControlName="total_hours"></p>
+            </div>
+            <button class="button" type="submit">Add course</button>
+        </form>
+        <p *ngIf="topicResponse!='failed'">Success!</p>
+    </div>
+</div>

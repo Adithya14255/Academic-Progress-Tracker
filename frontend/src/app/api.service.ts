@@ -13,8 +13,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  addTopicData(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/add_topic`,data);
+    
+  }
+
+  addCourseData(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/add_course`,data);
+    
+  }
   getCourseData(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/courses`,data);
+    
+  }
+
+  getTopicData(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/topics`,data);
     
   }
 
