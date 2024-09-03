@@ -1,8 +1,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
-<div class="container fade-left">
+<div class="container">
 
-    <div class="line">
+    <div class="left">
         <div class="profile-container">
             <div class="profile-header">
                 <img src=".\assets\logo\staff.png" alt="Profile Picture">
@@ -15,37 +15,24 @@
                     <p><strong>Name:</strong> {{data.name}}</p>
                     <p><strong>Department ID:</strong>{{data.department_id}}</p>
                 </div>
+                <ul id="navlogin">
+                    <li>
+                        <button class="table-btn" (click)="navigateWithData()">Go to Course Mentor table</button>
+                    </li>
+                    <li>
+                        <button class="logout-btn" (click)="navigateToOut()">Log out</button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="content fade-top">
-        <div class="design one"></div>
-        <div class="design two"></div>
-        <div class="design three"></div>
-        <p class="welcome-msg">Welcome {{data.name}}..!</p>
-        <ul id="navlogin">
-            <li>
-                <button class="table-btn" (click)="navigateWithData()">Go to Course mentor table</button>
-            </li>
-            <li>
-                <button class="logout-btn" (click)="navigateToOut()">Log out</button>
-            </li>
-        </ul>
-        <div class="design four"></div>
-        <div class="design five"></div>
-        <div class="design six"></div>
-    </div>
-    <div class="hours fade-right">
-        <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="0"
-            [outerStrokeColor]="'#170F76'" [animation]="true" [animationDuration]="300" [title]="percent.toString()"
-            [subtitle]="'Total Hour'" [showUnits]="true" [units]="'%'" [showSubtitle]="true" [showTitle]="true"
-            [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
-        </circle-progress>
-        <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="0"
-            [outerStrokeColor]="'#170F76'" [animation]="true" [animationDuration]="300" [title]="percent.toString()"
-            [subtitle]="'Totalhour'" [showUnits]="true" [units]="'%'" [showSubtitle]="true" [showTitle]="true"
-            [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
-        </circle-progress>
-    </div>
-</div>
+    <div class="right">
+        <!-- <div class="rectangle-t"></div>
+        <div class="circle-t"></div> -->
+        <div class="pie one">8/10 Uploaded</div>
+        <div class="pie two">4/10 App</div>
+        <div class="pie three">6/10 Disapp</div>
+        <div class="pie four">2/10 Comp</div>
 
+    </div>
+</div>

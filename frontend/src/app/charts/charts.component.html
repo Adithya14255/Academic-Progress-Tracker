@@ -1,9 +1,8 @@
 <div>
   <!-- CSE -->
-  <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="0"
-    [outerStrokeColor]="'#170F76'" [animation]="true" [animationDuration]="300" [title]="percent.toString()"
-    [subtitle]="'CSE'" [showUnits]="true" [units]="'%'" [showSubtitle]="true" [showTitle]="true"
-    [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
+  <circle-progress [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'" [subtitle]="'Progress'"
+    [animateTitle]="true" [animationDuration]="300">
   </circle-progress>
 
   <!-- AIDS -->
@@ -41,3 +40,6 @@
     [unitsColor]="'#483500'" [subtitleColor]="'#483500'" [titleColor]="'#483500'">
   </circle-progress>
 </div>
+
+
+<div class="pie"></div>
