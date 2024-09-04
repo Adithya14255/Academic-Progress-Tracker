@@ -189,5 +189,14 @@ def editlink():
         conn.commit()
         return json.dumps({'data':'Success'})
 
+@app.route('/facultyprogress', methods=['POST', 'GET'])
+def facultyprogress():
+        handler_id = request.json['handler_id']
+        q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
+        r = conn.execute(q).fetchall()
+        data=[dict(i._mapping) for i in r]
+        print(data)
+        return json.dumps(data)
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001,host="0.0.0.0")

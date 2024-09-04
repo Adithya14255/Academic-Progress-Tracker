@@ -13,6 +13,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  getFacultyProgressData(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/facultyprogress`,data);
+    
+  }
+
   addTopicData(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/add_topic`,data);
     

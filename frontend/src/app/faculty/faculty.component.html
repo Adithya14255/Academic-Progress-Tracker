@@ -1,44 +1,53 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+  rel="stylesheet"
+/>
 
 <div class="container">
-
-    <div class="left">
-        <div class="profile-container">
-            <div class="profile-header">
-                <img src=".\assets\logo\staff.png" alt="Profile Picture">
-                <h2>a</h2>
-                <p>Role: 1</p>
-            </div>
-            <div class="profile-body">
-                <div class="profile-info">
-                    <p><strong>ID:</strong>{{data.uid}}</p>
-                    <p><strong>Name:</strong> {{data.name}}</p>
-                    <p><strong>Department ID:</strong>{{data.department_id}}</p>
-                </div>
-                <ul id="navlogin">
-                    <li>
-                        <button class="table-btn" (click)="navigateWithData()">Go to Domain Mentor table</button>
-                    </li>
-                    <li>
-                        <button class="logout-btn" (click)="navigateToOut()">Log out</button>
-                    </li>
-                </ul>
-            </div>
+  <div class="left">
+    <div class="profile-container">
+      <div class="profile-header">
+        <img src=".\assets\logo\staff.png" alt="Profile Picture" />
+        <h2>a</h2>
+        <p>Role: 1</p>
+      </div>
+      <div class="profile-body">
+        <div class="profile-info">
+          <p><strong>ID:</strong>{{ userData.uid }}</p>
+          <p><strong>Name:</strong> {{ userData.name }}</p>
+          <p><strong>Department ID:</strong>{{ userData.department_id }}</p>
         </div>
+        <ul id="navlogin">
+          <li>
+            <button class="table-btn" (click)="navigateWithData()">
+              Go to Domain Mentor table
+            </button>
+          </li>
+          <li>
+            <button class="logout-btn" (click)="navigateToOut()">
+              Log out
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="right">
-        <div class="bar-chart">
-            <div id="my-chart">
-
-            
-              
-              </div>
-        </div>
-        <div class="pie-chart">
-            <div class="pie one"><p>8/10 Uploaded</p></div>
-            <div class="pie two"><p>4/10 App</p></div>
-            <div class="pie three"><p>6/10 Disapp</p></div>
-            <div class="pie four"><p>2/10 Comp</p></div>
-        </div>
+  </div>
+  <tbody>
+    <tr *ngFor="let item of ratios">
+      <td>
+        <p>{{ item.status_code }}= {{ item.ratio }}</p>
+      </td>
+    </tr>
+  </tbody>
+  <div class="right">
+    <div class="bar-chart">
+      <div id="my-chart"></div>
     </div>
+    <div class="pie-chart">
+      <div class="pie one"><p>8/10 Uploaded</p></div>
+      <div class="pie two"><p>4/10 App</p></div>
+      <div class="pie three"><p>6/10 Disapp</p></div>
+      <div class="pie four"><p>2/10 Comp</p></div>
+    </div>
+  </div>
 </div>
