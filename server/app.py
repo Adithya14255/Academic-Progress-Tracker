@@ -118,6 +118,15 @@ def add_topic():
             conn.commit()
             return json.dumps({'data':'Success'})
 
+@app.route('/faculty_info', methods=['POST', 'GET'])
+def faculty_info():
+        department_id = request.json['department_id']
+        q = sqlalchemy.text(f"select t.uid,name from t_users t,l_role_user l where t.uid=l.uid and role_id<4 and department_id={department_id};")
+        r = conn.execute(q).fetchall()
+        data=[dict(i._mapping) for i in r]
+        print(data)
+        return json.dumps(data)
+
 @app.route('/assign_course', methods=['POST', 'GET'])
 def assign_course():
        if request.method=='POST':

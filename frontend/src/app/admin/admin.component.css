@@ -1,8 +1,8 @@
 .container{
     padding:2vw;
-    font-size:2rem;
+    font-size: 1.8rem;
     font-family: 'Courier New', Courier, monospace;
-    display: flex;
+    display:flex;
     gap:2rem;
 }
 
@@ -11,6 +11,7 @@
     border-radius: 2.5%;
     padding:3rem;
     width:16vw;
+    max-height:auto;
 }
 
 .username, .password{
@@ -58,3 +59,76 @@ button{
 .topiclist{
     font-size: medium;
 }
+
+  /* Orange bubble on the bottom right */
+  .orange-cross-bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    /* Size of the bubble */
+    height: 100px;
+    /* Size of the bubble */
+    background-color: orange;
+    border-radius: 50%;
+    /* Circular shape */
+    z-index: -1;
+  }
+
+  .orange-cross-bar::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    /* Larger width to extend beyond the main bubble */
+    height: 200px;
+    /* Larger height to extend beyond the main bubble */
+    background-color: orange;
+    border-radius: 50%;
+    /* Circular shape */
+    bottom: 0;
+    right: 0;
+    transform: scale(1.5);
+    /* Scales up the bubble */
+    z-index: -1;
+  }
+
+  /* Orange bubble on the left middle */
+  .orange-bubble-left-middle {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    width: 80px;
+    /* Size of the bubble */
+    height: 80px;
+    /* Size of the bubble */
+    background-color: rgb(252, 192, 80);
+    border-radius: 50%;
+    /* Circular shape */
+    transform: translateY(-50%);
+    /* Centers the bubble vertically */
+    z-index: -1;
+  }
+
+  .orange-bubble-left-middle::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    /* Larger width to extend beyond the main bubble */
+    height: 160px;
+    /* Larger height to extend beyond the main bubble */
+    background-color: rgb(248, 186, 71);
+    border-radius: 50%;
+    /* Circular shape */
+    left: 0;
+    top: 0;
+    transform: scale(1.5);
+    /* Scales up the bubble */
+    z-index: -1;
+  }
+
+  /* Ensure content stays clear of the bubbles */
+  body {
+    position: relative;
+    margin-bottom: 120px;
+    /* Space above the bottom bubble */
+  }
