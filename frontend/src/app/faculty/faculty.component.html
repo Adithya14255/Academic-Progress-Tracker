@@ -35,13 +35,13 @@
   <tbody>
     <tr *ngFor="let item of ratios">
       <td>
-        <p>{{ item.status_code }}= {{ item.ratio }}</p>
+        <p>{{ item.status_code }} = {{ item.ratio }}</p>
       </td>
     </tr>
   </tbody>
   <div class="right">
     <div class="bar-chart">
-      <div id="my-chart"></div>
+      <canvas id="MyChart">{{chart}}</canvas> <!-- Bind chart directive here -->
     </div>
     <div class="pie-chart">
       <div class="pie one"><p>8/10 Uploaded</p></div>

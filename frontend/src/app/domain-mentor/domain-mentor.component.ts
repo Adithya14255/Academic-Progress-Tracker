@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
 import { Location } from '@angular/common';
 import { Chart ,registerables } from 'chart.js';
-import { chart } from 'highcharts';
 Chart.register(...registerables);
 @Component({
   selector: 'app-domain-mentor',
