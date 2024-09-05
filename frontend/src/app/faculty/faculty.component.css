@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    font-family: 'poppins',sans-serif;
-    list-style:none;
+
+* {
+    font-family: 'poppins', sans-serif;
+    list-style: none;
 }
-.container{
-    width:100vw;
-    height:90vh;
+
+.container {
+    width: 100vw;
+    height: 90vh;
     display: flex;
     align-items: center;
-    justify-content:start;
+    justify-content: start;
     overflow-x: hidden;
 }
 
@@ -18,18 +20,18 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     /* overflow: hidden; */
     width: 20vw;
-    height:60vh;
-    margin:0 5%;
+    height: 60vh;
+    margin: 0 5%;
     text-align: center;
 }
 
 .profile-header {
-    background-color:rgba(105,105,105,0.125);
+    background-color: rgba(105, 105, 105, 0.125);
     padding: 10px;
-    height:30vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
 }
 
 .profile-header img {
@@ -37,7 +39,7 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
-    
+
 }
 
 .profile-header h2 {
@@ -59,7 +61,7 @@
 .profile-info {
     background-color: rgba(90, 90, 90, 0.125);
     border-radius: 10px;
-    height:10vh;
+    height: 10vh;
     padding: 15% 5%;
     margin-top: 10%;
     text-align: left;
@@ -69,79 +71,130 @@
     margin: 5px 0;
     color: #333;
 }
-.left{
+
+.left {
     /* border:1px solid red; */
-    margin-top:2.19%;
-    width:30vw;
-    height:94vh;
-    box-shadow:2px 2px 5px rgba(105,105,105,0.3);
-    display:flex;
+    margin-top: 2.19%;
+    width: 30vw;
+    height: 94vh;
+    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3);
+    display: flex;
     justify-content: center;
     align-items: center;
-    position:sticky;
-    top:0;
-    left:0;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
+
 .profile-info strong {
     color: #e67e22;
 }
-.content{
-    margin:0 10%;
-    height:95vh;
-    width:50vw;
-    margin-top:2%;
-    display:flex;
+
+.content {
+    margin: 0 10%;
+    height: 95vh;
+    width: 50vw;
+    margin-top: 2%;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
 }
-.content .welcome-msg{
-    font-size:3.3em;
-    font-weight:600;
-    font-family:'poppins',sans-serif;
+
+.content .welcome-msg {
+    font-size: 3.3em;
+    font-weight: 600;
+    font-family: 'poppins', sans-serif;
 }
-#navlogin{
-    margin:10% 0;
-    width:35vw;
-    display:flex;
-    gap:20%;
-    align-items:center;
-    margin-top:1vh;
+
+#navlogin {
+    margin: 10% 0;
+    width: 16vw;
+    display: flex;
+    justify-content: space-around;
+    gap: 20%;
+    align-items: center;
+    margin-top: 1vh;
 }
-.logout-btn , .table-btn{
-    padding:3%;
-    width:120%;
-    height:100%;
-    border:none;
+
+.logout-btn,
+.table-btn {
+    padding: 3%;
+    width: 120%;
+    height: 100%;
+    border: none;
     background-color: #e67e22;
-    color:#ffffff;
-    outline:none;
-    border-radius:5px;
+    color: #ffffff;
+    outline: none;
+    border-radius: 5px;
 }
-.logout-btn{
-    padding:7%;
+
+.logout-btn {
+    padding: 7%;
 }
-.logout-btn:hover, .table-btn:hover{
+
+.logout-btn:hover,
+.table-btn:hover {
     background-color: orange;
-    color:white;
+    color: white;
     /* border:2px solid #e67e22; */
 }
-.right{
-    border:2px solid red;
-    height:100Vh;
-    margin-top:5.5%;
-    width:70vw;
+
+.right {
+    height: 100Vh;
+    margin-top: 5.5%;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 2fr, 1fr;
 }
-.bar-chart{
-    width:30vw;
-    height:70vh;
-    align-items: center;    
-    margin-bottom:15vh;
-    margin-left:5%; 
-    border:2px solid red; 
+
+.bar-chart {
+    width: 30vw;
+    height: 70vh;
+    margin-bottom: 15vh;
 }
-  
-.bar-chart h2{
-    font-weight:500;
+
+.bar-chart h2 {
+    font-weight: 500;
     text-decoration: underline;
+}
+
+.hour {
+    width: 10vw;
+    height: 40vh;
+    font-size: 0.9em;
+    margin-top: 10%;
+    padding: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.overall-hours h2 , .hour-com h2{
+    font-weight: 500;
+}
+
+.number {
+    height: 3vh;
+    width: 100%;
+    font-size:3em;
+    margin-top:15%;
+    font-weight: 700;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.rcontainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.one{
+    border: 2px solid blue;
+    border-radius:10px;
+    padding:2%;
+    height:15vh;
 }
