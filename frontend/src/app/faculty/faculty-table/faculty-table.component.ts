@@ -25,10 +25,12 @@ import { trigger, style, transition, animate } from '@angular/animations'; // Up
 
 export class FacultyTableComponent {
   data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''}];
+  completedData: any;
   userdata: User = {uid:0,name:'',role_id:0,department_id:0};
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   hourschange: number = 0;
+  completedList:number=0;
   checkoutForm = this.formBuilder.group({
     handler_id:0,
     topic_id:0,
@@ -82,5 +84,13 @@ export class FacultyTableComponent {
   editItem(index: number) {
     this.editedIndex = index;
     this.hourschange=0;
+  }
+
+  viewCompletedList(){
+    this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
+      this.completedData = response;
+    });
+    this.completedList=1;
+
   }
 }

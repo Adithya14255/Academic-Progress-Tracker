@@ -49,6 +49,9 @@ export class ApiService {
   getFacultyData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
   }
+  getFacultyCompletedData(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/faculty_completed/${id}`);
+  }
   getCourseMentorData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
   }

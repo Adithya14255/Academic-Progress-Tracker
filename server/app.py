@@ -55,10 +55,19 @@ def faculty(uid):
         data=[dict(i._mapping) for i in r]
         print(data)
         return json.dumps(data)
-        
+
+@app.route('/faculty_completed/<int:uid>', methods=['POST', 'GET'])
+def faculty_completed(uid):
+        p = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid='{uid}' and status_code=4;")
+        s = conn.execute(p).fetchall()
+        if s:
+            data=[dict(i._mapping) for i in s]
+            print(data)
+            return json.dumps(data)
+
 @app.route('/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
-        q = sqlalchemy.text(f"SELECT * FROM course_mentor_table WHERE mentor_id={id} and status_code!=4;")
+        q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table WHERE mentor_id={id} and status_code!=4;")
         r = conn.execute(q).fetchall()
         if r:
             data=[dict(i._mapping) for i in r]
