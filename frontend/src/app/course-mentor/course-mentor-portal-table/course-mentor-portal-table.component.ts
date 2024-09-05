@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule, FormBuilder } from '@angular/forms'; // Import FormsModule for ngModel
 import { User } from '../../interfaces/user';
-import { CourseMentor } from '../../interfaces/coursementor';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomainMentor } from '../../interfaces/domainmentor';
 
 @Component({
   selector: 'app-course-mentor-portal-table',
@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./course-mentor-portal-table.component.css'],
 })
 export class CourseMentorPortalTableComponent {
-  data: CourseMentor[] = [
+  data: DomainMentor[] = [
     {
       mentor_id: 0,
       uid: 0,
@@ -25,6 +25,7 @@ export class CourseMentorPortalTableComponent {
       topic: '',
       topic_id: 0,
       outcome: '',
+      comment:''
     },
   ];
   userdata: User = { uid: 0, name: '', role_id: 0, department_id: 0 };

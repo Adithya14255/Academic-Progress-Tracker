@@ -18,6 +18,7 @@ export class AdminComponent {
   topicResponse: any = "failed";
   registerResponse: any = "failed";
   assignmentResponse: any = "failed";
+  mentorAssignmentResponse: any = "failed";
   topics: any = [];
   faculty: any = [];
   constructor(
@@ -94,5 +95,12 @@ export class AdminComponent {
       this.faculty = data; // Assign the received data to jsonData
     });
     console.log(selectedValue)
+  }
+  assignMentorForm = this.formBuilder.group({ uid:0,course_code:"" });
+
+  assignCourseMentorDetails() {
+    this.apiService.assignCourseMentor(this.assignMentorForm.value).subscribe((data) => {
+      this.mentorAssignmentResponse = data; // Assign the received data to jsonData
+    });
   }
 }
