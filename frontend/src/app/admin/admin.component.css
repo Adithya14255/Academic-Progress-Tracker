@@ -1,134 +1,135 @@
-.container{
-    padding:2vw;
-    font-size: 1.8rem;
-    font-family: 'Courier New', Courier, monospace;
-    display:flex;
-    gap:2rem;
+.container {
+  padding: 1rem; /* Adjusted padding */
+  font-size: 1rem; /* Adjusted font size */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Space between items */
+  justify-content: center; /* Center forms horizontally */
 }
 
-.boxforforms{
-    border: 2px solid orange;
-    border-radius: 2.5%;
-    padding:3rem;
-    width:16vw;
-    max-height:auto;
+.boxforforms {
+  border: 2px solid #F58426; /* Orange border */
+  border-radius: 6px; /* Slightly rounded corners */
+  padding: 1rem; /* Reduced padding */
+  width: 350px; /* Increased width */
+  max-height: auto;
+  background-color: #fff; /* White background */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  box-sizing: border-box;
+  margin-bottom: 1rem; /* Space below each form */
 }
 
-.username, .password{
-    width:80%;
-    height:20%;
-    margin:2% 0;
-}
-input{
-    border:none;
-    border-bottom:2px solid black;
-    outline:none;
-    width:130%;
-    font-size: large;   
-    margin:7% 0;
-    padding:4px;
-    transition: .5s;
-}
-input{
-    border-bottom:2.5px solid #F58426;
+.username, .password {
+  margin: 0.5rem 0; /* Reduced margin */
 }
 
- 
-button{
-    width:100%;
-    height:20%;
-    padding:5%;
-    border-radius:10px;
-    outline:none;
-    border:none;
-    color:white;
-    margin:5%  0;
-    background-color: #F58426;
-    align-self: center;
-    cursor:pointer;
-    transition: .2s;
+input, select {
+  border: 2px solid #F58426; /* Orange border */
+  border-radius: 4px; /* Rounded corners */
+  outline: none;
+  width: calc(100% - 8px); /* Adjusted width */
+  font-size: 0.9rem; /* Smaller font size */
+  margin: 0.5rem 0; /* Reduced margin */
+  padding: 0.5rem;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
-.button:hover{
-    color: #F58426;
-    background-color:white;
-    border:2px solid #F58426;
-
+input:focus, select:focus {
+  border-color: #F5a623; /* Slightly darker orange for focus */
+  background-color: #f8f8f8; /* Light grey background */
 }
 
-.topiclist{
-    font-size: medium;
+button {
+  width: 100%;
+  padding: 0.5rem; /* Reduced padding */
+  border-radius: 6px; /* Rounded corners */
+  border: none;
+  color: #fff;
+  background-color: #F58426; /* Orange background */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 0.9rem; /* Smaller font size */
 }
 
-  /* Orange bubble on the bottom right */
-  .orange-cross-bar {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100px;
-    /* Size of the bubble */
-    height: 100px;
-    /* Size of the bubble */
-    background-color: orange;
-    border-radius: 50%;
-    /* Circular shape */
-    z-index: -1;
-  }
+.button:hover {
+  background-color: #F5a623; /* Slightly darker orange on hover */
+  color: #fff; /* Keep text white */
+  
+}
 
-  .orange-cross-bar::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    /* Larger width to extend beyond the main bubble */
-    height: 200px;
-    /* Larger height to extend beyond the main bubble */
-    background-color: orange;
-    border-radius: 50%;
-    /* Circular shape */
-    bottom: 0;
-    right: 0;
-    transform: scale(1.5);
-    /* Scales up the bubble */
-    z-index: -1;
-  }
+p {
+  margin: 0.5rem 0; /* Reduced margin */
+}
 
-  /* Orange bubble on the left middle */
-  .orange-bubble-left-middle {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    width: 80px;
-    /* Size of the bubble */
-    height: 80px;
-    /* Size of the bubble */
-    background-color: rgb(252, 192, 80);
-    border-radius: 50%;
-    /* Circular shape */
-    transform: translateY(-50%);
-    /* Centers the bubble vertically */
-    z-index: -1;
-  }
+tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
 
-  .orange-bubble-left-middle::after {
-    content: '';
-    position: absolute;
-    width: 160px;
-    /* Larger width to extend beyond the main bubble */
-    height: 160px;
-    /* Larger height to extend beyond the main bubble */
-    background-color: rgb(248, 186, 71);
-    border-radius: 50%;
-    /* Circular shape */
-    left: 0;
-    top: 0;
-    transform: scale(1.5);
-    /* Scales up the bubble */
-    z-index: -1;
-  }
+td {
+  padding: 0.5rem; /* Reduced padding */
+}
 
-  /* Ensure content stays clear of the bubbles */
-  body {
-    position: relative;
-    margin-bottom: 120px;
-    /* Space above the bottom bubble */
-  }
+.topiclist {
+  font-size: 0.8rem; /* Smaller font size */
+  color: #333;
+}
+
+/* Orange bubble on the bottom right */
+.orange-cross-bar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 80px; /* Smaller size */
+  height: 80px; /* Smaller size */
+  background-color: #F5a623;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.orange-cross-bar::after {
+  content: '';
+  position: absolute;
+  width: 160px; /* Larger width to extend beyond the main bubble */
+  height: 160px; /* Larger height to extend beyond the main bubble */
+  background-color: #F5a623;
+  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+  transform: scale(1.5);
+  z-index: -1;
+}
+
+/* Orange bubble on the left middle */
+.orange-bubble-left-middle {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 60px; /* Smaller size */
+  height: 60px; /* Smaller size */
+  background-color: #F5a623;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.orange-bubble-left-middle::after {
+  content: '';
+  position: absolute;
+  width: 120px; /* Larger width to extend beyond the main bubble */
+  height: 120px; /* Larger height to extend beyond the main bubble */
+  background-color: #F5a623;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  transform: scale(1.5);
+  z-index: -1;
+}
+
+/* Ensure content stays clear of the bubbles */
+body {
+  position: relative;
+  margin-bottom: 100px; /* Adjusted space above the bottom bubble */
+}

@@ -13,9 +13,8 @@ Chart.register(...registerables);
   templateUrl: './faculty.component.html',
   styleUrls: ['./faculty.component.css'],
 })
-export class FacultyComponent implements OnInit{
-  data: any;
-  userData: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
+export class FacultyComponent implements OnInit {
+  data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 69;
   progressValues: any = [];
   ratios: any=[];
@@ -57,7 +56,7 @@ export class FacultyComponent implements OnInit{
       this.data = state as User;
     }
     this.apiService
-      .getFacultyProgressData({ handler_id: this.userData.uid })
+      .getFacultyProgressData({ handler_id: this.data.uid })
       .subscribe((data) => {
         this.progressValues = data; // Assign the received data to jsonData\
         this.ratios = this.calculateStatusCodeRatios(this.progressValues);
