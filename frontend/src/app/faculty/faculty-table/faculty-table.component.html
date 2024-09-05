@@ -57,7 +57,7 @@
         </ul>
     </nav>
 </div>
-<button (click)="viewCompletedList()">Completed topics</button>
+<button class="comp-btn" (click)="viewCompletedList()">Completed topics</button>
 <p *ngIf="completedList == 1 && completedData == 'Failure'">No completed Topics Yet !</p>
 <div class="table-wrapper" *ngIf="completedList == 1 && completedData!='Failure'">
     <table>
