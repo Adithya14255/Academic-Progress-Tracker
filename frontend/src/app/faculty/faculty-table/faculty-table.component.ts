@@ -5,13 +5,22 @@ import { ApiService } from '../../api.service';
 import { Faculty_table } from '../../interfaces/faculty';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { trigger, style, transition, animate } from '@angular/animations'; // Updated import
 
 @Component({
   selector: 'app-faculty-table',
   standalone: true,
   imports: [CommonModule,FormsModule],
   templateUrl: './faculty-table.component.html',
-  styleUrls: ['./faculty-table.component.css']
+  styleUrls: ['./faculty-table.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ backgroundColor: '', opacity: 0 }),
+        animate(1000, style({ backgroundColor: 'white', opacity: 1 }))
+      ])
+    ])
+  ],
 })
 
 export class FacultyTableComponent {
