@@ -2,42 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
 import { CommonModule, Location } from '@angular/common';
-import {
-  NgCircleProgressModule,
-  CircleProgressOptions,
-} from 'ng-circle-progress';
 import { ApiService } from '../api.service';
-type StatusCount = { status_code: number; count: number };
 import { Chart ,registerables } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-faculty',
   standalone: true,
-  imports: [RouterLink, NgCircleProgressModule, CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './faculty.component.html',
-  styleUrl: './faculty.component.css',
-  providers: [
-    {
-      provide: CircleProgressOptions,
-      useValue: {
-        radius: 100,
-        outerStrokeWidth: 16,
-        innerStrokeWidth: 0,
-        outerStrokeColor: '#78C000',
-        animationDuration: 300,
-        showUnits: true,
-        units: '%',
-        showTitle: true,
-        showSubtitle: true,
-        unitsColor: '#483500',
-        subtitleColor: '#483500',
-        titleColor: '#483500',
-      },
-    },
-  ],
+  styleUrls: ['./faculty.component.css'],
 })
-export class FacultyComponent implements OnInit {
+export class FacultyComponent implements OnInit{
   data: any;
   userData: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 69;
@@ -48,32 +24,29 @@ export class FacultyComponent implements OnInit {
     private location: Location,
     private apiService: ApiService
   ) {}
+  
 
-  public config:any = {
-    type: 'bar',
+  public config: any = {
+    type: 'pie',
     data: {
-      labels:['upload','approve','disapprove','complete'],
-      datasets:[
+      labels: ['upload', 'approve', 'disapprove', 'complete'],
+      datasets: [
         {
-          label:'name1',
-          data:['10','2','3','6'],
-          backgroundColor:'orange',
-        },
-        {
-          label:'name2',
-          data:['11','2','4','8'],
-          backgroundColor:'red',
+          label: 'name1',
+          data: ['10', '2', '3', '6'],
+          backgroundColor: ['orange', 'green', 'blue', 'red'],
         },
       ],
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
+          beginAtZero: true,
+        },
+      },
     },
   };
+
 
   chart: any;
 
@@ -81,7 +54,7 @@ export class FacultyComponent implements OnInit {
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
-      this.userData = state as User;
+      this.data = state as User;
     }
     this.apiService
       .getFacultyProgressData({ handler_id: this.userData.uid })
@@ -107,7 +80,7 @@ export class FacultyComponent implements OnInit {
   }
   
   navigateWithData(): void {
-    this.router.navigateByUrl('/faculty-table', { state: this.userData });
+    this.router.navigateByUrl('/faculty-table', { state: this.data });
   }
   navigateToOut(): void {
     this.router.navigateByUrl('/faculty-login');
