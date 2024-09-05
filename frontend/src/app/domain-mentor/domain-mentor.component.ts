@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
 import { Location } from '@angular/common';
 import { Chart ,registerables } from 'chart.js';
+
 Chart.register(...registerables);
 @Component({
   selector: 'app-domain-mentor',
@@ -14,23 +15,15 @@ Chart.register(...registerables);
 export class DomainMentorComponent implements OnInit {
   data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 90;
-//   chart!: Chart; // Use definite assignment assertion
-// Chart: any;
-  
   public config:any = {
-  type: 'bar',
+  type: 'pie',
   data: {
     labels:['upload','approve','disapprove','complete'],
     datasets:[
       {
         label:'name1',
         data:['10','2','3','6'],
-        backgroundColor:'orange',
-      },
-      {
-        label:'name2',
-        data:['11','2','4','8'],
-        backgroundColor:'red',
+        backgroundColor:['orange','green','blue','red']
       },
     ],
   },

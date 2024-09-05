@@ -90,7 +90,7 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    
 }
 .content .welcome-msg{
     font-size:3.3em;
@@ -122,58 +122,14 @@
     color:white;
     /* border:2px solid #e67e22; */
 }
+
 .right{
     margin-top:2.19%;
-    width:68vw;
-    height:94vh;
+    width:40vw;
+    height:60vh;
     align-items: center;    
-    overflow: hidden;
-   
+    margin-bottom:15vh;
+    margin-left:13%;  
 
 }
-/* .rectangle-t{
-    height:20vh;
-    width:20vh;
-    transform: rotate(-35deg);
-    background-color:orange;
-    position: relative;
-    top:-10%;
-    left:-5%;
-} */
-.pie {
-    width: 200px;
-    height: 200px;
-    background-image: conic-gradient(rgb(255, 132, 0) 81%, rgb(10, 59, 220) 81%);
-    border-radius:50%;
-}
-.two{
-    background-image: conic-gradient(rgb(235, 11, 11) 40%, rgb(43, 147, 25) 40%);
-}
-.three{
-    background-image: conic-gradient(rgb(255, 255, 0) 60%, rgb(172, 7, 89) 60%);
-}
-.four{
-    background-image: conic-gradient(orange 20%, rgb(6, 12, 54) 20%);
-}
-.pie-chart{
-    height:30vh;
-    width:100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.right .pie-chart p{
-    position: relative;
-    top:-15%;
-}
-.bar-chart{
-    height:65vh;
-    width:100%;
-}
-#my-chart {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
   
