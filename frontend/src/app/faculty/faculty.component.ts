@@ -7,7 +7,6 @@ import {
   CircleProgressOptions,
 } from 'ng-circle-progress';
 import { ApiService } from '../api.service';
-type StatusCount = { status_code: number; count: number };
 import { Chart ,registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -38,8 +37,7 @@ Chart.register(...registerables);
   ],
 })
 export class FacultyComponent implements OnInit {
-  data: any;
-  userData: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
+  data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 69;
   progressValues: any = [];
   ratios: any=[];
@@ -81,10 +79,10 @@ export class FacultyComponent implements OnInit {
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
-      this.userData = state as User;
+      this.data = state as User;
     }
     this.apiService
-      .getFacultyProgressData({ handler_id: this.userData.uid })
+      .getFacultyProgressData({ handler_id: this.data.uid })
       .subscribe((data) => {
         this.progressValues = data; // Assign the received data to jsonData\
         this.ratios = this.calculateStatusCodeRatios(this.progressValues);
@@ -107,7 +105,7 @@ export class FacultyComponent implements OnInit {
   }
   
   navigateWithData(): void {
-    this.router.navigateByUrl('/faculty-table', { state: this.userData });
+    this.router.navigateByUrl('/faculty-table', { state: this.data });
   }
   navigateToOut(): void {
     this.router.navigateByUrl('/faculty-login');
