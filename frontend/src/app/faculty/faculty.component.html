@@ -13,9 +13,9 @@
       </div>
       <div class="profile-body">
         <div class="profile-info">
-          <p><strong>ID:</strong>{{ userData.uid }}</p>
-          <p><strong>Name:</strong> {{ userData.name }}</p>
-          <p><strong>Department ID:</strong>{{ userData.department_id }}</p>
+          <p><strong>ID:</strong>{{ data.uid }}</p>
+          <p><strong>Name:</strong> {{ data.name }}</p>
+          <p><strong>Department ID:</strong>{{ data.department_id }}</p>
         </div>
         <ul id="navlogin">
           <li>
@@ -32,13 +32,7 @@
       </div>
     </div>
   </div>
-  <tbody>
-    <tr *ngFor="let item of ratios">
-      <td>
-        <p>{{ item.status_code }} = {{ item.ratio }}</p>
-      </td>
-    </tr>
-  </tbody>
+  
   <div class="right">
     <div class="bar-chart">
       <canvas id="MyChart">{{chart}}</canvas> <!-- Bind chart directive here -->
