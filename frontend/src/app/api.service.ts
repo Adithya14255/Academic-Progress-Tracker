@@ -16,6 +16,9 @@ export class ApiService {
   assignCourseUser(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/assign_course`, data);
   }
+  assignCourseMentor(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/assign_mentor`, data);
+  }
   registerUser(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, data);
   }

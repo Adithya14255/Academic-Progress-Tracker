@@ -199,6 +199,53 @@
     </form>
     <p *ngIf="assignmentResponse != 'failed'">Success!</p>
   </div>
+  <div class="boxforforms">
+    <p>ASSIGN MENTOR - </p>
+    <form [formGroup]="assignMentorForm" (ngSubmit)="assignCourseMentorDetails()">
+      <div class="username">
+        <label for="name">Mentor department</label>
+        <select (change)="onAssignOptionChange($event)">
+          <option [value]="0">-</option>
+          <option [value]="1">CSE</option>
+          <option [value]="2">AI&DS</option>
+          <option [value]="3">ECE</option>
+          <option [value]="4">CSBS</option>
+          <option [value]="5">IT</option>
+          <option [value]="6">S&H</option>
+        </select>
+      </div>
+      <div class="username">
+        <label for="name">Faculty</label>
+        <select formControlName="uid">
+          <option *ngFor="let option of faculty" [value]="option.uid">
+            {{ option.uid }} - {{ option.name }}
+          </option>
+        </select>
+      </div>
+      <div class="username">
+        <label for="name">Course department</label>
+        <select (change)="onCourseOptionChange($event)">
+          <option [value]="0">-</option>
+          <option [value]="1">CSE</option>
+          <option [value]="2">AI&DS</option>
+          <option [value]="3">ECE</option>
+          <option [value]="4">CSBS</option>
+          <option [value]="5">IT</option>
+          <option [value]="6">S&H</option>
+        </select>
+      </div>
+      <div class="username">
+        <label for="name">course_code</label>
+        <select formControlName="course_code">
+          <option *ngFor="let option of courses" [value]="option.course_code">
+            {{ option.course_code }} = {{ option.course_name }}
+          </option>
+        </select>
+      </div>
+      <button class="button" type="submit">Assign Course</button>
+    </form>
+    <p *ngIf="mentorAssignmentResponse != 'failed'">Success!</p>
+  </div>
 </div>
 
 <div class="orange-cross-bar"></div>

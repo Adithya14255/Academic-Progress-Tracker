@@ -131,11 +131,10 @@ def faculty_info():
 def assign_mentor():
         course_code = request.json['course_code']
         uid = request.json['uid']
-        q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},{course_code});")
-        r = conn.execute(q).fetchall()
-        data=[dict(i._mapping) for i in r]
-        print(data)
-        return json.dumps(data)
+        q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},'{course_code}');")
+        conn.execute(q)
+        conn.commit()
+        return json.dumps({'data':'Success'})
 
 @app.route('/assign_course', methods=['POST', 'GET'])
 def assign_course():
