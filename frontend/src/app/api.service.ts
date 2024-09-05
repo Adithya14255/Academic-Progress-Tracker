@@ -1,73 +1,60 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './interfaces/user';
-
-
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   private apiUrl = 'http://127.0.0.1:5001';
 
   constructor(private http: HttpClient) {}
 
-  getFacultyProgressData(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/facultyprogress`,data);
-    
+  getFacultyInDepartment(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/faculty_info`, data);
   }
-
-  addTopicData(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/add_topic`,data);
-    
+  assignCourseUser(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/assign_course`, data);
   }
-
-  addCourseData(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/add_course`,data);
-    
+  registerUser(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, data);
   }
-  getCourseData(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/courses`,data);
-    
+  getFacultyProgressData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/facultyprogress`, data);
   }
-
-  getTopicData(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/topics`,data);
-    
+  addTopicData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/add_topic`, data);
   }
-
-  updateCommentDetails(id:any,data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/editcomment/${id}`,data);
-    
+  addCourseData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/add_course`, data);
   }
-
-  updateHoursCompletedDetails(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/edithourscompleted`,data);
-    
+  getCourseData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/courses`, data);
   }
-  updateLinkDetails(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/editlink`,data);
-    
+  getTopicData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/topics`, data);
   }
-
-  getFacultyData(id:any): Observable<any> {
+  updateCommentDetails(id: any, data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/editcomment/${id}`, data);
+  }
+  updateHoursCompletedDetails(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/edithourscompleted`, data);
+  }
+  updateLinkDetails(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/editlink`, data);
+  }
+  getFacultyData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
-    
   }
-  getCourseMentorData(id:any): Observable<any> {
+  getCourseMentorData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
-    
   }
-  getDomainMentorData(id:any): Observable<any> {
+  getDomainMentorData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/domain_mentor/${id}`);
-    
   }
-
   postLoginFacultyData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
-
   postLoginCourseMentorData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
