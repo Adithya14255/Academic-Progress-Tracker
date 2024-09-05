@@ -14,7 +14,6 @@ import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-
 import { DomainMentorComponent } from './domain-mentor/domain-mentor.component';
 import { AdminComponent } from './admin/admin.component';
 import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
-import { ChartsComponent } from './charts/charts.component';
 
 export const routes: Routes = [
     { path: '', component:LoginComponent,
@@ -34,5 +33,4 @@ export const routes: Routes = [
     { path: 'domain-mentor-table',component: DomainMentorPortalTableComponent}, 
     { path: 'admin',component: AdminComponent},
     { path: 'domain-mentor-base', component: DomainMentorPortalBaseComponent},
-    { path: 'charts', component: ChartsComponent}
 ];
