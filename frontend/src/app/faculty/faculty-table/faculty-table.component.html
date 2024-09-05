@@ -57,8 +57,9 @@
         </ul>
     </nav>
 </div>
-<button class="comp-btn" (click)="viewCompletedList()">Completed topics</button>
-<div class="table-wrapper" *ngIf="completedList==1">
+<button (click)="viewCompletedList()">Completed topics</button>
+<p *ngIf="completedList == 1 && completedData == 'Failure'">No completed Topics Yet !</p>
+<div class="table-wrapper" *ngIf="completedList == 1 && completedData!='Failure'">
     <table>
         <thead @fade>
           <tr>
@@ -70,12 +71,15 @@
           </tr>
         </thead>
         <tbody @fade>
-          <tr *ngFor="let item of completedData;let i = index">
+          <tr *ngFor="let item of completedData; let i = index">
             <td>{{ item.course_code }}</td>
             <td>{{ item.course_name }}</td>
             <td>{{ item.topic }}</td>
             <td>{{ item.outcome }}</td>
-        </tr>
+          </tr>
         </tbody>
-      </table>
+    </table>
 </div>
+
+
+

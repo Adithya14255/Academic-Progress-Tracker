@@ -12,7 +12,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent {
-  data: User = { uid: 0, name: '', role_id: 0, department_id: 0 };
+  data: any;
   courses: any = [];
   courseResponse: any = "failed";
   topicResponse: any = "failed";

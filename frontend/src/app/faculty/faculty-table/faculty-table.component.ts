@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
-import { Faculty_table } from '../../interfaces/faculty';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, style, transition, animate } from '@angular/animations'; // Updated import
+
 
 @Component({
   selector: 'app-faculty-table',
@@ -24,13 +24,13 @@ import { trigger, style, transition, animate } from '@angular/animations'; // Up
 })
 
 export class FacultyTableComponent {
-  data: Faculty_table[] = [{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''},{uid:0,course_code:'',course_name:'',status_code:3,hours_completed:0,topic:'',topic_id:0,outcome:''}];
+  data: any;
   completedData: any;
-  userdata: User = {uid:0,name:'',role_id:0,department_id:0};
+  userdata: any;
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   hourschange: number = 0;
-  completedList:number=0;
+  completedList: number = 0;
   checkoutForm = this.formBuilder.group({
     handler_id:0,
     topic_id:0,
@@ -41,11 +41,13 @@ export class FacultyTableComponent {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
     this.userdata = state as User;
-  }console.log(this.userdata)
-    this.apiService.getFacultyData(this.userdata.uid).subscribe(
-      response => {
-        this.data = response;
-      });
+  }
+  if (this.userdata){
+  this.apiService.getFacultyData(this.userdata.uid).subscribe(
+    response => {
+      this.data = response;
+    });
+    }
     }
 
   getBoxColor(value: number): string {
@@ -86,11 +88,19 @@ export class FacultyTableComponent {
     this.hourschange=0;
   }
 
-  viewCompletedList(){
+  viewCompletedList() {
     this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
-      this.completedData = response;
+      // Check if response contains 'Failure' or data
+      if (response.data == 'Failure') {
+        this.completedData = 'Failure';
+        console.log("here");
+      } else {
+        console.log("here instead");
+        this.completedData = response;  // Assuming the valid data is in response.data
+      }
+      this.completedList = 1;  // Trigger the display logic
     });
-    this.completedList=1;
-
   }
+  
+  
 }

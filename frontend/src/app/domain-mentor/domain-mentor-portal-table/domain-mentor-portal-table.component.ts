@@ -24,8 +24,8 @@ import { trigger, style, transition, animate } from '@angular/animations'; // Up
   ],
 })
 export class DomainMentorPortalTableComponent {
-  data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:1,url:'',topic:'',topic_id:0,outcome:'',comment:''}];
-  userdata: User = {uid:0,name:'',role_id:0,department_id:0};
+  data: any;
+  userdata: any;
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   comment: string = '';
@@ -40,12 +40,14 @@ export class DomainMentorPortalTableComponent {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
     this.userdata = state as User;
-  }console.log(this.userdata)
+  }
+    if (this.userdata){
     this.apiService.getDomainMentorData(this.userdata.uid).subscribe(
       response => {
         this.data = response;
       });
     }
+  }
 
   approveupdate(topic_id: number, uid: number): void {
     this.editedIndex=null;

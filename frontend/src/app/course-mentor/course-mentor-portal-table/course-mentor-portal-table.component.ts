@@ -14,21 +14,8 @@ import { DomainMentor } from '../../interfaces/domainmentor';
   styleUrls: ['./course-mentor-portal-table.component.css'],
 })
 export class CourseMentorPortalTableComponent {
-  data: DomainMentor[] = [
-    {
-      mentor_id: 0,
-      uid: 0,
-      course_code: '',
-      course_name: '',
-      status_code: 3,
-      url: '',
-      topic: '',
-      topic_id: 0,
-      outcome: '',
-      comment:''
-    },
-  ];
-  userdata: User = { uid: 0, name: '', role_id: 0, department_id: 0 };
+  data: any;
+  userdata: any;
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   link: string = '';
@@ -49,12 +36,12 @@ export class CourseMentorPortalTableComponent {
     if (typeof state === 'object' && state !== null) {
       this.userdata = state as User;
     }
-    console.log(this.userdata);
+    if(this.userdata){
     this.apiService
       .getCourseMentorData(this.userdata.uid)
       .subscribe((response) => {
         this.data = response;
-      });
+      });}
   }
 
   getBoxColor(value: number): string {
