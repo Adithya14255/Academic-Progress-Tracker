@@ -6,13 +6,22 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { Router } from '@angular/router';
 import { DomainMentor } from '../../interfaces/domainmentor';
+import { trigger, style, transition, animate } from '@angular/animations'; // Updated import
 
 @Component({
   selector: 'app-domain-mentor-portal-table',
   standalone: true,
   imports: [CommonModule, HeaderComponent,FormsModule],
   templateUrl: './domain-mentor-portal-table.component.html',
-  styleUrls: ['./domain-mentor-portal-table.component.css']
+  styleUrls: ['./domain-mentor-portal-table.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ backgroundColor: '', opacity: 0 }),
+        animate(1000, style({ backgroundColor: 'white', opacity: 1 }))
+      ])
+    ])
+  ],
 })
 export class DomainMentorPortalTableComponent {
   data: DomainMentor[] = [{mentor_id:0,uid:0,course_code:'',course_name:'',status_code:1,url:'',topic:'',topic_id:0,outcome:'',comment:''}];
