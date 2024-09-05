@@ -11,15 +11,15 @@
             <p><strong>ID:</strong>{{data.uid}}</p>
             <p><strong>Name:</strong> {{data.name}}</p>
             <p><strong>Department ID:</strong>{{data.department_id}}</p>
+            <ul id="navlogin">
+              <li>
+                <button class="table-btn" (click)="navigateWithData()">Go to Domain Mentor table</button>
+              </li>
+              <li>
+                <button class="logout-btn" (click)="navigateToOut()">Log out</button>
+              </li>
+            </ul>
           </div>
-          <ul id="navlogin">
-            <li>
-              <button class="table-btn" (click)="navigateWithData()">Go to Domain Mentor table</button>
-            </li>
-            <li>
-              <button class="logout-btn" (click)="navigateToOut()">Log out</button>
-            </li>
-          </ul>
         </div>
       </div>
     </div>

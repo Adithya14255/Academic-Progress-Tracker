@@ -103,6 +103,7 @@
     display:flex;
     gap:20%;
     align-items:center;
+    margin-top:1vh;
 }
 .logout-btn , .table-btn{
     padding:3%;
