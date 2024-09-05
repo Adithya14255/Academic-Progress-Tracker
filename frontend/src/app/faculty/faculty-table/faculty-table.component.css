@@ -4,6 +4,7 @@
     align-items: center;
     padding: 20px;
     padding-top: 200px;
+    overflow-y: hidden;
 }
 
 .table-wrapper {
@@ -205,3 +206,19 @@ form label {
     border-radius:.3rem ;
 }
 
+.comp-btn{
+    position:relative;
+    left:21.5vw;
+    bottom:6vh;
+    padding:5px;
+    border-radius:5px;
+    color:white;
+    background-color:#e67e22;
+    border:none;
+    outline:none;
+}
+.comp-btn:hover{
+    background-color: #fff;
+    color:#e67e22;
+    border:2px solid #e67e22;
+}
