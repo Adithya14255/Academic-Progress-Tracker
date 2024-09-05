@@ -13,26 +13,33 @@
           <p><strong>ID:</strong>{{ data.uid }}</p>
           <p><strong>Name:</strong> {{ data.name }}</p>
           <p><strong>Department ID:</strong>{{ data.department_id }}</p>
+          <ul id="navlogin">
+            <li>
+              <button class="table-btn" (click)="navigateWithData()">
+                Go to faculty table
+              </button>
+            </li>
+            <li>
+              <button class="logout-btn" (click)="navigateToOut()">
+                Log out
+              </button>
+            </li>
+          </ul>
         </div>
-        <ul id="navlogin">
-          <li>
-            <button class="table-btn" (click)="navigateWithData()">
-              Go to faculty table
-            </button>
-          </li>
-          <li>
-            <button class="logout-btn" (click)="navigateToOut()">
-              Log out
-            </button>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
   
   <div class="right">
     <div class="bar-chart">
+      <h2>Overall:</h2>
       <canvas id="MyChart">{{chart}}</canvas> <!-- Bind chart directive here -->
+    </div>
+    <div class="hour">
+      <div class="overall-hours">
+        <h1>Hours completion</h1>
+        
+      </div>
     </div>
   </div>
 </div>

@@ -31,19 +31,18 @@ export class FacultyComponent implements OnInit {
       labels: ['upload', 'approve', 'disapprove', 'complete'],
       datasets: [
         {
-          label: 'name1',
+          label: '',
           data: ['10', '2', '3', '6'],
           backgroundColor: ['orange', 'green', 'blue', 'red'],
         },
       ],
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
+    // options: {
+    //   scales: {
+    //     y: {
+    //     },
+    //   },
+    // },
   };
 
 
