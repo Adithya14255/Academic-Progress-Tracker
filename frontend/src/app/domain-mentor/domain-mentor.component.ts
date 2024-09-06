@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Chart ,registerables } from 'chart.js';
 
 Chart.register(...registerables);
 @Component({
   selector: 'app-domain-mentor',
   standalone: true,
-  imports: [RouterLink], // Import RouterLink if needed
+  imports: [RouterLink,CommonModule], // Import RouterLink if needed
   templateUrl: './domain-mentor.component.html',
   styleUrls: ['./domain-mentor.component.css'],
 })

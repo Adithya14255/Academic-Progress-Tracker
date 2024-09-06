@@ -178,7 +178,7 @@ def assign_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
         uid = request.json['uid']
-        if conn.execute(sqlalchemy.text(f"Select * from course_mentor_table where course_code='{course_code}' and uid={uid};")).first() != None:
+        if conn.execute(sqlalchemy.text(f"Select * from domain_mentor_table where course_code='{course_code}' and uid={uid};")).first() != None:
 
             return json.dumps({'error': 'mentor is already assigned to that course'})
         q = sqlalchemy.text(f"INSERT INTO t_complete_status (hours_completed, topic_id, handler_id, course_code, status_code) \
@@ -261,10 +261,20 @@ def facultyprogress():
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {
                         handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
+    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
+    color_status = {0:'grey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    codes,data,color = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
+    print(data)
+    return json.dumps({'status_code':codes,'count': data,'color': color})
+
+@app.route('/mentor_list', methods=['POST', 'GET'])
+def mentor_list():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(f"select b.uid,b.name,c.course_code from t_users b,l_mentor_courses c,l_course_departments d where b.uid=c.mentor_id and c.course_code=d.course_code and d.department_id={department_id};")
+    r = conn.execute(q).fetchall()
     data = [dict(i._mapping) for i in r]
     print(data)
     return json.dumps(data)
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001, host="0.0.0.0")

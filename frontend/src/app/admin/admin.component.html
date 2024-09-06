@@ -48,8 +48,6 @@
       </form>
       <p *ngIf="courseResponse != 'failed'">Success!</p>
     </div>
-  </div>
-  <div class="boxforboxforforms">
     <div class="boxforforms">
       <p>GET TOPICS -</p>
       <form [formGroup]="getTopicForm" (ngSubmit)="getTopic()">
@@ -67,6 +65,8 @@
         <td>{{ item.outcome }}</td>
       </tr>
     </div>
+  </div>
+  <div class="boxforboxforforms">
     <div class="boxforforms">
       <p>ADD TOPICS -</p>
       <form [formGroup]="addTopicForm" (ngSubmit)="addTopic()">
@@ -111,6 +111,7 @@
       <p *ngIf="topicResponse != 'failed'">Success!</p>
     </div>
   </div>
+  <div class="boxforboxforforms">
   <div class="boxforforms">
     <p>REGISTER USER -</p>
     <form [formGroup]="userRegistrationForm" (ngSubmit)="registerUserInfo()">
@@ -151,6 +152,32 @@
       <button class="button" type="submit">Register</button>
     </form>
     <p *ngIf="registerResponse != 'failed'">Success!</p>
+  </div>
+  <div class="boxforforms">
+    <p>GET MENTOR LIST - </p>
+    <form [formGroup]="getMentorListForm" (ngSubmit)="getMentorListDetails()">
+      <div class="username">
+        <label for="name">department_id</label>
+        <select required formControlName="department_id">
+          <option [value]="1">CSE</option>
+          <option [value]="2">AI&DS</option>
+          <option [value]="3">ECE</option>
+          <option [value]="4">CSBS</option>   
+          <option [value]="5">IT</option>
+          <option [value]="6">S&H</option>
+        </select>
+      </div>
+      <button class="button" type="submit">Get Mentor List</button>
+    </form>
+    <p *ngIf="mentorAssignmentResponse != 'failed'">Success!</p>
+    <tr class="topiclist" *ngFor="let item of mentorList">
+      <td>{{ item.uid }}</td>
+      <td>-</td>
+      <td>{{ item.name }}</td>
+      <td>-</td>
+      <td>{{ item.course_code }}</td>
+    </tr>
+  </div>
   </div>
   <div class="boxforforms">
     <p>ASSIGN COURSE - </p>
@@ -246,7 +273,7 @@
     </form>
     <p *ngIf="mentorAssignmentResponse != 'failed'">Success!</p>
   </div>
+   
 </div>
-
 <div class="orange-cross-bar"></div>
 <div class="orange-bubble-left-middle"></div>

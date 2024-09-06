@@ -10,6 +10,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  getMentorList(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/mentor_list`, data);
+  }
   getFacultyInDepartment(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/faculty_info`, data);
   }
@@ -69,12 +72,5 @@ export class ApiService {
   }
   postLoginAdminData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
-  }
-  updateData(id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/data/${id}`, data);
-  }
-
-  deleteData(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/data/${id}`);
   }
 }
