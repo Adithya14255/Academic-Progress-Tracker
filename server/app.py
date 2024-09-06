@@ -261,9 +261,11 @@ def facultyprogress():
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {
                         handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
-    data = [dict(i._mapping) for i in r]
+    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
+    color_status = {0:'grey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    codes,data,color = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     print(data)
-    return json.dumps(data)
+    return json.dumps({'status_code':codes,'count': data,'color': color})
 
 @app.route('/mentor_list', methods=['POST', 'GET'])
 def mentor_list():

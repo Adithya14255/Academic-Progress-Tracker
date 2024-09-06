@@ -16,7 +16,7 @@ Chart.register(...registerables);
 export class FacultyComponent implements OnInit {
   data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 69;
-  progressValues: any = [];
+
   ratios: any=[];
   constructor(
     private router: Router,
@@ -28,21 +28,15 @@ export class FacultyComponent implements OnInit {
   public config: any = {
     type: 'pie',
     data: {
-      labels: ['upload', 'approve', 'disapprove', 'complete'],
+      labels: [],
       datasets: [
         {
-          label: '',
-          data: ['10', '2', '3', '6'],
-          backgroundColor: ['orange', 'green', 'blue', 'red'],
+          label:'',
+          data: [],
+          backgroundColor: [],
         },
       ],
     },
-    // options: {
-    //   scales: {
-    //     y: {
-    //     },
-    //   },
-    // },
   };
 
 
@@ -57,25 +51,15 @@ export class FacultyComponent implements OnInit {
     this.apiService
       .getFacultyProgressData({ handler_id: this.data.uid })
       .subscribe((data) => {
-        this.progressValues = data; // Assign the received data to jsonData\
-        this.ratios = this.calculateStatusCodeRatios(this.progressValues);
-        console.log(this.ratios);
-      }); 
-      this.initChart(); // Initialize the chart
+        
+        this.config.data.labels = data.status_code;
+        this.config.data.datasets[0].data = data.count;
+        this.config.data.datasets[0].backgroundColor = data.color;
+        console.log(this.config);
+        this.chart = new Chart('MyChart',this.config);
+  }); 
   }
 
-  initChart():void{
-    this.chart = new Chart('MyChart',this.config);
-  }
-
-  calculateStatusCodeRatios(data: { status_code: number; count: number }[]): { status_code: number; ratio: number }[] {
-    const totalCount = data.reduce((sum, item) => sum + item.count, 0);
-  
-    return data.map(item => ({
-      status_code: item.status_code,
-      ratio: item.count / totalCount
-    }));
-  }
   
   navigateWithData(): void {
     this.router.navigateByUrl('/faculty-table', { state: this.data });
