@@ -1,4 +1,7 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet" />
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+  rel="stylesheet"
+/>
 
 <div class="container">
   <div class="left">
@@ -12,7 +15,13 @@
         <div class="profile-info">
           <p><strong>ID:</strong>{{ data.uid }}</p>
           <p><strong>Name:</strong> {{ data.name }}</p>
-          <p><strong>Department ID:</strong>{{ data.department_id }}</p>
+          <p><strong>Department Name:</strong>
+          <span *ngIf="data.department_id === 1">CSE</span>
+          <span *ngIf="data.department_id === 2">AI&DS</span>
+          <span *ngIf="data.department_id === 3">ECE</span>
+          <span *ngIf="data.department_id === 4">CSBS</span>
+          <span *ngIf="data.department_id === 5">IT</span>
+          <span *ngIf="data.department_id === 6">S&H</span></p>
           <ul id="navlogin">
             <li>
               <button class="table-btn" (click)="navigateWithData()">
@@ -29,16 +38,16 @@
       </div>
     </div>
   </div>
-  
+
   <div class="right">
     <div class="bar-chart">
       <h2>Overall:</h2>
-      <canvas id="MyChart">{{chart}}</canvas> <!-- Bind chart directive here -->
+      <canvas id="MyChart">{{ chart }}</canvas>
+      <!-- Bind chart directive here -->
     </div>
     <div class="hour">
       <div class="overall-hours">
         <h1>Hours completion</h1>
-        
       </div>
     </div>
   </div>

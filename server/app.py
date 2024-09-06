@@ -265,6 +265,14 @@ def facultyprogress():
     print(data)
     return json.dumps(data)
 
+@app.route('/mentor_list', methods=['POST', 'GET'])
+def mentor_list():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(f"select b.uid,b.name,c.course_code from t_users b,l_mentor_courses c,l_course_departments d where b.uid=c.mentor_id and c.course_code=d.course_code and d.department_id={department_id};")
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    print(data)
+    return json.dumps(data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001, host="0.0.0.0")

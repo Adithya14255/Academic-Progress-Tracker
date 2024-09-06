@@ -8,7 +8,7 @@ RUN npm cache clean --force
 
 RUN npm install -g npm@latest
 
-RUN npm install -g @angular/cli@latest
+RUN npm install -g @angular/cli@17.3.6
 
 RUN npm install --force
 
