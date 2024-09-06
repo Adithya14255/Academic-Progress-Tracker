@@ -199,3 +199,6 @@
     padding:2%;
     height:15vh;
 }
+.faculty-profile-name{
+    text-transform: capitalize;
+}
