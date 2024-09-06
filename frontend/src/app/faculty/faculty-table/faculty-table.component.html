@@ -29,7 +29,7 @@
                       <button *ngIf="editedIndex === i" (click)="hoursupdate(hourschange,0,item.uid)" class="statusactivated">Cancel</button>
                       <button *ngIf="editedIndex !== i" (click)="editItem(i)" class="statusactivated">Completed</button>
                     </ng-container>
-                    <p *ngIf="item.status_code != 3" class="statusdeactivated">Not Completed Yet</p>
+                    <span *ngIf="item.status_code != 3" class="statusdeactivated">Not Completed Yet</span>
                   </td>
             </tr>
             </tbody>
