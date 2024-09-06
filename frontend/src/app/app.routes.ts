@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
 import { DomainMentorLoginComponent } from './login/domain-mentor-login/domain-mentor-login.component';
 import { CourseMentorLoginComponent } from './login/course-mentor-login/course-mentor-login.component';
@@ -28,7 +28,7 @@ export const routes: Routes = [
     { path: 'course-mentor', component: CourseMentorComponent},
     { path: 'course-mentor-table', component: CourseMentorPortalTableComponent },
     { path: 'header', component: HeaderComponent},
-    { path: 'footer', component: FooterComponent},
+    
     { path: 'domain-mentor',component: DomainMentorComponent},
     { path: 'domain-mentor-table',component: DomainMentorPortalTableComponent}, 
     { path: 'admin',component: AdminComponent},
