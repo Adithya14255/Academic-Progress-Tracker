@@ -28,12 +28,12 @@ export class FacultyComponent implements OnInit {
   public config: any = {
     type: 'pie',
     data: {
-      labels: ['overall','approve','disapprove'],
+      labels: [],
       datasets: [
         {
-          label:'OverAll',
-          data: ['20','2','23'],
-          backgroundColor: ['#D0FA58','#0174DF','#FE2E2E'],
+          label:'',
+          data: [],
+          backgroundColor: [],
         },
       ],
     },
