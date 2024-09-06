@@ -14,11 +14,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 export class AdminComponent {
   data: any;
   courses: any = [];
-  courseResponse: any = "failed";
-  topicResponse: any = "failed";
-  registerResponse: any = "failed";
-  assignmentResponse: any = "failed";
-  mentorAssignmentResponse: any = "failed";
+  response: any = "failed";
   mentorList:any=[];
   topics: any = [];
   faculty: any = [];
@@ -43,16 +39,16 @@ export class AdminComponent {
 
   addCourse() {
     this.apiService.addCourseData(this.addCourseForm.value).subscribe((data) => {
-      this.courseResponse = data; // Assign the received data to jsonData
-      console.log(this.courseResponse);
+      this.response = data; // Assign the received data to jsonData
+      console.log(this.response);
     });
   }
   addTopicForm = this.formBuilder.group({ topic:"",course_code:"",topic_id:0,outcome:"",total_hours:0 });
 
   addTopic() {
     this.apiService.addTopicData(this.addTopicForm.value).subscribe((data) => {
-      this.topicResponse = data; // Assign the received data to jsonData
-      console.log(this.topicResponse);
+      this.response = data; // Assign the received data to jsonData
+      console.log(this.response);
     });
   }
 
@@ -77,14 +73,14 @@ export class AdminComponent {
 
   registerUserInfo() {
     this.apiService.registerUser(this.userRegistrationForm.value).subscribe((data) => {
-      this.registerResponse = data; // Assign the received data to jsonData
+      this.response = data; // Assign the received data to jsonData
     });
   }
   assignCourseForm = this.formBuilder.group({ uid:0,course_code:"" });
 
   assignCourseDetails() {
     this.apiService.assignCourseUser(this.assignCourseForm.value).subscribe((data) => {
-      this.assignmentResponse = data; // Assign the received data to jsonData
+      this.response = data; // Assign the received data to jsonData
     });
     console.log(this.assignCourseForm)
   }
@@ -101,7 +97,7 @@ export class AdminComponent {
 
   assignCourseMentorDetails() {
     this.apiService.assignCourseMentor(this.assignMentorForm.value).subscribe((data) => {
-      this.mentorAssignmentResponse = data;
+      this.response = data;
     });
   }
 
@@ -110,7 +106,7 @@ export class AdminComponent {
   getMentorListDetails() {
     this.apiService.getMentorList(this.getMentorListForm.value).subscribe((data) => {
       this.mentorList = data;
-      this.mentorAssignmentResponse = data;
+      this.response = data;
     });
   }
 }
