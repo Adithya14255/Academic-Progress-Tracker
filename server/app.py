@@ -178,7 +178,7 @@ def assign_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
         uid = request.json['uid']
-        if conn.execute(sqlalchemy.text(f"Select * from course_mentor_table where course_code='{course_code}' and uid={uid};")).first() != None:
+        if conn.execute(sqlalchemy.text(f"Select * from domain_mentor_table where course_code='{course_code}' and uid={uid};")).first() != None:
 
             return json.dumps({'error': 'mentor is already assigned to that course'})
         q = sqlalchemy.text(f"INSERT INTO t_complete_status (hours_completed, topic_id, handler_id, course_code, status_code) \
