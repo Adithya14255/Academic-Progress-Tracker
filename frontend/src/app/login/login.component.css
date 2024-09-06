@@ -1,21 +1,61 @@
-.container{
+.container {
     display: flex;
-    width:100%;
-    height: 100%;
-    gap:2vw;
+    width: 100%;
+    min-height: 100vh; /* Use minimum height to fill the viewport */
+    position: relative;
+    justify-content: center;
+    overflow: hidden; /* Prevent scrolling */
+    align-items: center; /* Center content vertically */
 }
-.img{
-    width:65vw;
-    height: 90vh;
+
+.img {
+    width: 100vw; /* Ensure image covers full viewport width */
+    height: 100vh; /* Ensure image covers full viewport height */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
     filter: blur(3px);
+    position: absolute; /* Ensure the image stays within the container */
+    top: 0;
+    left: 0;
 }
 
-.loginpagetext{
-    z-index:5;
-    position: absolute;
-    margin: 23vh 10vw;
-    font-size: 700%;
+/* Adjust text styles */
+.loginpagetext {
+    z-index: 1; /* Ensure text stays above the image */
+    position: absolute; /* Absolute positioning to move text to the top */
+    top: 2vh; /* Move text closer to the top */
+    text-align: center;
+    color: black;
+    font-size: 5vw; /* Responsive font size */
     font-weight: 600;
-    font-family:'poppins';
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap; /* Prevent text from breaking into two lines */
+    width: 100%; /* Ensure text spans the full width */
 }
 
+/* Responsive Styles */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+    .img {
+        width: 100vw; /* Adjust width for smaller screens */
+        height: 100vh; /* Adjust height for smaller screens */
+    }
+
+    .loginpagetext {
+        font-size: 6vw; /* Adjust text size */
+        top: 3vh; /* Move text closer to the top for smaller screens */
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+    .img {
+        width: 100vw; /* Adjust width for mobile screens */
+        height: 100vh; /* Adjust height for mobile screens */
+    }
+
+    .loginpagetext {
+        font-size: 8vw; /* Adjust text size for smaller screens */
+        top: 4vh; /* Move text closer to the top for mobile screens */
+    }
+}
