@@ -11,7 +11,6 @@ import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-
 import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
 import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
-import { ChartsComponent } from './charts/charts.component';
 import { Chart } from 'chart.js';
 @Component({
   selector: 'app-root',
@@ -27,7 +26,6 @@ import { Chart } from 'chart.js';
     FaculityLoginComponent,
     FacultyTableComponent,
     DomainMentorPortalBaseComponent,
-    ChartsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
