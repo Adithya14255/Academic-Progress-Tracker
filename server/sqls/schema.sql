@@ -9,6 +9,12 @@ CREATE TABLE t_departments(
   department_name VARCHAR(24) NOT NULL
 );
 
+-- Create the t_domains table
+CREATE TABLE t_domains(
+  domain_id INT PRIMARY KEY,
+  domain_name VARCHAR(48) NOT NULL
+);
+
 -- Create the t_course_details table
 CREATE TABLE t_course_details (
   course_code VARCHAR(48) PRIMARY KEY,
@@ -35,7 +41,7 @@ CREATE TABLE t_course_topics (
   course_code VARCHAR(48) NOT NULL,
   outcome VARCHAR(4),
   topic VARCHAR(48) NOT NULL,
-  topic_id INT PRIMARY KEY,
+  topic_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
   total_hours INT,
   FOREIGN KEY (course_code) REFERENCES t_course_details(course_code)
 );
@@ -56,6 +62,13 @@ CREATE TABLE l_course_departments (
   FOREIGN KEY (department_id) REFERENCES t_departments(department_id)
 );
 
+-- Create the l_course_domains table
+CREATE TABLE l_course_domains (
+  course_code VARCHAR(24) NOT NULL,
+  domain_id INT NOT NULL,
+  FOREIGN KEY (course_code) REFERENCES  t_course_details(course_code),
+  FOREIGN KEY (domain_id) REFERENCES t_domains(domain_id)
+);
 
 -- Create the t_topic_links table 
 CREATE TABLE t_topic_links (
@@ -97,7 +110,6 @@ CREATE TABLE l_mentor_courses (
 );
 
 
-
 --view to check user details
 
 create view user_details_check as select u.uid,u.name,u.password,u.department_id,r.role_id from t_users u,l_role_user r where u.uid=r.uid;
@@ -108,15 +120,25 @@ create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.
 
 --view for domain mentor table
 
-create view domain_mentor_table as select z.mentor_id,u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,c.topic_id  from t_topic_comments y,t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id;
-
+create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,t.topic_id  from t_topic_comments y,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id GROUP BY 
+    z.mentor_id, 
+    c.course_code, 
+    d.course_name, 
+    t.topic, 
+    t.outcome, 
+    c.status_code, 
+    l.url, 
+    y.comment, 
+    t.topic_id;
 
 -- initialize the roles
-INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Mentor'), (3, 'Domain Mentor'),(4,'Admin');
-
+INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Coordinator'), (3, 'Domain Mentor'),(4,'Admin');
 
 -- initialize the statuses
 INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Completed');
 
 -- initialize the departments
 INSERT INTO t_departments (department_id, department_name) VALUES (1, 'CSE'), (2, 'AI&DS'), (3, 'ECE'),(4,'CSBS'),(5,'IT'),(6,'S&H');
+
+-- initialize the domains
+INSERT INTO t_domains (domain_id, domain_name) VALUES (1, 'PROGRAMMING'), (2, 'NETWORKS & OPERATING SYSTEMS'), (3, 'ALGORITHMS');

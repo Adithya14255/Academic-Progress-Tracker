@@ -54,6 +54,8 @@ export class CourseMentorPortalTableComponent {
         return 'red';
       case 3:
         return 'green';
+      case 4:
+        return 'darkblue';
       default:
         return 'white'; // Default color
     }

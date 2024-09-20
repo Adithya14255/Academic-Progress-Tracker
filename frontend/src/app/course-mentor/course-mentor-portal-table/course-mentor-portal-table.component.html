@@ -14,7 +14,6 @@
       <thead>
         <tr>
           <th>Course Code</th>
-          <th>Handler_ID</th>
           <th>Course Name</th>
           <th>Topic</th>
           <th>Outcome</th>
@@ -26,7 +25,6 @@
       <tbody>
         <tr *ngFor="let item of data; let i = index">
           <td>{{ item.course_code }}</td>
-          <td>{{ item.uid }}</td>
           <td>{{ item.course_name }}</td>
           <td>{{ item.topic }}</td>
           <td>{{ item.outcome }}</td>

@@ -44,12 +44,18 @@ def register():
         password = request.json['password']
         dept_id = request.json['department_id']
         id = request.json['id']
-        q = sqlalchemy.text(f"INSERT INTO t_users VALUES({id},'{
+        p = sqlalchemy.text(
+        f"SELECT * FROM t_users WHERE uid='{id}'")
+        if not conn.execute(p).fetchall():
+            q = sqlalchemy.text(f"INSERT INTO t_users VALUES({id},'{
                             name}','{password}',{dept_id});")
-        conn.execute(q)
-        q = sqlalchemy.text(f"INSERT INTO l_role_user VALUES({id},{role});")
-        conn.execute(q)
+            conn.execute(q)
+        q = sqlalchemy.text(f"SELECT * FROM l_role_user WHERE uid='{id}' AND role_id={role};")
+        if not conn.execute(q).fetchall():
+                    q = sqlalchemy.text(f"INSERT INTO l_role_user VALUES ('{id}',{role});")
+                    conn.execute(q)
         conn.commit()
+        print("success")
         return json.dumps({'data': 'Success'})
 
 
@@ -82,7 +88,7 @@ def faculty_completed(uid):
 @app.route('/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
     q = sqlalchemy.text(
-        f"SELECT * FROM domain_mentor_table WHERE mentor_id={id} and status_code!=4;")
+        f"SELECT * FROM domain_mentor_table WHERE mentor_id={id};")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -142,11 +148,10 @@ def add_topic():
     if request.method == 'POST':
         course_code = request.json['course_code']
         topic = request.json['topic']
-        topic_id = request.json['topic_id']
         outcome = request.json['outcome']
         total_hours = request.json['total_hours']
         q = sqlalchemy.text(f"INSERT INTO t_course_topics VALUES('{course_code}','{
-                            outcome}','{topic}',{topic_id},{total_hours});")
+                            outcome}','{topic}',{total_hours});")
         conn.execute(q)
         conn.commit()
         return json.dumps({'data': 'Success'})
@@ -155,7 +160,7 @@ def add_topic():
 @app.route('/faculty_info', methods=['POST', 'GET'])
 def faculty_info():
     department_id = request.json['department_id']
-    q = sqlalchemy.text(f"select t.uid,name from t_users t,l_role_user l where t.uid=l.uid and role_id<4 and department_id={department_id};")
+    q = sqlalchemy.text(f"select * from user_details_check where role_id<4 and department_id={department_id};")  
     r = conn.execute(q).fetchall()
     data = [dict(i._mapping) for i in r]
     print(data)
@@ -166,8 +171,10 @@ def faculty_info():
 def assign_mentor():
     course_code = request.json['course_code']
     uid = request.json['uid']
-    q = sqlalchemy.text(
-        f"insert into l_mentor_courses values({uid},'{course_code}');")
+    if conn.execute(sqlalchemy.text(f"Select * from l_mentor_courses where course_code='{course_code}';")).first() != None:
+            print("error-already assigned")
+            return json.dumps({'error': 'mentor is already assigned to that course'})
+    q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},'{course_code}');")
     conn.execute(q)
     conn.commit()
     return json.dumps({'data': 'Success'})
@@ -178,6 +185,7 @@ def assign_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
         uid = request.json['uid']
+        print(course_code,uid)
         if conn.execute(sqlalchemy.text(f"Select * from faculty_table where course_code='{course_code}' and uid={uid};")).first() != None:
 
             return json.dumps({'error': 'mentor is already assigned to that course'})
@@ -197,6 +205,7 @@ def assign_course():
                                 WHERE course_code = '{course_code}';")
         conn.execute(q)
         conn.commit()
+        print("here")
         return json.dumps({'data': 'Success'})
     return json.dumps({'response': 'incorrect method'})
 
@@ -242,14 +251,11 @@ def editcomment(approval):
 
 @app.route('/editlink', methods=['POST', 'GET'])
 def editlink():
-    handler_id = request.json['handler_id']
     topic_id = request.json['topic_id']
     link = request.json['link']
-    q = sqlalchemy.text(f"update t_complete_status set status_code=1 where handler_id={
-                        handler_id} and topic_id={topic_id};")
+    q = sqlalchemy.text(f"update t_complete_status set status_code=1 where topic_id={topic_id};")
     conn.execute(q)
-    q = sqlalchemy.text(f"update t_topic_links set url='{link}' where handler_id={
-                        handler_id} and topic_id={topic_id};")
+    q = sqlalchemy.text(f"update t_topic_links set url='{link}' where topic_id={topic_id};")
     conn.execute(q)
     conn.commit()
     return json.dumps({'data': 'Success'})
@@ -264,8 +270,8 @@ def facultyprogress():
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
     color_status = {0:'grey',1:'orange',2:'red',3:'green',4:'darkgreen'}
     codes,data,color = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
-    print(data)
-    return json.dumps({'status_code':codes,'count': data,'color': color})
+    print(codes,data,color)
+    return json.dumps({'status_code':codes,'count': data,'color': color}) 
 
 @app.route('/mentor_list', methods=['POST', 'GET'])
 def mentor_list():
