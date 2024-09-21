@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    padding-top: 200px;
     overflow-y: hidden;
 }
 
@@ -222,3 +221,50 @@ form label {
     color:#e67e22;
     border:2px solid #e67e22;
 }
+.username, .password {
+    margin: 0.5rem 0; /* Reduced margin */
+  }
+  
+  input, select {
+    border: 2px solid #F58426; /* Orange border */
+    border-radius: 4px; /* Rounded corners */
+    outline: none;
+    width: calc(100% - 8px); /* Adjusted width */
+    font-size: 0.9rem; /* Smaller font size */
+    margin: 0.5rem 0; /* Reduced margin */
+    padding: 0.5rem;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  input:focus, select:focus {
+    border-color: #F5a623; /* Slightly darker orange for focus */
+    background-color: #f8f8f8; /* Light grey background */
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding */
+    border-radius: 6px; /* Rounded corners */
+    border: none;
+    color: #fff;
+    background-color: #F58426; /* Orange background */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+  
+  .button:hover {
+    background-color: #F5a623; /* Slightly darker orange on hover */
+    color: #fff; /* Keep text white */
+    
+  }
+  .boxforforms {
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 1rem; /* Reduced padding */
+    width: 350px; /* Increased width */
+    max-height: auto;
+    background-color: #fff; /* White background */
+    margin-bottom: 1rem; /* Space below each form */
+    margin-left: 18%;
+    margin-top: 1rem;
+  }

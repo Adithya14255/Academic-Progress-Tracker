@@ -6,10 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://127.0.0.1:5001';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
+  getFacultyCourseList(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/faculty_courses`, data);
+  }
   getMentorList(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/mentor_list`, data);
   }
@@ -49,18 +52,7 @@ export class ApiService {
   updateLinkDetails(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/editlink`, data);
   }
-  getFacultyData(id: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/faculty/${id}`);
-  }
-  getFacultyCompletedData(id: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/faculty_completed/${id}`);
-  }
-  getCourseMentorData(id: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
-  }
-  getDomainMentorData(id: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/domain_mentor/${id}`);
-  }
+
   postLoginFacultyData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
@@ -72,5 +64,17 @@ export class ApiService {
   }
   postLoginAdminData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
+  }
+  getFacultyData(id: any,course_code: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/faculty/${id}/${course_code}`);
+  }
+  getFacultyCompletedData(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/faculty_completed/${id}`);
+  }
+  getCourseMentorData(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
+  }
+  getDomainMentorData(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/domain_mentor/${id}`);
   }
 }

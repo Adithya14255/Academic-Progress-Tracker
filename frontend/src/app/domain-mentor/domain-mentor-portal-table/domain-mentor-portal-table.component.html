@@ -19,6 +19,7 @@
           <th>status</th>
           <th>link</th>
           <th>Approval</th>
+          <th>comment</th>
         </tr>
       </thead>
       <tbody @fade>
@@ -33,7 +34,8 @@
             ></div>
           </td>
           <td>
-            <a href="{{ item.url }}" style="text-decoration: none">View</a>
+            <a *ngIf="item.url != ''"  href="{{ item.url }}" style="text-decoration: none">View</a>
+            <p *ngIf="item.url == ''">View</p>
           </td>
           <td>
             <ng-container *ngIf="(item.status_code == 1 || item.status_code == 2) && editedIndex != i">
@@ -70,6 +72,7 @@
               </button>
             </div>
           </td>
+          <td>{{ item.comment }}</td>
         </tr>
       </tbody>
     </table>

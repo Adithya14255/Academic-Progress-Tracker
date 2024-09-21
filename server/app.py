@@ -12,13 +12,13 @@ engine = sqlalchemy.create_engine(
 conn = engine.connect()
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/api/', methods=['POST', 'GET'])
 def index():
     data = {'error': 'none'}
     return json.dumps(data)
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/api/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         role = request.json['role']
@@ -27,6 +27,7 @@ def login():
         q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE name='{
                             name}' and password='{password}' and role_id={role};")
         r = conn.execute(q).fetchall()
+        print(r)
         if r:
             data = [dict(i._mapping) for i in r]
             print(data)
@@ -36,7 +37,7 @@ def login():
             return json.dumps({'Error': 'Incorrect details entered'})
 
 
-@app.route('/register', methods=['POST', 'GET'])
+@app.route('/api/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         role = request.json['role']
@@ -58,11 +59,25 @@ def register():
         print("success")
         return json.dumps({'data': 'Success'})
 
-
-@app.route('/faculty/<int:uid>', methods=['POST', 'GET'])
-def faculty(uid):
+@app.route('/api/faculty_courses', methods=['POST', 'GET'])
+def faculty_courses():
+    uid = request.json['uid']
     q = sqlalchemy.text(
-        f"SELECT * FROM faculty_table WHERE uid='{uid}' and status_code!=4;")
+        f"SELECT distinct course_code,course_name FROM faculty_table WHERE uid='{uid}';")
+    if conn.execute(q).fetchall() is not None:
+        r = conn.execute(q).fetchall()
+        print(r)
+        if r:
+            data = [dict(i._mapping) for i in r]
+            return json.dumps(data)
+    else:
+        return json.dumps({"response":"no courses assigned"})
+
+
+@app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
+def faculty(uid,course_code):
+    q = sqlalchemy.text(
+        f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -70,7 +85,7 @@ def faculty(uid):
         return json.dumps(data)
 
 
-@app.route('/faculty_completed/<int:uid>', methods=['POST', 'GET'])
+@app.route('/api/faculty_completed/<int:uid>', methods=['POST', 'GET'])
 def faculty_completed(uid):
     p = sqlalchemy.text(
         f"SELECT * FROM faculty_table WHERE uid='{uid}' and status_code=4;")
@@ -85,7 +100,7 @@ def faculty_completed(uid):
         return json.dumps({'data': 'Failure'})
 
 
-@app.route('/course_mentor/<int:id>', methods=['POST', 'GET'])
+@app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
     q = sqlalchemy.text(
         f"SELECT * FROM domain_mentor_table WHERE mentor_id={id};")
@@ -96,7 +111,7 @@ def course_mentor(id):
         return json.dumps(data)
 
 
-@app.route('/domain_mentor/<int:id>', methods=['POST', 'GET'])
+@app.route('/api/domain_mentor/<int:id>', methods=['POST', 'GET'])
 def domain_mentor(id):
     q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table;")
     r = conn.execute(q).fetchall()
@@ -106,7 +121,7 @@ def domain_mentor(id):
         return json.dumps(data)
 
 
-@app.route('/courses', methods=['POST', 'GET'])
+@app.route('/api/courses', methods=['POST', 'GET'])
 def courses():
     dept_id = request.json['department_id']
     q = sqlalchemy.text(
@@ -117,7 +132,7 @@ def courses():
     return json.dumps(data)
 
 
-@app.route('/topics', methods=['POST', 'GET'])
+@app.route('/api/topics', methods=['POST', 'GET'])
 def topics():
     course_code = request.json['course_code']
     q = sqlalchemy.text(
@@ -128,7 +143,7 @@ def topics():
     return json.dumps(data)
 
 
-@app.route('/add_course', methods=['POST', 'GET'])
+@app.route('/api/add_course', methods=['POST', 'GET'])
 def add_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
@@ -143,7 +158,7 @@ def add_course():
         return json.dumps({'data': 'Success'})
 
 
-@app.route('/add_topic', methods=['POST', 'GET'])
+@app.route('/api/add_topic', methods=['POST', 'GET'])
 def add_topic():
     if request.method == 'POST':
         course_code = request.json['course_code']
@@ -157,17 +172,34 @@ def add_topic():
         return json.dumps({'data': 'Success'})
 
 
-@app.route('/faculty_info', methods=['POST', 'GET'])
+@app.route('/api/faculty_info', methods=['POST', 'GET'])
 def faculty_info():
     department_id = request.json['department_id']
-    q = sqlalchemy.text(f"select * from user_details_check where role_id<4 and department_id={department_id};")  
+    q = sqlalchemy.text(f"select * from user_details_check where role_id=1 and department_id={department_id};")  
     r = conn.execute(q).fetchall()
     data = [dict(i._mapping) for i in r]
     print(data)
     return json.dumps(data)
 
+@app.route('/api/course_mentor_info', methods=['POST', 'GET'])
+def course_mentor_info():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(f"select * from user_details_check where role_id=2 and department_id={department_id};")  
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    print(data)
+    return json.dumps(data)
 
-@app.route('/assign_mentor', methods=['POST', 'GET'])
+@app.route('/api/domain_mentor_info', methods=['POST', 'GET'])
+def domain_mentor_info():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(f"select * from user_details_check where role_id=3 and department_id={department_id};")  
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    print(data)
+    return json.dumps(data)
+
+@app.route('/api/assign_mentor', methods=['POST', 'GET'])
 def assign_mentor():
     course_code = request.json['course_code']
     uid = request.json['uid']
@@ -180,7 +212,7 @@ def assign_mentor():
     return json.dumps({'data': 'Success'})
 
 
-@app.route('/assign_course', methods=['POST', 'GET'])
+@app.route('/api/assign_course', methods=['POST', 'GET'])
 def assign_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
@@ -210,7 +242,7 @@ def assign_course():
     return json.dumps({'response': 'incorrect method'})
 
 
-@app.route('/edithourscompleted', methods=['POST', 'GET'])
+@app.route('/api/edithourscompleted', methods=['POST', 'GET'])
 def edithourscompleted():
     handler_id = request.json['handler_id']
     topic_id = request.json['topic_id']
@@ -222,34 +254,29 @@ def edithourscompleted():
     return json.dumps({'data': 'Success'})
 
 
-@app.route('/editcomment/<int:approval>', methods=['POST', 'GET'])
+@app.route('/api/editcomment/<int:approval>', methods=['POST', 'GET'])
 def editcomment(approval):
     # approval can be true or false
     if approval == 0:
-        handler_id = request.json['handler_id']
         topic_id = request.json['topic_id']
         comment = request.json['comment']
         q = sqlalchemy.text(f"update t_topic_comments set comment = '{
-                            comment}' where handler_id={handler_id} and topic_id={topic_id};")
+                            comment}' where topic_id={topic_id};")
         conn.execute(q)
-        q = sqlalchemy.text(f"update t_complete_status set status_code=2 where handler_id={
-                            handler_id} and topic_id={topic_id};")
+        q = sqlalchemy.text(f"update t_complete_status set status_code=2 where topic_id={topic_id};")
         conn.execute(q)
         conn.commit()
     if approval == 1:
-        handler_id = request.json['handler_id']
         topic_id = request.json['topic_id']
-        q = sqlalchemy.text(f"update t_topic_comments set comment = '' where handler_id={
-                            handler_id} and topic_id={topic_id};")
+        q = sqlalchemy.text(f"update t_topic_comments set comment = '' where topic_id={topic_id};")
         conn.execute(q)
-        q = sqlalchemy.text(f"update t_complete_status set status_code=3 where handler_id={
-                            handler_id} and topic_id={topic_id};")
+        q = sqlalchemy.text(f"update t_complete_status set status_code=3 where topic_id={topic_id};")
         conn.execute(q)
         conn.commit()
     return json.dumps({'data': 'Success'})
 
 
-@app.route('/editlink', methods=['POST', 'GET'])
+@app.route('/api/editlink', methods=['POST', 'GET'])
 def editlink():
     topic_id = request.json['topic_id']
     link = request.json['link']
@@ -261,7 +288,7 @@ def editlink():
     return json.dumps({'data': 'Success'})
 
 
-@app.route('/facultyprogress', methods=['POST', 'GET'])
+@app.route('/api/facultyprogress', methods=['POST', 'GET'])
 def facultyprogress():
     handler_id = request.json['handler_id']
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {
@@ -273,7 +300,7 @@ def facultyprogress():
     print(codes,data,color)
     return json.dumps({'status_code':codes,'count': data,'color': color}) 
 
-@app.route('/mentor_list', methods=['POST', 'GET'])
+@app.route('/api/mentor_list', methods=['POST', 'GET'])
 def mentor_list():
     department_id = request.json['department_id']
     q = sqlalchemy.text(f"select b.uid,b.name,c.course_code from t_users b,l_mentor_courses c,l_course_departments d where b.uid=c.mentor_id and c.course_code=d.course_code and d.department_id={department_id};")

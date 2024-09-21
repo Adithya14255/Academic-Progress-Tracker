@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { FormBuilder,ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, style, transition, animate } from '@angular/animations'; // Updated import
+import { error } from 'node:console';
 
 
 @Component({
   selector: 'app-faculty-table',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './faculty-table.component.html',
   styleUrls: ['./faculty-table.component.css'],
   animations: [
@@ -27,6 +28,7 @@ export class FacultyTableComponent {
   data: any;
   completedData: any;
   userdata: any;
+  coursedata: any;
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   hourschange: number = 0;
@@ -36,6 +38,9 @@ export class FacultyTableComponent {
     topic_id:0,
     hours_completed:0
   });
+  getCourseDataForm = this.formBuilder.group({
+    course_code: '',
+  });
   constructor(private location:Location,private formBuilder: FormBuilder,private apiService: ApiService,private router:Router) {}
   ngOnInit(): void {
     const state = this.location.getState();
@@ -43,13 +48,19 @@ export class FacultyTableComponent {
     this.userdata = state as User;
   }
   if (this.userdata){
-  this.apiService.getFacultyData(this.userdata.uid).subscribe(
-    response => {
-      this.data = response;
-    });
-    }
-    }
+    this.apiService.getFacultyCourseList({'uid':this.userdata.uid}).subscribe(
+      response => {
+        this.coursedata = response;
+        console.log(this.coursedata);
 
+      });}
+    }
+  getCourseDetails(){
+        console.log(this.getCourseDataForm.value);
+        this.apiService.getFacultyData(this.userdata.uid,this.getCourseDataForm.value.course_code).subscribe(
+          response => {
+            this.data = response;
+          },error => alert("Error-try again"));}   
   getBoxColor(value: number): string {
     switch (value) {
       case 0:
