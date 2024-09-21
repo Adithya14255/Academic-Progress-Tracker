@@ -1,11 +1,11 @@
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, jsonify
 import sqlalchemy
 import os
 import json
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
     "postgresql://admin:admin@192.168.69.24/kgaps")
@@ -295,7 +295,7 @@ def facultyprogress():
                         handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'grey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
     codes,data,color = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     print(codes,data,color)
     return json.dumps({'status_code':codes,'count': data,'color': color}) 

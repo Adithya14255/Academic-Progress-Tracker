@@ -12,13 +12,13 @@ import { Chart } from 'chart.js';
   templateUrl: './faculty.component.html',
   styleUrls: ['./faculty.component.css'],
 })
-export class FacultyComponent implements OnInit, AfterViewInit {
-  @ViewChild('myChart') myChart!: ElementRef;
+export class FacultyComponent implements OnInit {
 
   data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
   percent: number = 69;
   chart: any;
   ratios: any = [];
+  recievedata: any;
 
   constructor(
     private router: Router,
@@ -44,23 +44,23 @@ export class FacultyComponent implements OnInit, AfterViewInit {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
       this.data = state as User;
-    }
-  }
-
-  ngAfterViewInit(): void {
+    
     this.apiService.getFacultyProgressData({ handler_id: this.data.uid }).subscribe((data) => {
       // Example of updating chart data with API response
-      this.config.data.labels = data.status_code;
-      this.config.data.datasets[0].data = data.count;
-      this.config.data.datasets[0].backgroundColor = data.color;
-
-      console.log(this.config);
-
-      // Initialize the chart after the view has been initialized
-      this.chart = new Chart(this.myChart.nativeElement, this.config);
+      this.recievedata=data;
+      console.log(this.recievedata);
+      this.functionfordata();
     });
-  }
+  }}
+  functionfordata(): void{
+    this.config.data.labels = this.recievedata.status_code;
+    this.config.data.datasets[0].data = this.recievedata.count;
+    this.config.data.datasets[0].backgroundColor = this.recievedata.color;
 
+    console.log(this.config);
+
+    this.chart = new Chart('MyChart',this.config);
+  }
   navigateWithData(): void {
     this.router.navigateByUrl('/faculty-table', { state: this.data });
   }
