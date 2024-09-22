@@ -4,11 +4,12 @@ import { User } from '../interfaces/user';
 import { CommonModule, Location } from '@angular/common';
 import { ApiService } from '../api.service';
 import { Chart } from 'chart.js';
+import { NgChartsModule } from 'ng2-charts'; 
 
 @Component({
   selector: 'app-faculty',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule,NgChartsModule],
   templateUrl: './faculty.component.html',
   styleUrls: ['./faculty.component.css'],
 })
@@ -19,6 +20,8 @@ export class FacultyComponent implements OnInit {
   chart: any;
   ratios: any = [];
   recievedata: any;
+  chartsData: Array<any> = [];
+  datafromApi:any;
 
   constructor(
     private router: Router,
@@ -47,10 +50,13 @@ export class FacultyComponent implements OnInit {
     
     this.apiService.getFacultyProgressData({ handler_id: this.data.uid }).subscribe((data) => {
       // Example of updating chart data with API response
-      this.recievedata=data;
+      this.recievedata=data.main;
       console.log(this.recievedata);
       this.functionfordata();
+      this.createCharts(data.other);
     });
+
+    this.createCharts(this.datafromApi);
   }}
   functionfordata(): void{
     this.config.data.labels = this.recievedata.status_code;
@@ -67,5 +73,36 @@ export class FacultyComponent implements OnInit {
 
   navigateToOut(): void {
     this.router.navigateByUrl('/faculty-login');
+  }
+
+  createCharts(courseData: any) {
+    Object.keys(courseData).forEach(course => {
+      const chartLabels: string[] = [];
+      const chartData: number[] = [];
+      const chartColors: string[] = [];
+
+      // Extract data for each status in a course
+      Object.keys(courseData[course]).forEach(status => {
+        chartLabels.push(status); // Push status like 'Not uploaded', 'Uploaded'
+        chartData.push(courseData[course][status][0]); // Push the count, like 6, 4, 1, etc.
+        chartColors.push(courseData[course][status][1]); // Push the color
+      });
+
+      // Create the chart configuration
+      const chartConfig = {
+        labels: chartLabels,
+        datasets: [
+          {
+            data: chartData, // Count values
+            backgroundColor: chartColors, // Status colors
+            label: course // Course label
+          }
+        ],
+        chartType: 'pie' // Or 'bar', 'doughnut', etc.
+      };
+
+      // Add this configuration to the chartsData array
+      this.chartsData.push(chartConfig);
+    });
   }
 }

@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts5": "^5.10.4",
-    "@angular/animations": "^17.3.0",
+    "@angular/animations": "^18.2.5",
     "@angular/cdk": "^17.0.0",
     "@angular/cli": "^17.3.9",
     "@angular/common": "^17.3.0",
@@ -32,10 +32,11 @@
     "highcharts": "^11.4.8",
     "mdb-angular-ui-kit": "^6.0.0",
     "ng-circle-progress": "^1.7.1",
+    "ng2-charts": "^6.0.1",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.4",
