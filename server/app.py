@@ -3,12 +3,14 @@ import sqlalchemy
 import os
 import json
 from flask_cors import CORS
+from collections import defaultdict
+
 
 app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.69.24/kgaps")
+    "postgresql://admin:admin@192.168.0.247/kgaps")
 conn = engine.connect()
 
 
@@ -296,9 +298,16 @@ def facultyprogress():
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
     color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
-    codes,data,color = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
-    print(codes,data,color)
-    return json.dumps({'status_code':codes,'count': data,'color': color}) 
+    codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
+    q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
+    r = conn.execute(q).fetchall()
+    data = defaultdict(lambda: defaultdict(int))
+    for course_id, status_code, count in r:
+        data[course_id][status[status_code]] = count,color_status[status_code]
+    json_output = json.dumps(data, indent=4)
+    print(codes,mdata,mcolor,json_output)
+    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output}) 
+
 
 @app.route('/api/mentor_list', methods=['POST', 'GET'])
 def mentor_list():

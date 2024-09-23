@@ -49,15 +49,8 @@
     <canvas id="MyChart">{{chart}}</canvas>
   </div> 
   </div>
-  <div *ngFor="let chart of chartsData; let i = index" class="chart-container">
-    <h3>{{chart.datasets[0].label}}</h3>
-    <canvas baseChart
-      [data]="chart.datasets[0].data"
-      [labels]="chart.labels"
-      [chartType]="chart.chartType"
-      [backgroundColor]="chart.datasets[0].backgroundColor">
-    </canvas>
-  </div>
-  
+  <div class="subcharts">
+  <div #chartContainer class="chart-container"></div> 
+</div>
   </div>
 </div>

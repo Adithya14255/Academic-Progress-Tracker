@@ -190,3 +190,10 @@
 .mainChart{
     width:30vw;
 }
+.chart-container {
+    margin-bottom: 30px;
+}
+
+.subcharts{
+    width:15vw;
+}
