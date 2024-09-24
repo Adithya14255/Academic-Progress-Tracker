@@ -109,6 +109,13 @@ CREATE TABLE l_mentor_courses (
   FOREIGN KEY (mentor_id) REFERENCES t_users(uid)
 );
 
+-- Create the l_faculty_courses table
+CREATE TABLE l_faculty_courses (    
+  faculty_id INT,
+  course_code VARCHAR(24) NOT NULL,
+  FOREIGN KEY (course_code) REFERENCES t_course_details(course_code),
+  FOREIGN KEY (faculty_id) REFERENCES t_users(uid)
+);
 
 --view to check user details
 

@@ -65,7 +65,7 @@ def register():
 def faculty_courses():
     uid = request.json['uid']
     q = sqlalchemy.text(
-        f"SELECT distinct course_code,course_name FROM faculty_table WHERE uid='{uid}';")
+        f"SELECT l.course_code,t.course_name FROM l_faculty_courses l,t_course_details t WHERE l.faculty_id='{uid}' and l.course_code=t.course_code;")
     if conn.execute(q).fetchall() is not None:
         r = conn.execute(q).fetchall()
         print(r)
@@ -105,7 +105,7 @@ def faculty_completed(uid):
 @app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
     q = sqlalchemy.text(
-        f"SELECT * FROM domain_mentor_table WHERE mentor_id={id};")
+        f"SELECT * FROM domain_mentor_table WHERE mentor_id={id} and status_code!=4;")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -115,7 +115,7 @@ def course_mentor(id):
 
 @app.route('/api/domain_mentor/<int:id>', methods=['POST', 'GET'])
 def domain_mentor(id):
-    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table;")
+    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where status_code!=4;")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -167,8 +167,25 @@ def add_topic():
         topic = request.json['topic']
         outcome = request.json['outcome']
         total_hours = request.json['total_hours']
-        q = sqlalchemy.text(f"INSERT INTO t_course_topics VALUES('{course_code}','{
+        uid= request.json['uid']
+        if conn.execute(sqlalchemy.text(f"select topic_id from t_course_topics where course_code='{course_code}' and topic='{topic}';")).first() != None:
+            print("error-topic exists")
+            return json.dumps({'error': 'topic already exists in course'})
+        q = sqlalchemy.text(f"INSERT INTO t_course_topics(course_code,outcome,topic,total_hours) VALUES('{course_code}','{
                             outcome}','{topic}',{total_hours});")
+        conn.execute(q)
+        q = sqlalchemy.text(f"select topic_id from t_course_topics where course_code='{course_code}' and topic='{topic}';")
+        topic_id=conn.execute(q).fetchone()[0]
+        q = sqlalchemy.text(f"INSERT INTO t_topic_links values({topic_id}, {uid},'')")
+        conn.execute(q)   
+        q = sqlalchemy.text(f"INSERT INTO t_topic_comments values({topic_id}, {uid},'');")  
+        conn.execute(q)
+        q = sqlalchemy.text(f"""
+            INSERT INTO t_complete_status (hours_completed, topic_id, handler_id, course_code, status_code)
+            SELECT 0,{topic_id}, faculty_id, '{course_code}', 0
+            FROM  l_faculty_courses
+            WHERE l_faculty_courses.course_code = '{course_code}';
+        """)
         conn.execute(q)
         conn.commit()
         return json.dumps({'data': 'Success'})
@@ -220,25 +237,12 @@ def assign_course():
         course_code = request.json['course_code']
         uid = request.json['uid']
         print(course_code,uid)
-        if conn.execute(sqlalchemy.text(f"Select * from faculty_table where course_code='{course_code}' and uid={uid};")).first() != None:
-
+        if conn.execute(sqlalchemy.text(f"Select * from l_faculty_courses where course_code='{course_code}' and faculty_id={uid};")).first() != None:
             return json.dumps({'error': 'mentor is already assigned to that course'})
-        q = sqlalchemy.text(f"INSERT INTO t_complete_status (hours_completed, topic_id, handler_id, course_code, status_code) \
-                            SELECT 0, topic_id, {uid}, '{course_code}', 0 \
-                            FROM t_course_topics \
-                            WHERE course_code = '{course_code}';")
+
+        q = sqlalchemy.text(f"insert into l_faculty_courses values({uid},'{course_code}');")
         conn.execute(q)
-        q = sqlalchemy.text(f"INSERT INTO t_topic_links \
-                                SELECT topic_id, {uid},''\
-                                FROM t_course_topics\
-                                WHERE course_code = '{course_code}';")
-        conn.execute(q)
-        q = sqlalchemy.text(f"INSERT INTO t_topic_comments \
-                                SELECT topic_id, {uid},''\
-                                FROM t_course_topics\
-                                WHERE course_code = '{course_code}';")
-        conn.execute(q)
-        conn.commit()
+        conn.commit()   
         print("here")
         return json.dumps({'data': 'Success'})
     return json.dumps({'response': 'incorrect method'})
