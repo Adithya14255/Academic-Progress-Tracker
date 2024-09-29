@@ -4,8 +4,8 @@
     <div class="boxforforms">
     <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
     <div class="username">
-      <label for="name">Select Course</label>
-      <select formControlName="course_code">
+      <p>Select Course</p>
+      <select id="course_data" formControlName="course_code">
         <option *ngFor="let option of coursedata" [value]="option.course_code">
           {{ option.course_code }} - {{ option.course_name }}
         </option>
@@ -14,6 +14,7 @@
       <button class="button" type="submit">Get Details</button>
     </form>
   </div>
+  <p class="courseCodeAndName">{{displayCourseData.course_code}}-{{displayCourseData.course_name}}</p>
     <div class="container">
     <div class="table-wrapper">
         <table>
@@ -22,6 +23,7 @@
                 <th>Topic</th>
                 <th>Outcome</th>
                 <th>Status Code</th>
+                <th>Link</th>
                 <th></th>
               </tr>
             </thead>
@@ -32,15 +34,52 @@
                 <td>{{ item.outcome }}</td>
                 <td> <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div></td>
                 <td>
+                  <span *ngIf="item.url=='' && item.can_upload==0">view</span>
+                  <a *ngIf="item.status_code > 0 && editedIndex!=i" class="statusactivated" [href]="getMoodleLink(item.url)" 
+                    target="_blank">view</a>
+                  <button *ngIf="item.status_code==0 && editedIndex!=i && item.can_upload==1"
+                  (click)="idupdate(i)"
+                  class="statusactivated"
+                >
+                  upload link
+                </button>
+                <button *ngIf="(item.status_code>0 && item.status_code < 3) && editedIndex!=i && item.can_upload==1"
+                (click)="idupdate(i)"
+                class="statusactivated"
+              >
+                edit
+              </button>
+                  <div *ngIf="editedIndex == i">
+                      <input
+                        type="text"
+                        [(ngModel)]="link"
+                        placeholder="Enter link"
+                      />
+                      <button
+                        (click)="linkupdate(link, item.topic_id, item.uid)"
+                        class="statusactivated"
+                      >
+                        Submit
+                      </button>
+                      <button
+                      (click)="linkupdate(link, 0, item.uid)"
+                      class="statusactivated"
+                    >
+                      cancel
+                    </button>
+                  </div>
+                </td>
+                <td>
                     <ng-container *ngIf="item.status_code == 3">
-                      <p  *ngIf="editedIndex===i">Enter hours taken</p>
-                      <input *ngIf="editedIndex === i" type="text" [(ngModel)]="hourschange" title="Enter hours taken" class="statusactivatedinput" />
-                      <button *ngIf="editedIndex === i" (click)="hoursupdate(hourschange,item.topic_id,item.uid)" class="statusactivated">Submit</button>
-                      <button *ngIf="editedIndex === i" (click)="hoursupdate(hourschange,0,item.uid)" class="statusactivated">Cancel</button>
-                      <button *ngIf="editedIndex !== i" (click)="editItem(i)" class="statusactivated">Completed</button>
+                      <p  *ngIf="completedIndex===i">Enter hours taken</p>
+                      <input *ngIf="completedIndex === i" type="text" [(ngModel)]="hourschange" title="Enter hours taken" class="statusactivatedinput" />
+                      <button *ngIf="completedIndex === i" (click)="hoursupdate(hourschange,item.topic_id,item.uid)" class="statusactivated">Submit</button>
+                      <button *ngIf="completedIndex === i" (click)="hoursupdate(hourschange,0,item.uid)" class="statusactivated">Cancel</button>
+                      <button *ngIf="completedIndex !== i" (click)="editItem(i)" class="statusactivated">Completed</button>
                     </ng-container>
                     <span *ngIf="item.status_code != 3" class="statusdeactivated">Not Completed Yet</span>
                   </td>
+                 
             </tr>
             </tbody>
           </table>

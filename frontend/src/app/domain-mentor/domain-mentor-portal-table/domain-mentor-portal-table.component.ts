@@ -39,10 +39,11 @@ export class DomainMentorPortalTableComponent {
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
-    this.userdata = state as User;
+    this.userdata = state;
+    console.log(this.userdata);
   }
     if (this.userdata){
-    this.apiService.getDomainMentorData(this.userdata.uid).subscribe(
+    this.apiService.getDomainMentorData(this.userdata.domain_id).subscribe(
       response => {
         this.data = response;
       });

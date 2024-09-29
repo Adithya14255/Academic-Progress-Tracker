@@ -269,3 +269,9 @@ form label {
     margin-top: 1rem;
   }
   
+  .courseCodeAndName{
+    padding-left: 19vw;
+    color:black;
+    font-size: larger;
+    font-weight: 600;
+}

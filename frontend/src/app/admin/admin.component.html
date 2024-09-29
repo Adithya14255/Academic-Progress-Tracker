@@ -27,7 +27,7 @@
       <p>ADD COURSES -</p>
       <form [formGroup]="addCourseForm" (ngSubmit)="addCourse()">
         <div class="username">
-          <label for="name">department_id</label>
+          <label for="name">department</label>
           <select formControlName="department_id">
             <option [value]="1">CSE</option>
             <option [value]="2">AI&DS</option>
@@ -35,6 +35,14 @@
             <option [value]="4">CSBS</option>
             <option [value]="5">IT</option>
             <option [value]="6">S&H</option>
+          </select>
+        </div>
+        <div class="username">
+          <label for="name">domain id</label>
+          <select formControlName="domain_id">
+            <option [value]="1">PROGRAMMING</option>
+            <option [value]="2">NETWORKS & OPERATING SYSTEMS</option>
+            <option [value]="3">ALGORITHMS</option>
           </select>
         </div>
         <div class="username">
@@ -247,10 +255,10 @@
 
   </div>
   <div class="boxforforms">
-    <p>ASSIGN MENTOR - </p>
+    <p>ASSIGN COORDINATOR - </p>
     <form [formGroup]="assignMentorForm" (ngSubmit)="assignCourseMentorDetails()">
       <div class="username">
-        <label for="name">Mentor department</label>
+        <label for="name">Coordinator department</label>
         <select (change)="onAssignOptionChange($event)">
           <option [value]="0">-</option>
           <option [value]="1">CSE</option>
@@ -262,7 +270,7 @@
         </select>
       </div>
       <div class="username">
-        <label for="name">Faculty</label>
+        <label for="name">Coordinator</label>
         <select formControlName="uid">
             <option [value]="0">-</option>   
           <option *ngFor="let option of faculty" [value]="option.uid">
@@ -294,7 +302,42 @@
       <button class="button" type="submit">Assign Mentor</button>
     </form>
   </div>
-   
+  <div class="boxforforms">
+    <p>ASSIGN DOMAIN MENTOR - </p>
+    <form [formGroup]="assignDomainMentorForm" (ngSubmit)="assignDomainMentorDetails()">
+      <div class="username">
+        <label for="name">Coordinator department</label>
+        <select (change)="onAssignOptionChange($event)">
+          <option [value]="0">-</option>
+          <option [value]="1">CSE</option>
+          <option [value]="2">AI&DS</option>
+          <option [value]="3">ECE</option>
+          <option [value]="4">CSBS</option>
+          <option [value]="5">IT</option>
+          <option [value]="6">S&H</option>
+        </select>
+      </div>
+      <div class="username">
+        <label for="name">Coordinator</label>
+        <select formControlName="mentor_id">
+            <option [value]="0">-</option>   
+          <option *ngFor="let option of faculty" [value]="option.uid">
+            {{ option.uid }} - {{ option.name }}
+          </option>
+        </select>
+      </div>
+      <div class="username">
+        <label for="name">domain id</label>
+        <select formControlName="domain_id">
+          <option [value]="1">PROGRAMMING</option>
+          <option [value]="2">NETWORKS & OPERATING SYSTEMS</option>
+          <option [value]="3">ALGORITHMS</option>
+        </select>
+      </div>
+      <button class="button" type="submit">Assign Domain Mentor</button>
+    </form>
+  </div>
+    
 </div>
 <div class="orange-cross-bar"></div>
 <div class="orange-bubble-left-middle"></div>

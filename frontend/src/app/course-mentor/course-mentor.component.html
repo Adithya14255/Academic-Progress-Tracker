@@ -6,7 +6,7 @@
         <div class="profile-container">
             <div class="profile-header">
                 <img src=".\assets\logo\staff.png" alt="Profile Picture">
-                <h2>{{data.name}}</h2>
+                <h2 class="faculty-profile-name">{{data.name}}</h2>
                 <p>Course Coordinator</p>
             </div>
             <div class="profile-body">
@@ -21,14 +21,18 @@
                         <span *ngIf="data.department_id === 5">IT</span>
                         <span *ngIf="data.department_id === 6">S&H</span></p>
                 </div>
-                <ul id="navlogin">
-                    <li>
-                        <button class="table-btn" (click)="navigateWithData()">Go to Course Mentor table</button>
-                    </li>
-                    <li>
-                        <button class="logout-btn" (click)="navigateToOut()">Log out</button>
-                    </li>
-                </ul>
+                <div class="profile-info-links">
+                    <ul id="navlogin">
+                      <li>
+                        <button class="table-btn" (click)="navigateWithData()">Course table >
+                        </button>
+                      </li>
+                      <li>
+                        <button class="logout-btn" (click)="navigateToOut()">
+                          |< Logout </button>
+                      </li>
+                    </ul>
+                  </div>
             </div>
         </div>
     </div>

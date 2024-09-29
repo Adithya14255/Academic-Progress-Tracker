@@ -2,8 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4%;
-    padding-top: 10%;
+    padding: 2%;
     width:100vw;
     height:80vh;
 }
@@ -181,4 +180,12 @@ form input {
     border:1px solid orange;
     border-radius:.3rem ;
     font-weight: 500;
+}
+
+.courseCodeAndName{
+    padding-top: 5vw;
+    padding-left: 19vw;
+    color:black;
+    font-size: larger;
+    font-weight: 600;
 }

@@ -15,6 +15,7 @@ import { DomainMentor } from '../../interfaces/domainmentor';
 })
 export class CourseMentorPortalTableComponent {
   data: any;
+  displayCourseData:any = {course_code:'',course_name:''};
   userdata: any;
   boxcolor: string = 'white';
   editedIndex: number | null = null;
@@ -41,6 +42,7 @@ export class CourseMentorPortalTableComponent {
       .getCourseMentorData(this.userdata.uid)
       .subscribe((response) => {
         this.data = response;
+        this.displayCourseData=this.data[0];
       });}
   }
 

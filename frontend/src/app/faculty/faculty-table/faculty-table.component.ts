@@ -29,10 +29,13 @@ export class FacultyTableComponent {
   completedData: any;
   userdata: any;
   coursedata: any;
+  displayCourseData:any = {course_code:'',course_name:''};
   boxcolor: string = 'white';
   editedIndex: number | null = null;
+  completedIndex: number | null = null;
   hourschange: number = 0;
   completedList: number = 0;
+  link: any;
   checkoutForm = this.formBuilder.group({
     handler_id:0,
     topic_id:0,
@@ -51,9 +54,14 @@ export class FacultyTableComponent {
     this.apiService.getFacultyCourseList({'uid':this.userdata.uid}).subscribe(
       response => {
         this.coursedata = response;
-        console.log(this.coursedata);
-
-      });}
+        this.displayCourseData=this.coursedata[0];
+        console.log(this.displayCourseData);
+        this.apiService.getFacultyData(this.userdata.uid,this.coursedata[0].course_code).subscribe(
+          response => {
+            this.data = response;
+          },error => alert("Error-try again"));
+      });
+    }
     }
   getCourseDetails(){
         console.log(this.getCourseDataForm.value);
@@ -95,7 +103,7 @@ export class FacultyTableComponent {
 }
 
   editItem(index: number) {
-    this.editedIndex = index;
+    this.completedIndex = index;
     this.hourschange=0;
   }
 
@@ -112,6 +120,40 @@ export class FacultyTableComponent {
       this.completedList = 1;  // Trigger the display logic
     });
   }
-  
-  
+  getCanLinkUpdateForm = this.formBuilder.group({
+    handler_id: 0,
+    topic_id: 0,
+    link: '',
+  });
+  idupdate(index: number): void {
+    this.editedIndex = index;
+  }
+  linkupdate(link:string,topic_id: number, uid: number): void {
+    this.editedIndex = null;
+    if (topic_id == 0) {
+      return;
+    }
+    this.getCanLinkUpdateForm.patchValue({
+      handler_id: uid,
+      topic_id: topic_id,
+      link: link,
+    });
+    this.apiService.updateLinkDetails(this.getCanLinkUpdateForm.value).subscribe();
+    this.router
+      .navigateByUrl('/faculty-table', { state: this.data })
+      .then(() => {
+        window.location.reload();
+      });
+  }
+  getMoodleLink(url: string): string {
+    const moodleBaseUrl = 'https://moodle.kgkite.ac.in'; // Set this to your Moodle base URL
+    const apiToken = localStorage.getItem('moodleToken');
+    // Check if the URL starts with the Moodle base URL
+    if (url.startsWith(moodleBaseUrl) && apiToken) {
+      console.log(`${url}&wstoken=${apiToken}`);
+      return `${url}&wstoken=${apiToken}`; // Append the token
+    }
+    console.log(url);
+    return url; // Return the original URL if it's not a Moodle link
+  }
 }

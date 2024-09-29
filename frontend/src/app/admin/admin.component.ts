@@ -35,7 +35,7 @@ export class AdminComponent {
       this.courses = data; // Assign the received data to jsonData
     });
   }
-  addCourseForm = this.formBuilder.group({ department_id: 1,course_code:0,course_name:0 });
+  addCourseForm = this.formBuilder.group({ department_id: 1,course_code:0,course_name:0,domain_id:0 });
 
   addCourse() {
     this.apiService.addCourseData(this.addCourseForm.value).subscribe((data) => {
@@ -97,6 +97,13 @@ export class AdminComponent {
 
   assignCourseMentorDetails() {
     this.apiService.assignCourseMentor(this.assignMentorForm.value).subscribe((data) => {
+      this.response = data;
+    });
+  }
+  assignDomainMentorForm = this.formBuilder.group({ mentor_id:0,domain_id:0 });
+
+  assignDomainMentorDetails() {
+    this.apiService.assignDomainMentor(this.assignDomainMentorForm.value).subscribe((data) => {
       this.response = data;
     });
   }

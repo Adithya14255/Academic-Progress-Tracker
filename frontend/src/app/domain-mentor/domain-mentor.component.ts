@@ -13,7 +13,7 @@ Chart.register(...registerables);
   styleUrls: ['./domain-mentor.component.css'],
 })
 export class DomainMentorComponent implements OnInit {
-  data: User = { uid: 1, name: '', role_id: 0, department_id: 0 };
+  data: any;
   percent: number = 90;
   public config:any = {
   type: 'pie',
@@ -42,7 +42,7 @@ export class DomainMentorComponent implements OnInit {
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
-      this.data = state as User;
+      this.data = state;
     
     }
 
@@ -51,73 +51,6 @@ export class DomainMentorComponent implements OnInit {
   initChart():void{
     this.chart = new Chart('MyChart',this.config);
   }
-  // initChart(): void {
-  //   this.chart = new Chart({
-  //     chart: {
-  //       type: 'bar',
-  //     },
-  //     title: {
-  //       text: 'Historic World Population by Region',
-  //       align: 'left',
-  //     },
-  //     subtitle: {
-  //       text: 'Source: <a href="https://en.wikipedia.org/wiki/List_of_continents_and_continental_subregions_by_population" target="_blank">Wikipedia.org</a>',
-  //       align: 'left',
-  //     },
-  //     xAxis: {
-  //       categories: ['Africa', 'America', 'Asia', 'Europe'],
-  //       title: {
-  //         text: null,
-  //       },
-  //       gridLineWidth: 1,
-  //       lineWidth: 0,
-  //     },
-  //     yAxis: {
-  //       min: 0,
-  //       title: {
-  //         text: 'Population (millions)',
-  //         align: 'high',
-  //       },
-  //       labels: {
-  //         overflow: 'justify',
-  //       },
-  //       gridLineWidth: 0,
-  //     },
-  //     tooltip: {
-  //       valueSuffix: ' millions',
-  //     },
-  //     plotOptions: {
-  //       bar: {
-  //         borderRadius: 3,
-  //         dataLabels: {
-  //           enabled: true,
-  //         },
-  //         groupPadding: 0.1,
-  //       },
-  //     },
-      
-  //     credits: {
-  //       enabled: false,
-  //     },
-  //     series: [
-  //       {
-  //         type: 'bar',
-  //         name: 'Year 1990',
-  //         data: [632, 727, 3202, 721],
-  //       },
-  //       {
-  //         type: 'bar',
-  //         name: 'Year 2000',
-  //         data: [814, 841, 3714, 726],
-  //       },
-  //       {
-  //         type: 'bar',
-  //         name: 'Year 2021',
-  //         data: [1393, 1031, 4695, 745],
-  //       },
-  //     ],
-  //   });
-  // }
 
   navigateWithData(): void {
     this.router.navigateByUrl('/domain-mentor-table', { state: this.data });

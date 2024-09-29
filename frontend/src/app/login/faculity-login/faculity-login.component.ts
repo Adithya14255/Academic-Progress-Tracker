@@ -19,6 +19,21 @@ export class FaculityLoginComponent {
     role: 1,
     password: ''
   });
+  ngOnInit(): void {
+    // this.apiService.loginMoodle()
+    //   .subscribe(response => {
+    //     if (response.token) {
+    //       // Handle successful login and store the token
+    //       localStorage.setItem('moodleToken', response.token);
+    //       console.log('Login successful, token stored:', response.token);
+    //     } else {
+    //       // Handle login failure (invalid credentials or other issues)
+    //       console.error('Login failed:', response);
+    //     }
+    //   });
+  }
+
+
   fetchFacultyData() {
     this.apiService.postLoginFacultyData(this.checkoutForm.value).subscribe(data => {
       this.data = data; 

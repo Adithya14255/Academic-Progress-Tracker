@@ -117,17 +117,32 @@ CREATE TABLE l_faculty_courses (
   FOREIGN KEY (faculty_id) REFERENCES t_users(uid)
 );
 
+-- Create the l_domain_mentors table
+CREATE TABLE l_domain_mentors (    
+  mentor_id INT NOT NULL,
+  domain_id INT NOT NULL,
+  FOREIGN KEY (domain_id) REFERENCES t_domains(domain_id),
+  FOREIGN KEY (mentor_id) REFERENCES t_users(uid)
+);
+
 --view to check user details
 
 create view user_details_check as select u.uid,u.name,u.password,u.department_id,r.role_id from t_users u,l_role_user r where u.uid=r.uid;
 
 --view for faculty table
 
-create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,c.hours_completed,c.topic_id  from t_users u,t_complete_status c,t_course_details d,t_course_topics t where u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id;
+create view faculty_table as select u.uid,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,c.hours_completed,c.topic_id,z.url,x.comment, CASE 
+    WHEN z.topic_id IS NOT NULL AND z.handler_id = u.uid THEN 1
+    ELSE 0
+  END AS can_upload  from t_users u,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links z,t_topic_comments x where z.topic_id=t.topic_id and x.topic_id=t.topic_id and z.topic_id=t.topic_id and x.topic_id=t.topic_id and u.uid=c.handler_id and c.course_code=d.course_code and t.topic_id=c.topic_id;
 
 --view for domain mentor table
 
-create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,t.topic_id  from t_topic_comments y,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, l_mentor_courses z where c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id GROUP BY 
+create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,CASE 
+        WHEN c.status_code = 4 THEN 3
+        ELSE c.status_code
+    END AS status_code,l.url,y.comment,t.topic_id,q.domain_id  
+    FROM l_course_domains q,t_topic_comments y,t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l,l_mentor_courses z where q.course_code=d.course_code and c.course_code=d.course_code and t.topic_id=c.topic_id and l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and l.handler_id=y.handler_id and l.topic_id=y.topic_id GROUP BY 
     z.mentor_id, 
     c.course_code, 
     d.course_name, 
@@ -136,7 +151,8 @@ create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_nam
     c.status_code, 
     l.url, 
     y.comment, 
-    t.topic_id;
+    t.topic_id,
+	  q.domain_id;
 
 -- initialize the roles
 INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Coordinator'), (3, 'Domain Mentor'),(4,'Admin');

@@ -13,7 +13,6 @@ import { CourseMentorComponent } from './course-mentor/course-mentor.component';
 import { DomainMentorPortalTableComponent } from './domain-mentor/domain-mentor-portal-table/domain-mentor-portal-table.component';
 import { DomainMentorComponent } from './domain-mentor/domain-mentor.component';
 import { AdminComponent } from './admin/admin.component';
-import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
 
 export const routes: Routes = [
     { path: '', component:LoginComponent,
@@ -32,5 +31,4 @@ export const routes: Routes = [
     { path: 'domain-mentor',component: DomainMentorComponent},
     { path: 'domain-mentor-table',component: DomainMentorPortalTableComponent}, 
     { path: 'admin',component: AdminComponent},
-    { path: 'domain-mentor-base', component: DomainMentorPortalBaseComponent},
 ];

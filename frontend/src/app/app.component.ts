@@ -10,8 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { CourseMentorPortalTableComponent } from './course-mentor/course-mentor-portal-table/course-mentor-portal-table.component';
 import { FaculityLoginComponent } from './login/faculity-login/faculity-login.component';
 import { FacultyTableComponent } from './faculty/faculty-table/faculty-table.component';
-import { DomainMentorPortalBaseComponent } from './domain-mentor/domain-mentor-portal-base/domain-mentor-portal-base.component';
-import { Chart } from 'chart.js';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -24,8 +23,7 @@ import { Chart } from 'chart.js';
     CourseMentorPortalTableComponent,
     DomainMentorPortalTableComponent,
     FaculityLoginComponent,
-    FacultyTableComponent,
-    DomainMentorPortalBaseComponent,
+    FacultyTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

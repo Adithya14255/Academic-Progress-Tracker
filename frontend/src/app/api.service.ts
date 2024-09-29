@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = '/api';
-
   constructor(private http: HttpClient) {}
 
+  loginMoodle(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/moodle_login`);
+  }
   getFacultyCourseList(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/faculty_courses`, data);
   }
@@ -24,6 +26,9 @@ export class ApiService {
   }
   assignCourseMentor(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/assign_mentor`, data);
+  }
+  assignDomainMentor(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/assign_domain_mentor`, data);
   }
   registerUser(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, data);

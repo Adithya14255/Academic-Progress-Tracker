@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
@@ -12,7 +11,7 @@ import { ApiService } from '../../api.service';
   styleUrls: ['./domain-mentor-login.component.css'] // Note the plural 'styleUrls'
 })
 export class DomainMentorLoginComponent {
-  data: User = {uid:0,name:'',role_id:0,department_id:0};
+  data:any;
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
     name: '',

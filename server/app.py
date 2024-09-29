@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
+import requests
 import sqlalchemy
 import os
 import json
-from flask_cors import CORS
 from collections import defaultdict
 
 
@@ -19,6 +19,29 @@ def index():
     data = {'error': 'none'}
     return json.dumps(data)
 
+MOODLE_API_URL = "https://moodle.kgkite.ac.in/login/token.php"
+
+@app.route('/api/moodle_login', methods=['POST','GET'])
+def login_to_moodle():
+    username = '22csa03'
+    password = 'Kitestudent@123'
+    
+    # Prepare the payload for Moodle's API
+    moodle_payload = {
+        'username': username,
+        'password': password,
+        'service': 'moodle_mobile_app'  # Adjust if using another service
+    }
+    
+    try:
+        # Forward the request to Moodle
+        moodle_response = requests.post(MOODLE_API_URL, data=moodle_payload)
+        moodle_response.raise_for_status()  # Raise an error for bad responses
+        print(moodle_response.json())
+        # Return Moodle's response back to the Angular client
+        return jsonify(moodle_response.json())
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/login', methods=['POST', 'GET'])
 def login():
@@ -33,6 +56,7 @@ def login():
         if r:
             data = [dict(i._mapping) for i in r]
             print(data)
+            
             response = jsonify(data[0])
             return response
         else:
@@ -104,8 +128,15 @@ def faculty_completed(uid):
 
 @app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
-    q = sqlalchemy.text(
-        f"SELECT * FROM domain_mentor_table WHERE mentor_id={id} and status_code!=4;")
+    q = sqlalchemy.text(f"select z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,CASE \
+        WHEN c.status_code = 4 THEN 3 \
+        ELSE c.status_code \
+    END AS status_code,l.url,y.comment,t.topic_id  from t_topic_comments y,\
+    t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, \
+    l_mentor_courses z where c.course_code=d.course_code and t.topic_id=c.topic_id and \
+    l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and \
+    l.handler_id=y.handler_id and l.topic_id=y.topic_id and mentor_id={id} GROUP BY \
+    z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,t.topic_id;")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -115,7 +146,7 @@ def course_mentor(id):
 
 @app.route('/api/domain_mentor/<int:id>', methods=['POST', 'GET'])
 def domain_mentor(id):
-    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where status_code!=4;")
+    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where domain_id='{id}';")
     r = conn.execute(q).fetchall()
     if r:
         data = [dict(i._mapping) for i in r]
@@ -151,14 +182,17 @@ def add_course():
         course_code = request.json['course_code']
         course_name = request.json['course_name']
         dept_id = request.json['department_id']
+        domain_id = request.json['domain_id']
+        print(domain_id)
         q = sqlalchemy.text(f"INSERT INTO t_course_details VALUES('{course_code}','{course_name}');")
         conn.execute(q)
         q = sqlalchemy.text(
             f"INSERT INTO l_course_departments VALUES('{course_code}',{dept_id});")
         conn.execute(q)
+        q = sqlalchemy.text(f"INSERT INTO l_course_domains VALUES('{course_code}','{domain_id}');")
+        conn.execute(q)
         conn.commit()
         return json.dumps({'data': 'Success'})
-
 
 @app.route('/api/add_topic', methods=['POST', 'GET'])
 def add_topic():
@@ -194,14 +228,14 @@ def add_topic():
 @app.route('/api/faculty_info', methods=['POST', 'GET'])
 def faculty_info():
     department_id = request.json['department_id']
-    q = sqlalchemy.text(f"select * from user_details_check where role_id=1 and department_id={department_id};")  
+    q = sqlalchemy.text(f"select * from user_details_check where department_id={department_id};")  
     r = conn.execute(q).fetchall()
     data = [dict(i._mapping) for i in r]
     print(data)
     return json.dumps(data)
 
-@app.route('/api/course_mentor_info', methods=['POST', 'GET'])
-def course_mentor_info():
+@app.route('/api/course_coordinator_info', methods=['POST', 'GET'])
+def course_coordinator_info():
     department_id = request.json['department_id']
     q = sqlalchemy.text(f"select * from user_details_check where role_id=2 and department_id={department_id};")  
     r = conn.execute(q).fetchall()
@@ -226,6 +260,18 @@ def assign_mentor():
             print("error-already assigned")
             return json.dumps({'error': 'mentor is already assigned to that course'})
     q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},'{course_code}');")
+    conn.execute(q)
+    conn.commit()
+    return json.dumps({'data': 'Success'})
+
+@app.route('/api/assign_domain_mentor', methods=['POST', 'GET'])
+def assign_domain_mentor():
+    domain_id = request.json['domain_id']
+    mentor_id = request.json['mentor_id']
+    if conn.execute(sqlalchemy.text(f"Select * from l_domain_mentors where mentor_id={mentor_id} and domain_id={domain_id};")).first() != None:
+            print("error-already assigned")
+            return json.dumps({'error': 'mentor is already assigned to that domain'})
+    q = sqlalchemy.text(f"insert into l_domain_mentors values({mentor_id},{domain_id});")
     conn.execute(q)
     conn.commit()
     return json.dumps({'data': 'Success'})
