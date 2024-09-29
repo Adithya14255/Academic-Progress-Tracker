@@ -26,6 +26,7 @@ import { trigger, style, transition, animate } from '@angular/animations'; // Up
 export class DomainMentorPortalTableComponent {
   data: any;
   userdata: any;
+  name: string = '';
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   comment: string = '';
@@ -43,6 +44,7 @@ export class DomainMentorPortalTableComponent {
     console.log(this.userdata);
   }
     if (this.userdata){
+    this.name = this.userdata.name;
     this.apiService.getDomainMentorData(this.userdata.domain_id).subscribe(
       response => {
         this.data = response;

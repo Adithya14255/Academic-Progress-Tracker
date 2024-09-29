@@ -36,6 +36,7 @@ export class FacultyTableComponent {
   hourschange: number = 0;
   completedList: number = 0;
   link: any;
+  name: string = '';
   checkoutForm = this.formBuilder.group({
     handler_id:0,
     topic_id:0,
@@ -51,6 +52,7 @@ export class FacultyTableComponent {
     this.userdata = state as User;
   }
   if (this.userdata){
+    this.name = this.userdata.name;
     this.apiService.getFacultyCourseList({'uid':this.userdata.uid}).subscribe(
       response => {
         this.coursedata = response;
@@ -59,7 +61,7 @@ export class FacultyTableComponent {
         this.apiService.getFacultyData(this.userdata.uid,this.coursedata[0].course_code).subscribe(
           response => {
             this.data = response;
-          },error => alert("Error-try again"));
+          });
       });
     }
     }

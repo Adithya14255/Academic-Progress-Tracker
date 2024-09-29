@@ -212,21 +212,21 @@ form label {
     padding:5px;
     border-radius:5px;
     color:white;
-    background-color:#e67e22;
+    background-color:#fe370f;
     border:none;
     outline:none;
 }
 .comp-btn:hover{
     background-color: #fff;
-    color:#e67e22;
-    border:2px solid #e67e22;
+    color:#fe370f;
+    border:2px solid #fe370f;
 }
 .username, .password {
     margin: 0.5rem 0; /* Reduced margin */
   }
   
   input, select {
-    border: 2px solid #F58426; /* Orange border */
+    border: 2px solid #fe370f; /* Orange border */
     border-radius: 4px; /* Rounded corners */
     outline: none;
     width: calc(100% - 8px); /* Adjusted width */
@@ -237,7 +237,7 @@ form label {
   }
   
   input:focus, select:focus {
-    border-color: #F5a623; /* Slightly darker orange for focus */
+    border-color: #ff0000; /* Slightly darker orange for focus */
     background-color: #f8f8f8; /* Light grey background */
   }
   
@@ -247,31 +247,62 @@ form label {
     border-radius: 6px; /* Rounded corners */
     border: none;
     color: #fff;
-    background-color: #F58426; /* Orange background */
+    background-color: #fe370f; /* Orange background */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     font-size: 0.9rem; /* Smaller font size */
   }
   
   .button:hover {
-    background-color: #F5a623; /* Slightly darker orange on hover */
-    color: #fff; /* Keep text white */
+    background-color: rgb(216, 216, 216); /* Slightly darker orange on hover */
+    color: #fe370f; /* Keep text white */
+    border: 2px solid #fe370f;
     
   }
   .boxforforms {
+    border:2px solid #fe370f;
     border-radius: 6px; /* Slightly rounded corners */
     padding: 1rem; /* Reduced padding */
     width: 350px; /* Increased width */
     max-height: auto;
     background-color: #fff; /* White background */
     margin-bottom: 1rem; /* Space below each form */
-    margin-left: 18%;
-    margin-top: 1rem;
   }
   
   .courseCodeAndName{
-    padding-left: 19vw;
-    color:black;
-    font-size: larger;
+    color:gray;
+    font-size: 1.3rem;
     font-weight: 600;
+    margin-left: .2vw;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fe370f;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .containerforgreeting{
+    margin-left: 20vw;
+    display: flex;
+    gap:5vw;
+    padding-top:6vh ;
+  }
+
+  .greeting{
+    font-size: 2.6rem;
+    color:#fe370f;
+    padding-top: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.nocompletedtext{
+    margin-left: 45vw;
 }

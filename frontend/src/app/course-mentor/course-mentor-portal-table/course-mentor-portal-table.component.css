@@ -1,16 +1,24 @@
-.container {
+.containerfortableandform {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2%;
-    width:100vw;
-    height:80vh;
+    gap:5vw;
+    padding-left: 10vw;
 }
 
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F58426;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
 .table-wrapper {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
     padding: 20px;
     overflow-x: auto;
     padding-top: 0;
@@ -183,9 +191,72 @@ form input {
 }
 
 .courseCodeAndName{
-    padding-top: 5vw;
     padding-left: 19vw;
-    color:black;
+    color:rgb(123, 123, 123);
     font-size: larger;
     font-weight: 600;
 }
+
+.noTopicsText{
+    width:10vw;
+    margin: auto;
+}
+
+.greeting{
+    padding-left: 18vw;
+    font-size: 2.6rem;
+    color:orange;
+    margin-top:6vh;
+}
+
+
+.boxforforms {
+    border: 2px solid #F58426; /* Orange border */
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 1rem; /* Reduced padding */
+    width: 20vw; /* Increased width */
+    max-height: auto;
+    background-color: #fff; /* White background */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    box-sizing: border-box;
+    margin-bottom: 1rem; /* Space below each form */
+  }
+  
+  .username, .password {
+    margin: 0.5rem 0; /* Reduced margin */
+  }
+  
+  input, select {
+    border: 2px solid #F58426; /* Orange border */
+    border-radius: 4px; /* Rounded corners */
+    outline: none;
+    width: calc(100% - 8px); /* Adjusted width */
+    font-size: 1.2rem; /* Smaller font size */
+    margin: 0.5rem 0; /* Reduced margin */
+    padding: 0.5rem;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  input:focus, select:focus {
+    border-color: #F5a623; /* Slightly darker orange for focus */
+    background-color: #f8f8f8; /* Light grey background */
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding */
+    border-radius: 6px; /* Rounded corners */
+    border: none;
+    color: #fff;
+    background-color: #F58426; /* Orange background */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+  
+  .button:hover {
+    background-color: #F5a623; /* Slightly darker orange on hover */
+    color: #fff; /* Keep text white */
+    
+  }
+  

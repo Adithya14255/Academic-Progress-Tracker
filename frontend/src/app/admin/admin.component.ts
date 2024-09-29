@@ -43,14 +43,6 @@ export class AdminComponent {
       console.log(this.response);
     });
   }
-  addTopicForm = this.formBuilder.group({ topic:"",course_code:"",outcome:"",total_hours:0,uid:0 });
-
-  addTopic() {
-    this.apiService.addTopicData(this.addTopicForm.value).subscribe((data) => {
-      this.response = data; // Assign the received data to jsonData
-      console.log(this.response);
-    });
-  }
 
   getTopicForm = this.formBuilder.group({ course_code:0 });
 

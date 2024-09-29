@@ -75,67 +75,7 @@
     </div>
   </div>
   <div class="boxforboxforforms">
-    <div class="boxforforms">
-      <p>ADD TOPICS -</p>
-      <form [formGroup]="addTopicForm" (ngSubmit)="addTopic()">
-        <div class="username">
-          <label for="name">department_id</label>
-          <select (change)="onCourseOptionChange($event)">
-            <option [value]="0">-</option>
-            <option [value]="1">CSE</option>
-            <option [value]="2">AI&DS</option>
-            <option [value]="3">ECE</option>
-            <option [value]="4">CSBS</option>
-            <option [value]="5">IT</option>
-            <option [value]="6">S&H</option>
-          </select>
-        </div>
-        <div class="username">
-          <label for="name">course_code</label>
-          <select formControlName="course_code">
-            <option [value]="0">-</option>           
-            <option *ngFor="let option of courses" [value]="option.course_code">
-              {{ option.course_code }} = {{ option.course_name }}
-            </option>
-          </select>
-        </div>
-        <div class="username">
-          <label for="name">Topic name</label>
-          <p><input id="name" type="text" formControlName="topic" /></p>
-        </div>
-        <div class="username">
-          <label for="name">outcome</label>
-          <p><input id="name" type="text" formControlName="outcome" /></p>
-        </div>
-        <div class="username">
-          <label for="name">total hours</label>
-          <p><input id="name" type="number" formControlName="total_hours" /></p>
-        </div>
-        <div class="username">
-          <label for="name">Faculty department</label>
-          <select (change)="onAssignOptionChange($event)">
-            <option [value]="0">-</option>
-            <option [value]="1">CSE</option>
-            <option [value]="2">AI&DS</option>
-            <option [value]="3">ECE</option>
-            <option [value]="4">CSBS</option>
-            <option [value]="5">IT</option>
-            <option [value]="6">S&H</option>
-          </select>
-        </div>
-        <div class="username">
-          <label for="name">Faculty</label>
-          <select formControlName="uid">
-            <option [value]="0">-</option>
-            <option *ngFor="let option of faculty" [value]="option.uid">
-              {{ option.uid }} - {{ option.name }}
-            </option>
-          </select>
-        </div>
-        <button class="button" type="submit">Add Topic</button>
-      </form>
-
-    </div>
+    
   </div>
   <div class="boxforboxforforms">
   <div class="boxforforms">
@@ -170,7 +110,7 @@
         <label for="name">role</label><br />
         <select required formControlName="role">
           <option [value]="1">Faculty</option>
-          <option [value]="2">Course Mentor</option>
+          <option [value]="2">Course Coordinator</option>
           <option [value]="3">Domain Mentor</option>
           <option [value]="4">Admin</option>
         </select>

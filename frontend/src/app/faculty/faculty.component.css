@@ -46,7 +46,7 @@
 }
 
 .profile-header h2 {
-    font-size: 2.4rem;
+    font-size: 1.6rem;
     color: rgb(216, 216, 216);
 }
 
@@ -59,7 +59,6 @@
 .profile-body {
     padding: 20px;
 }
-
 
 .profile-info {
     background-color: rgba(90, 90, 90, 0.125);
@@ -86,11 +85,10 @@
 .left {
     background-color: #333;
     width: 20vw;
-    height: 94vh;
+    height: 100vh;
     box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3);
     justify-content: center;
     align-items: center;
-    margin-bottom:2.7%;
 }
 
 .profile-info strong {
@@ -148,6 +146,8 @@
 }
 .faculty-profile-name{
     text-transform: capitalize;
+    font-size: 2rem;
+
 }
 .piechart-container{
     height: fit-content;

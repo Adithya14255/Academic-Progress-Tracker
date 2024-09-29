@@ -103,6 +103,20 @@ def faculty_courses():
             return json.dumps(data)
     else:
         return json.dumps({"response":"no courses assigned"})
+    
+@app.route('/api/coordinator_courses', methods=['POST', 'GET'])
+def coordinator_courses():
+    uid = request.json['uid']
+    q = sqlalchemy.text(
+        f"SELECT l.course_code,t.course_name FROM l_mentor_courses l,t_course_details t WHERE l.mentor_id='{uid}' and l.course_code=t.course_code;")
+    if conn.execute(q).fetchall() is not None:
+        r = conn.execute(q).fetchall()
+        print(r)
+        if r:
+            data = [dict(i._mapping) for i in r]
+            return json.dumps(data)
+    else:
+        return json.dumps({"response":"no courses assigned"})
 
 
 @app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
@@ -133,20 +147,15 @@ def faculty_completed(uid):
 
 @app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
 def course_mentor(id):
-    q = sqlalchemy.text(f"select z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,CASE \
-        WHEN c.status_code = 4 THEN 3 \
-        ELSE c.status_code \
-    END AS status_code,l.url,y.comment,t.topic_id  from t_topic_comments y,\
-    t_complete_status c,t_course_details d,t_course_topics t,t_topic_links l, \
-    l_mentor_courses z where c.course_code=d.course_code and t.topic_id=c.topic_id and \
-    l.handler_id=c.handler_id and l.topic_id=c.topic_id and z.course_code=c.course_code and \
-    l.handler_id=y.handler_id and l.topic_id=y.topic_id and mentor_id={id} GROUP BY \
-    z.mentor_id,c.course_code,d.course_name,t.topic,t.outcome,c.status_code,l.url,y.comment,t.topic_id;")
-    r = conn.execute(q).fetchall()
-    if r:
-        data = [dict(i._mapping) for i in r]
-        print(data)
-        return json.dumps(data)
+    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where mentor_id={id};")
+    if conn.execute(q).first():
+        r=conn.execute(q).fetchall()
+        if r:
+            data = [dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+    else:
+        return json.dumps({'response':'No topics added'})
 
 
 @app.route('/api/domain_mentor/<int:id>', methods=['POST', 'GET'])

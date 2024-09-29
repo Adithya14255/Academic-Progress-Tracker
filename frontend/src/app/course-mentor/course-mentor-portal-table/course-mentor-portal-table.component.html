@@ -8,13 +8,14 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
   crossorigin="anonymous"
 />
+<div class="sidenav"></div>
+<p class="greeting">Welcome Course Coordinator - {{name}}</p>
 <p class="courseCodeAndName">Course Code : {{ displayCourseData.course_code }} Course Name : {{ displayCourseData.course_name }}</p>
-<div class="container">
+<div class="containerfortableandform">
   <div class="table-wrapper">
     <table>
       <thead>
         <tr>
-
           <th>Topic</th>
           <th>Outcome</th>
           <th>Status Code</th>
@@ -71,24 +72,48 @@
         </tr>
       </tbody>
     </table>
+    <p class="noTopicsText" *ngIf="msg!=''">{{msg}}</p>
+
   </div>
+  
+<div class="boxforforms">
+  <p>ADD TOPICS -</p>
+  <form [formGroup]="addTopicForm" (ngSubmit)="addTopic()">
+    <p>For course = {{ displayCourseData.course_code }} - {{ displayCourseData.course_name}}</p>
+    <div class="username">
+      <label for="name">Topic name</label>
+      <p><input id="name" type="text" formControlName="topic" /></p>
+    </div>
+    <div class="username">
+      <label for="name">outcome</label>
+      <p><input id="name" type="text" formControlName="outcome" /></p>
+    </div>
+    <div class="username">
+      <label for="name">total hours</label>
+      <p><input id="name" type="number" formControlName="total_hours" /></p>
+    </div>
+    <div class="username">
+      <label for="name">Faculty department</label>
+      <select (change)="onAssignOptionChange($event)">
+        <option [value]="0">-</option>
+        <option [value]="1">CSE</option>
+        <option [value]="2">AI&DS</option>
+        <option [value]="3">ECE</option>
+        <option [value]="4">CSBS</option>
+        <option [value]="5">IT</option>
+        <option [value]="6">S&H</option>
+      </select>
+    </div>
+    <div class="username">
+      <label for="name">Faculty</label>
+      <select formControlName="uid">
+        <option [value]="0">-</option>
+        <option *ngFor="let option of faculty" [value]="option.uid">
+          {{ option.uid }} - {{ option.name }}
+        </option>
+      </select>
+    </div>
+    <button class="button" type="submit">Add Topic</button>
+  </form>
 </div>
-<div class="nav">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>

@@ -15,6 +15,9 @@ export class ApiService {
   getFacultyCourseList(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/faculty_courses`, data);
   }
+  getCoordinatorCourse(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/coordinator_courses`, data);
+  }
   getMentorList(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/mentor_list`, data);
   }
