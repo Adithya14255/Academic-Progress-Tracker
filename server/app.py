@@ -47,16 +47,21 @@ def login_to_moodle():
 def login():
     if request.method == 'POST':
         role = request.json['role']
-        name = request.json['name']
+        uid = request.json['name']
         password = request.json['password']
-        q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE name='{
-                            name}' and password='{password}' and role_id={role};")
+        q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE uid='{
+                            uid}' and password='{password}' and role_id={role};")
         r = conn.execute(q).fetchall()
-        print(r)
         if r:
             data = [dict(i._mapping) for i in r]
+            if data[0]['role_id']==3:
+                print("here")
+                q = sqlalchemy.text(f"SELECT domain_id from l_domain_mentors where mentor_id={uid};")
+                if conn.execute(q).fetchone():
+                    data[0]['domain_id']=conn.execute(q).fetchone()[0]
+                else:
+                    return json.dumps({'Error':'Mentor has no assigned Domain'})
             print(data)
-            
             response = jsonify(data[0])
             return response
         else:

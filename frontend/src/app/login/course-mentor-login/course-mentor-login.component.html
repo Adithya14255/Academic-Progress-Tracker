@@ -11,20 +11,18 @@
       <li routerLinkActive="active">
         <a class="navloginitem" [routerLink]="['../domain-mentor-login']">Domain Mentor</a>
       </li>
-      <li routerLinkActive="active">
-        <a class="navloginitem" [routerLink]="['../admin-login']">Admin</a>
-      </li>
     </ul>
   </div>
     <form id="loginform"  [formGroup]="checkoutForm" (ngSubmit)="fetchCourseMentorData()">
       <div class="username">
-        <label for="name">Username</label>
+        <label for="name">Coordinator ID</label>
         <p><input id="name" type="text" formControlName="name"></p>
     </div>
     <div class="password">
         <label for="pwd">Password</label>
         <p><input id="pwd" type="password" formControlName="password"></p>
     </div>
+    <p *ngIf="errorMessage!=''">Error: {{errorMessage}}</p>
     <button class="button" type="submit">LOGIN</button>
     </form>
 </div>

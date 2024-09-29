@@ -68,7 +68,6 @@ button {
     text-decoration: none;
     font-size: 1rem;
     color: #333;
-    position: relative;
     padding-bottom: 5px;
     transition: color 0.3s;
 }
@@ -89,7 +88,7 @@ button {
 
 #navlogin {
     display: flex;
-    gap: 10%;
+    gap:20px;
     list-style-type: none;
     padding: 0;
     margin: 0;
