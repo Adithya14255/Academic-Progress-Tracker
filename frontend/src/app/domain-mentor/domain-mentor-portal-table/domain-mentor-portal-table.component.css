@@ -23,7 +23,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #002ac2;
+    background-image: linear-gradient(#002092, rgb(155, 252, 255));
     overflow-x: hidden;
     padding-top: 20px;
   }
@@ -167,3 +167,17 @@ tbody tr td a {
     text-decoration: None;
     background-color: #ffffff;
 }
+
+.design {
+    height: 80vh;
+    width: 80vh;
+    position: fixed;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right,#16349e, rgb(143, 255, 244));
+    bottom: -20vh;
+    right: -40vh;
+    border: 2px solid rgb(0, 0, 213);
+    overflow-x: hidden;
+    padding-top: 20px;
+    rotate: 30deg;
+  }
