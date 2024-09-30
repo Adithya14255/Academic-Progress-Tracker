@@ -4,53 +4,56 @@
 />
 <div class="container">
   <div class="left">
-    
-      <div class="profile-header">
-        <img src="./assets/logo/staff.png" alt="Profile Picture" />
-        <h2 class="faculty-profile-name">{{ data.name }}</h2>
-        <p>Faculty</p>
-      </div>
-      <div class="profile-body">
-        <div class="profile-info">
-          <p><strong>ID </strong>{{ data.uid }}</p>
-          <p><strong>Name </strong> {{ data.name }}</p>
-          <p>
-            <strong>Department </strong>
-            <span *ngIf="data.department_id === 1">CSE</span>
-            <span *ngIf="data.department_id === 2">AI&DS</span>
-            <span *ngIf="data.department_id === 3">ECE</span>
-            <span *ngIf="data.department_id === 4">CSBS</span>
-            <span *ngIf="data.department_id === 5">IT</span>
-            <span *ngIf="data.department_id === 6">S&H</span>
-          </p>
-          <p><strong>Links ></strong></p>
-          <div class="profile-info-links">
-            <ul id="navlogin">
-              <li>
-                <button class="table-btn" (click)="navigateWithData()">Faculty table >
-                </button>
-              </li>
-              <li>
-                <button class="logout-btn" (click)="navigateToOut()">
-                  |< Logout </button>
-              </li>
-            </ul>
-          </div>
+    <div class="profile-header">
+      <img src="./assets/logo/staff.png" alt="Profile Picture" />
+      <h2 class="faculty-profile-name">{{ data.name }}</h2>
+      <p>Faculty</p>
+    </div>
+    <div class="profile-body">
+      <div class="profile-info">
+        <p><strong>ID </strong>{{ data.uid }}</p>
+        <p><strong>Name </strong> {{ data.name }}</p>
+        <p>
+          <strong>Department </strong>
+          <span *ngIf="data.department_id === 1">CSE</span>
+          <span *ngIf="data.department_id === 2">AI&DS</span>
+          <span *ngIf="data.department_id === 3">ECE</span>
+          <span *ngIf="data.department_id === 4">CSBS</span>
+          <span *ngIf="data.department_id === 5">IT</span>
+          <span *ngIf="data.department_id === 6">S&H</span>
+        </p>
+        <p><strong>Links ></strong></p>
+        <div class="profile-info-links">
+          <ul id="navlogin">
+            <li>
+              <button class="table-btn" (click)="navigateWithData()">
+                Faculty table >
+              </button>
+            </li>
+            <li>
+              <button class="logout-btn" (click)="navigateToOut()">
+                |< Logout
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-    
-  </div>
-  <div class="right">
-   <div class="piechart-container">
-    <div class="overall-text">
-      Overall :
     </div>
-    <div class="mainChart">
-    <canvas id="MyChart">{{chart}}</canvas>
-  </div> 
   </div>
-  <div class="subcharts">
-  <div #chartContainer class="chart-container"></div> 
-</div>
+
+  <div class="right">
+    <div class="nametext">
+      <p class="greeting">Welcome Faculty - {{ name }}</p>
+    </div>
+    <div class="piechart-container">
+      <div class="overall-text">Overall :</div>
+      <div class="mainChart">
+        <canvas id="MyChart">{{ chart }}</canvas>
+      </div>
+      <div class="subcharts">
+        <div #chartContainer class="chart-container"></div>
+      </div>
+    </div>
+    
   </div>
 </div>

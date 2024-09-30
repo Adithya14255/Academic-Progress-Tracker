@@ -27,6 +27,8 @@ export class DomainMentorPortalTableComponent {
   data: any;
   userdata: any;
   name: string = '';
+  domain_id: number = 0;
+  displayCourseData:any = {course_code:'',course_name:''};
   boxcolor: string = 'white';
   editedIndex: number | null = null;
   comment: string = '';
@@ -45,9 +47,12 @@ export class DomainMentorPortalTableComponent {
   }
     if (this.userdata){
     this.name = this.userdata.name;
+    this.domain_id = this.userdata.domain_id;
     this.apiService.getDomainMentorData(this.userdata.domain_id).subscribe(
       response => {
         this.data = response;
+        this.displayCourseData.course_code = this.data[0].course_code;
+        this.displayCourseData.course_name = this.data[0].course_name; 
       });
     }
   }
@@ -104,5 +109,7 @@ export class DomainMentorPortalTableComponent {
         return 'white'; // Default color
     }
   }
-
+  navigateWithData(): void {
+    this.router.navigateByUrl('/domain-mentor', { state: this.userdata });
+  }
 }

@@ -20,6 +20,7 @@ export class FacultyComponent implements OnInit {
   percent: number = 69;
   chart: any;
   ratios: any = [];
+  name: string= '';
   recievedata: any;
   chartsData: Array<any> = [];
   datafromApi:any;
@@ -61,7 +62,8 @@ export class FacultyComponent implements OnInit {
     });
 
     // this.createCharts(this.datafromApi);
-  }}
+  }this.name=this.data.name;
+}
   functionfordata(): void{
     this.config.data.labels = this.recievedata.status_code;
     this.config.data.datasets[0].data = this.recievedata.count;

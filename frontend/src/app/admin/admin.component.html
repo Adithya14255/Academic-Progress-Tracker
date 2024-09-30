@@ -150,7 +150,7 @@
     <form [formGroup]="assignCourseForm" (ngSubmit)="assignCourseDetails()">
       <div class="username">
         <label for="name">Faculty department</label>
-        <select (change)="onAssignOptionChange($event)">
+        <select (change)="onDepartmentFacultyOptionChange($event)">
           <option [value]="0">-</option>
           <option [value]="1">CSE</option>
           <option [value]="2">AI&DS</option>
@@ -199,7 +199,7 @@
     <form [formGroup]="assignMentorForm" (ngSubmit)="assignCourseMentorDetails()">
       <div class="username">
         <label for="name">Coordinator department</label>
-        <select (change)="onAssignOptionChange($event)">
+        <select (change)="onDepartmentCoordinatorOptionChange($event)">
           <option [value]="0">-</option>
           <option [value]="1">CSE</option>
           <option [value]="2">AI&DS</option>
@@ -247,7 +247,7 @@
     <form [formGroup]="assignDomainMentorForm" (ngSubmit)="assignDomainMentorDetails()">
       <div class="username">
         <label for="name">Coordinator department</label>
-        <select (change)="onAssignOptionChange($event)">
+        <select (change)="onDepartmentDomainMentorOptionChange($event)">
           <option [value]="0">-</option>
           <option [value]="1">CSE</option>
           <option [value]="2">AI&DS</option>

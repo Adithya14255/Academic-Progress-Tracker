@@ -77,10 +77,27 @@ export class AdminComponent {
     console.log(this.assignCourseForm)
   }
 
-  onAssignOptionChange(event: Event) {
+  onDepartmentFacultyOptionChange(event: Event) {
 
     const selectedValue: string = (event.target as HTMLSelectElement).value;
     this.apiService.getFacultyInDepartment({department_id:selectedValue}).subscribe((data) => {
+      this.faculty = data; // Assign the received data to jsonData
+    });
+    console.log(selectedValue)
+  }
+
+  onDepartmentCoordinatorOptionChange(event: Event) {
+
+    const selectedValue: string = (event.target as HTMLSelectElement).value;
+    this.apiService.getCoordinatorsInDepartment({department_id:selectedValue}).subscribe((data) => {
+      this.faculty = data; // Assign the received data to jsonData
+    });
+    console.log(selectedValue)
+  }
+  onDepartmentDomainMentorOptionChange(event: Event) {
+
+    const selectedValue: string = (event.target as HTMLSelectElement).value;
+    this.apiService.getDomainMentorsInDepartment({department_id:selectedValue}).subscribe((data) => {
       this.faculty = data; // Assign the received data to jsonData
     });
     console.log(selectedValue)

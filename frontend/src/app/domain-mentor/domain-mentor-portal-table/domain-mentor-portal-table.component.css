@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    padding-top: 200px;
+
 }
 .table-wrapper {
     width: 100%;
@@ -15,6 +15,32 @@
     overflow-y: scroll;
     height: 400px;
     scrollbar-width: none;
+}
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #002ac2;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .courseCodeAndName{
+    padding-left: 19vw;
+    color:rgb(123, 123, 123);
+    font-size: larger;
+    font-weight: 600;
+}
+
+
+.greeting{
+    padding-left: 18vw;
+    font-size: 2.6rem;
+    color:#002ac2;
+    margin-top:6vh;
 }
 .table-wrapper thead {
     position: sticky;
@@ -44,7 +70,7 @@ tbody td {
     text-align: center;
 }
 tbody tr {
-    border-bottom: 1px solid orange;
+    border-bottom: 1px solid #002ac2;
     align-items: center;
 }
 tbody tr:hover {
@@ -53,7 +79,7 @@ tbody tr:hover {
 .approve {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: orange;
+    background-color: #002ac2;
     color: white;
     border: none;
     border-radius: 4px;
@@ -66,7 +92,7 @@ tbody tr:hover {
     background-color: white;
 }
 tbody tr td a {
-    color: orange;
+    color:#002ac2;
 }
 .pagination {
     margin-left: 680px;
@@ -75,7 +101,7 @@ tbody tr td a {
     background: none;
     border: none;
     outline: none;
-    background-color: orange;
+    background-color: #002ac2;
     border-radius: 5px;
     color: white;
     height: 3%;
@@ -95,7 +121,7 @@ tbody tr td a {
     width:5rem;
     border:none;
     background-color: transparent;
-    color:orange;
+    color:#002ac2;
     text-decoration-line: underline;
     transition: .2s;
 }
@@ -108,7 +134,7 @@ tbody tr td a {
 .statusactivatedinput{
     width:1.5rem;
     text-align: center;
-    border:1px solid orange;
+    border:1px solid #002ac2;
     border-radius:.3rem ;
 }
 
@@ -122,4 +148,22 @@ tbody tr td a {
     margin: auto;
     border-radius: 5px;
     cursor:not-allowed;
+}
+
+.table-btn {
+    font-size: 1.2rem;
+    border: none;
+    background: none;
+    color:  #ffffff;
+    font-weight: 500;
+    outline: none;
+    border-radius: 5px;
+    padding:0.7rem 1rem;
+}
+
+.logout-btn:hover,
+.table-btn:hover {
+    color: #002ac2;
+    text-decoration: None;
+    background-color: #ffffff;
 }

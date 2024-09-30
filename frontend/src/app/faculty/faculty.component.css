@@ -139,10 +139,9 @@
 
 .right {
     height: 100Vh;
-    margin-top: 5.5%;
-    width: 70vw;
+    width: 80vw;
     display:flex;
-
+    flex-direction: column;
 }
 .faculty-profile-name{
     text-transform: capitalize;
@@ -150,6 +149,7 @@
 
 }
 .piechart-container{
+    display: flex;
     height: fit-content;
     margin-left:5%;
     border-radius:7px;
@@ -196,4 +196,17 @@
 
 .subcharts{
     width:15vw;
+}
+
+.greeting{
+    padding-left: 3vw;
+    font-size: 2.6rem;
+    color:orange;
+    margin-top:6vh;
+}
+.courseCodeAndName{
+    padding-left: 5vw;
+    color:rgb(123, 123, 123);
+    font-size: larger;
+    font-weight: 600;
 }

@@ -56,6 +56,10 @@ export class CourseMentorPortalTableComponent {
         }
       });}
   }
+
+  navigateWithData(): void {
+    this.router.navigateByUrl('/course-mentor', { state: this.userdata });
+  }
   getCoordinatorData(){
     this.apiService.getCourseMentorData(this.userdata.uid).subscribe(
       response => {

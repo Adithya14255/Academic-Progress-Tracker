@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.0.247/kgaps")
+    "postgresql://admin:admin@192.168.147.24/kgaps")
 conn = engine.connect()
 
 
@@ -242,7 +242,7 @@ def add_topic():
 @app.route('/api/faculty_info', methods=['POST', 'GET'])
 def faculty_info():
     department_id = request.json['department_id']
-    q = sqlalchemy.text(f"select * from user_details_check where department_id={department_id};")  
+    q = sqlalchemy.text(f"select * from user_details_check where role_id=1 and department_id={department_id};")  
     r = conn.execute(q).fetchall()
     data = [dict(i._mapping) for i in r]
     print(data)

@@ -65,6 +65,9 @@ export class FacultyTableComponent {
       });
     }
     }
+    navigateWithData(): void {
+      this.router.navigateByUrl('/faculty-incharge', { state: this.userdata });
+    }
   getCourseDetails(){
         console.log(this.getCourseDataForm.value);
         this.apiService.getFacultyData(this.userdata.uid,this.getCourseDataForm.value.course_code).subscribe(

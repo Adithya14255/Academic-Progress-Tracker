@@ -54,7 +54,7 @@ tbody td {
 }
 
 tbody tr {
-    border-bottom: 1px solid orange;
+    border-bottom: 1px solid #fe370f;
     align-items: center;
 }
 
@@ -81,7 +81,7 @@ tbody tr:hover {
 }
 
 tbody tr td a {
-    color: orange;
+    color: #fe370f;
 }
 
 .pagination {
@@ -305,4 +305,23 @@ form label {
 
 .nocompletedtext{
     margin-left: 45vw;
+}
+
+.table-btn {
+    font-size: 1.2rem;
+    border: none;
+    background: none;
+    color:  #ffffff;
+    font-weight: 500;
+    outline: none;
+    border-radius: 5px;
+    padding:1rem;
+}
+
+.logout-btn:hover,
+.table-btn:hover {
+
+    color: #F58426;
+    text-decoration: None;
+    background-color: #ffffff;
 }
