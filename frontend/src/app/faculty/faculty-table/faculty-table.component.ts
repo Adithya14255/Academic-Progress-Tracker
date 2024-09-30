@@ -90,7 +90,7 @@ export class FacultyTableComponent {
   }
 
   hoursupdate(hourschange:number,topic_id:number,uid:number){
-    this.editedIndex=null;
+    this.completedIndex=null;
     if (topic_id==0){
       return;
     }
@@ -117,9 +117,7 @@ export class FacultyTableComponent {
       // Check if response contains 'Failure' or data
       if (response.data == 'Failure') {
         this.completedData = 'Failure';
-        console.log("here");
       } else {
-        console.log("here instead");
         this.completedData = response;  // Assuming the valid data is in response.data
       }
       this.completedList = 1;  // Trigger the display logic

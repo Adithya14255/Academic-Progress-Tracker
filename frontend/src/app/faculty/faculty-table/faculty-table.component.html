@@ -125,14 +125,14 @@
                 Submit
               </button>
               <button
-                *ngIf="completedIndex === i"
+                *ngIf="completedIndex == i"
                 (click)="hoursupdate(hourschange, 0, item.uid)"
                 class="statusactivated"
               >
                 Cancel
               </button>
               <button
-                *ngIf="completedIndex !== i"
+                *ngIf="completedIndex != i"
                 (click)="editItem(i)"
                 class="statusactivated"
               >
@@ -196,6 +196,7 @@
         <td>{{ item.course_name }}</td>
         <td>{{ item.topic }}</td>
         <td>{{ item.outcome }}</td>
+        <td>        </td>
       </tr>
     </tbody>
   </table>
