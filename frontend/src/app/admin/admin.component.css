@@ -3,11 +3,25 @@
   font-size: 1rem; /* Adjusted font size */
   font-family: 'Arial', sans-serif;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 1rem; /* Space between items */
   justify-content: center; /* Center forms horizontally */
 }
 
+.admintitle{
+  color:orange;
+  font-size: 2rem;
+}
+
+.boxforboxforforms{
+  margin-left: 14vw;
+  display:flex;
+  gap:2vw;
+  width:60vw;
+  padding:2vw;
+  background-color: #fff;
+}
 .boxforforms {
   border: 2px solid #F58426; /* Orange border */
   border-radius: 6px; /* Slightly rounded corners */

@@ -1,6 +1,7 @@
 <div class="container">
   <p *ngIf="response != 'failed'">Success!</p>
   <div class="boxforboxforforms">
+    <p class="admintitle">Get details -</p>
     <div class="boxforforms">
       <p>GET COURSES -</p>
       <form [formGroup]="checkoutForm" (ngSubmit)="fetchCourses()">
@@ -24,7 +25,53 @@
       </tr>
     </div>
     <div class="boxforforms">
-      <p>ADD COURSES -</p>
+      <p>GET MENTOR LIST - </p>
+      <form [formGroup]="getMentorListForm" (ngSubmit)="getMentorListDetails()">
+        <div class="username">
+          <label for="name">department_id</label>
+          <select required formControlName="department_id">
+            <option [value]="1">CSE</option>
+            <option [value]="2">AI&DS</option>
+            <option [value]="3">ECE</option>
+            <option [value]="4">CSBS</option>   
+            <option [value]="5">IT</option>
+            <option [value]="6">S&H</option>
+          </select>
+        </div>
+        <button class="button" type="submit">Get Mentor List</button>
+      </form>
+  
+      <tr class="topiclist" *ngFor="let item of mentorList">
+        <td>{{ item.uid }}</td>
+        <td>-</td>
+        <td>{{ item.name }}</td>
+        <td>-</td>
+        <td>{{ item.course_code }}</td>
+      </tr>
+    </div>
+    <div class="boxforforms">
+      <p>GET TOPICS -</p>
+      <form [formGroup]="getTopicForm" (ngSubmit)="getTopic()">
+        <div class="username">
+          <label for="name">course_code</label>
+          <p><input id="name" type="text" formControlName="course_code" /></p>
+        </div>
+        <button class="button" type="submit">Get Topics</button>
+      </form>
+      <tr class="topiclist" *ngFor="let item of topics">
+        <td>{{ item.topic_id }}</td>
+        <td>-</td>
+        <td>{{ item.topic }}</td>
+        <td>-</td>
+        <td>{{ item.outcome }}</td>
+      </tr>
+    </div>
+  </div>
+  <div class="boxforboxforforms">
+    <p class="admintitle">Register Stuff -</p>
+
+    <div class="boxforforms">
+      <p class="title">REGISTER COURSES -</p>
       <form [formGroup]="addCourseForm" (ngSubmit)="addCourse()">
         <div class="username">
           <label for="name">department</label>
@@ -56,28 +103,6 @@
         <button class="button" type="submit">Add course</button>
       </form>
     </div>
-    <div class="boxforforms">
-      <p>GET TOPICS -</p>
-      <form [formGroup]="getTopicForm" (ngSubmit)="getTopic()">
-        <div class="username">
-          <label for="name">course_code</label>
-          <p><input id="name" type="text" formControlName="course_code" /></p>
-        </div>
-        <button class="button" type="submit">Get Topics</button>
-      </form>
-      <tr class="topiclist" *ngFor="let item of topics">
-        <td>{{ item.topic_id }}</td>
-        <td>-</td>
-        <td>{{ item.topic }}</td>
-        <td>-</td>
-        <td>{{ item.outcome }}</td>
-      </tr>
-    </div>
-  </div>
-  <div class="boxforboxforforms">
-    
-  </div>
-  <div class="boxforboxforforms">
   <div class="boxforforms">
     <p>REGISTER USER -</p>
     <form [formGroup]="userRegistrationForm" (ngSubmit)="registerUserInfo()">
@@ -117,36 +142,12 @@
       </div>
       <button class="button" type="submit">Register</button>
     </form>
-
   </div>
+  </div>
+  <div class="boxforboxforforms">
+    <p class="admintitle">Assign Stuff -</p>
   <div class="boxforforms">
-    <p>GET MENTOR LIST - </p>
-    <form [formGroup]="getMentorListForm" (ngSubmit)="getMentorListDetails()">
-      <div class="username">
-        <label for="name">department_id</label>
-        <select required formControlName="department_id">
-          <option [value]="1">CSE</option>
-          <option [value]="2">AI&DS</option>
-          <option [value]="3">ECE</option>
-          <option [value]="4">CSBS</option>   
-          <option [value]="5">IT</option>
-          <option [value]="6">S&H</option>
-        </select>
-      </div>
-      <button class="button" type="submit">Get Mentor List</button>
-    </form>
-
-    <tr class="topiclist" *ngFor="let item of mentorList">
-      <td>{{ item.uid }}</td>
-      <td>-</td>
-      <td>{{ item.name }}</td>
-      <td>-</td>
-      <td>{{ item.course_code }}</td>
-    </tr>
-  </div>
-  </div>
-  <div class="boxforforms">
-    <p>ASSIGN COURSE - </p>
+    <p>ASSIGN COURSE TO FACULTY  - </p>
     <form [formGroup]="assignCourseForm" (ngSubmit)="assignCourseDetails()">
       <div class="username">
         <label for="name">Faculty department</label>
@@ -277,7 +278,7 @@
       <button class="button" type="submit">Assign Domain Mentor</button>
     </form>
   </div>
-    
+</div>   
 </div>
 <div class="orange-cross-bar"></div>
 <div class="orange-bubble-left-middle"></div>

@@ -16,6 +16,9 @@ conn = engine.connect()
 
 @app.route('/api/', methods=['POST', 'GET'])
 def index():
+    q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
+    r = conn.execute(q).fetchall()
+    print(q)
     data = {'error': 'none'}
     return json.dumps(data)
 
