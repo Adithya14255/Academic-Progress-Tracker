@@ -53,6 +53,9 @@ export class CourseMentorPortalTableComponent {
         else{
         this.displayCourseData=response[0];
         this.getCoordinatorData();
+        this.apiService.getFacultyInCourse({'course_code':this.displayCourseData.course_code}).subscribe((data) => {
+          this.faculty = data; // Assign the received data to jsonData
+        });
         }
       });}
   }
@@ -121,14 +124,5 @@ export class CourseMentorPortalTableComponent {
       this.response = data; // Assign the received data to jsonData
       console.log(this.response);
     });
-  }
-
-  onAssignOptionChange(event: Event) {
-
-    const selectedValue: string = (event.target as HTMLSelectElement).value;
-    this.apiService.getFacultyInDepartment({department_id:selectedValue}).subscribe((data) => {
-      this.faculty = data; // Assign the received data to jsonData
-    });
-    console.log(selectedValue)
   }
 }

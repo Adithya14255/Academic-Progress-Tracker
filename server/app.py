@@ -248,6 +248,15 @@ def faculty_info():
     print(data)
     return json.dumps(data)
 
+@app.route('/api/faculty_course_info', methods=['POST', 'GET'])
+def faculty_course_info():
+    course_code = request.json['course_code']
+    q = sqlalchemy.text(f"select u.uid,u.name from l_faculty_courses l,user_details_check u where l.faculty_id=u.uid and u.role_id=1 and l.course_code='{course_code}';")  
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    print(data)
+    return json.dumps(data)
+
 @app.route('/api/course_coordinator_info', methods=['POST', 'GET'])
 def course_coordinator_info():
     department_id = request.json['department_id']

@@ -27,6 +27,9 @@ export class ApiService {
   getCoordinatorsInDepartment(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/course_coordinator_info`, data);
   }
+  getFacultyInCourse(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/faculty_course_info`, data);
+  }
   getFacultyInDepartment(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/faculty_info`, data);
   }
