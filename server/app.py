@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.147.24/kgaps")
+    "postgresql://admin:admin@192.168.56.1/kgaps")
 conn = engine.connect()
 
 
@@ -52,8 +52,7 @@ def login():
         role = request.json['role']
         uid = request.json['name']
         password = request.json['password']
-        q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE uid='{
-                            uid}' and password='{password}' and role_id={role};")
+        q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE uid='{uid}' and password='{password}' and role_id={role};")
         r = conn.execute(q).fetchall()
         if r:
             data = [dict(i._mapping) for i in r]

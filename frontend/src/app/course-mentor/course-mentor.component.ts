@@ -2,33 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
 import { CommonModule, Location } from '@angular/common';
-import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progress';
+
 
 @Component({
   selector: 'app-course-mentor',
   standalone: true,
-  imports: [RouterLink,NgCircleProgressModule,CommonModule],
+  imports: [RouterLink,CommonModule],
   templateUrl: './course-mentor.component.html',
   styleUrl: './course-mentor.component.css',
-  providers: [
-    {
-      provide: CircleProgressOptions,
-      useValue: {
-        radius: 100,
-        outerStrokeWidth: 16,
-        innerStrokeWidth: 0,
-        outerStrokeColor: "#78C000",
-        animationDuration: 300,
-        showUnits: true,
-        units: '%',
-        showTitle: true,
-        showSubtitle: true,
-        unitsColor: "#483500",
-        subtitleColor: "#483500",
-        titleColor: "#483500",
-      }
-    }
-  ]
+  providers: []
 })
 
 export class CourseMentorComponent {

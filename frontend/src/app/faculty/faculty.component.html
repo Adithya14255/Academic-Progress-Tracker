@@ -43,7 +43,12 @@
 
   <div class="right">
     <div class="nametext">
+      
       <p class="greeting">Welcome Faculty - {{ name }}</p>
+    </div>
+    <label for="facultyprogress">Progress:</label>
+    <div class="range" style="--p:40">
+      <div class="range__label">Progress</div>
     </div>
     <div class="piechart-container">
       <div class="overall-text">Overall :</div>
@@ -54,6 +59,5 @@
         <div #chartContainer class="chart-container"></div>
       </div>
     </div>
-    
   </div>
 </div>
