@@ -1,12 +1,14 @@
 services:
   angular:
-    build: 
+    container_name: angualr-server
+    build:
       context: frontend
     ports:
       - "4200:4200"
     networks:
       - mynetwork
   server: 
+    container_name: flask-server
     build: 
       context: server
     env_file:
@@ -18,8 +20,8 @@ services:
     networks:
       - mynetwork
   db:
+    container_name: postgres-server
     image: postgres
-    container_name: local_pgdb_kgaps
     restart: always
     ports:
       - "5432:5432"
@@ -33,7 +35,7 @@ services:
     
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4_container_kgaps
+    container_name: pgadmin
     restart: always
     ports:
       - "8888:80"
