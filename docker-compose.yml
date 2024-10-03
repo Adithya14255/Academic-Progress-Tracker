@@ -4,6 +4,8 @@ services:
       context: frontend
     ports:
       - "4200:4200"
+    networks:
+      - mynetwork
   server: 
     build: 
       context: server
@@ -13,7 +15,8 @@ services:
       - '5001:5001'
     depends_on:
       - db
-
+    networks:
+      - mynetwork
   db:
     image: postgres
     container_name: local_pgdb_kgaps
@@ -25,7 +28,9 @@ services:
     volumes:
       - local_pgdata:/var/lib/postgresql/data
       - ./server/sqls/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-   
+    networks:
+      - mynetwork
+    
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container_kgaps
@@ -38,10 +43,12 @@ services:
      PGADMIN_DEFAULT_EMAIL: admin@admin.com
      PGADMIN_DEFAULT_PASSWORD: admin
     networks:
-      - backend
+      - mynetwork
+    
+    
 volumes:
   local_pgdata:
   pgadmin-data:
 
 networks:
- backend:
+    mynetwork:

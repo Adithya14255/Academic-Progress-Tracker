@@ -10,15 +10,15 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.56.1/kgaps")
+    "postgresql://admin:admin@192.168.147.24/kgaps")
 conn = engine.connect()
 
 
 @app.route('/api/', methods=['POST', 'GET'])
 def index():
-    q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
-    r = conn.execute(q).fetchall()
-    print(q)
+    # q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
+    # r = conn.execute(q).fetchall()
+    # print(q)
     data = {'error': 'none'}
     return json.dumps(data)
 
@@ -81,8 +81,7 @@ def register():
         p = sqlalchemy.text(
         f"SELECT * FROM t_users WHERE uid='{id}'")
         if not conn.execute(p).fetchall():
-            q = sqlalchemy.text(f"INSERT INTO t_users VALUES({id},'{
-                            name}','{password}',{dept_id});")
+            q = sqlalchemy.text(f"INSERT INTO t_users VALUES({id},'{name}','{password}',{dept_id});")
             conn.execute(q)
         q = sqlalchemy.text(f"SELECT * FROM l_role_user WHERE uid='{id}' AND role_id={role};")
         if not conn.execute(q).fetchall():
@@ -221,8 +220,7 @@ def add_topic():
         if conn.execute(sqlalchemy.text(f"select topic_id from t_course_topics where course_code='{course_code}' and topic='{topic}';")).first() != None:
             print("error-topic exists")
             return json.dumps({'error': 'topic already exists in course'})
-        q = sqlalchemy.text(f"INSERT INTO t_course_topics(course_code,outcome,topic,total_hours) VALUES('{course_code}','{
-                            outcome}','{topic}',{total_hours});")
+        q = sqlalchemy.text(f"INSERT INTO t_course_topics(course_code,outcome,topic,total_hours) VALUES('{course_code}','{outcome}','{topic}',{total_hours});")
         conn.execute(q)
         q = sqlalchemy.text(f"select topic_id from t_course_topics where course_code='{course_code}' and topic='{topic}';")
         topic_id=conn.execute(q).fetchone()[0]
@@ -324,8 +322,7 @@ def edithourscompleted():
     handler_id = request.json['handler_id']
     topic_id = request.json['topic_id']
     hours_completed = request.json['hours_completed']
-    q = sqlalchemy.text(f"update t_complete_status set status_code=4,hours_completed={
-                        hours_completed} where handler_id={handler_id} and topic_id={topic_id};")
+    q = sqlalchemy.text(f"update t_complete_status set status_code=4,hours_completed={hours_completed} where handler_id={handler_id} and topic_id={topic_id};")
     conn.execute(q)
     conn.commit()
     return json.dumps({'data': 'Success'})
@@ -337,8 +334,7 @@ def editcomment(approval):
     if approval == 0:
         topic_id = request.json['topic_id']
         comment = request.json['comment']
-        q = sqlalchemy.text(f"update t_topic_comments set comment = '{
-                            comment}' where topic_id={topic_id};")
+        q = sqlalchemy.text(f"update t_topic_comments set comment = '{comment}' where topic_id={topic_id};")
         conn.execute(q)
         q = sqlalchemy.text(f"update t_complete_status set status_code=2 where topic_id={topic_id};")
         conn.execute(q)
@@ -368,8 +364,7 @@ def editlink():
 @app.route('/api/facultyprogress', methods=['POST', 'GET'])
 def facultyprogress():
     handler_id = request.json['handler_id']
-    q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {
-                        handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
+    q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
     color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
