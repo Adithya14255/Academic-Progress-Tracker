@@ -48,11 +48,13 @@
     </div>
     <div class="progressbars" *ngFor="let item of courseDataCurrent;">
     <label for="facultyprogress">Current Progress: {{item.course_code}}</label>
-    <progress value="item.completed_hours" max="item.total_hours" [style.background-color]="item.bar_color" >{{item.completed_hours}}</progress>
+    <progress [value]="item.completed_hours" [max]="item.total_hours" [style.color]="item.bar_color" >{{item.completed_hours}}</progress>
+    <p>{{item.completed_hours}} / {{item.total_hours}}</p>
   </div>
   <div class="progressbars" *ngFor="let item of courseDataOverall;">
     <label for="facultyprogress">Overall Progress: {{item.course_code}}</label>
-    <progress value="item.completed_hours" max="item.total_hours" >{{item.completed_hours}}</progress>
+    <progress [value]="item.completed_hours" [max]="item.total_hours" >{{item.completed_hours}}</progress>
+    <p>{{item.completed_hours}} / {{item.total_hours}}</p>
   </div>
     <div class="piechart-container">
       <div class="overall-text">Overall :</div>
