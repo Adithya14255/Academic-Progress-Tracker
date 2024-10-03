@@ -25,6 +25,8 @@ export class FacultyComponent implements OnInit {
   chartsData: Array<any> = [];
   datafromApi:any;
   charts: Chart[] = [];
+  courseDataCurrent: any = [];
+  courseDataOverall: any = [];
     // Track references to canvas elements
     @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef;
   constructor(
@@ -55,6 +57,8 @@ export class FacultyComponent implements OnInit {
     this.apiService.getFacultyProgressData({ handler_id: this.data.uid }).subscribe((data) => {
       // Example of updating chart data with API response
       this.recievedata=data.main;
+      this.courseDataCurrent = data.course_data_current;
+      this.courseDataOverall = data.course_data_overall;
       console.log(this.recievedata);
       this.functionfordata();
       const otherData = JSON.parse(data.other);
