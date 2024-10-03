@@ -375,8 +375,14 @@ def facultyprogress():
     for course_id, status_code, count in r:
         data[course_id][status[status_code]] = count,color_status[status_code]
     json_output = json.dumps(data, indent=4)
-    print(codes,mdata,mcolor,json_output)
-    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output}) 
+    q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where status_code=4 and uid='{handler_id}' group by course_code,uid;")
+    r = conn.execute(q).fetchall()
+    course_data_current = [[i[0],i[1],i[1]//i[0],i[2]] for i in r]
+    q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where uid='{handler_id}' group by course_code,uid;")
+    r = conn.execute(q).fetchall()
+    course_data_overall = [[i[0],i[1],i[1]//i[0],i[2]] for i in r]
+    print(course_data_current,course_data_overall)
+    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output,'course_data_current':course_data_current,'course_data_overall':course_data_overall}) 
 
 
 @app.route('/api/mentor_list', methods=['POST', 'GET'])

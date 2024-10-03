@@ -136,27 +136,22 @@ export class FacultyTableComponent {
     if (topic_id == 0) {
       return;
     }
-    this.getCanLinkUpdateForm.patchValue({
-      handler_id: uid,
-      topic_id: topic_id,
-      link: link,
-    });
-    this.apiService.updateLinkDetails(this.getCanLinkUpdateForm.value).subscribe();
-    this.router
-      .navigateByUrl('/faculty-table', { state: this.data })
-      .then(() => {
-        window.location.reload();
-      });
-  }
-  getMoodleLink(url: string): string {
     const moodleBaseUrl = 'https://moodle.kgkite.ac.in'; // Set this to your Moodle base URL
-    const apiToken = localStorage.getItem('moodleToken');
-    // Check if the URL starts with the Moodle base URL
-    if (url.startsWith(moodleBaseUrl) && apiToken) {
-      console.log(`${url}&wstoken=${apiToken}`);
-      return `${url}&wstoken=${apiToken}`; // Append the token
+    if (link.startsWith(moodleBaseUrl)) {
+      this.getCanLinkUpdateForm.patchValue({
+        handler_id: uid,
+        topic_id: topic_id,
+        link: link,
+      });
+      this.apiService.updateLinkDetails(this.getCanLinkUpdateForm.value).subscribe();
+      this.router
+        .navigateByUrl('/faculty-table', { state: this.data })
+        .then(() => {
+          window.location.reload();
+        });
+     
     }
-    console.log(url);
-    return url; // Return the original URL if it's not a Moodle link
+    alert("Invalid link entered");
+    return; // Append the token
   }
 }
