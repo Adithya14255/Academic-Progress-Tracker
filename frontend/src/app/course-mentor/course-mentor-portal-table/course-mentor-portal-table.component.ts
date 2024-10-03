@@ -20,7 +20,7 @@ export class CourseMentorPortalTableComponent {
   faculty: any = [];
   msg: string = '';
   name: string = '';
-  displayTable: boolean = false; 
+  displayTable: boolean = true;
   displayAddTopic: boolean = false; 
 
   addTopicForm = this.formBuilder.group({
@@ -69,13 +69,13 @@ export class CourseMentorPortalTableComponent {
   }
 
   showTable() {
-    this.displayTable = true;  
-    this.displayAddTopic = false;  
+    this.displayTable = true;
+    this.displayAddTopic = false;
   }
 
   showAddTopic() {
-    this.displayAddTopic = true;  
-    this.displayTable = false;  
+    this.displayAddTopic = true;
+    this.displayTable = false;
   }
 
   navigateWithData(): void {
