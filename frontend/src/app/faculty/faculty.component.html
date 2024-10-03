@@ -46,11 +46,14 @@
       
       <p class="greeting">Welcome Faculty - {{ name }}</p>
     </div>
-    <div class="progressbars" *ngFor="let item of courseDataCurrent;"></div>
-    <label for="facultyprogress">Progress:</label>
-    <div class="range" style="width:item">
-      <div class="range__label">Progress</div>
-    </div>
+    <div class="progressbars" *ngFor="let item of courseDataCurrent;">
+    <label for="facultyprogress">Current Progress: {{item.course_code}}</label>
+    <progress value="item.completed_hours" max="item.total_hours" [style.background-color]="item.bar_color" >{{item.completed_hours}}</progress>
+  </div>
+  <div class="progressbars" *ngFor="let item of courseDataOverall;">
+    <label for="facultyprogress">Overall Progress: {{item.course_code}}</label>
+    <progress value="item.completed_hours" max="item.total_hours" >{{item.completed_hours}}</progress>
+  </div>
     <div class="piechart-container">
       <div class="overall-text">Overall :</div>
       <div class="mainChart">

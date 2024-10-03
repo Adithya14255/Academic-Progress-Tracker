@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.0.253/kgaps")
+    "postgresql://admin:admin@192.168.147.24/kgaps")
 conn = engine.connect()
 
 
@@ -377,10 +377,17 @@ def facultyprogress():
     json_output = json.dumps(data, indent=4)
     q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where status_code=4 and uid='{handler_id}' group by course_code,uid;")
     r = conn.execute(q).fetchall()
-    course_data_current = [[i[0],i[1],i[1]//i[0],i[2]] for i in r]
+    progress_color = {0:'green',1:'blue',2:'red',3:'green',4:'green'}
+    course_data_current = []
+    for i in r:
+        temp={'completed_hours':i[0],'total_hours':i[1],'bar_color':progress_color[i[0]//i[1]],'course_code':i[2]}
+        course_data_current.append(temp)
     q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where uid='{handler_id}' group by course_code,uid;")
     r = conn.execute(q).fetchall()
-    course_data_overall = [[i[0],i[1],i[1]//i[0],i[2]] for i in r]
+    course_data_overall = []
+    for i in r:
+        temp={'completed_hours':i[0],'total_hours':i[1],'course_code':i[2]}
+        course_data_overall.append(temp)
     print(course_data_current,course_data_overall)
     return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output,'course_data_current':course_data_current,'course_data_overall':course_data_overall}) 
 
