@@ -20,7 +20,7 @@ export class CourseMentorPortalTableComponent {
   faculty: any = [];
   msg: string = '';
   name: string = '';
-  displayTable: boolean = false;
+  displayTable: boolean = true;
   displayAddTopic: boolean = false; 
 
   addTopicForm = this.formBuilder.group({
@@ -123,7 +123,9 @@ export class CourseMentorPortalTableComponent {
 
   linkupdate(link: string, topic_id: number, uid: number): void {
     this.editedIndex = null;
-    if (topic_id === 0) return;
+    if (topic_id == 0) {
+      return;
+    }
     this.checkoutForm.patchValue({
       handler_id: uid,
       topic_id: topic_id,

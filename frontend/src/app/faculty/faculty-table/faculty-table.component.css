@@ -290,6 +290,8 @@ form label {
     background-image: linear-gradient( rgb(206, 0, 0), rgb(255, 138, 42));
     overflow-x: hidden;
     padding-top: 20px;
+    display: flex;
+    flex-direction: column;
   }
 
   .containerforgreeting{
@@ -320,16 +322,24 @@ form label {
     outline: none;
     border-radius: 5px;
     padding:1rem;
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    padding: 10px;
+    cursor: pointer;
+    transition: border-bottom 0.3s ease; /* Smooth transition for border */
 }
 
 .logout-btn:hover,
 .table-btn:hover {
 
-    color: #F58426;
+    /* color: #007bff;  Change color on hover */
+    color: orange;
     text-decoration: None;
     background-color: #ffffff;
 }
-
+.table-btn.active {
+    border-bottom: 2px solid orange; /* Customize the color and size of the border */
+  }
 
 .design {
     height: 80vh;

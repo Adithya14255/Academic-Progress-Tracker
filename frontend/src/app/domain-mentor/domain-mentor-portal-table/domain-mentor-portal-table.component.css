@@ -176,7 +176,6 @@ tbody tr td a {
     background-image: linear-gradient(to bottom right,#16349e, rgb(143, 255, 244));
     bottom: -20vh;
     right: -40vh;
-    border: 2px solid rgb(0, 0, 213);
     overflow-x: hidden;
     padding-top: 20px;
     rotate: 30deg;

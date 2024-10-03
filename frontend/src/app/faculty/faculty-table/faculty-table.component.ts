@@ -37,6 +37,9 @@ export class FacultyTableComponent {
   completedList: number = 0;
   link: any;
   name: string = '';
+  displayTable: boolean = true;
+  details: boolean = false;
+  activeButton: string = 'uploaded';
   checkoutForm = this.formBuilder.group({
     handler_id:0,
     topic_id:0,
@@ -113,6 +116,9 @@ export class FacultyTableComponent {
   }
 
   viewCompletedList() {
+    this.details = false;
+    this.displayTable = false;
+    this.activeButton = 'approved';
     this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
       // Check if response contains 'Failure' or data
       if (response.data == 'Failure') {
@@ -130,6 +136,16 @@ export class FacultyTableComponent {
   });
   idupdate(index: number): void {
     this.editedIndex = index;
+  }
+  showDetails() {
+    this.details = true;
+    this.displayTable = true;
+    this.activeButton = 'details';
+  }
+  showUploaded(){
+    this.details = false;
+    this.displayTable = true;
+    this.activeButton = 'uploaded';
   }
   linkupdate(link:string,topic_id: number, uid: number): void {
     this.editedIndex = null;
