@@ -40,6 +40,7 @@ export class FacultyTableComponent {
   completedTopicPrompt: boolean = false;
   details: boolean = false;
   activeButton: string = 'uploaded';
+  displayforapproved: boolean = false;
 
   checkoutForm = this.formBuilder.group({
     handler_id: 0,
@@ -122,6 +123,7 @@ export class FacultyTableComponent {
     this.details = false;
     this.displayTable = false;
     this.completedTopicPrompt = true;
+    this.displayforapproved = true;
     this.activeButton = 'approved';
     this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
       this.completedData = response.data === 'Failure' ? 'Failure' : response;  // Handle failure case
@@ -152,6 +154,7 @@ export class FacultyTableComponent {
     this.displayTable = true;
     this.activeButton = 'uploaded';
     this.completedTopicPrompt = false;
+    this.displayforapproved = false;
   }
 
   linkupdate(link: string, topic_id: number, uid: number): void {

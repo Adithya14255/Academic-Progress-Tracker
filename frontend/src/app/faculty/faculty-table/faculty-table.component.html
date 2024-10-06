@@ -37,6 +37,45 @@
   </div>
 </div>
 
+<div class="container" *ngIf="displayforapproved">
+  <div class="table-wrapper">
+    <table>
+      <thead @fade>
+        <tr>
+          <th>Topic</th>
+          <th>Outcome</th>
+          <th>Status Code</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody @fade>
+        <tr *ngFor="let item of data; let i = index">
+          <ng-container *ngIf="item.status_code !== 3">
+          <td>{{ item.topic }}</td>
+          <td>{{ item.outcome }}</td>
+          <td>
+            <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+          </td>
+          <td>
+            <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
+            <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
+            <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
+                    (click)="idupdate(i)" class="statusactivated">upload link</button>
+            <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
+                    (click)="idupdate(i)" class="statusactivated">edit</button>
+            <div *ngIf="editedIndex === i">
+              <input type="text" [(ngModel)]="link" placeholder="Enter link" />
+              <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
+              <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">cancel</button>
+            </div>
+          </td>
+        </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="container" *ngIf="displayTable && data.length > 0">
   <div class="table-wrapper">
     <table>
@@ -75,6 +114,8 @@
     </table>
   </div>
 </div>
+
+
 <p
   class="nocompletedtext"
   *ngIf="completedList == 1 && completedData == 'Failure' && completedTopicPrompt == true"
