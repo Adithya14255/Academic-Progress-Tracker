@@ -22,6 +22,7 @@ export class CourseMentorPortalTableComponent {
   name: string = '';
   displayTable: boolean = true;
   displayAddTopic: boolean = false; 
+  comment: string = '';
 
   addTopicForm = this.formBuilder.group({
     topic: '',
@@ -32,9 +33,10 @@ export class CourseMentorPortalTableComponent {
   });
 
   checkoutForm = this.formBuilder.group({
-    handler_id: [0],
-    topic_id: [0],
-    link: [''],
+    handler_id: 0,
+    topic_id: 0,
+    link: '',
+    comment: '',
   });
 
   constructor(

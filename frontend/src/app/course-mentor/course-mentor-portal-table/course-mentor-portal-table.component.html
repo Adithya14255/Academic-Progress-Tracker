@@ -27,6 +27,7 @@
           <th>Outcome</th>
           <th>Status Code</th>
           <th>Link</th>
+          <th>Approval</th>
           <th>Comments</th>
         </tr>
       </thead>
@@ -51,7 +52,27 @@
               <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">Cancel</button>
             </div>
           </td>
-          <td>{{ item.comment }}</td>
+          <td>
+            <!-- Show "Approved" if the item is approved, otherwise show buttons -->
+            <ng-container *ngIf="item.status_code === 3;">
+              <span class="approved-text">Approved</span>
+            </ng-container>
+            <ng-container *ngIf="item.status_code === 2;">
+              <span class="approved-text">Disapproved</span>
+            </ng-container>
+            <ng-container *ngIf="item.status_code === 1;">
+              <span class="approved-text">Uploaded</span>
+            </ng-container>
+          </td>
+          <td>
+            <!-- Display "No comments" if item.comment is null or empty -->
+            <ng-container *ngIf="item.comment && item.comment !== ''; else noComment">
+              {{ item.comment }}
+            </ng-container>
+            <ng-template #noComment>
+              No comments
+            </ng-template>
+          </td>
         </tr>
       </tbody>
     </table>
