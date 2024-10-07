@@ -17,8 +17,8 @@
     <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
       <div class="username">
         <p>Select Course</p>
-        <select id="course_data" formControlName="course_code">
-          <option *ngFor="let option of coursedata" [value]="option.course_code">
+        <select id="course_data" formControlName="course">
+          <option *ngFor="let option of coursedata" [value]="option">
             {{ option.course_code }} - {{ option.course_name }}
           </option>
         </select>
