@@ -8,17 +8,21 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
   crossorigin="anonymous"
 />
-<div class="sidenav"><li>
+<div class="sidenav">
   <button class="table-btn" (click)="navigateWithData()"> < Back
   </button>
-</li></div>
+</div>
 <p class="greeting">Welcome Domain Mentor - {{name}}</p>
 <p class="courseCodeAndName">Domain:
   <span *ngIf="domain_id === 1">PROGRAMMING</span>
   <span *ngIf="domain_id === 2">NETWORKS & OPERATING SYSTEMS</span>
   <span *ngIf="domain_id === 3">ALGORITHMS</span>
 </p>
-<p class="courseCodeAndName">Course Code : {{ displayCourseData.course_code }} Course Name : {{ displayCourseData.course_name }}</p>
+<p class="courseCodeAndName">
+  Course Code: {{ displayCourseData.course_code }} 
+  Course Name: {{ displayCourseData.course_name }}
+</p>
+
 <div class="container">
   <div class="table-wrapper">
     <table @fade>
@@ -27,10 +31,10 @@
           <th>Course Code</th>
           <th>Course Name</th>
           <th>Topic</th>
-          <th>status</th>
-          <th>link</th>
+          <th>Status</th>
+          <th>Link</th>
           <th>Approval</th>
-          <th>comment</th>
+          <th>Comment</th>
         </tr>
       </thead>
       <tbody @fade>
@@ -45,25 +49,33 @@
             ></div>
           </td>
           <td>
-            <a *ngIf="item.url != ''"  href="{{ item.url }}" target="_blank" style="text-decoration: none">View</a>
-            <p *ngIf="item.url == ''">View</p>
+            <a *ngIf="item.url !== ''" href="{{ item.url }}" target="_blank" style="text-decoration: none">View</a>
+            <p *ngIf="item.url === ''">View</p>
           </td>
           <td>
-            <ng-container *ngIf="(item.status_code == 1 || item.status_code == 2) && editedIndex != i">
+            <!-- Show "Approved" if the item is approved, otherwise show buttons -->
+            <ng-container *ngIf="item.status_code === 3; else approvalButtons">
+              <span class="approved-text">Approved</span>
+            </ng-container>
+            <ng-template #approvalButtons>
               <button
+                *ngIf="editedIndex !== i"
                 (click)="approveupdate(item.topic_id, item.uid)"
                 class="statusactivated"
               >
                 Approve
               </button>
               <button
+                *ngIf="editedIndex !== i"
                 (click)="disapproveupdate(i)"
                 class="statusactivated"
               >
                 Disapprove
               </button>
-            </ng-container>
-            <div *ngIf="editedIndex == i">
+            </ng-template>
+
+            <!-- Comment input fields for disapproval -->
+            <div *ngIf="editedIndex === i">
               <input
                 type="text"
                 [(ngModel)]="comment"
@@ -76,36 +88,24 @@
                 Submit
               </button>
               <button
-                (click)="commentupdate(comment, 0, item.uid)"
+                (click)="cancelEdit()"
                 class="statusactivated"
               >
-                cancel
+                Cancel
               </button>
             </div>
           </td>
-          <td>{{ item.comment }}</td>
+          <td>
+            <!-- Display "No comments" if item.comment is null or empty -->
+            <ng-container *ngIf="item.comment && item.comment !== ''; else noComment">
+              {{ item.comment }}
+            </ng-container>
+            <ng-template #noComment>
+              No comments
+            </ng-template>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<div class="nav">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-<div class="design"></div>

@@ -135,12 +135,13 @@ tbody tr:hover {
     border: 2px solid rgb(0, 170, 31); /* Orange border */
     border-radius: 6px; /* Slightly rounded corners */
     padding: 1rem; /* Reduced padding */
-    width: 20vw; /* Increased width */
+    width: 50vw; /* Increased width */
     max-height: auto;
     background-color: #fff; /* White background */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
     box-sizing: border-box;
     margin: 1rem auto; /* Center the box */
+    margin-left: 18vw;
 }
 
 .add-row-form {
@@ -257,7 +258,7 @@ button {
     font-size: 1.2rem;
     border: none;
     background: none;
-    background-color: rgb(0, 170, 31);
+    background-color: transparent;
     color: #ffffff;
     font-weight: 500;
     outline: none;
@@ -267,9 +268,9 @@ button {
 
 .logout-btn:hover,
 .table-btn:hover {
-    color: rgb(0, 170, 31);
+    color:  rgb(59, 88, 58);
     text-decoration: none;
-    background-color: #ffffff;
+   /* background-color: rgb(32, 141, 30); */
 }
 
 .design {
