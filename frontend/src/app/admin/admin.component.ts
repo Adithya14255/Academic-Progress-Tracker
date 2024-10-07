@@ -27,7 +27,7 @@ export class AdminComponent {
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
-      this.data = state as User;
+      this.data = state;
     }
   }
   fetchCourses() {

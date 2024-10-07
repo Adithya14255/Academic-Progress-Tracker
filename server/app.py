@@ -10,15 +10,16 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.147.24/kgaps")
+    "postgresql://admin:admin@192.168.0.247/kgaps")
 conn = engine.connect()
 
 
 @app.route('/api/', methods=['POST', 'GET'])
 def index():
-    # q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
-    # r = conn.execute(q).fetchall()
-    # print(q)
+    q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
+    r = conn.execute(q)
+    conn.commit()
+    print(q)
     data = {'error': 'none'}
     return json.dumps(data)
 

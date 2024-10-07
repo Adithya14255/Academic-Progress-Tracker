@@ -151,7 +151,8 @@ export class FacultyTableComponent {
         });
      
     }
+    else{
     alert("Invalid link entered");
     return; // Append the token
-  }
+  }}
 }
