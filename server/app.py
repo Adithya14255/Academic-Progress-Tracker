@@ -14,6 +14,18 @@ engine = sqlalchemy.create_engine(
 conn = engine.connect()
 
 
+def progress_color(comp,total):
+    try:
+        value=comp/total
+    except:
+        return 'black'
+    if value==0:
+        return 'blue'
+    elif value<0:
+        return 'green'
+    else:
+        return 'red'
+
 @app.route('/api/', methods=['POST', 'GET'])
 def index():
     q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
@@ -111,11 +123,11 @@ def coordinator_courses():
     uid = request.json['uid']
     q = sqlalchemy.text(
         f"SELECT l.course_code,t.course_name FROM l_mentor_courses l,t_course_details t WHERE l.mentor_id='{uid}' and l.course_code=t.course_code;")
-    if conn.execute(q).fetchall() is not None:
+    if conn.execute(q).fetchall():
         r = conn.execute(q).fetchall()
-        print(r)
         if r:
             data = [dict(i._mapping) for i in r]
+            print(data)
             return json.dumps(data)
     else:
         return json.dumps({"response":"no courses assigned"})
@@ -123,14 +135,13 @@ def coordinator_courses():
 
 @app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
 def faculty(uid,course_code):
-    q = sqlalchemy.text(
-        f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
-    r = conn.execute(q).fetchall()
-    if r:
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
+    if (conn.execute(q).fetchall()):
+        r = conn.execute(q).fetchall()
         data = [dict(i._mapping) for i in r]
         print(data)
         return json.dumps(data)
-
+    return json.dumps({'response':'No topics assigned yet'})
 
 @app.route('/api/faculty_completed/<int:uid>', methods=['POST', 'GET'])
 def faculty_completed(uid):
@@ -144,7 +155,7 @@ def faculty_completed(uid):
             return json.dumps(data)
     else:
         print("fail")
-        return json.dumps({'data': 'Failure'})
+        return json.dumps({'response': 'no completed topics yet'})
 
 
 @app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
@@ -276,6 +287,15 @@ def domain_mentor_info():
     print(data)
     return json.dumps(data)
 
+@app.route('/api/mentor_list', methods=['POST', 'GET'])
+def mentor_list():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(f"select b.uid,b.name,c.course_code from t_users b,l_mentor_courses c,l_course_departments d where b.uid=c.mentor_id and c.course_code=d.course_code and d.department_id={department_id};")
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    print(data)
+    return json.dumps(data)
+
 @app.route('/api/assign_mentor', methods=['POST', 'GET'])
 def assign_mentor():
     course_code = request.json['course_code']
@@ -362,7 +382,7 @@ def editlink():
     return json.dumps({'data': 'Success'})
 
 
-@app.route('/api/facultyprogress', methods=['POST', 'GET'])
+@app.route('/api/faculty_progress', methods=['POST', 'GET'])
 def facultyprogress():
     handler_id = request.json['handler_id']
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
@@ -372,35 +392,38 @@ def facultyprogress():
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
+    print(r)
     data = defaultdict(lambda: defaultdict(int))
     for course_id, status_code, count in r:
         data[course_id][status[status_code]] = count,color_status[status_code]
     json_output = json.dumps(data, indent=4)
-    q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where status_code=4 and uid='{handler_id}' group by course_code,uid;")
+    q = sqlalchemy.text(f"SELECT COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours, all_courses.course_code FROM (SELECT DISTINCT course_code FROM faculty_table WHERE uid = '{handler_id}') AS all_courses LEFT JOIN (SELECT course_code, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 AND uid = '{handler_id}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
     r = conn.execute(q).fetchall()
-    progress_color = {0:'green',1:'blue',2:'red',3:'green',4:'green'}
     course_data_current = []
     for i in r:
-        temp={'completed_hours':i[0],'total_hours':i[1],'bar_color':progress_color[i[0]//i[1]],'course_code':i[2]}
+        temp={'completed_hours':i[0],'total_hours':i[1],'bar_color':progress_color(i[0],i[1]),'course_code':i[2]}
         course_data_current.append(temp)
-    q = sqlalchemy.text(f"select sum(hours_completed) as hours_completed,sum(total_hours) as total_hours,course_code from faculty_table where uid='{handler_id}' group by course_code,uid;")
+    q = sqlalchemy.text(f"SELECT all_courses.course_code,COALESCE(active_courses.active_course_count, 0),all_courses.total_course_count AS active_course_count FROM (SELECT course_code, COUNT(*) AS total_course_count FROM faculty_table WHERE uid = '{handler_id}' GROUP BY course_code, uid) AS all_courses LEFT JOIN (SELECT course_code, COUNT(*) AS active_course_count FROM faculty_table WHERE uid = '{handler_id}' AND status_code = 4 GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
     r = conn.execute(q).fetchall()
     course_data_overall = []
     for i in r:
-        temp={'completed_hours':i[0],'total_hours':i[1],'course_code':i[2]}
+        temp={'course_code':i[0],'count':i[1],'total_count':i[2]}
         course_data_overall.append(temp)
     print(course_data_current,course_data_overall)
     return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output,'course_data_current':course_data_current,'course_data_overall':course_data_overall}) 
 
 
-@app.route('/api/mentor_list', methods=['POST', 'GET'])
-def mentor_list():
-    department_id = request.json['department_id']
-    q = sqlalchemy.text(f"select b.uid,b.name,c.course_code from t_users b,l_mentor_courses c,l_course_departments d where b.uid=c.mentor_id and c.course_code=d.course_code and d.department_id={department_id};")
+
+@app.route('/api/course_progress', methods=['POST', 'GET'])
+def course_progress():
+    course_code = request.json['course_code']
+    q = sqlalchemy.text(f"SELECT status_code,COUNT(*) FROM domain_mentor_table WHERE course_code='{course_code}' and status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
-    data = [dict(i._mapping) for i in r]
-    print(data)
-    return json.dumps(data)
+    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
+    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor}}) 
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001, host="0.0.0.0")

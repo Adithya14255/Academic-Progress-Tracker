@@ -6,20 +6,20 @@
         <div class="profile-container">
             <div class="profile-header">
                 <img src=".\assets\logo\staff.png" alt="Profile Picture">
-                <h2 class="faculty-profile-name">{{data.name}}</h2>
+                <h2 class="faculty-profile-name">{{name}}</h2>
                 <p>Course Coordinator</p>
             </div>
             <div class="profile-body">
                 <div class="profile-info">
-                    <p><strong>ID:</strong>{{data.uid}}</p>
-                    <p><strong>Name:</strong> {{data.name}}</p>
+                    <p><strong>ID:</strong>{{userdata.uid}}</p>
+                    <p><strong>Name:</strong> {{name}}</p>
                     <p><strong>Department Name:</strong>
-                        <span *ngIf="data.department_id === 1">CSE</span>
-                        <span *ngIf="data.department_id === 2">AI&DS</span>
-                        <span *ngIf="data.department_id === 3">ECE</span>
-                        <span *ngIf="data.department_id === 4">CSBS</span>
-                        <span *ngIf="data.department_id === 5">IT</span>
-                        <span *ngIf="data.department_id === 6">S&H</span></p>
+                        <span *ngIf="userdata.department_id === 1">CSE</span>
+                        <span *ngIf="userdata.department_id === 2">AI&DS</span>
+                        <span *ngIf="userdata.department_id === 3">ECE</span>
+                        <span *ngIf="userdata.department_id === 4">CSBS</span>
+                        <span *ngIf="userdata.department_id === 5">IT</span>
+                        <span *ngIf="userdata.department_id === 6">S&H</span></p>
                     <p><strong>Links ></strong></p>    
                         <div class="profile-info-links">
                             <ul id="navlogin">
@@ -40,12 +40,24 @@
     <div class="right">
         
 <p class="greeting">Welcome Course Coordinator - {{name}}</p>
-        <p class="courseCodeAndName">AI3746 - Artificial Systems</p>
-        <div class="pie-chart">
-            <div class="pie one"><p>Marudhu Paandian</p></div>
-            <div class="pie two"><p>Rajarajan</p></div>
-            <div class="pie three"><p>Nishanth R</p></div>
-            <div class="pie four"><p>Yogesh</p></div>
+        <p class="courseCodeAndName">{{displayCourseData.course_code}} - {{displayCourseData.course_name}}</p>
+        <div  *ngFor="let item of courseDataCurrent;">
+            <label for="facultyprogress">Faculty: {{item.course_code}}</label>
+            <label for="facultyprogress">Current Progress: {{item.course_code}}</label>
+            <progress class="progressbars" [value]="item.completed_hours" [max]="item.total_hours" [style.background-color]="item.bar_color" >{{item.completed_hours}}</progress>
+            <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+          </div>
+          <div class="progressbars" *ngFor="let item of courseDataOverall;">
+            <label for="facultyprogress">Faculty: {{item.course_code}}</label>
+            <label for="facultyprogress">Overall Progress: {{item.course_code}}</label>
+            <progress class="progressbars" [value]="item.completed_hours" [max]="item.total_hours" >{{item.completed_hours}}</progress>
+            <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+          </div>
+            <div class="piechart-container">
+              <div class="overall-text">Overall :</div>
+              <div class="mainChart">
+                <canvas id="MyChart">{{ chart }}</canvas>
+              </div>
         </div>
     </div>
 </div>
