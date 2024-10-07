@@ -39,7 +39,6 @@ export class FacultyTableComponent {
   activeButton: string = 'details';  // Default to uploaded view
   details: boolean = true;  // Show details form
   displayforapproved: boolean = false;
-  completedList: number = 0;
   completedTopicPrompt: boolean = false;
 
   checkoutForm = this.formBuilder.group({
@@ -93,10 +92,9 @@ export class FacultyTableComponent {
           console.log(response.response);
         }else{
         this.displayTable = this.data.length > 0; // Show the table only if there are topics
-      },
-      error => alert("Error - try again")
-    );
-  }
+      }
+  });
+}
 
   getBoxColor(value: number): string {
     switch (value) {
@@ -154,7 +152,6 @@ export class FacultyTableComponent {
   showDetails() {
     this.details = true;
     this.displayTable = false;
-    this.displayDetailsTable = true;
     this.activeButton = 'details';
     this.completedTopicPrompt = false;
   }
@@ -188,32 +185,6 @@ export class FacultyTableComponent {
     }
   }
 
-  // Show the "Details" form
-  showDetails(): void {
-    this.details = true;
-    this.data = [];  // Clear the table data when "Details" is clicked
-    this.displayTable = true;
-    this.activeButton = 'details';
-    this.completedTopicPrompt = false;
-  }
 
-  // Show the "Uploaded" table
-  showUploaded(): void {
-    this.details = false;
-    this.displayTable = true;
-    this.activeButton = 'uploaded';
-    this.completedTopicPrompt = false;
-  }
 
-  // View the list of approved/completed topics
-  viewCompletedList(): void {
-    this.details = false;
-    this.displayTable = true;
-    this.completedTopicPrompt = true;
-    this.activeButton = 'approved';
-    this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
-      this.completedData = response.data === 'Failure' ? 'Failure' : response;
-      this.completedList = 1;
-    });
-  }
 }
