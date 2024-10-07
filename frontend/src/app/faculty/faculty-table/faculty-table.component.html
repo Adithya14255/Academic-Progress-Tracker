@@ -1,13 +1,3 @@
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
-  rel="stylesheet"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-  crossorigin="anonymous"
-/>
 <div class="sidenav">
   <button class="table-btn" (click)="navigateWithData()">< Back</button>
   <button class="table-btn" (click)="showDetails()" [class.active]="activeButton === 'details'">Details</button>
@@ -19,9 +9,10 @@
   <div class="greeting">
     <p>Welcome Faculty - {{ name }}</p>
     <p class="courseCodeAndName">
-      {{ displayCourseData.course_code }}-{{ displayCourseData.course_name }}
+      {{ displayCourseData.course_code }} - {{ displayCourseData.course_name }}
     </p>
   </div>
+
   <div class="boxforforms" *ngIf="details">
     <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
       <div class="username">
@@ -37,7 +28,8 @@
   </div>
 </div>
 
-<div class="container" *ngIf="displayforapproved">
+<!-- Combined Table Displaying Both Approved and Uploaded Data -->
+<div class="container" *ngIf="data.length > 0">
   <div class="table-wrapper">
     <table>
       <thead @fade>
@@ -50,67 +42,83 @@
       </thead>
       <tbody @fade>
         <tr *ngFor="let item of data; let i = index">
-          <ng-container *ngIf="item.status_code !== 3">
-          <td>{{ item.topic }}</td>
-          <td>{{ item.outcome }}</td>
-          <td>
-            <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
-          </td>
-          <td>
-            <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
-            <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
-            <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
-                    (click)="idupdate(i)" class="statusactivated">upload link</button>
-            <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
-                    (click)="idupdate(i)" class="statusactivated">edit</button>
-            <div *ngIf="editedIndex === i">
-              <input type="text" [(ngModel)]="link" placeholder="Enter link" />
-              <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
-              <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">cancel</button>
-            </div>
-          </td>
-        </ng-container>
+          <ng-container *ngIf="activeButton === 'details'">
+            <td>{{ item.topic }}</td>
+            <td>{{ item.outcome }}</td>
+            <td>
+              <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+            </td>
+            <td>
+              <!-- Link or Buttons for Upload/Edit -->
+              <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
+              <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
+              <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">upload link</button>
+              <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">edit</button>
+              <!-- Link Update Form -->
+              <div *ngIf="editedIndex === i">
+                <input type="text" [(ngModel)]="link" placeholder="Enter link" />
+                <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
+                <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">Cancel</button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="item.status_code !== 3 && activeButton === 'uploaded'">
+            <td>{{ item.topic }}</td>
+            <td>{{ item.outcome }}</td>
+            <td>
+              <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+            </td>
+            <td>
+              <!-- Link or Buttons for Upload/Edit -->
+              <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
+              <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
+              <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">upload link</button>
+              <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">edit</button>
+              <!-- Link Update Form -->
+              <div *ngIf="editedIndex === i">
+                <input type="text" [(ngModel)]="link" placeholder="Enter link" />
+                <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
+                <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">Cancel</button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="item.status_code === 3 && activeButton === 'approved'">
+            <td>{{ item.topic }}</td>
+            <td>{{ item.outcome }}</td>
+            <td>
+              <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
+            </td>
+            <td>
+              <!-- Link or Buttons for Upload/Edit -->
+              <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
+              <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
+              <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">upload link</button>
+              <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
+                      (click)="idupdate(i)" class="statusactivated">edit</button>
+              <!-- Link Update Form -->
+              <div *ngIf="editedIndex === i">
+                <input type="text" [(ngModel)]="link" placeholder="Enter link" />
+                <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
+                <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">Cancel</button>
+              </div>
+            </td>
+          </ng-container>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<div class="container" *ngIf="displayTable && data.length > 0">
-  <div class="table-wrapper">
-    <table>
-      <thead @fade>
-        <tr>
-          <th>Topic</th>
-          <th>Outcome</th>
-          <th>Status Code</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <tbody @fade>
-        <tr *ngFor="let item of data; let i = index">
-          <ng-container *ngIf="item.status_code !== 3">
-          <td>{{ item.topic }}</td>
-          <td>{{ item.outcome }}</td>
-          <td>
-            <div class="box" [style.background-color]="getBoxColor(item.status_code)"></div>
-          </td>
-          <td>
-            <span *ngIf="item.url === '' && item.can_upload === 0">view</span>
-            <a *ngIf="item.status_code > 0 && editedIndex !== i" class="statusactivated" [href]="item.url" target="_blank">view</a>
-            <button *ngIf="item.status_code === 0 && editedIndex !== i && item.can_upload === 1"
-                    (click)="idupdate(i)" class="statusactivated">upload link</button>
-            <button *ngIf="item.status_code > 0 && item.status_code < 3 && editedIndex !== i && item.can_upload === 1"
-                    (click)="idupdate(i)" class="statusactivated">edit</button>
-            <div *ngIf="editedIndex === i">
-              <input type="text" [(ngModel)]="link" placeholder="Enter link" />
-              <button (click)="linkupdate(link, item.topic_id, item.uid)" class="statusactivated">Submit</button>
-              <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">cancel</button>
-            </div>
-          </td>
-        </ng-container>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<p
+  class="nocompletedtext"
+  *ngIf="completedList == 1 && completedData == 'Failure' && completedTopicPrompt == true"
+>
+  No completed Topics Yet !
+</p>
