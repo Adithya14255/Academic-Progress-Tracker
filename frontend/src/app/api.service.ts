@@ -46,7 +46,10 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/register`, data);
   }
   getFacultyProgressData(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/facultyprogress`, data);
+    return this.http.post<any>(`${this.apiUrl}/faculty_progress`, data);
+  }
+  getCourseProgressData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/course_progress`, data);
   }
   addTopicData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/add_topic`, data);

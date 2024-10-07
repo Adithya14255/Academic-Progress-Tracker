@@ -106,6 +106,7 @@ export class CourseMentorPortalTableComponent {
       this.addTopicForm.reset();  // Reset form after submission
       this.displayAddTopic = false;  // Optionally hide the form
     });
+    window.location.reload();
   }
 
   getBoxColor(value: number): string {
