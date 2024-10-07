@@ -31,11 +31,12 @@ export class FacultyTableComponent {
   link: string = '';
   name: string = '';
   displayTable: boolean = true;
-  activeButton: string = 'uploaded';  // Default to uploaded view
-  details: boolean = false;  // Show details form
+  activeButton: string = 'details';  // Default to uploaded view
+  details: boolean = true;  // Show details form
   displayforapproved: boolean = false;
   completedList: number = 0;
   completedTopicPrompt: boolean = false;
+  submitted: boolean = false;
 
   checkoutForm = this.formBuilder.group({
     handler_id: 0,
@@ -53,7 +54,12 @@ export class FacultyTableComponent {
     link: '',
   });
 
-  constructor(private location: Location, private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {}
+  constructor(
+    private location: Location,
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const state = this.location.getState();
@@ -86,6 +92,7 @@ export class FacultyTableComponent {
       response => {
         this.data = response;
         this.displayTable = this.data.length > 0; // Show the table only if there are topics
+        this.submitted = true;
       },
       error => alert("Error - try again")
     );
@@ -132,8 +139,7 @@ export class FacultyTableComponent {
   // Show the "Details" form
   showDetails(): void {
     this.details = true;
-    this.data = [];  // Clear the table data when "Details" is clicked
-    this.displayTable = true;
+    this.displayTable = false; // Hide the table initially when showing details
     this.activeButton = 'details';
     this.completedTopicPrompt = false;
   }
