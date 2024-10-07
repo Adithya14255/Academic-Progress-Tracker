@@ -31,39 +31,31 @@ export class FacultyTableComponent {
   link: string = '';
   name: string = '';
   displayTable: boolean = true;
-  activeButton: string = 'uploaded';  // Default to uploaded view
-  details: boolean = false;  // Show details form
+  activeButton: string = 'details';  // Default to uploaded view
+  details: boolean = true;  // Show details form
   displayforapproved: boolean = false;
   completedList: number = 0;
   completedTopicPrompt: boolean = false;
-
-  checkoutForm = this.formBuilder.group({
-    handler_id: 0,
-    topic_id: 0,
-    hours_completed: 0
-  });
 
   getCourseDataForm = this.formBuilder.group({
     course_code: '',
   });
 
-  getCanLinkUpdateForm = this.formBuilder.group({
-    handler_id: 0,
-    topic_id: 0,
-    link: '',
-  });
-
-  constructor(private location: Location, private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {}
+  constructor(
+    private location: Location, 
+    private formBuilder: FormBuilder, 
+    private apiService: ApiService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const state = this.location.getState();
     if (typeof state === 'object' && state !== null) {
       this.userdata = state as User;
     }
-
     if (this.userdata) {
       this.name = this.userdata.name;
-      this.apiService.getFacultyCourseList({ uid: this.userdata.uid }).subscribe(
+      this.apiService.getFacultyCourseList({ 'uid': this.userdata.uid }).subscribe(
         response => {
           this.coursedata = response;
           this.displayCourseData = this.coursedata[0];
@@ -75,12 +67,10 @@ export class FacultyTableComponent {
     }
   }
 
-  // Navigate back to the faculty-incharge page with user data
   navigateWithData(): void {
     this.router.navigateByUrl('/faculty-incharge', { state: this.userdata });
   }
 
-  // Get course details when a course is selected
   getCourseDetails() {
     this.apiService.getFacultyData(this.userdata.uid, this.getCourseDataForm.value.course_code).subscribe(
       response => {
@@ -91,7 +81,6 @@ export class FacultyTableComponent {
     );
   }
 
-  // Get the color based on status code
   getBoxColor(value: number): string {
     switch (value) {
       case 0: return 'white';
@@ -102,53 +91,51 @@ export class FacultyTableComponent {
     }
   }
 
-  // Handle editing index
   idupdate(index: number): void {
-    this.editedIndex = index;
+    this.editedIndex = index; // Set the edited index to the current item index
+    this.link = this.data[index].url; // Pre-fill the link input with the current URL
   }
 
-  // Handle updating the link for an item
   linkupdate(link: string, topic_id: number, uid: number): void {
-    this.editedIndex = null;
-    if (topic_id === 0) {
+    if (link.trim() === '') {
+      alert('Please enter a valid link.'); // Alert if the link is empty
       return;
     }
-    const moodleBaseUrl = 'https://moodle.kgkite.ac.in';  // Set this to your Moodle base URL
-    if (link.startsWith(moodleBaseUrl)) {
-      this.getCanLinkUpdateForm.patchValue({
-        handler_id: uid,
-        topic_id: topic_id,
-        link: link,
-      });
-      this.apiService.updateLinkDetails(this.getCanLinkUpdateForm.value).subscribe();
-      this.router.navigateByUrl('/faculty-table', { state: this.data }).then(() => {
-        window.location.reload();
-      });
-    } else {
-      alert("Invalid link entered");
-    }
+
+    this.apiService.updateLinkDetails({ link, topicId: topic_id, uid }).subscribe(
+      (response: any) => { // Explicitly define the type
+        // Handle response after updating the link
+        if (response.success) {
+          this.data[this.editedIndex!].url = link; // Use non-null assertion operator
+          this.data[this.editedIndex!].status_code = 1; // Use non-null assertion operator
+          this.editedIndex = null; // Reset the edited index
+          this.link = ''; // Clear the input field
+        } else {
+          alert('Failed to update link. Please try again.');
+        }
+      },
+      (error: any) => { // Explicitly define the type
+        alert('An error occurred. Please try again.');
+      }
+    );
   }
 
-  // Show the "Details" form
   showDetails(): void {
     this.details = true;
-    this.data = [];  // Clear the table data when "Details" is clicked
     this.displayTable = true;
     this.activeButton = 'details';
     this.completedTopicPrompt = false;
   }
 
-  // Show the "Uploaded" table
   showUploaded(): void {
-    this.details = false;
+    this.details = true;
     this.displayTable = true;
     this.activeButton = 'uploaded';
     this.completedTopicPrompt = false;
   }
 
-  // View the list of approved/completed topics
   viewCompletedList(): void {
-    this.details = false;
+    this.details = true;
     this.displayTable = true;
     this.completedTopicPrompt = true;
     this.activeButton = 'approved';
