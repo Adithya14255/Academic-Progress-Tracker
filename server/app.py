@@ -135,14 +135,13 @@ def coordinator_courses():
 
 @app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
 def faculty(uid,course_code):
-    q = sqlalchemy.text(
-        f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
-    r = conn.execute(q).fetchall()
-    if r:
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
+    if (conn.execute(q).fetchall()):
+        r = conn.execute(q).fetchall()
         data = [dict(i._mapping) for i in r]
         print(data)
         return json.dumps(data)
-
+    return json.dumps({'response':'No topics assigned yet'})
 
 @app.route('/api/faculty_completed/<int:uid>', methods=['POST', 'GET'])
 def faculty_completed(uid):
@@ -156,7 +155,7 @@ def faculty_completed(uid):
             return json.dumps(data)
     else:
         print("fail")
-        return json.dumps({'data': 'Failure'})
+        return json.dumps({'response': 'no completed topics yet'})
 
 
 @app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])

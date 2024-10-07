@@ -82,13 +82,14 @@ export class FacultyTableComponent {
     this.apiService.getFacultyData(this.userdata.uid, this.getCourseDataForm.value.course_code).subscribe(
       response => {
         this.data = response;  // Update 'data' with the fetched topics
-        if (this.data.length>0){
         this.displayTable = this.data.length > 0; // Show the table only if there are topics
         this.displayCourseData = {'course_code':response[0].course_code,'course_name':response[0].course_name};
-      }
-    },
-      error => alert("Error - no entries to show")
-    );
+        console.log('fine');
+        if (!this.displayCourseData.course_code){
+          alert("Error - no entries to show");
+
+        }
+    });
   }
 
   getBoxColor(value: number): string {
