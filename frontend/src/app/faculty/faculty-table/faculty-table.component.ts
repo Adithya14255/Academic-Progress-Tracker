@@ -29,6 +29,7 @@ export class FacultyTableComponent {
   displayCourseData: any = { course_code: '', course_name: '' };
   editedIndex: number | null = null;
   link: string = '';
+  hourschange: number =0;
   name: string = '';
   displayTable: boolean = true;
   activeButton: string = 'details';  // Default to uploaded view
@@ -96,7 +97,10 @@ export class FacultyTableComponent {
     this.editedIndex = index; // Set the edited index to the current item index
     this.link = this.data[index].url; // Pre-fill the link input with the current URL
   }
-
+  editItem(index: number) {
+    this.completedIndex = index;
+    this.hourschange=0;
+  }
   checkoutForm = this.formBuilder.group({
     handler_id: 0,
     topic_id: 0,

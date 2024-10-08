@@ -109,6 +109,42 @@
                 <button (click)="linkupdate(link, 0, item.uid)" class="statusactivated">Cancel</button>
               </div>
             </td>
+            <td>
+              <ng-container *ngIf="item.status_code == 3">
+                <p *ngIf="completedIndex === i">Enter hours taken</p>
+                <input
+                  *ngIf="completedIndex === i"
+                  type="text"
+                  [(ngModel)]="hourschange"
+                  title="Enter hours taken"
+                  class="statusactivatedinput"
+                />
+                <button
+                  *ngIf="completedIndex === i"
+                  (click)="hoursupdate(hourschange, item.topic_id, item.uid)"
+                  class="statusactivated"
+                >
+                  Submit
+                </button>
+                <button
+                  *ngIf="completedIndex == i"
+                  (click)="hoursupdate(hourschange, 0, item.uid)"
+                  class="statusactivated"
+                >
+                  Cancel
+                </button>
+                <button
+                  *ngIf="completedIndex != i"
+                  (click)="editItem(i)"
+                  class="statusactivated"
+                >
+                  Completed
+                </button>
+              </ng-container>
+              <span *ngIf="item.status_code != 3" class="statusdeactivated"
+                >Not Completed Yet</span
+              >
+            </td>
           </ng-container>
         </tr>
       </tbody>
