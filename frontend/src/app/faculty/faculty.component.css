@@ -135,58 +135,81 @@
 .progress-container {
     margin-bottom: 1.5rem; /* Increased space between progress containers */
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slight background for visibility */
+    background-color: rgba(255, 255, 255, 0.2); /* Slight background for visibility */
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  }
-  
-  /* Progress Bar Horizontal Layout */
-  .progressbar-horizontal {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    transition: transform 0.2s; /* Animation on hover */
+}
+
+.progress-container:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Progress Bar Horizontal Layout */
+.progressbar-horizontal {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  /* Progress Color Indicator */
-  .progresscolor {
+    margin-top: 10px; /* Spacing above progress bars */
+}
+
+/* Progress Color Indicator */
+.progresscolor {
     width: 30px;
     height: 30px;
     border-radius: 50%; /* Make the color indicator circular */
     display: inline-block;
     margin-right: 10px; /* Space between color and text */
-  }
-  
-  /* Progress Bar Styling */
-  .progressbars {
+}
+
+/* Progress Bar Styling */
+.progressbars {
     width: 95%; /* Full width of the container */
     height: 20px; /* Height of the progress bar */
     border-radius: 10px; /* Rounded corners */
     background-color: rgba(0, 0, 0, 0.1); /* Background of the progress bar */
     appearance: none; /* Remove default styles for the progress element */
-  }
-  
-  .progressbars::-webkit-progress-bar {
+    overflow: hidden; /* Prevent overflow of the inner color */
+}
+
+/* Progress Bar Background */
+.progressbars::-webkit-progress-bar {
     background-color: rgba(0, 0, 0, 0.1); /* Background color of the progress bar */
     border-radius: 10px; /* Rounded corners */
-  }
-  
-  .progressbars::-webkit-progress-value {
+}
+
+/* Progress Bar Value */
+.progressbars::-webkit-progress-value {
     border-radius: 10px; /* Rounded corners */
+    background-color: rgba(255, 138, 42, 0.9); /* Color of the progress value */
     transition: width 0.5s ease-in-out; /* Smooth transition for progress */
-  }
-  
-  /* For Firefox */
-  .progressbars::-moz-progress-bar {
-    background-color: rgba(0, 0, 0, 0.6); /* Progress color */
+}
+
+/* For Firefox */
+.progressbars::-moz-progress-bar {
+    background-color: rgba(255, 138, 42, 0.9); /* Progress color */
     border-radius: 10px; /* Rounded corners */
-  }
-  
-  /* Progress Text Styling */
-  .progress-text {
+}
+
+/* Progress Text Styling */
+.progress-text {
     font-size: 1rem; /* Adjust text size */
     color: #333; /* Darker text color for contrast */
     margin-left: 10px; /* Space between text and progress bar */
-  }
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .progress-text {
+        font-size: 0.9rem; /* Smaller font size on smaller screens */
+    }
+
+    .progress-container {
+        padding: 10px; /* Reduced padding for smaller screens */
+    }
+}
+
   
   
   /* Pie Chart Container Styling */

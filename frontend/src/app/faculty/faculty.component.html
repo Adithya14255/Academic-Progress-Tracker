@@ -42,21 +42,24 @@
 
     <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
       <p class="facultyprogress">Course {{courseDataOverall[i].course_code}}</p>
+    
+      <!-- Current Progress Section -->
       <label for="facultyprogress">Current Progress:</label>
       <div class="progressbar-horizontal">
         <div class="progresscolor" [style.background-color]="item.bar_color"></div>
-        <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+        <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
       </div>
     
-
-    <div class="progress-container">
+      <!-- Overall Progress Section -->
       <label for="facultyprogress">Overall Progress:</label>
       <div class="progressbar-horizontal">
-        <progress class="progressbars" [value]="courseDataOverall[i].count" [max]="courseDataOverall[i].total_count">{{courseDataOverall[i].completed_hours}}</progress>
-        <p>{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+        <progress class="progressbars" [value]="courseDataOverall[i].count" [max]="courseDataOverall[i].total_count">
+          {{courseDataOverall[i].completed_hours}}
+        </progress>
+        <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
       </div>
     </div>
-  </div>
+
     <div class="piechart-container">
       <div class="mainChart">
         <canvas id="MyChart">{{ chart }}</canvas>
@@ -65,6 +68,5 @@
         <div #chartContainer class="chart-container"></div>
       </div>
     </div>
-    
   </div>
 </div>
