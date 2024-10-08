@@ -224,12 +224,14 @@
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
   }
   
-  .piechart-container .mainChart,
-  .piechart-container .subcharts {
-    width: 100%; /* Ensures the charts take full width */
-    height: auto;
+  .piechart-container .mainChart {
+    width: 10vw; /* Ensures the charts take full width */
+    height: 10vw;
   }
-  
+  .piechart-container .subcharts{
+    width:8vw;
+    height:8vw;
+  }
   .piechart-container canvas {
     width: 100%;
     height: auto; /* Make canvas responsive */
