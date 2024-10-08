@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.147.24/kgaps")
+    "postgresql://admin:admin@172.16.30.15/kgaps")
 conn = engine.connect()
 
 
@@ -19,11 +19,12 @@ def progress_color(comp,total):
         value=comp/total
     except:
         return 'black'
-    if value==0:
+    if value==1:
         return 'blue'
-    elif value<0:
+    elif value<1:
         return 'green'
     else:
+        print(value)
         return 'red'
 
 @app.route('/api/', methods=['POST', 'GET'])

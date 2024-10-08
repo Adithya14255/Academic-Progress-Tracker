@@ -1,71 +1,63 @@
 <div class="container">
   <div class="left">
-    <!-- Left section content -->
-    <div class="profile-header">
-      <img src="./assets/logo/staff.png" alt="Profile Picture" />
-      <h2 class="faculty-profile-name">{{ data.name }}</h2>
-      <p>Faculty</p>
-    </div>
-    <div class="profile-body">
-      <div class="profile-info">
-        <p><strong>ID: </strong>{{ data.uid }}</p>
-        <p><strong>Name: </strong>{{ data.name }}</p>
-        <p>
-          <strong>Department: </strong>
-          <span *ngIf="data.department_id === 1">CSE</span>
-          <span *ngIf="data.department_id === 2">AI&DS</span>
-          <span *ngIf="data.department_id === 3">ECE</span>
-          <span *ngIf="data.department_id === 4">CSBS</span>
-          <span *ngIf="data.department_id === 5">IT</span>
-          <span *ngIf="data.department_id === 6">S&H</span>
-        </p>
-        <p><strong>Links:</strong></p>
-        <div class="profile-info-links">
-          <ul id="navlogin">
-            <li>
-              <button class="table-btn" (click)="navigateWithData()">Faculty table ></button>
-            </li>
-            <li>
-              <button class="logout-btn" (click)="navigateToOut()">|< Logout</button>
-            </li>
-          </ul>
+    <div class="profile-container">
+      <div class="profile-header">
+        <img src=".\assets\logo\staff.png" alt="Profile Picture">
+        <h2 class="faculty-profile-name">{{name}}</h2>
+        <p>Faculty</p>
+      </div>
+      <div class="profile-body">
+        <div class="profile-info">
+          <p><strong>ID:</strong> {{data.uid}}</p>
+          <p><strong>Name:</strong> {{name}}</p>
+          <p><strong>Department Name:</strong>
+            <span *ngIf="data.department_id === 1">CSE</span>
+            <span *ngIf="data.department_id === 2">AI&DS</span>
+            <span *ngIf="data.department_id === 3">ECE</span>
+            <span *ngIf="data.department_id === 4">CSBS</span>
+            <span *ngIf="data.department_id === 5">IT</span>
+            <span *ngIf="data.department_id === 6">S&H</span>
+          </p>
+          <p><strong>Links ></strong></p>
+          <div class="profile-info-links">
+            <ul id="navlogin">
+              <li>
+                <button class="table-btn" (click)="navigateWithData()">Faculty table ></button>
+              </li>
+              <li>
+                <button class="logout-btn" (click)="navigateToOut()">|< Logout</button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div class="right">
     <!-- Right section content -->
     <div class="nametext">
-      <p class="greeting">Welcome Faculty - {{ name }}</p>
+      <p class="greeting">Welcome Faculty - {{name}}</p>
     </div>
 
     <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
       <p class="facultyprogress">Course {{courseDataOverall[i].course_code}}</p>
-    
+      
       <!-- Current Progress Section -->
       <label for="facultyprogress">Progression:</label>
       <div class="progressbar-horizontal">
         <div class="progresscolor" [style.background-color]="item.bar_color"></div>
         <div class="colorcomment">
-        <ng-container>
-          <p *ngIf="item.bar_color === 'black'">
-            Not yet started
-          </p>
-          <p *ngIf="item.bar_color === 'red'">
-            Delayed
-          </p>
-          <p *ngIf="item.bar_color === 'green'">
-            Ahead of time
-          </p>
-          <p *ngIf="item.bar_color === 'blue'">
-            On Time
-          </p>
-        </ng-container>
+          <ng-container>
+            <p *ngIf="item.bar_color === 'black'">Not yet started</p>
+            <p *ngIf="item.bar_color === 'red'">Delayed</p>
+            <p *ngIf="item.bar_color === 'green'">Ahead of time</p>
+            <p *ngIf="item.bar_color === 'blue'">On Time</p>
+          </ng-container>
         </div>
         <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
       </div>
-    
+      
       <!-- Overall Progress Section -->
       <label for="facultyprogress">Overall Progress:</label>
       <div class="progressbar-horizontal">
@@ -78,7 +70,7 @@
 
     <div class="piechart-container">
       <div class="mainChart">
-        <canvas id="MyChart">{{ chart }}</canvas>
+        <canvas id="MyChart">{{chart}}</canvas>
       </div>
       <div class="subcharts">
         <div #chartContainer class="chart-container"></div>
