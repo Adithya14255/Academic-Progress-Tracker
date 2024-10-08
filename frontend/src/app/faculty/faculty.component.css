@@ -267,6 +267,7 @@
   
   .progress-container {
     margin-bottom: 1rem;
+    
   }
   
   .progressbar-horizontal {
@@ -287,28 +288,12 @@
   
   .piechart-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(255, 138, 42, 0.2);
     padding: 2rem;
+    height:60vh;
     border-radius: 10px;
     margin-top: 2rem;
   }
   
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-  
-    .left {
-      width: 100%;
-      position: relative;
-      margin-bottom: 2rem;
-    }
-  
-    .right {
-      margin-left: 0;
-      padding: 1rem;
-    }
-  }
+
   
