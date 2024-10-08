@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@172.16.30.15/kgaps")
+    "postgresql://admin:admin@192.168.147.24/kgaps")
 conn = engine.connect()
 
 
@@ -388,7 +388,7 @@ def facultyprogress():
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'purple'}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'#4b007d'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
