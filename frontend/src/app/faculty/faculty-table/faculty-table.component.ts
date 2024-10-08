@@ -36,6 +36,7 @@ export class FacultyTableComponent {
   displayforapproved: boolean = false;
   completedList: number = 0;
   completedTopicPrompt: boolean = false;
+  completedIndex: number | null = null;
 
   getCourseDataForm = this.formBuilder.group({
     course_code: '',
@@ -101,6 +102,7 @@ export class FacultyTableComponent {
     topic_id: 0,
     link: '',
     comment: '',
+    hours_completed:0
   });
   
   linkupdate(link: string, topic_id: number, uid: number): void {
@@ -143,4 +145,22 @@ export class FacultyTableComponent {
       this.completedList = 1;
     });
   }
+
+  hoursupdate(hourschange:number,topic_id:number,uid:number){
+    this.completedIndex=null;
+    if (topic_id==0){
+      return;
+    }
+    this.checkoutForm.patchValue({
+      handler_id:uid,
+      topic_id: topic_id,
+      hours_completed: hourschange
+    });
+    this.apiService.updateHoursCompletedDetails(this.checkoutForm.value).subscribe();
+    console.log(this.checkoutForm.value);
+    this.router.navigateByUrl('/faculty-table', { state: this.data }).then(() => {
+      window.location.reload();
+    });
+    console.log(this.checkoutForm.value);
 }
+  }

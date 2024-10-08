@@ -388,7 +388,7 @@ def facultyprogress():
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'purple'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
@@ -420,7 +420,7 @@ def course_progress():
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) FROM domain_mentor_table WHERE course_code='{course_code}' and status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'purple'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
     q = sqlalchemy.text(f"SELECT all_courses.uid, t.name, all_courses.course_code, COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours FROM (SELECT DISTINCT course_code, uid FROM faculty_table where course_code='{course_code}') AS all_courses LEFT JOIN (SELECT course_code, uid, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 and course_code='{course_code}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code AND all_courses.uid = active_courses.uid JOIN t_users t ON all_courses.uid = t.uid;")
     r = conn.execute(q).fetchall()
