@@ -44,17 +44,19 @@
       <label for="facultyprogress">Current Progress: {{item.course_code}}</label>
       <div class="progressbar-horizontal">
         <div class="progresscolor" [style.background-color]="item.bar_color"></div>
-        <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+        <progress class="progressbars" [value]="item.completed_hours" [max]="item.total_hours"></progress>
+        <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
       </div>
     </div>
-
+    
     <div *ngFor="let item of courseDataOverall;" class="progress-container">
       <label for="facultyprogress">Overall Progress: {{item.course_code}}</label>
       <div class="progressbar-horizontal">
-        <progress class="progressbars" [value]="item.count" [max]="item.total_count">{{item.completed_hours}}</progress>
-        <p>{{item.count}} / {{item.total_count}}</p>
+        <progress class="progressbars" [value]="item.count" [max]="item.total_count"></progress>
+        <p class="progress-text">{{item.count}} / {{item.total_count}}</p>
       </div>
     </div>
+    
 
     <div class="piechart-container">
       <div class="mainChart">
@@ -67,106 +69,3 @@
     
   </div>
 </div>
-
-<style>
-  * {
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-  }
-
-  .progress-container {
-    margin-bottom: 1rem;
-  }
-
-  .progressbar-horizontal {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .progresscolor {
-    width: 10px;
-    height: 20px;
-    display: inline-block;
-  }
-
-  .progressbars {
-    width: 95%;
-  }
-
-  .piechart-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around; /* Distributes space evenly between charts */
-  align-items: center; /* Center aligns the items vertically */
-  background-color: lightcyan;
-  padding: 2rem;
-  border-radius: 10px;
-  margin-top: 2rem;
-  gap: 2rem; /* Space between the charts */
-  
-  /* Drop shadow */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Horizontal offset, Vertical offset, Blur radius, Color */
-}
-
-
-.mainChart, .subcharts {
-    width: 300px; /* Ensure both charts have the same width */
-    height: 350px; /* Ensure both charts have the same height */
-    display: flex; /* Center the canvas within the div */
-    justify-content: center; /* Center the canvas horizontally */
-    align-items: center; /* Center the canvas vertically */
-}
-
-.mainChart canvas, .subcharts .chart-container {
-    width: 100%; /* Ensure the content inside takes full width */
-    height: 100%; /* Ensure the content inside takes full height */
-    /* Add any additional styles for canvas here */
-}
-
-
-
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-
-    .left {
-      width: 100%;
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .right {
-      margin-left: 0;
-      padding: 1rem;
-    }
-
-    .profile-header img {
-      width: 100px;
-      height: 100px;
-    }
-
-    .greeting {
-      font-size: 1.8rem;
-    }
-
-    .progress-container {
-      margin-bottom: 0.5rem;
-    }
-
-    .progressbar-horizontal {
-      justify-content: flex-start;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .profile-header h2 {
-      font-size: 1.4rem;
-    }
-
-    .greeting {
-      font-size: 1.6rem;
-    }
-  }
-</style>
