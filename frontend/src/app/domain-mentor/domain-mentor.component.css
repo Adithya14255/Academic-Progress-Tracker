@@ -41,7 +41,7 @@
 }
 
 .profile-header p {
-    color: #e67e22;
+    color: #0370b9;
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -84,7 +84,7 @@
 }
 
 .profile-info strong {
-    color: #e67e22;
+    color: #0370b9;
     font-weight: 500;
 }
 .content{
@@ -115,7 +115,7 @@
     font-size: 1.2rem;
     border: none;
     background: none;
-    color:  #ff902f;
+    color:  #0370b9;
     font-weight: 500;
     outline: none;
     border-radius: 5px;

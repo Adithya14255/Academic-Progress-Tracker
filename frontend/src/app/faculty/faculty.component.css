@@ -11,13 +11,7 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: start;
-    overflow-y: hidden;
-}
-
-.faculty-profile-name {
-    text-transform: capitalize;
+    flex-direction: column;
 }
 
 .profile-header {
