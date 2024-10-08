@@ -1,136 +1,161 @@
+/* Global Styles */
 * {
     font-family: 'Poppins', sans-serif;
     list-style: none;
     overflow-y: hidden;
-  }
-  
-  body {
+}
+
+body {
     background: white;
     background-image: linear-gradient(rgb(255, 138, 42), rgb(255, 206, 0));
     color: black;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-  }
-  
-  .container {
+}
+
+/* Container Styles */
+.container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100vw;
     height: 100vh;
-  }
-  
-  /* Left Section Styling */
-  .left {
+}
+
+/* Left Section Styling */
+.left {
     background-color: #333;
     width: 20vw;
     height: 100vh;
     box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  
-  .profile-header {
+}
+
+.profile-header {
     background-color: rgba(105, 105, 105, 0.125);
     padding: 10px;
     height: 35vh;
-    padding-top: 5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2vh;
-  }
-  
-  .profile-header img {
+}
+
+.profile-header img {
     border-radius: 50%;
     width: 200px;
     height: 200px;
     object-fit: cover;
-  }
-  
-  .profile-header h2 {
+}
+
+.profile-header h2 {
     font-size: 1.6rem;
     color: rgb(216, 216, 216);
-  }
-  
-  .profile-header p {
+}
+
+.profile-header p {
     color: #e67e22;
     font-weight: bold;
     font-size: 1.2rem;
-  }
-  
-  .profile-body {
+}
+
+.profile-body {
     padding: 20px;
-  }
-  
-  .profile-info {
+}
+
+.profile-info,
+.profile-info-links {
     background-color: rgba(90, 90, 90, 0.125);
     border-radius: 10px;
     height: auto;
     padding: 5% 5%;
-    margin-top: 10%;
-    text-align: left;
-    font-size: 1rem;
-  }
-  
-  .profile-info-links {
-    background-color: rgba(147, 147, 147, 0.125);
-    border-radius: 10px;
-    height: auto;
-    padding: 5% 5%;
+}
+
+.profile-info-links {
     border: 2px solid white;
-  }
-  
-  .profile-info p {
+}
+
+.profile-info p {
     margin: 1vw 0;
     color: #b5b5b5;
-  }
-  
-  .profile-info strong {
+}
+
+.profile-info strong {
     color: #e67e22;
-  }
-  
-  #navlogin {
+}
+
+#navlogin {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-  
-  .logout-btn,
-  .table-btn {
+}
+
+.logout-btn,
+.table-btn {
     font-size: 1.2rem;
     border: none;
     background: none;
     color: white;
     font-weight: 500;
     cursor: pointer;
-  }
-  
-  .logout-btn:hover,
-  .table-btn:hover {
+}
+
+.logout-btn:hover,
+.table-btn:hover {
     color: black;
-  }
-  
-  /* Right Section Styling */
-  .right {
+}
+
+/* Right Section Styling */
+.right {
     padding: 2rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Align items from the start */
-  }
-  
-  .nametext {
+}
+
+.nametext {
     margin-bottom: 1rem;
-  }
-  
-  .greeting {
+}
+
+.greeting {
     font-size: 2.2rem;
     color: rgb(255, 138, 42);
-  }
-  
+}
+
+/* Pie Chart Container Styling */
+.piechart-container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 1rem; /* Space between charts */
+    background-color: rgba(255, 138, 42, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
+}
+
+/* Chart Styles */
+.piechart-container .mainChart,
+.piechart-container .subcharts {
+    display: flex; /* Use flex for centering */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    width: 20vw; /* Full width of the grid cell */
+    aspect-ratio: 1; /* Ensure the charts are square */
+}
+
+.piechart-container canvas {
+    width: 100%;
+    height: 100%; /* Make canvas fill the container */
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
 /* Progress Container */
 .progress-container {
     margin-bottom: 1.5rem; /* Increased space between progress containers */
@@ -141,19 +166,17 @@
     transition: transform 0.2s; /* Animation on hover */
 }
 
+
 .progress-container:hover {
     transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
-/* Progress Bar Horizontal Layout */
+/* Progress Bar Styles */
 .progressbar-horizontal {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-top: 10px; /* Spacing above progress bars */
 }
 
-/* Progress Color Indicator */
 .progresscolor {
     width: 30px;
     height: 30px;
@@ -162,14 +185,11 @@
     margin-right: 10px; /* Space between color and text */
 }
 
-/* Progress Bar Styling */
 .progressbars {
     width: 95%; /* Full width of the container */
     height: 20px; /* Height of the progress bar */
     border-radius: 10px; /* Rounded corners */
     background-color: rgba(0, 0, 0, 0.1); /* Background of the progress bar */
-    appearance: none; /* Remove default styles for the progress element */
-    overflow: hidden; /* Prevent overflow of the inner color */
 }
 
 /* Progress Bar Background */
@@ -179,16 +199,11 @@
 }
 
 /* Progress Bar Value */
-.progressbars::-webkit-progress-value {
+.progressbars::-webkit-progress-value,
+.progressbars::-moz-progress-bar {
     border-radius: 10px; /* Rounded corners */
     background-color: rgba(255, 138, 42, 0.9); /* Color of the progress value */
     transition: width 0.5s ease-in-out; /* Smooth transition for progress */
-}
-
-/* For Firefox */
-.progressbars::-moz-progress-bar {
-    background-color: rgba(255, 138, 42, 0.9); /* Progress color */
-    border-radius: 10px; /* Rounded corners */
 }
 
 /* Progress Text Styling */
@@ -201,88 +216,39 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .progress-text {
-        font-size: 0.9rem; /* Smaller font size on smaller screens */
+    .container {
+        flex-direction: column;
     }
 
-    .progress-container {
-        padding: 10px; /* Reduced padding for smaller screens */
+    .left {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .right {
+        padding: 1rem;
+    }
+
+    .profile-header img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .greeting {
+        font-size: 1.8rem;
+    }
+
+    .piechart-container {
+        grid-template-columns: repeat(2, 1fr); /* Change to 2 columns on smaller screens */
     }
 }
 
-  
-  
-  /* Pie Chart Container Styling */
-  .piechart-container {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(3, 1fr); /* 3 columns to mimic numpad layout */
-    gap: 1rem; /* Space between charts */
-    background-color: rgba(255, 138, 42, 0.2);
-    padding: 2rem;
-    border-radius: 10px;
-    margin-top: 2rem;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
-  }
-  
-  .piechart-container .mainChart {
-    width: 10vw; /* Ensures the charts take full width */
-    height: 10vw;
-  }
-  .piechart-container .subcharts{
-    width:8vw;
-    height:8vw;
-  }
-  .piechart-container canvas {
-    width: 100%;
-    height: auto; /* Make canvas responsive */
-  }
-  
-  .mainChart {
-    margin-bottom: 2rem; /* Space between charts */
-  }
-  
-  /* Responsive Styles */
-  @media screen and (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-  
-    .left {
-      position: relative;
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-  
-    .right {
-      margin-left: 0;
-      padding: 1rem;
-    }
-  
-    .profile-header img {
-      width: 100px;
-      height: 100px;
-    }
-  
-    .greeting {
-      font-size: 1.8rem;
-    }
-  
-    .courseCodeAndName {
-      font-size: 1rem;
-    }
-  
-    .piechart-container {
-      grid-template-columns: repeat(2, 1fr); /* Change to 2 columns on smaller screens */
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .profile-header h2 {
-      font-size: 1.4rem;
+        font-size: 1.4rem;
     }
-  
+
     .greeting {
-      font-size: 1.6rem;
+        font-size: 1.6rem;
     }
-  }
-  
+}

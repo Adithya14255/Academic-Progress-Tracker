@@ -44,9 +44,25 @@
       <p class="facultyprogress">Course {{courseDataOverall[i].course_code}}</p>
     
       <!-- Current Progress Section -->
-      <label for="facultyprogress">Current Progress:</label>
+      <label for="facultyprogress">Progression:</label>
       <div class="progressbar-horizontal">
         <div class="progresscolor" [style.background-color]="item.bar_color"></div>
+        <div class="colorcomment">
+        <ng-container>
+          <p *ngIf="item.bar_color === 'black'">
+            Not yet started
+          </p>
+          <p *ngIf="item.bar_color === 'red'">
+            Delayed
+          </p>
+          <p *ngIf="item.bar_color === 'green'">
+            Ahead of time
+          </p>
+          <p *ngIf="item.bar_color === 'blue'">
+            On Time
+          </p>
+        </ng-container>
+        </div>
         <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
       </div>
     
