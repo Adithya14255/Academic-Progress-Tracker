@@ -75,7 +75,9 @@ export class CourseMentorComponent {
     this.apiService.getCourseProgressData({ course_code:this.displayCourseData.course_code }).subscribe((data) => {
       // Example of updating chart data with API response
       this.recievedata=data.main;
-      console.log(this.recievedata);
+      this.courseDataCurrent = data.course_data_current;
+      this.courseDataOverall = data.course_data_overall;
+      console.log(this.courseDataCurrent);
       this.functionfordata();
     });
   }

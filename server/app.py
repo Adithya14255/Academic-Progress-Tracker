@@ -422,8 +422,20 @@ def course_progress():
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
     color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'darkgreen'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
-    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor}}) 
-
+    q = sqlalchemy.text(f"SELECT all_courses.uid, t.name, all_courses.course_code, COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours FROM (SELECT DISTINCT course_code, uid FROM faculty_table where course_code='{course_code}') AS all_courses LEFT JOIN (SELECT course_code, uid, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 and course_code='{course_code}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code AND all_courses.uid = active_courses.uid JOIN t_users t ON all_courses.uid = t.uid;")
+    r = conn.execute(q).fetchall()
+    course_data_current = []
+    for i in r:
+        temp={'uid':i[0],'name':i[1],'course_code':i[2],'completed_hours':i[3],'total_hours':i[4],'bar_color':progress_color(i[3],i[4])}
+        course_data_current.append(temp)
+    q = sqlalchemy.text(f"SELECT f.uid, t.name, f.course_code, COUNT(*) AS total_topics_assigned, SUM(CASE WHEN f.status_code = 4 THEN 1 ELSE 0 END) AS topics_completed FROM faculty_table f JOIN t_users t ON t.uid = f.uid WHERE f.course_code = '{course_code}' GROUP BY f.uid, f.course_code, t.name;")
+    r = conn.execute(q).fetchall()
+    course_data_overall = []
+    for i in r:
+        temp={'uid':i[0],'name':i[1],'course_code':i[2],'count':i[4],'total_count':i[3]}
+        course_data_overall.append(temp)
+    print(course_data_overall,course_data_current)
+    return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'course_data_overall':course_data_overall,'course_data_current':course_data_current}) 
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001, host="0.0.0.0")
