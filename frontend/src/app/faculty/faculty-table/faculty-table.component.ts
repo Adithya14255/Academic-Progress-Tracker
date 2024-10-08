@@ -21,40 +21,30 @@ import { trigger, style, transition, animate } from '@angular/animations';
     ])
   ],
 })
-
 export class FacultyTableComponent {
-  data: any[] = [];  // Make sure this is an array
+  data: any[] = []; // Array to store table data
   completedData: any;
   userdata: any;
   coursedata: any;
   displayCourseData: any = { course_code: '', course_name: '' };
-  boxcolor: string = 'white';
   editedIndex: number | null = null;
-  completedIndex: number | null = null;
-  hourschange: number = 0;
-  completedList: number = 0;
-  link: any;
+  link: string = '';
   name: string = '';
   displayTable: boolean = true;
   activeButton: string = 'details';  // Default to uploaded view
   details: boolean = true;  // Show details form
   displayforapproved: boolean = false;
+  completedList: number = 0;
   completedTopicPrompt: boolean = false;
-
-  checkoutForm = this.formBuilder.group({
-    handler_id: 0,
-    topic_id: 0,
-    hours_completed: 0
-  });
 
   getCourseDataForm = this.formBuilder.group({
     course_code: '',
   });
 
   constructor(
-    private location: Location,
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private location: Location, 
+    private formBuilder: FormBuilder, 
+    private apiService: ApiService, 
     private router: Router
   ) {}
 
@@ -82,19 +72,14 @@ export class FacultyTableComponent {
   }
 
   getCourseDetails() {
-    console.log(this.getCourseDataForm.value);
     this.apiService.getFacultyData(this.userdata.uid, this.getCourseDataForm.value.course_code).subscribe(
       response => {
-        this.data = response;  // Update 'data' with the fetched topics
-
-        if ('response' in response) {
-          alert("Error - no entries to show");
-          console.log(response.response);
-        }else{
+        this.data = response;
         this.displayTable = this.data.length > 0; // Show the table only if there are topics
-      }
-  });
-}
+      },
+      error => alert("Error - try again")
+    );
+  }
 
   getBoxColor(value: number): string {
     switch (value) {
@@ -102,89 +87,61 @@ export class FacultyTableComponent {
       case 1: return 'orange';
       case 2: return 'red';
       case 3: return 'green';
-      default: return 'white'; // Default color
+      default: return 'white';  // Default color
     }
   }
-
-  hoursupdate(hourschange: number, topic_id: number, uid: number) {
-    this.completedIndex = null;
-    if (topic_id === 0) {
-      return;
-    }
-    this.checkoutForm.patchValue({
-      handler_id: uid,
-      topic_id: topic_id,
-      hours_completed: hourschange
-    });
-    this.apiService.updateHoursCompletedDetails(this.checkoutForm.value).subscribe();
-    this.router.navigateByUrl('/faculty-table', { state: this.data }).then(() => {
-      window.location.reload();
-    });
-  }
-
-  editItem(index: number) {
-    this.completedIndex = index;
-    this.hourschange = 0;
-  }
-
-  viewCompletedList() {
-    this.details = false;
-    this.displayTable = false;
-    this.completedTopicPrompt = true;
-    this.displayforapproved = true;
-    this.activeButton = 'approved';
-    this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
-      this.completedData = response.data === 'Failure' ? 'Failure' : response;  // Handle failure case
-      this.completedList = 1;  // Trigger the display logic
-    });
-  }
-
-  getCanLinkUpdateForm = this.formBuilder.group({
-    handler_id: 0,
-    topic_id: 0,
-    link: '',
-  });
 
   idupdate(index: number): void {
-    this.editedIndex = index;
+    this.editedIndex = index; // Set the edited index to the current item index
+    this.link = this.data[index].url; // Pre-fill the link input with the current URL
   }
 
-  showDetails() {
+  linkupdate(link: string, topic_id: number, uid: number): void {
+    if (link.trim() === '') {
+      alert('Please enter a valid link.'); // Alert if the link is empty
+      return;
+    }
+
+    this.apiService.updateLinkDetails({ link, topicId: topic_id, uid }).subscribe(
+      (response: any) => { // Explicitly define the type
+        // Handle response after updating the link
+        if (response.success) {
+          this.data[this.editedIndex!].url = link; // Use non-null assertion operator
+          this.data[this.editedIndex!].status_code = 1; // Use non-null assertion operator
+          this.editedIndex = null; // Reset the edited index
+          this.link = ''; // Clear the input field
+        } else {
+          alert('Failed to update link. Please try again.');
+        }
+      },
+      (error: any) => { // Explicitly define the type
+        alert('An error occurred. Please try again.');
+      }
+    );
+  }
+
+  showDetails(): void {
     this.details = true;
-    this.displayTable = false;
+    this.displayTable = true;
     this.activeButton = 'details';
     this.completedTopicPrompt = false;
   }
 
-  showUploaded() {
-    this.details = false;
+  showUploaded(): void {
+    this.details = true;
     this.displayTable = true;
     this.activeButton = 'uploaded';
     this.completedTopicPrompt = false;
-    this.displayforapproved = false;
   }
 
-  linkupdate(link: string, topic_id: number, uid: number): void {
-    this.editedIndex = null;
-    if (topic_id === 0) {
-      return;
-    }
-    const moodleBaseUrl = 'https://moodle.kgkite.ac.in'; // Set this to your Moodle base URL
-    if (link.startsWith(moodleBaseUrl)) {
-      this.getCanLinkUpdateForm.patchValue({
-        handler_id: uid,
-        topic_id: topic_id,
-        link: link,
-      });
-      this.apiService.updateLinkDetails(this.getCanLinkUpdateForm.value).subscribe();
-      this.router.navigateByUrl('/faculty-table', { state: this.data }).then(() => {
-        window.location.reload();
-      });
-    } else {
-      alert("Invalid link entered");
-    }
+  viewCompletedList(): void {
+    this.details = true;
+    this.displayTable = true;
+    this.completedTopicPrompt = true;
+    this.activeButton = 'approved';
+    this.apiService.getFacultyCompletedData(this.userdata.uid).subscribe(response => {
+      this.completedData = response.data === 'Failure' ? 'Failure' : response;
+      this.completedList = 1;
+    });
   }
-
-
-
 }
