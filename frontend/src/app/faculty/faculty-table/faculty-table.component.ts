@@ -96,28 +96,27 @@ export class FacultyTableComponent {
     this.link = this.data[index].url; // Pre-fill the link input with the current URL
   }
 
+  checkoutForm = this.formBuilder.group({
+    handler_id: 0,
+    topic_id: 0,
+    link: '',
+    comment: '',
+  });
+  
   linkupdate(link: string, topic_id: number, uid: number): void {
-    if (link.trim() === '') {
-      alert('Please enter a valid link.'); // Alert if the link is empty
+    this.editedIndex = null;
+    if (topic_id == 0) {
       return;
     }
-
-    this.apiService.updateLinkDetails({ link, topicId: topic_id, uid }).subscribe(
-      (response: any) => { // Explicitly define the type
-        // Handle response after updating the link
-        if (response.success) {
-          this.data[this.editedIndex!].url = link; // Use non-null assertion operator
-          this.data[this.editedIndex!].status_code = 1; // Use non-null assertion operator
-          this.editedIndex = null; // Reset the edited index
-          this.link = ''; // Clear the input field
-        } else {
-          alert('Failed to update link. Please try again.');
-        }
-      },
-      (error: any) => { // Explicitly define the type
-        alert('An error occurred. Please try again.');
-      }
-    );
+    this.checkoutForm.patchValue({
+      handler_id: uid,
+      topic_id: topic_id,
+      link: link,
+    });
+    this.apiService.updateLinkDetails(this.checkoutForm.value).subscribe(() => {
+      this.router.navigateByUrl('/faculty-table', { state: this.data })
+        .then(() => window.location.reload());
+    });
   }
 
   showDetails(): void {
