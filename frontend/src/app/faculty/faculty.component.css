@@ -214,8 +214,7 @@
 
 /* Pie Chart Container Styling */
 .piechart-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     gap: 1rem;
     background-color: rgb(82, 82, 82);
     padding: 2rem;
@@ -229,13 +228,14 @@
     border-radius: 20px; 
 }
 
-.piechart-container .mainChart,
-.piechart-container .subcharts {
+.piechart-container .mainChart {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20vw;
-    aspect-ratio: 1;
+    width:35vw;
+}
+.subcharts{
+    width:40vw;
 }
 
 .piechart-container canvas {
@@ -243,11 +243,11 @@
     height: 100%;
 }
 
+
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
+
 
     .left {
         width: 100%;
@@ -263,9 +263,6 @@
         font-size: 1.8rem;
     }
 
-    .piechart-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media screen and (max-width: 480px) {

@@ -87,7 +87,10 @@ export class FacultyComponent implements OnInit {
 
   createCharts(courseData: any) {
     const container = this.chartContainer.nativeElement;
-
+    container.style.display = 'flex';
+    container.style.width = '15vw';
+ // Optional, to allow wrapping if there are too many charts
+container.style.gap = '1vw'; 
     Object.keys(courseData).forEach(course => {
       const chartLabels: string[] = [];
       const chartData: number[] = [];
