@@ -115,6 +115,7 @@
 
 .nametext {
     text-align:left; 
+    margin-top: 2vh;
     margin-bottom: 20px; 
 }
 
@@ -181,7 +182,6 @@
     color: green; 
     margin-left: auto; 
     padding-left: 10px; 
-    background-color: rgba(0, 0, 0, 0.2); 
     padding: 5px 10px; 
     border-radius: 8px; 
     white-space: nowrap; 
@@ -198,7 +198,7 @@
 }
 
 .progressbars {
-    width: 100%; 
+    width: 95%; 
     height: 20px;
     border-radius: 20px; 
     overflow: hidden; 

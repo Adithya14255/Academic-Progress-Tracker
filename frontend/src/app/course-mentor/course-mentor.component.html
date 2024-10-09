@@ -54,7 +54,7 @@
           <label for="facultyprogress">Overall Progress:</label>
           <div class="progressbar-horizontal">
             <progress class="progressbars" [value]="courseDataOverall[i].count" [max]="courseDataOverall[i].total_count">{{courseDataOverall[i].completed_hours}}</progress>
-            <p>{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+            <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
           </div>
         </div>
       </div>
