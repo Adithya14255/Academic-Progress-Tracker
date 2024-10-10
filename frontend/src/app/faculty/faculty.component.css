@@ -1,18 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    font-family: 'poppins',sans-serif;
-    list-style:none;
+
+* {
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 .container {
-    width: 100vw; 
-    display: flex; 
-    align-items: flex-start; 
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
     padding-top: 3vh;
 }
 
-.faculty-profile-name{
+.faculty-profile-name {
     text-transform: capitalize;
 }
+
 .profile-header {
     background-color: rgba(105, 105, 105, 0.125);
     padding: 10px;
@@ -21,7 +26,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:2vh;
+    gap: 2vh;
 }
 
 .profile-header img {
@@ -29,7 +34,6 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
-
 }
 
 .profile-header h2 {
@@ -47,7 +51,6 @@
     padding: 20px;
 }
 
-
 .profile-info {
     background-color: rgba(90, 90, 90, 0.125);
     border-radius: 10px;
@@ -57,6 +60,7 @@
     text-align: left;
     font-size: 1rem;
 }
+
 .profile-info-links {
     background-color: rgba(147, 147, 147, 0.125);
     border-radius: 10px;
@@ -71,14 +75,14 @@
 }
 
 .left {
-    background-color: #333; 
+    background-color: #333;
     width: 20vw;
-    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3); 
-    display: flex; 
+    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3);
+    display: flex;
     flex-direction: column;
-    justify-content: center; 
-    position: fixed; 
-    top: 0; 
+    justify-content: center;
+    position: fixed;
+    top: 0;
     bottom: 0;
 }
 
@@ -91,7 +95,7 @@
     font-size: 1.2rem;
     border: none;
     background: none;
-    color:  #00930a;
+    color: #00930a;
     font-weight: 500;
     outline: none;
     border-radius: 5px;
@@ -103,35 +107,32 @@
     text-decoration: underline;
 }
 
-
-
-/* Right Section Styling */
 .right {
-    margin-left: 20vw; 
-    padding: 25px; 
-    flex-grow: 1; 
-    overflow: auto; 
+    margin-left: 20vw;
+    padding: 25px;
+    flex-grow: 1;
+    overflow: auto;
 }
 
 .nametext {
-    text-align:left; 
+    text-align: left;
     margin-top: 2vh;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .greeting {
-    font-size: 2.8rem; 
-    color: rgb(255, 138, 42); 
-    margin-top: -5vh; 
-    margin-bottom: 10px; 
+    font-size: 2.8rem;
+    color: rgb(255, 138, 42);
+    margin-top: -5vh;
+    margin-bottom: 10px;
     font-weight: 400;
     letter-spacing: 1.1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .greeting:hover {
-    color: rgb(255, 90, 0); 
+    color: rgb(255, 90, 0);
 }
 
 .progress-container {
@@ -141,6 +142,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
+    align-items: center;
 }
 
 .progress-container:hover {
@@ -150,44 +152,40 @@
 .progressbar-horizontal {
     display: flex;
     align-items: center;
-    margin-top: 15px; 
-    gap: 15px; 
+    margin-top: 15px;
+    gap: 15px;
     padding: 10px;
-    border-radius: 10px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .progresscolor {
     width: 35px;
     height: 35px;
-    border-radius: 50%; 
-    margin-right: 15px; 
-    border: 2px solid rgba(255, 255, 255, 0.3); 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .colorcomment p {
-    font-size: 1rem; 
+    font-size: 1rem;
     color: #e67e22;
-    font-weight: 600; 
-    margin: 0; 
+    font-weight: 600;
+    margin: 0;
 }
-
 
 .progress-text {
-    font-size: 1.1rem; 
-    color: green; 
-    margin-left: auto; 
-    padding-left: 10px; 
-    padding: 5px 10px; 
-    border-radius: 8px; 
-    white-space: nowrap; 
-    font-weight: 500; 
+    font-size: 1.1rem;
+    color: green;
+    margin-left: auto;
+    padding-left: 10px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-weight: 500;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 
 .progressbar-horizontal:hover {
     border-radius: 20px;
@@ -195,16 +193,15 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-
 .progressbars {
-    width: 100%; 
+    width: 100%;
     height: 20px;
-    border-radius: 20px; 
-    overflow: hidden; 
-    appearance: none; 
+    border-radius: 20px;
+    overflow: hidden;
+    appearance: none;
 }
 
-/* For WebKit browsers */
+
 .progressbars::-webkit-progress-value {
     background-color: green;
     border-radius: 20px;
@@ -213,78 +210,69 @@
 /* For Mozilla browsers */
 .progressbars::-moz-progress-bar {
     background-color: green;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
-
 
 .progressbars::-webkit-progress-background {
-    background-color: rgba(200, 200, 200, 0.2); 
-    border-radius: 20px; 
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 20px;
 }
 
+/* Styles for the single chart in piechart-container */
 .piechart-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr; 
-    gap: 1rem; 
     background-color: rgb(82, 82, 82);
     padding: 2rem;
-    color: white;
     border-radius: 20px;
     margin-top: 2rem;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    align-items: start;
+    display: flex;
+    justify-content: center;
 }
 
 .mainChart {
+    width: 30vw;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 30vw; 
-    height: 100vh; 
 }
 
-.piechart-container canvas {
-    width: 100%; 
-    height: 100%; 
-}
-
-.subcharts {
+/* Chart container styles */
+#chartContainer {
     display: grid;
-    grid-template-columns: repeat(3, 2fr); 
-    gap: 1rem; 
-    justify-items: center; 
-    border: 2px solid black;
-    padding: 1rem; 
-    max-width: 100%; 
+    grid-template-columns: repeat(2, 1fr); /* 2 charts per row */
+    gap: 20px; /* Spacing between grid items */
+    margin-top: 2rem; /* Space above the chart grid */
+    width: 100%; 
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .left {
-        width: 100%;
-        margin-bottom: 2rem;
-    }
-
-    .profile-header img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .greeting {
-        font-size: 1.8rem;
-    }
-
-    .piechart-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* Wrapper for each chart and its title */
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 480px) {
-    .greeting {
-        font-size: 1.6rem;
-    }
+/* Style for the chart title (h3) */
+.chart-wrapper h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #333;
+}
+
+/* Each chart should have some max width and aspect ratio */
+.chart-wrapper {
+    max-width: 300px; /* Set max width for individual chart wrappers */
+    aspect-ratio: 1; /* Maintain a square aspect ratio */
+    width: 100%; /* Ensure the wrapper takes full width of grid cell */
+}
+
+/* Ensuring the canvas fills its container */
+.chart-wrapper canvas {
+    width: 100%; /* Full width of the chart wrapper */
+    height: 100%; /* Full height of the chart wrapper */
+    display: block; /* Ensures no extra space at the bottom */
 }
