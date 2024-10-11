@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@172.16.30.15/kgaps")
+    "postgresql://admin:admin@192.168.0.253/kgaps")
 conn = engine.connect()
 
 
