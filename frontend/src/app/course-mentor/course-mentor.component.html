@@ -1,7 +1,5 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
-
 <div class="container">
-
     <div class="left">
         <div class="profile-container">
             <div class="profile-header">
@@ -37,32 +35,41 @@
             </div>
         </div>
     </div>
+  
     <div class="right">
-        
-<p class="greeting">Welcome Course Coordinator - {{name}}</p>
+      <div class="nametext">  
+          <p class="greeting">Welcome Course Coordinator - {{name}}</p>
+        </div>
         <p class="courseCodeAndName">{{displayCourseData.course_code}} - {{displayCourseData.course_name}}</p>
-        <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
-          <p class="facultyprogress">Faculty - {{item.uid}} {{item.name}}</p>
-          <label for="facultyprogress">Current Progress:</label>
-          <div class="progressbar-horizontal">
-            <div class="progresscolor" [style.background-color]="item.bar_color"></div>
-            <p>{{item.completed_hours}} / {{item.total_hours}}</p>
-          </div>
+        <div class="progress-grid">
+          <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
+            <p class="facultyprogress">Faculty - {{item.uid}} {{item.name}}</p>
+            <label for="facultyprogress">Current Progress:</label>
+            <div class="progressbar-horizontal">
+              <div class="progresscolor" [style.background-color]="item.bar_color"></div>
+              <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+            </div>
         
     
-        <div>
-          <label for="facultyprogress">Overall Progress:</label>
-          <div class="progressbar-horizontal">
-            <progress class="progressbars" [value]="courseDataOverall[i].count" [max]="courseDataOverall[i].total_count">{{courseDataOverall[i].completed_hours}}</progress>
-            <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+          <div>
+            <label for="facultyprogress">Overall Progress:</label>
+            <div class="progressbar-horizontal">
+              <progress 
+                class="progressbars" 
+                [value]="courseDataOverall[i].count" 
+                [max]="courseDataOverall[i].total_count">
+                {{courseDataOverall[i].completed_hours}}
+              </progress>
+              <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+            </div>
           </div>
         </div>
       </div>
-            <div class="piechart-container">
-              <div class="overall-text">Overall :</div>
-              <div class="mainChart">
-                <canvas id="MyChart">{{ chart }}</canvas>
-              </div>
-        </div>
+
+      <div class="piechart-container">
+          <div class="mainChart">
+              <canvas id="MyChart">{{ chart }}</canvas>
+           </div>
+       </div>
     </div>
 </div>

@@ -1,45 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    font-family: 'poppins',sans-serif;
-    list-style:none;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 .container {
-    width: 100vw; 
-    display: flex; 
-    align-items: flex-start; 
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
     padding-top: 3vh;
 }
 
-.faculty-profile-name{
-    text-transform: capitalize;
+.left {
+    background-color: #2b2b2b;
+    width: 20vw;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding-top: 3vh;
 }
+
 .profile-header {
-    background-color: rgba(105, 105, 105, 0.125);
-    padding: 10px;
-    height: 35vh;
-    padding-top: 5vh;
+    background-color: rgba(255, 55, 15, 0.1);
+    padding: 15px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:2vh;
+    gap: 1.5vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header img {
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
-
+    border: 4px solid rgba(254, 55, 15, 0.7); /* Change to match the theme */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .profile-header h2 {
-    font-size: 1.6rem;
-    color: rgb(216, 216, 216);
+    font-size: 1.8rem;
+    color: rgb(255, 255, 255); /* Change to white for better contrast */
+    text-transform: capitalize;
 }
 
 .profile-header p {
-    color: #00930a;
-    font-weight: bold;
+    color: #fe370f; /* Set to orange */
+    font-weight: 600;
     font-size: 1.2rem;
 }
 
@@ -47,91 +64,95 @@
     padding: 20px;
 }
 
-
 .profile-info {
-    background-color: rgba(90, 90, 90, 0.125);
-    border-radius: 10px;
-    height: auto;
-    padding: 5% 5%;
-    margin-top: 10%;
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter for contrast */
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 2rem;
     text-align: left;
     font-size: 1rem;
-}
-.profile-info-links {
-    background-color: rgba(147, 147, 147, 0.125);
-    border-radius: 10px;
-    height: auto;
-    padding: 5% 5%;
-    border: 2px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info p {
-    margin: 1vw 0;
-    color: #b5b5b5;
-}
-
-.left {
-    background-color: #333; 
-    width: 20vw;
-    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3); 
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    position: fixed; 
-    top: 0; 
-    bottom: 0;
+    margin: 10px 0;
+    color: #ffffff; /* Set to white for better contrast */
+    font-weight: 500;
 }
 
 .profile-info strong {
-    color: #00930a;
+    color: #fe370f; /* Set to orange */
+    font-weight: 600;
+}
+
+.profile-info-links {
+    background-color: rgba(254, 55, 15, 0.1); /* Change to a lighter orange */
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 1rem;
+    border: 1px solid #fe370f; /* Change to orange */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .logout-btn,
 .table-btn {
     font-size: 1.2rem;
-    border: none;
-    background: none;
-    color:  #00930a;
-    font-weight: 500;
-    outline: none;
+    border: 2px solid #fe370f; /* Change to orange */
+    background-color: transparent;
+    color: #fe370f; /* Set to orange */
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .logout-btn:hover,
 .table-btn:hover {
-    color: white;
-    text-decoration: underline;
+    background-color: #fe370f; /* Change to orange */
+    color: white; /* Set text to white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
 
-/* Right Section Styling */
+
 .right {
-    margin-left: 20vw; 
-    padding: 25px; 
-    flex-grow: 1; 
-    overflow: auto; 
+    margin-left: 20vw;
+    padding: 25px;
+    flex-grow: 1;
+    overflow: auto;
 }
 
 .nametext {
-    text-align:left; 
+    text-align: left;
     margin-top: 2vh;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .greeting {
-    font-size: 2.8rem; 
-    color: rgb(255, 138, 42); 
-    margin-top: -5vh; 
-    margin-bottom: 10px; 
+    font-size: 2.8rem;
+    color: rgb(255, 138, 42);
+    margin-top: -5vh;
+    margin-bottom: 10px;
     font-weight: 400;
     letter-spacing: 1.1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .greeting:hover {
-    color: rgb(255, 90, 0); 
+    color: rgb(255, 90, 0);
+}
+
+/* Parent container to hold the grid */
+.progress-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two grids per row */
+    gap: 20px; /* Spacing between grid items */
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .progress-container {
@@ -141,6 +162,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
+    align-items: center;
 }
 
 .progress-container:hover {
@@ -150,122 +172,82 @@
 .progressbar-horizontal {
     display: flex;
     align-items: center;
-    margin-top: 15px; 
-    gap: 15px; 
+    margin-top: 15px;
+    gap: 15px;
     padding: 10px;
-    border-radius: 10px; 
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .progresscolor {
     width: 35px;
     height: 35px;
-    border-radius: 50%; 
-    margin-right: 15px; 
-    border: 2px solid rgba(255, 255, 255, 0.3); 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .colorcomment p {
-    font-size: 1rem; 
+    font-size: 1rem;
     color: #e67e22;
-    font-weight: 600; 
-    margin: 0; 
+    font-weight: 600;
+    margin: 0;
 }
 
-
 .progress-text {
-    font-size: 1.1rem; 
-    color: green; 
-    margin-left: auto; 
-    padding-left: 10px; 
-    padding: 5px 10px; 
-    border-radius: 8px; 
-    white-space: nowrap; 
-    font-weight: 500; 
+    font-size: 1.1rem;
+    color: green;
+    margin-left: auto;
+    padding-left: 10px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-weight: 500;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .progressbar-horizontal:hover {
-    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     transform: translateY(-3px);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .progressbars {
-    width: 95%; 
+    width: 100%;
     height: 20px;
-    border-radius: 20px; 
-    overflow: hidden; 
-    appearance: none; 
+    border-radius: 20px;
+    overflow: hidden;
+    appearance: none;
 }
 
-/* For WebKit browsers */
 .progressbars::-webkit-progress-value {
     background-color: green;
     border-radius: 20px;
 }
 
-/* For Mozilla browsers */
+.progressbars::-webkit-progress-background {
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 20px;
+}
+
 .progressbars::-moz-progress-bar {
     background-color: green;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
 
-
-.progressbars::-webkit-progress-background {
-    background-color: rgba(200, 200, 200, 0.2); 
-    border-radius: 20px; 
-}
-
-
-.piechart-container .mainChart{
+.piechart-container {
+    background-color: rgb(82, 82, 82);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 20vw;
-    aspect-ratio: 1;
 }
 
-
-
-.piechart-container canvas {
-    width: 100%;
-    height: 100%;
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .left {
-        width: 100%;
-        margin-bottom: 2rem;
-    }
-
-    .profile-header img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .greeting {
-        font-size: 1.8rem;
-    }
-
-    .piechart-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .greeting {
-        font-size: 1.6rem;
-    }
+.mainChart {
+    width: 30vw;
+    display: flex;
+    justify-content: center;
 }
