@@ -40,7 +40,7 @@
       <div class="nametext">  
           <p class="greeting">Welcome Course Coordinator - {{name}}</p>
         </div>
-        <p class="courseCodeAndName">{{displayCourseData.course_code}} - {{displayCourseData.course_name}}</p>
+        <strong class="courseCodeAndName">{{displayCourseData.course_code}} - {{displayCourseData.course_name}}</strong>
         <div class="progress-grid">
           <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
             <p class="facultyprogress">Faculty - {{item.uid}} {{item.name}}</p>
