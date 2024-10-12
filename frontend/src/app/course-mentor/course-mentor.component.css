@@ -4,12 +4,10 @@
     list-style:none;
 }
 .container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    overflow-y: hidden;
+    width: 100vw; 
+    display: flex; 
+    align-items: flex-start; 
+    padding-top: 3vh;
 }
 
 .faculty-profile-name{
@@ -73,56 +71,21 @@
 }
 
 .left {
-    background-color: #333;
+    background-color: #333; 
     width: 20vw;
-    height: 100vh;
-    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3);
-    justify-content: center;
-    align-items: center;
+    box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.3); 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    position: fixed; 
+    top: 0; 
+    bottom: 0;
 }
 
 .profile-info strong {
     color: #00930a;
 }
-.content{
-    margin:0 10%;
-    height:95vh;
-    width:50vw;
-    margin-top:2%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-}
-.content .welcome-msg{
-    font-size:3.3em;
-    font-weight:600;
-    font-family:'poppins',sans-serif;
-}
-#navlogin {
-    width: 12vw;
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    margin-top: 1vh;
-}
 
-
-.right{
-    margin-top:2.19%;
-}
-.greeting{
-    padding-left: 3vw;
-    font-size: 2.6rem;
-    color:#00930a;
-    margin-top:6vh;
-}
-.courseCodeAndName{
-    padding-left: 5vw;
-    color:rgb(123, 123, 123);
-    font-size: larger;
-    font-weight: 600;
-}
 .logout-btn,
 .table-btn {
     font-size: 1.2rem;
@@ -140,38 +103,169 @@
     text-decoration: underline;
 }
 
-.pie {
-    width: 300px;
-    height: 300px;
-    background-image: conic-gradient(rgb(0, 120, 4) 81%, rgb(43, 147, 25) 81%);
-    border-radius:50%;
-}
-.two{
-    background-image: conic-gradient(rgb(0, 120, 4) 40%, rgb(43, 147, 25) 40%);
-}
-.three{
-    background-image: conic-gradient(rgb(0, 120, 4) 60%, rgb(43, 147, 25) 60%);
-}
-.four{
-    background-image: conic-gradient(rgb(0, 120, 4) 20%, rgb(43, 147, 25) 20%);
-}
-.pie-chart{
-    height:80vh;
-    width:80vw;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: 2vw;
-}
-.right .pie-chart p{
-    position: relative;
-    top:-15%;
+
+
+/* Right Section Styling */
+.right {
+    margin-left: 20vw; 
+    padding: 25px; 
+    flex-grow: 1; 
+    overflow: auto; 
 }
 
-.progresscolor{
-    width:20px;
-    height:20px;
+.nametext {
+    text-align:left; 
+    margin-bottom: 20px; 
 }
-.mainChart{
-    width:15vw;
+
+.greeting {
+    font-size: 2.8rem; 
+    color: rgb(255, 138, 42); 
+    margin-top: -5vh; 
+    margin-bottom: 10px; 
+    font-weight: 400;
+    letter-spacing: 1.1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.greeting:hover {
+    color: rgb(255, 90, 0); 
+}
+
+.progress-container {
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.progress-container:hover {
+    transform: translateY(-2px);
+}
+
+.progressbar-horizontal {
+    display: flex;
+    align-items: center;
+    margin-top: 15px; 
+    gap: 15px; 
+    padding: 10px;
+    border-radius: 10px; 
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+.progresscolor {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; 
+    margin-right: 15px; 
+    border: 2px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+.colorcomment p {
+    font-size: 1rem; 
+    color: #e67e22;
+    font-weight: 600; 
+    margin: 0; 
+}
+
+
+.progress-text {
+    font-size: 1.1rem; 
+    color: green; 
+    margin-left: auto; 
+    padding-left: 10px; 
+    background-color: rgba(0, 0, 0, 0.2); 
+    padding: 5px 10px; 
+    border-radius: 8px; 
+    white-space: nowrap; 
+    font-weight: 500; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.progressbar-horizontal:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transform: translateY(-3px);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.progressbars {
+    width: 100%; 
+    height: 20px;
+    border-radius: 20px; 
+    overflow: hidden; 
+    appearance: none; 
+}
+
+/* For WebKit browsers */
+.progressbars::-webkit-progress-value {
+    background-color: green;
+    border-radius: 20px;
+}
+
+/* For Mozilla browsers */
+.progressbars::-moz-progress-bar {
+    background-color: green;
+    border-radius: 20px; 
+}
+
+
+.progressbars::-webkit-progress-background {
+    background-color: rgba(200, 200, 200, 0.2); 
+    border-radius: 20px; 
+}
+
+
+.piechart-container .mainChart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    aspect-ratio: 1;
+}
+
+
+
+.piechart-container canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .profile-header img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .greeting {
+        font-size: 1.8rem;
+    }
+
+    .piechart-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .greeting {
+        font-size: 1.6rem;
+    }
 }
