@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { HeaderComponent } from '../../header/header.component';
-import { User } from '../../interfaces/user';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { Router } from '@angular/router';
-import { DomainMentor } from '../../interfaces/domainmentor';
 import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({

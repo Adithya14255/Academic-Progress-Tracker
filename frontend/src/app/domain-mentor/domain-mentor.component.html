@@ -3,20 +3,20 @@
     <div class="profile-container">
       <div class="profile-header">
         <img src="./assets/logo/staff.png" alt="Profile Picture">
-        <h2 class="faculty-profile-name">{{data.name}}</h2>
+        <h2 class="faculty-profile-name">{{name}}</h2>
         <p>Domain Mentor</p>
       </div>
       <div class="profile-body">
         <div class="profile-info">
-          <p><strong>ID:</strong>{{data.uid}}</p>
-          <p><strong>Name:</strong> {{data.name}}</p>
+          <p><strong>ID:</strong>{{uid}}</p>
+          <p><strong>Name:</strong> {{name}}</p>
           <p><strong>Department Name:</strong>
-            <span *ngIf="data.department_id === 1">CSE</span>
-            <span *ngIf="data.department_id === 2">AI&DS</span>
-            <span *ngIf="data.department_id === 3">ECE</span>
-            <span *ngIf="data.department_id === 4">CSBS</span>
-            <span *ngIf="data.department_id === 5">IT</span>
-            <span *ngIf="data.department_id === 6">S&H</span>
+            <span *ngIf="userdata.department_id === 1">CSE</span>
+            <span *ngIf="userdata.department_id === 2">AI&DS</span>
+            <span *ngIf="userdata.department_id === 3">ECE</span>
+            <span *ngIf="userdata.department_id === 4">CSBS</span>
+            <span *ngIf="userdata.department_id === 5">IT</span>
+            <span *ngIf="userdata.department_id === 6">S&H</span>
           </p>
           <p><strong>Links ></strong></p>
           <div class="profile-info-links">
@@ -33,7 +33,60 @@
       </div>
     </div>
   </div>
-  <div class="right">
-    <canvas id="MyChart">{{chart}}</canvas>
+   <div class="right">
+   <div class="boxforforms">
+      <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
+        <div class="username">
+          <p>Select Course</p>
+          <select id="course_data" formControlName="course_code">
+            <option>-</option>
+            <option *ngFor="let option of coursedata" [value]="option.course_code">
+              {{ option.course_code }} - {{ option.course_name }}
+            </option>
+          </select>
+        </div>
+        <button class="button" type="submit">Get Details</button>
+      </form>
+    </div>
+    <p class="greeting">Welcome Domain Mentor - {{name}}</p>
+    <p class="courseCodeAndName">Domain:
+      <span *ngIf="domain_id === 1">PROGRAMMING</span>
+      <span *ngIf="domain_id === 2">NETWORKS & OPERATING SYSTEMS</span>
+      <span *ngIf="domain_id === 3">ALGORITHMS</span>
+    </p>
+    <p class="courseCodeAndName">
+      Course Code: {{ displayCourseData.course_code }} 
+      Course Name: {{ displayCourseData.course_name }}
+    </p>    
+    <div class="progress-grid">
+      <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
+        <p class="facultyprogress">Faculty - {{item.uid}} {{item.name}}</p>
+        <label for="facultyprogress">Current Progress:</label>
+        <div class="progressbar-horizontal">
+          <div class="progresscolor" [style.background-color]="item.bar_color"></div>
+          <p>{{item.completed_hours}} / {{item.total_hours}}</p>
+        </div>
+    
+
+      <div>
+        <label for="facultyprogress">Overall Progress:</label>
+        <div class="progressbar-horizontal">
+          <progress 
+            class="progressbars" 
+            [value]="courseDataOverall[i].count" 
+            [max]="courseDataOverall[i].total_count">
+            {{courseDataOverall[i].completed_hours}}
+          </progress>
+          <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <div class="piechart-container">
+      <div class="mainChart">
+          <canvas id="MyChart">{{ chart }}</canvas>
+       </div>
+   </div>
+  </div>
+</div> 
