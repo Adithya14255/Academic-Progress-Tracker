@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { HeaderComponent } from '../../header/header.component';
 import { User } from '../../interfaces/user';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { Router } from '@angular/router';
 import { DomainMentor } from '../../interfaces/domainmentor';
@@ -11,7 +11,7 @@ import { trigger, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-domain-mentor-portal-table',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FormsModule],
+  imports: [CommonModule, HeaderComponent, FormsModule,ReactiveFormsModule],
   templateUrl: './domain-mentor-portal-table.component.html',
   styleUrls: ['./domain-mentor-portal-table.component.css'],
   animations: [
@@ -37,6 +37,7 @@ export class DomainMentorPortalTableComponent {
     topic_id: 0,
     comment: ''
   });
+  details: boolean = true;  // Show details form
 
   constructor(
     private location: Location,

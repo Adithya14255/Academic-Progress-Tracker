@@ -22,6 +22,19 @@
   Course Code: {{ displayCourseData.course_code }} 
   Course Name: {{ displayCourseData.course_name }}
 </p>
+<div class="boxforforms" *ngIf="details">
+  <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
+    <div class="username">
+      <p>Select Course</p>
+      <select id="course_data" formControlName="course_code">
+        <option *ngFor="let option of coursedata" [value]="option.course_code">
+          {{ option.course_code }} - {{ option.course_name }}
+        </option>
+      </select>
+    </div>
+    <button class="button" type="submit">Get Details</button>
+  </form>
+</div>
 
 <div class="container">
   <div class="table-wrapper">

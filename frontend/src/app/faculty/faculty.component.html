@@ -38,41 +38,50 @@
     <div class="nametext">
         <p class="greeting">Welcome Faculty - {{name}}</p>
     </div>
-    <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
-        <p class="facultyprogress">Course {{courseDataOverall[i].course_code}}</p>
-        <label for="facultyprogress">Progression:</label>
-        <div class="progressbar-horizontal">
-            <div class="progresscolor" [style.background-color]="item.bar_color"></div>
-            <div class="colorcomment">
-                <ng-container>
-                    <p *ngIf="item.bar_color === 'black'">Not yet started</p>
-                    <p *ngIf="item.bar_color === 'red'">Delayed</p>
-                    <p *ngIf="item.bar_color === 'green'">Ahead of time</p>
-                    <p *ngIf="item.bar_color === 'blue'">On Time</p>
-                </ng-container>
-            </div>
-            <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
-        </div>
-        <label for="facultyprogress">Overall Progress:</label>
-        <div class="progressbar-horizontal">
-            <progress 
-                class="progressbars" 
-                [value]="courseDataOverall[i].count" 
-                [max]="courseDataOverall[i].total_count">
-                {{courseDataOverall[i].completed_hours}}
-            </progress>
-            <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
-        </div>
-    </div>
+    <div class="progress-grid">
+      <div *ngFor="let item of courseDataCurrent; let i = index" class="progress-container">
+          <p class="facultyprogress">Course {{courseDataOverall[i].course_code}}</p>
+          <label for="facultyprogress">Progression:</label>
+          <div class="progressbar-horizontal">
+              <div class="progresscolor" [style.background-color]="item.bar_color"></div>
+              <div class="colorcomment">
+                  <ng-container>
+                      <p *ngIf="item.bar_color === 'black'">Not yet started</p>
+                      <p *ngIf="item.bar_color === 'red'">Delayed</p>
+                      <p *ngIf="item.bar_color === 'green'">Ahead of time</p>
+                      <p *ngIf="item.bar_color === 'blue'">On Time</p>
+                  </ng-container>
+              </div>
+              <p class="progress-text">{{item.completed_hours}} / {{item.total_hours}}</p>
+          </div>
+          <label for="facultyprogress">Overall Progress:</label>
+          <div class="progressbar-horizontal">
+              <progress 
+                  class="progressbars" 
+                  [value]="courseDataOverall[i].count" 
+                  [max]="courseDataOverall[i].total_count">
+                  {{courseDataOverall[i].completed_hours}}
+              </progress>
+              <p class="progress-text">{{courseDataOverall[i].count}} / {{courseDataOverall[i].total_count}}</p>
+          </div>
+      </div>
+  </div>
+  
 
 
     <div class="piechart-container">
-        <div class="mainChart">
-            <canvas id="MyChart">{{chart}}</canvas>
-        </div>
-        <div class="subcharts">
-            <div #chartContainer class="chart-container"></div>
-        </div>
+      <div class="mainChart">
+          <canvas id="MyChart">{{chart}}</canvas>
+      </div>
+  </div>
+  
+  <div class="piechart-container2">
+    <div class="mainChart2">
+      <div #chartContainer class="chart-container"></div> <!-- This will contain your charts -->
     </div>
+  </div>
+  
+
+  
 </div>
 </div>

@@ -133,6 +133,19 @@ def coordinator_courses():
     else:
         return json.dumps({"response":"no courses assigned"})
 
+@app.route('/api/domain_courses', methods=['POST', 'GET'])
+def domain_courses():
+    domain_id = request.json['domain_id']
+    q = sqlalchemy.text(
+        f"SELECT l.course_code,t.course_name FROM l_course_domains l,t_course_details t WHERE l.domain_id='{domain_id}' and l.course_code=t.course_code;")
+    if conn.execute(q).fetchall():
+        r = conn.execute(q).fetchall()
+        if r:
+            data = [dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+    else:
+        return json.dumps({"response":"no courses assigned"})
 
 @app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
 def faculty(uid,course_code):
