@@ -4,49 +4,77 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { User } from '../../interfaces/user';
 import { CommonModule } from '@angular/common';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-faculity-login',
+  selector: 'app-faculty-login',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './faculity-login.component.html',
-  styleUrl: './faculity-login.component.css'
+  styleUrl: './faculity-login.component.css',
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ backgroundColor: 'transparent', opacity: 0 }),
+        animate(1000, style({ backgroundColor: 'white', opacity: 1 }))
+      ])
+    ]),
+    trigger('slideLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-20vw)' }),
+        animate('500ms 400ms ease-in-out', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('500ms  ease-in-out', style({ transform: 'translateX(-20vw)' }))
+      ])
+    ])
+  ]     
 })
 export class FaculityLoginComponent {
-  data: User = {uid:0,name:'',role_id:0,department_id:0};
-  errorMessage:string = '';
-  constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
+  data: User = { uid: 0, name: '', role_id: 0, department_id: 0 };
+  errorMessage: string = '';
+  showErrorMessage: boolean = false;
+
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private apiService: ApiService
+  ) {}
+
   checkoutForm = this.formBuilder.group({
     name: '',
     role: 1,
-    password: ''
+    password: '',
   });
-  ngOnInit(): void {
-    // this.apiService.loginMoodle()
-    //   .subscribe(response => {
-    //     if (response.token) {
-    //       // Handle successful login and store the token
-    //       localStorage.setItem('moodleToken', response.token);
-    //       console.log('Login successful, token stored:', response.token);
-    //     } else {
-    //       // Handle login failure (invalid credentials or other issues)
-    //       console.error('Login failed:', response);
-    //     }
-    //   });
-  }
-
 
   fetchFacultyData() {
-    this.apiService.postLoginFacultyData(this.checkoutForm.value).subscribe(data => {
-      this.data = data; 
-      console.log(data)
-      if('Error' in data){
-        this.errorMessage=data.Error;
+    this.apiService.postLoginFacultyData(this.checkoutForm.value).subscribe(
+      (data) => {
+        this.data = data;
+        if ('Error' in data) {
+          this.showError(data.Error);
+        } else if (this.data.role_id == 1) {
+          this.router.navigateByUrl('/faculty-incharge', { state: this.data });
+        }
+      },
+      (error) => {
+        this.showError("An error occurred.");
       }
-      if(this.data.role_id==1){
-        this.router.navigateByUrl('/faculty-incharge', { state: this.data  });
-    }}
-  );
-  
-}
+    );
+  }
+
+  showError(message: string) {
+    this.errorMessage = message;
+    this.showErrorMessage = true;
+
+    // Auto hide the error message after 4 seconds
+    setTimeout(() => {
+      this.clearError();
+    }, 4000);
+  }
+
+  clearError() {
+    this.showErrorMessage = false;
+    this.errorMessage = '';
+  }
 }

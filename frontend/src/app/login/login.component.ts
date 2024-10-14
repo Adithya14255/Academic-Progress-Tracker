@@ -1,22 +1,28 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { FaculityLoginComponent } from './faculity-login/faculity-login.component';
-import { DomainMentorLoginComponent } from './domain-mentor-login/domain-mentor-login.component';
-import { CourseMentorLoginComponent } from './course-mentor-login/course-mentor-login.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { trigger, style, transition, animate } from '@angular/animations';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink,HeaderComponent,FaculityLoginComponent,DomainMentorLoginComponent,CourseMentorLoginComponent,AdminLoginComponent,RouterOutlet],
+  imports: [RouterLink,RouterOutlet],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  animations: [
+    trigger( 'fadeUp',[
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' }))
+      ])
+    ])
+  ]
 })
 export class LoginComponent {
   constructor(private router: Router) {
     this.router.navigateByUrl('/faculty-login');
   }
-        
-  
 }

@@ -1,5 +1,15 @@
-<div class="login-form">
+<div class="login-form" @fade>
   <div class="nav">
+    <div class="sidenav one" @slideLeft>
+    </div>
+    <div class="sidenav two" @slideLeft>
+    </div>
+    
+    <div *ngIf="showErrorMessage" class="error-popup">
+      <span>{{ errorMessage }}</span>
+      <!-- <button class="close-btn" (click)="clearError()">&times;</button> -->
+    </div>
+    
     <ul id="navlogin">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a class="navloginitem" [routerLink]="['../faculty-login']">Faculty</a>
@@ -14,14 +24,14 @@
   </div>
     <form id="loginform" [formGroup]="checkoutForm" (ngSubmit)="fetchFacultyData()">
         <div class="username">
-            <label for="name">Faculty ID</label>
+            <label for="name"><b>Faculty ID:</b></label>
             <p><input id="name" type="text" formControlName="name"></p>
         </div>
         <div class="password">
-            <label for="pwd">Password</label>
+            <label for="pwd"><b>Password:</b></label>
             <p><input id="pwd" type="password" formControlName="password"></p>
         </div>
-        <p *ngIf="errorMessage!=''">Error: {{errorMessage}}</p>
+        <!-- <p *ngIf="errorMessage!=''">Error: {{errorMessage}}</p> -->
         <button class="button" type="submit">LOGIN</button>
     </form>
 </div>

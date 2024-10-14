@@ -1,61 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .container {
     display: flex;
-    width: 100%;
-    min-height: 100vh; /* Use minimum height to fill the viewport */
+    width: 90%;
+    min-height: 100vh; 
     position: relative;
-    justify-content: center;
-    overflow: hidden; /* Prevent scrolling */
-    align-items: center; /* Center content vertically */
+    justify-content:end;
+    align-items: center; 
 }
 
-.img {
-    width: 100vw; /* Ensure image covers full viewport width */
-    height: 100vh; /* Ensure image covers full viewport height */
-    object-fit: cover; /* Ensures the image covers the container without distortion */
-    filter: blur(3px);
-    position: absolute; /* Ensure the image stays within the container */
-    top: 0;
-    left: 0;
-}
 
-/* Adjust text styles */
 .loginpagetext {
-    z-index: 1; /* Ensure text stays above the image */
-    position: absolute; /* Absolute positioning to move text to the top */
-    top: 2vh; /* Move text closer to the top */
+    z-index: 1; 
+    position: absolute; 
+    top: 8vh; 
+    left:0.6%;
     text-align: center;
     color: black;
-    font-size: 5vw; /* Responsive font size */
+    font-size: 3vw;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    white-space: nowrap; /* Prevent text from breaking into two lines */
-    width: 100%; /* Ensure text spans the full width */
+    white-space: nowrap; 
+    width: 100%; 
 }
 
-/* Responsive Styles */
-
-/* For tablets and smaller screens */
 @media (max-width: 768px) {
-    .img {
-        width: 100vw; /* Adjust width for smaller screens */
-        height: 100vh; /* Adjust height for smaller screens */
-    }
+    
 
     .loginpagetext {
-        font-size: 6vw; /* Adjust text size */
-        top: 3vh; /* Move text closer to the top for smaller screens */
+        font-size: 6vw; 
+        top: 3vh;
     }
 }
 
-/* For mobile screens */
 @media (max-width: 480px) {
-    .img {
-        width: 100vw; /* Adjust width for mobile screens */
-        height: 100vh; /* Adjust height for mobile screens */
-    }
+    
 
     .loginpagetext {
         font-size: 8vw; /* Adjust text size for smaller screens */
         top: 4vh; /* Move text closer to the top for mobile screens */
     }
 }
+.design-bottom{
+    height: 40vh;
+    width:40vw;
+    border-radius: 25% 75% 75% 25% / 30% 25% 75% 28%;
+    background-color: aquamarine;
+}
+    
