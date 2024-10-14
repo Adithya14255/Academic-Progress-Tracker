@@ -28,6 +28,7 @@ export class DomainMentorPortalTableComponent {
   userdata: any;
   name: string = '';
   domain_id: number = 0;
+  coursedata: any;
   displayCourseData: any = { course_code: '', course_name: '' };
   boxcolor: string = 'white';
   editedIndex: number | null = null;
@@ -37,7 +38,7 @@ export class DomainMentorPortalTableComponent {
     topic_id: 0,
     comment: ''
   });
-  details: boolean = true;  // Show details form
+  displayTable: boolean = true;
 
   constructor(
     private location: Location,
@@ -53,16 +54,34 @@ export class DomainMentorPortalTableComponent {
       console.log(this.userdata);
     }
     if (this.userdata) {
-      this.name = this.userdata.name;
-      this.domain_id = this.userdata.domain_id;
-      this.apiService.getDomainMentorData(this.userdata.domain_id).subscribe(
+      this.apiService.getDomainMentorCourse({ 'domain_id': this.userdata.domain_id }).subscribe(
         response => {
-          this.data = response;
-          this.displayCourseData.course_code = this.data[0].course_code;
-          this.displayCourseData.course_name = this.data[0].course_name;
+          this.coursedata = response;
+          this.displayCourseData = this.coursedata[0];
+          this.name = this.userdata.name;
+          this.domain_id = this.userdata.domain_id;
+          this.apiService.getDomainMentorData({'domain_id':this.userdata.domain_id,'course_code':this.displayCourseData.course_code}).subscribe(
+          response => {
+            this.data = response;
+            this.displayTable = this.data.length > 0; // Show the table only if there are topics
+            console.log(this.displayCourseData);
         }
       );
+        });
+      
     }
+  }
+  getCourseDataForm = this.formBuilder.group({
+    course_code: '',
+  });
+  getCourseDetails() {
+    this.apiService.getDomainMentorData({'domain_id':this.userdata.domain_id,'course_code':this.getCourseDataForm.value.course_code}).subscribe(
+      response => {
+        this.data = response;
+        this.displayTable = this.data.length > 0; // Show the table only if there are topics
+      },
+      error => alert("Error - try again")
+    );
   }
 
   approveupdate(topic_id: number, uid: number): void {

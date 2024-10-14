@@ -18,6 +18,9 @@ export class ApiService {
   getCoordinatorCourse(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/coordinator_courses`, data);
   }
+  getDomainMentorCourse(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/domain_courses`, data);
+  }
   getMentorList(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/mentor_list`, data);
   }
@@ -93,7 +96,7 @@ export class ApiService {
   getCourseMentorData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/course_mentor/${id}`);
   }
-  getDomainMentorData(id: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/domain_mentor/${id}`);
+  getDomainMentorData(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/domain_mentor`,data);
   }
 }

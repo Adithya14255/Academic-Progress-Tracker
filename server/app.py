@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.0.247/kgaps")
+    "postgresql://admin:admin@192.168.147.24/kgaps")
 conn = engine.connect()
 
 
@@ -185,14 +185,20 @@ def course_mentor(id):
         return json.dumps({'response':'No topics added'})
 
 
-@app.route('/api/domain_mentor/<int:id>', methods=['POST', 'GET'])
-def domain_mentor(id):
-    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where domain_id='{id}';")
-    r = conn.execute(q).fetchall()
-    if r:
-        data = [dict(i._mapping) for i in r]
-        print(data)
-        return json.dumps(data)
+@app.route('/api/domain_mentor', methods=['POST', 'GET'])
+def domain_mentor():
+    domain_id = request.json['domain_id']
+    course_code = request.json['course_code']
+    print(domain_id)
+    q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where domain_id='{domain_id}' and course_code='{course_code}';")
+    if conn.execute(q).first():
+        r=conn.execute(q).fetchall()
+        if r:
+            data = [dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+    else:
+        return json.dumps({'response':'No topics added'})
 
 
 @app.route('/api/courses', methods=['POST', 'GET'])

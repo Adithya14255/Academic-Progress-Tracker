@@ -12,17 +12,7 @@
   <button class="table-btn" (click)="navigateWithData()"> < Back
   </button>
 </div>
-<p class="greeting">Welcome Domain Mentor - {{name}}</p>
-<p class="courseCodeAndName">Domain:
-  <span *ngIf="domain_id === 1">PROGRAMMING</span>
-  <span *ngIf="domain_id === 2">NETWORKS & OPERATING SYSTEMS</span>
-  <span *ngIf="domain_id === 3">ALGORITHMS</span>
-</p>
-<p class="courseCodeAndName">
-  Course Code: {{ displayCourseData.course_code }} 
-  Course Name: {{ displayCourseData.course_name }}
-</p>
-<div class="boxforforms" *ngIf="details">
+<div class="boxforforms">
   <form [formGroup]="getCourseDataForm" (ngSubmit)="getCourseDetails()">
     <div class="username">
       <p>Select Course</p>
@@ -35,6 +25,16 @@
     <button class="button" type="submit">Get Details</button>
   </form>
 </div>
+<p class="greeting">Welcome Domain Mentor - {{name}}</p>
+<p class="courseCodeAndName">Domain:
+  <span *ngIf="domain_id === 1">PROGRAMMING</span>
+  <span *ngIf="domain_id === 2">NETWORKS & OPERATING SYSTEMS</span>
+  <span *ngIf="domain_id === 3">ALGORITHMS</span>
+</p>
+<p class="courseCodeAndName">
+  Course Code: {{ displayCourseData.course_code }} 
+  Course Name: {{ displayCourseData.course_name }}
+</p>
 
 <div class="container">
   <div class="table-wrapper">

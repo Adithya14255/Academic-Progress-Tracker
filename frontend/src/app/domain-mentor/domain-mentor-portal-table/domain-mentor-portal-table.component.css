@@ -180,3 +180,54 @@ tbody tr td a {
     padding-top: 20px;
     rotate: 30deg;
   }
+  .boxforforms {
+    border:2px solid #16349e;
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 1rem; /* Reduced padding */
+    width: 350px; /* Increased width */
+    max-height: auto;
+    background-color: #fff; /* White background */
+    margin-bottom: 1rem; /* Space below each form */
+    position: fixed;
+    margin-left: 62vw;
+  }
+  
+  
+.username, .password {
+    margin: 0.5rem 0; /* Reduced margin */
+  }
+  
+  input, select {
+    border: 2px solid #16349e; /* Orange border */
+    border-radius: 4px; /* Rounded corners */
+    outline: none;
+    width: calc(100% - 8px); /* Adjusted width */
+    font-size: 0.9rem; /* Smaller font size */
+    margin: 0.5rem 0; /* Reduced margin */
+    padding: 0.5rem;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  input:focus, select:focus {
+    border-color: #009dff; /* Slightly darker orange for focus */
+    background-color: #f8f8f8; /* Light grey background */
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding */
+    border-radius: 6px; /* Rounded corners */
+    border: none;
+    color: #fff;
+    background-color: #16349e; /* Orange background */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+  
+  .button:hover {
+    background-color: rgb(216, 216, 216); /* Slightly darker orange on hover */
+    color: #16349e; /* Keep text white */
+    border: 2px solid #16349e;
+    
+  }
