@@ -88,6 +88,22 @@ CREATE TABLE t_topic_comments (
   FOREIGN KEY (handler_id) REFERENCES t_users(uid)
 );
 
+-- Create the t_class table 
+CREATE TABLE t_class (
+  id INT NOT NULL PRIMARY KEY
+);
+-- mapping  - 111 -first 1 refers to department, second 1 refers to year and next 1 represent A section
+
+-- Create the l_class_course table
+CREATE TABLE l_class_course (
+  class_id INT NOT NULL,
+  course_code VARCHAR(24) NOT NULL,
+  handler_id INT NOT NULL,
+  FOREIGN KEY (handler_id) REFERENCES t_users(uid),
+  FOREIGN KEY (class_id) REFERENCES t_class(id),
+  FOREIGN KEY (course_code) REFERENCES t_course_details(course_code)
+);
+
 -- Create the t_hours_completed table
 CREATE TABLE t_complete_status (
   hours_completed INT DEFAULT 0,  
@@ -155,13 +171,13 @@ create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_nam
 	  q.domain_id;
 
 -- initialize the roles
-INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Coordinator'), (3, 'Domain Mentor'),(4,'Admin');
+INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Coordinator'), (3, 'Domain Mentor'),(4,'Head Of Department'),(5,'Supervisor'),(6,'IQAC');
 
 -- initialize the statuses
-INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Completed');
+INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Awaiting Verification'),(5,'Verified'),(6,'Completed');
 
 -- initialize the departments
-INSERT INTO t_departments (department_id, department_name) VALUES (1, 'CSE'), (2, 'AI&DS'), (3, 'ECE'),(4,'CSBS'),(5,'IT'),(6,'S&H');
+INSERT INTO t_departments (department_id, department_name) VALUES (1, 'CSE'), (2,'AI&DS'), (3, 'ECE'),(4,'CSBS'),(5,'IT'),(6,'S&H'),(7,'MECH'),(8,'CYS'),(9,'AI&ML');
 
 -- initialize the domains
 INSERT INTO t_domains (domain_id, domain_name) VALUES (1, 'PROGRAMMING'), (2, 'NETWORKS & OPERATING SYSTEMS'), (3, 'ALGORITHMS');

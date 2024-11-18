@@ -4,13 +4,14 @@ import sqlalchemy
 import os
 import json
 from collections import defaultdict
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-
+CORS(app)
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.147.24/kgaps")
+    "postgresql://admin:admin@192.168.177.24/kgaps")
 conn = engine.connect()
 
 
@@ -36,35 +37,12 @@ def index():
     data = {'error': 'none'}
     return json.dumps(data)
 
-MOODLE_API_URL = "https://moodle.kgkite.ac.in/login/token.php"
-
-@app.route('/api/moodle_login', methods=['POST','GET'])
-def login_to_moodle():
-    username = '22csa03'
-    password = 'Kitestudent@123'
-    
-    # Prepare the payload for Moodle's API
-    moodle_payload = {
-        'username': username,
-        'password': password,
-        'service': 'moodle_mobile_app'  # Adjust if using another service
-    }
-    
-    try:
-        # Forward the request to Moodle
-        moodle_response = requests.post(MOODLE_API_URL, data=moodle_payload)
-        moodle_response.raise_for_status()  # Raise an error for bad responses
-        print(moodle_response.json())
-        # Return Moodle's response back to the Angular client
-        return jsonify(moodle_response.json())
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         role = request.json['role']
-        uid = request.json['name']
+        uid = request.json['username']
         password = request.json['password']
         q = sqlalchemy.text(f"SELECT uid,name,role_id,department_id FROM user_details_check WHERE uid='{uid}' and password='{password}' and role_id={role};")
         r = conn.execute(q).fetchall()
@@ -147,9 +125,11 @@ def domain_courses():
     else:
         return json.dumps({"response":"no courses assigned"})
 
-@app.route('/api/faculty/<int:uid>/<string:course_code>', methods=['POST', 'GET'])
-def faculty(uid,course_code):
-    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid={uid} and status_code!=4 and course_code='{course_code}';")
+@app.route('/api/faculty', methods=['POST', 'GET'])
+def faculty():
+    uid=request.json['uid']
+    course_code=request.json['course_code']
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table WHERE uid={uid} and course_code='{course_code}';")
     if (conn.execute(q).fetchall()):
         r = conn.execute(q).fetchall()
         data = [dict(i._mapping) for i in r]
@@ -157,23 +137,11 @@ def faculty(uid,course_code):
         return json.dumps(data)
     return json.dumps({'response':'No topics assigned yet'})
 
-@app.route('/api/faculty_completed/<int:uid>', methods=['POST', 'GET'])
-def faculty_completed(uid):
-    p = sqlalchemy.text(
-        f"SELECT * FROM faculty_table WHERE uid='{uid}' and status_code=4;")
-    if conn.execute(p).fetchall():
-        s = conn.execute(p).fetchall()
-        if s:
-            data = [dict(i._mapping) for i in s]
-            print(data)
-            return json.dumps(data)
-    else:
-        print("fail")
-        return json.dumps({'response': 'no completed topics yet'})
 
 
-@app.route('/api/course_mentor/<int:id>', methods=['POST', 'GET'])
-def course_mentor(id):
+@app.route('/api/course_mentor', methods=['POST', 'GET'])
+def course_mentor():
+    id = request.json['uid']
     q = sqlalchemy.text(f"SELECT * FROM domain_mentor_table where mentor_id={id};")
     if conn.execute(q).first():
         r=conn.execute(q).fetchall()
@@ -393,7 +361,7 @@ def editcomment(approval):
 @app.route('/api/editlink', methods=['POST', 'GET'])
 def editlink():
     topic_id = request.json['topic_id']
-    link = request.json['link']
+    link = request.json['url']
     q = sqlalchemy.text(f"update t_complete_status set status_code=1 where topic_id={topic_id};")
     conn.execute(q)
     q = sqlalchemy.text(f"update t_topic_links set url='{link}' where topic_id={topic_id};")
@@ -404,7 +372,7 @@ def editlink():
 
 @app.route('/api/faculty_progress', methods=['POST', 'GET'])
 def facultyprogress():
-    handler_id = request.json['handler_id']
+    handler_id = request.json['uid']
     q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
     r = conn.execute(q).fetchall()
     status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
@@ -416,7 +384,7 @@ def facultyprogress():
     data = defaultdict(lambda: defaultdict(int))
     for course_id, status_code, count in r:
         data[course_id][status[status_code]] = count,color_status[status_code]
-    json_output = json.dumps(data, indent=4)
+    json_output = json.dumps(data)
     q = sqlalchemy.text(f"SELECT COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours, all_courses.course_code FROM (SELECT DISTINCT course_code FROM faculty_table WHERE uid = '{handler_id}') AS all_courses LEFT JOIN (SELECT course_code, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 AND uid = '{handler_id}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
     r = conn.execute(q).fetchall()
     course_data_current = []
@@ -429,7 +397,7 @@ def facultyprogress():
     for i in r:
         temp={'course_code':i[0],'count':i[1],'total_count':i[2]}
         course_data_overall.append(temp)
-    print(course_data_current,course_data_overall)
+    print({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output,'course_data_current':course_data_current,'course_data_overall':course_data_overall})
     return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'other':json_output,'course_data_current':course_data_current,'course_data_overall':course_data_overall}) 
 
 
@@ -454,8 +422,8 @@ def course_progress():
     for i in r:
         temp={'uid':i[0],'name':i[1],'course_code':i[2],'count':i[4],'total_count':i[3]}
         course_data_overall.append(temp)
-    print(course_data_overall,course_data_current)
+    print({'main':{'status_code':codes,'count': mdata,'color': mcolor},'course_data_overall':course_data_overall,'course_data_current':course_data_current})
     return json.dumps({'main':{'status_code':codes,'count': mdata,'color': mcolor},'course_data_overall':course_data_overall,'course_data_current':course_data_current}) 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001, host="0.0.0.0")
+    app.run(debug=True, port=8000, host="0.0.0.0")
