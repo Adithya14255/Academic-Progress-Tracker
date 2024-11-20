@@ -288,7 +288,7 @@ def mentor_list():
 def assign_mentor():
     course_code = request.json['course_code']
     uid = request.json['uid']
-    if conn.execute(sqlalchemy.text(f"Select * from l_mentor_courses where course_code='{course_code}';")).first() != None:
+    if conn.execute(sqlalchemy.text(f"Select * from l_mentor_courses where mentor_id='{uid}';")).first() != None:
             print("error-already assigned")
             return json.dumps({'error': 'mentor is already assigned to that course'})
     q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},'{course_code}');")
