@@ -87,8 +87,8 @@ export class ApiService {
   postLoginAdminData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
-  getFacultyData(id: any,course_code: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/faculty/${id}/${course_code}`);
+  getFacultyData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/faculty`,data);
   }
   getFacultyCompletedData(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/faculty_completed/${id}`);

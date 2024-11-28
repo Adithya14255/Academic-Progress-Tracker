@@ -61,7 +61,7 @@ export class FacultyTableComponent {
         response => {
           this.coursedata = response;
           this.displayCourseData = this.coursedata[0];
-          this.apiService.getFacultyData(this.userdata.uid, this.coursedata[0].course_code).subscribe(
+          this.apiService.getFacultyData({'uid':this.userdata.uid, 'course_code':this.coursedata[0].course_code}).subscribe(
             response => {
               this.data = response;
             });
@@ -74,7 +74,7 @@ export class FacultyTableComponent {
   }
 
   getCourseDetails() {
-    this.apiService.getFacultyData(this.userdata.uid, this.getCourseDataForm.value.course_code).subscribe(
+    this.apiService.getFacultyData({'uid':this.userdata.uid, 'course_code':this.coursedata[0].course_code}).subscribe(
       response => {
         this.data = response;
         this.displayTable = this.data.length > 0; // Show the table only if there are topics

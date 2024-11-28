@@ -34,7 +34,7 @@ export class DomainMentorLoginComponent {
   errorMessage:string= '';
   constructor(private router: Router,private formBuilder: FormBuilder,private apiService: ApiService) {}
   checkoutForm = this.formBuilder.group({
-    name: '',
+    username: '',
     role: 3,
     password: ''
   });

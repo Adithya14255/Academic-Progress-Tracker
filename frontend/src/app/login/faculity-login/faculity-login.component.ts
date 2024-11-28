@@ -42,7 +42,7 @@ export class FaculityLoginComponent {
   ) {}
 
   checkoutForm = this.formBuilder.group({
-    name: '',
+    username: '',
     role: 1,
     password: '',
   });
