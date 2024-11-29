@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 app.secret_key = "helloworld"
 engine = sqlalchemy.create_engine(
-    "postgresql://admin:admin@192.168.177.24/kgaps")
+    "postgresql://admin:admin@192.168.0.247/kgaps")
 conn = engine.connect()
 
 
@@ -30,10 +30,10 @@ def progress_color(comp,total):
 
 @app.route('/api/', methods=['POST', 'GET'])
 def index():
-    q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
-    r = conn.execute(q)
-    conn.commit()
-    print(q)
+    # q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
+    # r = conn.execute(q)
+    # conn.commit()
+    # print(q)
     data = {'error': 'none'}
     return json.dumps(data)
 
@@ -124,6 +124,20 @@ def domain_courses():
             return json.dumps(data)
     else:
         return json.dumps({"response":"no courses assigned"})
+    
+@app.route('/api/department_courses', methods=['POST', 'GET'])
+def department_courses():
+    department_id = request.json['department_id']
+    q = sqlalchemy.text(
+        f"SELECT l.course_code,t.course_name FROM l_course_departments l,t_course_details t WHERE l.department_id='{department_id}' and l.course_code=t.course_code;")
+    if conn.execute(q).fetchall():
+        r = conn.execute(q).fetchall()
+        if r:
+            data = [dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+    else:
+        return json.dumps({"response":"no courses assigned"})
 
 @app.route('/api/faculty', methods=['POST', 'GET'])
 def faculty():
@@ -167,6 +181,20 @@ def domain_mentor():
             return json.dumps(data)
     else:
         return json.dumps({'response':'No topics added'})
+    
+@app.route('/api/head_of_department', methods=['POST', 'GET'])
+def head_of_department():
+    course_code = request.json['course_code']
+    handler_id = request.json['handler_id']
+    q = sqlalchemy.text(f"SELECT * FROM faculty_table where course_code='{course_code}' and uid={handler_id};")
+    if conn.execute(q).first():
+        r=conn.execute(q).fetchall()
+        if r:
+            data = [dict(i._mapping) for i in r]
+            print(data)
+            return json.dumps(data)
+    else:
+        return json.dumps({'response':'No topics added'})
 
 
 @app.route('/api/courses', methods=['POST', 'GET'])
@@ -179,6 +207,16 @@ def courses():
     print(data)
     return json.dumps(data)
 
+@app.route('/api/course_classes', methods=['POST', 'GET'])
+def course_classes():
+    course_code = request.json['course_code']
+    q = sqlalchemy.text(
+        f"select * from l_class_course where course_code = '{course_code}' and handler_id=0;")
+    r = conn.execute(q).fetchall()
+    data = [dict(i._mapping) for i in r]
+    
+    print(data)
+    return json.dumps(data)
 
 @app.route('/api/topics', methods=['POST', 'GET'])
 def topics():
@@ -198,6 +236,8 @@ def add_course():
         course_name = request.json['course_name']
         dept_id = request.json['department_id']
         domain_id = request.json['domain_id']
+        year = request.json['year']
+        combined_id = str(dept_id)+str(year)
         print(domain_id)
         q = sqlalchemy.text(f"INSERT INTO t_course_details VALUES('{course_code}','{course_name}');")
         conn.execute(q)
@@ -205,6 +245,8 @@ def add_course():
             f"INSERT INTO l_course_departments VALUES('{course_code}',{dept_id});")
         conn.execute(q)
         q = sqlalchemy.text(f"INSERT INTO l_course_domains VALUES('{course_code}','{domain_id}');")
+        conn.execute(q)
+        q = sqlalchemy.text(f"INSERT INTO l_class_course(class_id,course_code,handler_id) SELECT id,'{course_code}',0 FROM t_class WHERE id::text LIKE '{combined_id}_';")
         conn.execute(q)
         conn.commit()
         return json.dumps({'data': 'Success'})
@@ -290,23 +332,23 @@ def assign_mentor():
     uid = request.json['uid']
     if conn.execute(sqlalchemy.text(f"Select * from l_mentor_courses where mentor_id='{uid}';")).first() != None:
             print("error-already assigned")
-            return json.dumps({'error': 'mentor is already assigned to that course'})
+            return json.dumps({'response': 'mentor is already assigned to a course'})
     q = sqlalchemy.text(f"insert into l_mentor_courses values({uid},'{course_code}');")
     conn.execute(q)
     conn.commit()
-    return json.dumps({'data': 'Success'})
+    return json.dumps({'response': 'Success'})
 
 @app.route('/api/assign_domain_mentor', methods=['POST', 'GET'])
 def assign_domain_mentor():
     domain_id = request.json['domain_id']
     mentor_id = request.json['mentor_id']
-    if conn.execute(sqlalchemy.text(f"Select * from l_domain_mentors where mentor_id={mentor_id} and domain_id={domain_id};")).first() != None:
+    if conn.execute(sqlalchemy.text(f"Select * from l_domain_mentors where mentor_id={mentor_id};")).first() != None:
             print("error-already assigned")
-            return json.dumps({'error': 'mentor is already assigned to that domain'})
+            return json.dumps({'response': 'domain mentor is already assigned to a domain'})
     q = sqlalchemy.text(f"insert into l_domain_mentors values({mentor_id},{domain_id});")
     conn.execute(q)
     conn.commit()
-    return json.dumps({'data': 'Success'})
+    return json.dumps({'response': 'Success'})
 
 
 @app.route('/api/assign_course', methods=['POST', 'GET'])
@@ -314,15 +356,18 @@ def assign_course():
     if request.method == 'POST':
         course_code = request.json['course_code']
         uid = request.json['uid']
+        class_id = request.json['class_id']
         print(course_code,uid)
         if conn.execute(sqlalchemy.text(f"Select * from l_faculty_courses where course_code='{course_code}' and faculty_id={uid};")).first() != None:
-            return json.dumps({'error': 'mentor is already assigned to that course'})
+            return json.dumps({'response': 'mentor is already assigned to that course'})
 
         q = sqlalchemy.text(f"insert into l_faculty_courses values({uid},'{course_code}');")
         conn.execute(q)
-        conn.commit()   
-        print("here")
-        return json.dumps({'data': 'Success'})
+        q = sqlalchemy.text(f"update l_class_course set handler_id='{uid}' where class_id={class_id};")
+        conn.execute(q)
+        conn.commit()  
+        print("successfully assigned to faculty "+str(uid))
+        return json.dumps({'response': 'Success'})
     return json.dumps({'response': 'incorrect method'})
 
 
@@ -369,29 +414,38 @@ def editlink():
     conn.commit()
     return json.dumps({'data': 'Success'})
 
+@app.route('/api/verify_hours', methods=['POST', 'GET'])
+def verifyhours():
+    handler_id = request.json['handler_id']
+    topic_id = request.json['topic_id']
+    q = sqlalchemy.text(f"update t_complete_status set status_code=5 where handler_id={handler_id} and topic_id={topic_id};")
+    conn.execute(q)
+    conn.commit()
+    return json.dumps({'data': 'Success'})
+
 
 @app.route('/api/faculty_progress', methods=['POST', 'GET'])
 def facultyprogress():
     handler_id = request.json['uid']
-    q = sqlalchemy.text(f"SELECT status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code;")
+    q = sqlalchemy.text(f"SELECT CASE WHEN status_code > 3 THEN 3 ELSE status_code END AS status_code, COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} GROUP BY CASE WHEN status_code > 3 THEN 3 ELSE status_code END;")
     r = conn.execute(q).fetchall()
-    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'#4b007d'}
+    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved"}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
-    q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
+    q = sqlalchemy.text(f"SELECT course_code,status_code,COUNT(*) AS count FROM faculty_table WHERE uid = {handler_id} AND status_code IN (0,1, 2, 3) GROUP BY status_code,course_code;")
     r = conn.execute(q).fetchall()
     print(r)
     data = defaultdict(lambda: defaultdict(int))
     for course_id, status_code, count in r:
         data[course_id][status[status_code]] = count,color_status[status_code]
     json_output = json.dumps(data)
-    q = sqlalchemy.text(f"SELECT COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours, all_courses.course_code FROM (SELECT DISTINCT course_code FROM faculty_table WHERE uid = '{handler_id}') AS all_courses LEFT JOIN (SELECT course_code, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 AND uid = '{handler_id}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
+    q = sqlalchemy.text(f"SELECT COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours, all_courses.course_code FROM (SELECT DISTINCT course_code FROM faculty_table WHERE uid = '{handler_id}') AS all_courses LEFT JOIN (SELECT course_code, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 5 AND uid = '{handler_id}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
     r = conn.execute(q).fetchall()
     course_data_current = []
     for i in r:
         temp={'completed_hours':i[0],'total_hours':i[1],'bar_color':progress_color(i[0],i[1]),'course_code':i[2]}
         course_data_current.append(temp)
-    q = sqlalchemy.text(f"SELECT all_courses.course_code,COALESCE(active_courses.active_course_count, 0),all_courses.total_course_count AS active_course_count FROM (SELECT course_code, COUNT(*) AS total_course_count FROM faculty_table WHERE uid = '{handler_id}' GROUP BY course_code, uid) AS all_courses LEFT JOIN (SELECT course_code, COUNT(*) AS active_course_count FROM faculty_table WHERE uid = '{handler_id}' AND status_code = 4 GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
+    q = sqlalchemy.text(f"SELECT all_courses.course_code,COALESCE(active_courses.active_course_count, 0),all_courses.total_course_count AS active_course_count FROM (SELECT course_code, COUNT(*) AS total_course_count FROM faculty_table WHERE uid = '{handler_id}' GROUP BY course_code, uid) AS all_courses LEFT JOIN (SELECT course_code, COUNT(*) AS active_course_count FROM faculty_table WHERE uid = '{handler_id}' AND status_code = 5 GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code;")
     r = conn.execute(q).fetchall()
     course_data_overall = []
     for i in r:
@@ -405,18 +459,18 @@ def facultyprogress():
 @app.route('/api/course_progress', methods=['POST', 'GET'])
 def course_progress():
     course_code = request.json['course_code']
-    q = sqlalchemy.text(f"SELECT status_code,COUNT(*) FROM domain_mentor_table WHERE course_code='{course_code}' and status_code IN (0,1, 2, 3, 4) GROUP BY status_code,course_code;")
+    q = sqlalchemy.text(f"SELECT CASE WHEN status_code > 3 THEN 3 ELSE status_code END AS status_code, COUNT(*) FROM domain_mentor_table WHERE course_code = '{course_code}' GROUP BY CASE WHEN status_code > 3 THEN 3 ELSE status_code END, course_code;")
     r = conn.execute(q).fetchall()
-    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved",4:"Completed"}
-    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green',4:'purple'}
+    status = {0:"Not uploaded",1:"Uploaded",2:"Disapproved",3:"Approved"}
+    color_status = {0:'lightgrey',1:'orange',2:'red',3:'green'}
     codes,mdata,mcolor = [status[i[0]] for i in r],[i[1] for i in r],[color_status[i[0]] for i in r]
-    q = sqlalchemy.text(f"SELECT all_courses.uid, t.name, all_courses.course_code, COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours FROM (SELECT DISTINCT course_code, uid FROM faculty_table where course_code='{course_code}') AS all_courses LEFT JOIN (SELECT course_code, uid, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 4 and course_code='{course_code}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code AND all_courses.uid = active_courses.uid JOIN t_users t ON all_courses.uid = t.uid;")
+    q = sqlalchemy.text(f"SELECT all_courses.uid, t.name, all_courses.course_code, COALESCE(active_courses.hours_completed, 0) AS hours_completed, COALESCE(active_courses.total_hours, 0) AS total_hours FROM (SELECT DISTINCT course_code, uid FROM faculty_table where course_code='{course_code}') AS all_courses LEFT JOIN (SELECT course_code, uid, SUM(hours_completed) AS hours_completed, SUM(total_hours) AS total_hours FROM faculty_table WHERE status_code = 5 and course_code='{course_code}' GROUP BY course_code, uid) AS active_courses ON all_courses.course_code = active_courses.course_code AND all_courses.uid = active_courses.uid JOIN t_users t ON all_courses.uid = t.uid;")
     r = conn.execute(q).fetchall()
     course_data_current = []
     for i in r:
         temp={'uid':i[0],'name':i[1],'course_code':i[2],'completed_hours':i[3],'total_hours':i[4],'bar_color':progress_color(i[3],i[4])}
         course_data_current.append(temp)
-    q = sqlalchemy.text(f"SELECT f.uid, t.name, f.course_code, COUNT(*) AS total_topics_assigned, SUM(CASE WHEN f.status_code = 4 THEN 1 ELSE 0 END) AS topics_completed FROM faculty_table f JOIN t_users t ON t.uid = f.uid WHERE f.course_code = '{course_code}' GROUP BY f.uid, f.course_code, t.name;")
+    q = sqlalchemy.text(f"SELECT f.uid, t.name, f.course_code, COUNT(*) AS total_topics_assigned, SUM(CASE WHEN f.status_code = 5 THEN 1 ELSE 0 END) AS topics_completed FROM faculty_table f JOIN t_users t ON t.uid = f.uid WHERE f.course_code = '{course_code}' GROUP BY f.uid, f.course_code, t.name;")
     r = conn.execute(q).fetchall()
     course_data_overall = []
     for i in r:

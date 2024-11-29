@@ -92,14 +92,12 @@ CREATE TABLE t_topic_comments (
 CREATE TABLE t_class (
   id INT NOT NULL PRIMARY KEY
 );
--- mapping  - 111 -first 1 refers to department, second 1 refers to year and next 1 represent A section
 
 -- Create the l_class_course table
 CREATE TABLE l_class_course (
   class_id INT NOT NULL,
   course_code VARCHAR(24) NOT NULL,
   handler_id INT NOT NULL,
-  FOREIGN KEY (handler_id) REFERENCES t_users(uid),
   FOREIGN KEY (class_id) REFERENCES t_class(id),
   FOREIGN KEY (course_code) REFERENCES t_course_details(course_code)
 );
@@ -174,10 +172,21 @@ create view domain_mentor_table as select z.mentor_id,c.course_code,d.course_nam
 INSERT INTO t_roles (role_id, designation) VALUES (1, 'Faculty'), (2, 'Course Coordinator'), (3, 'Domain Mentor'),(4,'Head Of Department'),(5,'Supervisor'),(6,'IQAC');
 
 -- initialize the statuses
-INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Awaiting Verification'),(5,'Verified'),(6,'Completed');
+INSERT INTO t_status (status_code, status) VALUES (0, 'Assigned'), (1, 'Uploaded'),(2,'Disapproved'), (3, 'Approved'),(4,'Awaiting Verification'),(5,'Verified');
 
 -- initialize the departments
 INSERT INTO t_departments (department_id, department_name) VALUES (1, 'CSE'), (2,'AI&DS'), (3, 'ECE'),(4,'CSBS'),(5,'IT'),(6,'S&H'),(7,'MECH'),(8,'CYS'),(9,'AI&ML');
 
 -- initialize the domains
 INSERT INTO t_domains (domain_id, domain_name) VALUES (1, 'PROGRAMMING'), (2, 'NETWORKS & OPERATING SYSTEMS'), (3, 'ALGORITHMS');
+
+-- mapping  - 111 -first 1 refers to department, second 1 refers to year and next 1 represent A section
+INSERT INTO t_class (id) 
+VALUES 
+(111), (112), (121), (122), (131), (132), (141), (142),
+(211), (212), (221), (222), (231), (232), (241), (242),
+(311), (312), (321), (322), (331), (332), (341), (342),
+(411), (421), (431), (441), (511), (521), (531), (532),
+(711), (721), (731), (741), (811), (821), (831), (841),
+(911), (921), (931), (941);
+-- 1 - cse,2 - ai&ds,3 - ece,4 - csbs,5 - it,6 - s&h,7 - mech,8 - cys,9 - ai&ml
