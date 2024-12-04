@@ -33,7 +33,7 @@ def index():
     # q = sqlalchemy.text(f"TRUNCATE TABLE t_complete_status,t_course_topics,t_topic_comments,t_topic_links;")
     # r = conn.execute(q)
     # conn.commit()
-    # print(q)
+    # print(r)
     data = {'error': 'none'}
     return json.dumps(data)
 
@@ -138,6 +138,44 @@ def department_courses():
             return json.dumps(data)
     else:
         return json.dumps({"response":"no courses assigned"})
+
+@app.route('/api/supervisor_courses', methods=['POST', 'GET'])
+def supervisor_courses():
+    q = sqlalchemy.text("""
+        SELECT 
+            d.department_id, 
+            d.department_name, 
+            ARRAY_AGG(cd.course_code) AS course_codes, 
+            ARRAY_AGG(cd.course_name) AS course_names 
+        FROM 
+            t_departments d
+        JOIN 
+            l_course_departments lcd ON d.department_id = lcd.department_id
+        JOIN 
+            t_course_details cd ON lcd.course_code = cd.course_code
+        GROUP BY 
+            d.department_id, d.department_name 
+        ORDER BY 
+            d.department_id;
+    """)
+    result = conn.execute(q).fetchall()
+    if result:
+        data = []
+        for row in result:
+            courses = [
+                {"course_code": code, "course_name": name}
+                for code, name in zip(row.course_codes, row.course_names)
+            ]
+            data.append({
+                "department_id": row.department_id,
+                "department_name": row.department_name,
+                "courses": courses
+            })
+        print(data)
+        return json.dumps(data), 200, {'Content-Type': 'application/json'}
+    else:
+        return json.dumps({"response": "no courses assigned"}), 404, {'Content-Type': 'application/json'}
+
 
 @app.route('/api/faculty', methods=['POST', 'GET'])
 def faculty():
