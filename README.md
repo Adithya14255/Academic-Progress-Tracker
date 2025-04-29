@@ -1,6 +1,6 @@
 # Academic Progress Tracker
 
-A comprehensive web application for tracking and managing academic progress across educational institutions. This application enables administrators to monitor student performance, instructors to manage courses and assessments. This app is designed for the admininstration to view overall progress at a glance
+A comprehensive web application for tracking and managing academic progress across educational institutions.This app is designed for the admininstration to view overall progress at a glance
 
 ## 🚀 Features
 
