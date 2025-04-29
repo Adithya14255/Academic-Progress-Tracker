@@ -124,8 +124,8 @@ frontend/
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Images
-[](assets/home.png)
-[](assets/1.png)
-[](assets/2.png)
-[](assets/3.png)
+![](assets/home.png)
+![](assets/1.png)
+![](assets/2.png)
+![](assets/3.png)
 
